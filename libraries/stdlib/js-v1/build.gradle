@@ -284,6 +284,9 @@ jar {
 }
 
 task mergedJar(type: Jar, dependsOn: compileJs) {
+    def irStdlibJar = tasks.getByPath(":kotlin-stdlib-js-ir:jar")
+    dependsOn(irStdlibJar)
+
     classifier = null
     manifestAttributes(manifest, project, 'Main')
 
@@ -296,6 +299,7 @@ task mergedJar(type: Jar, dependsOn: compileJs) {
 
     includeEmptyDirs false
     duplicatesStrategy DuplicatesStrategy.EXCLUDE
+    from zipTree(irStdlibJar.archivePath)
     from jsOutputFile
     from jsOutputMetaFile
     from "${jsOutputFile}.map"
