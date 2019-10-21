@@ -13,6 +13,11 @@ repositories {
 kotlin {
     target {
         browser()
+        val isIrBackend = project.findProperty("kotlin.js.useIrBackend")?.toString()?.toBoolean() ?: false
+        if (isIrBackend) {
+            compilations["main"].kotlinOptions.freeCompilerArgs += listOf("-Xir-produce-klib-dir", "-Xir-only")
+            compilations["test"].kotlinOptions.freeCompilerArgs += "-Xir-produce-js"
+        }
     }
 
     sourceSets {
