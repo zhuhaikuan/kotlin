@@ -309,13 +309,12 @@ task libraryJarWithoutIr(type: Jar, dependsOn: compileJs) {
     exclude "${experimentalJsModuleName}.*"
 }
 
-task libraryJarWithIr(type: Jar, dependsOn: libraryJarWithoutIr) {
+task libraryJarWithIr(type: Zip, dependsOn: libraryJarWithoutIr) {
     def irStdlibJar = tasks.getByPath(":kotlin-stdlib-js-ir:jar")
     dependsOn(irStdlibJar)
 
-    manifest {
-        from zipTree(libraryJarWithoutIr.archiveFile).find { it.name == 'MANIFEST.MF' }
-    }
+    archiveExtension = "jar"
+    destinationDirectory = file("$buildDir/libs")
 
     duplicatesStrategy DuplicatesStrategy.FAIL
 
