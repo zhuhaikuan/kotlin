@@ -42,8 +42,8 @@ The Kotlin plugin provides language support in IntelliJ IDEA and Android Studio.
 
   <xi:include href="plugin-common.xml" xpointer="xpointer(/idea-plugin/*)"/>
 
-  <!-- CIDR-PLUGIN-EXCLUDE-START -->
   <xi:include href="jvm.xml" xpointer="xpointer(/idea-plugin/*)"/>
+  <!-- CIDR-PLUGIN-EXCLUDE-START -->
   <!-- CIDR-PLUGIN-EXCLUDE-END -->
 
   <xi:include href="native.xml" xpointer="xpointer(/idea-plugin/*)"/>
