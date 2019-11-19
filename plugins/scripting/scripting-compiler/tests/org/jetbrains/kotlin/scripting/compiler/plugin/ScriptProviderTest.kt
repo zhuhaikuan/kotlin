@@ -13,8 +13,9 @@ import org.jetbrains.kotlin.scripting.definitions.ScriptDefinitionProvider
 import org.jetbrains.kotlin.scripting.definitions.ScriptDefinitionsSource
 import org.junit.Assert
 import org.junit.Test
-import java.io.File
 import java.util.concurrent.atomic.AtomicInteger
+import kotlin.script.experimental.api.SourceCode
+import kotlin.script.experimental.host.StringScriptSource
 import kotlin.script.experimental.jvm.defaultJvmScriptingHostConfiguration
 import kotlin.script.templates.standard.ScriptTemplateWithArgs
 
@@ -71,14 +72,14 @@ class ScriptProviderTest {
         }
     }
 
-    private fun ScriptDefinitionProvider.isScript(fileName: String) = isScript(File(fileName))
+    private fun ScriptDefinitionProvider.isScript(fileName: String) = isScript(StringScriptSource("", fileName))
 }
 
 private open class FakeScriptDefinition(val suffix: String = ".kts") :
     ScriptDefinition.FromLegacy(defaultJvmScriptingHostConfiguration, KotlinScriptDefinition(ScriptTemplateWithArgs::class))
 {
     val matchCounter = AtomicInteger()
-    override fun isScript(file: File): Boolean = file.name.endsWith(suffix).also {
+    override fun isScript(script: SourceCode): Boolean = script.name!!.endsWith(suffix).also {
         if (it) matchCounter.incrementAndGet()
     }
 

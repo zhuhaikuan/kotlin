@@ -11,6 +11,7 @@ import org.jetbrains.kotlin.scripting.resolve.KotlinScriptDefinitionFromAnnotate
 import java.io.File
 import kotlin.reflect.KClass
 import kotlin.script.experimental.api.*
+import kotlin.script.experimental.host.FileBasedScriptSource
 import kotlin.script.experimental.host.ScriptingHostConfiguration
 import kotlin.script.experimental.host.createCompilationConfigurationFromTemplate
 import kotlin.script.experimental.host.createEvaluationConfigurationFromTemplate
@@ -28,7 +29,7 @@ abstract class ScriptDefinition : UserDataHolderBase() {
     abstract val compilationConfiguration: ScriptCompilationConfiguration
     abstract val evaluationConfiguration: ScriptEvaluationConfiguration?
 
-    abstract fun isScript(file: File): Boolean
+    abstract fun isScript(script: SourceCode): Boolean
     abstract val fileExtension: String
     abstract val name: String
     open val defaultClassName: String = "Script"
@@ -75,7 +76,7 @@ abstract class ScriptDefinition : UserDataHolderBase() {
             )
         }
 
-        override fun isScript(file: File): Boolean = legacyDefinition.isScript(file.name)
+        override fun isScript(script: SourceCode): Boolean = script.name?.let {legacyDefinition.isScript(it) } ?: isDefault
 
         override val fileExtension: String get() = legacyDefinition.fileExtension
 
@@ -130,10 +131,11 @@ abstract class ScriptDefinition : UserDataHolderBase() {
             compilationConfiguration[ScriptCompilationConfiguration.filePathPattern]?.takeIf { it.isNotBlank() }
         }
 
-        override fun isScript(file: File): Boolean =
-            file.name.endsWith(".$fileExtension") &&
+        override fun isScript(script: SourceCode): Boolean =
+            script.name?.endsWith(".$fileExtension") == true &&
                     (filePathPattern?.let {
-                        Regex(it).matches(FileUtilRt.toSystemIndependentName(file.path))
+                        val nameToMatch = if (script is FileBasedScriptSource) script.file.path else script.name!!
+                        Regex(it).matches(FileUtilRt.toSystemIndependentName(nameToMatch))
                     } ?: true)
 
         override val fileExtension: String get() = compilationConfiguration[ScriptCompilationConfiguration.fileExtension]!!

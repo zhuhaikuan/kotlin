@@ -42,6 +42,7 @@ import org.jetbrains.kotlin.idea.caches.project.getScriptRelatedModuleInfo
 import org.jetbrains.kotlin.idea.core.script.settings.KotlinScriptingSettings
 import org.jetbrains.kotlin.script.ScriptTemplatesProvider
 import org.jetbrains.kotlin.scripting.definitions.*
+import org.jetbrains.kotlin.scripting.resolve.VirtualFileScriptSource
 import org.jetbrains.kotlin.utils.PathUtil
 import org.jetbrains.kotlin.utils.addToStdlib.firstIsInstanceOrNull
 import org.jetbrains.kotlin.utils.addToStdlib.flattenTo
@@ -52,10 +53,12 @@ import kotlin.concurrent.withLock
 import kotlin.concurrent.write
 import kotlin.script.dependencies.Environment
 import kotlin.script.dependencies.ScriptContents
+import kotlin.script.experimental.api.SourceCode
 import kotlin.script.experimental.dependencies.DependenciesResolver
 import kotlin.script.experimental.dependencies.ScriptDependencies
 import kotlin.script.experimental.dependencies.asSuccess
 import kotlin.script.experimental.host.ScriptingHostConfiguration
+import kotlin.script.experimental.host.StringScriptSource
 import kotlin.script.experimental.host.configurationDependencies
 import kotlin.script.experimental.jvm.JvmDependency
 import kotlin.script.experimental.jvm.defaultJvmScriptingHostConfiguration
@@ -69,32 +72,32 @@ class ScriptDefinitionsManager(private val project: Project) : LazyScriptDefinit
     private val failedContributorsHashes = HashSet<Int>()
 
     private val scriptDefinitionsCacheLock = ReentrantLock()
-    private val scriptDefinitionsCache = SLRUMap<File, ScriptDefinition>(10, 10)
+    private val scriptDefinitionsCache = SLRUMap<SourceCode, ScriptDefinition>(10, 10)
 
-    override fun findDefinition(file: File): ScriptDefinition? {
-        if (nonScriptFileName(file.name)) return null
+    override fun findDefinition(script: SourceCode): ScriptDefinition? {
+        if (script.name != null && nonScriptFileName(script.name!!)) return null
         if (!isReady()) return null
 
-        val cached = scriptDefinitionsCacheLock.withLock { scriptDefinitionsCache.get(file) }
+        val cached = scriptDefinitionsCacheLock.withLock { scriptDefinitionsCache.get(script) }
         if (cached != null) return cached
 
-        val virtualFile = VfsUtil.findFileByIoFile(file, true)
+        val virtualFile = if (script is VirtualFileScriptSource) script.virtualFile else null
         val definition =
             if (virtualFile != null && ScratchFileService.getInstance().getRootType(virtualFile) is ScratchRootType) {
                 // Scratch should always have default script definition
                 getDefaultDefinition()
             } else {
-                super.findDefinition(file) ?: return null
+                super.findDefinition(script) ?: return null
             }
 
         scriptDefinitionsCacheLock.withLock {
-            scriptDefinitionsCache.put(file, definition)
+            scriptDefinitionsCache.put(script, definition)
         }
 
         return definition
     }
 
-    override fun findScriptDefinition(fileName: String): KotlinScriptDefinition? = findDefinition(File(fileName))?.legacyDefinition
+    override fun findScriptDefinition(fileName: String): KotlinScriptDefinition? = findDefinition(StringScriptSource("", fileName))?.legacyDefinition
 
     fun reloadDefinitionsBy(source: ScriptDefinitionsSource) = lock.write {
         if (definitions == null) return // not loaded yet
