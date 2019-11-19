@@ -25,7 +25,7 @@ import org.jetbrains.kotlin.parsing.KotlinParserDefinition
 import org.jetbrains.kotlin.psi.KtFile
 import org.jetbrains.kotlin.scripting.definitions.ScriptDefinition
 import org.jetbrains.kotlin.scripting.resolve.KotlinScriptDefinitionFromAnnotatedTemplate
-import java.io.File
+import kotlin.script.experimental.host.StringScriptSource
 
 class MultipleScriptDefinitionsChecker(private val project: Project) : EditorNotifications.Provider<EditorNotificationPanel>() {
 
@@ -42,7 +42,7 @@ class MultipleScriptDefinitionsChecker(private val project: Project) : EditorNot
         val allApplicableDefinitions = ScriptDefinitionsManager.getInstance(project)
             .getAllDefinitions()
             .filter {
-                it.asLegacyOrNull<StandardIdeScriptDefinition>() == null && it.isScript(File(file.path)) &&
+                it.asLegacyOrNull<StandardIdeScriptDefinition>() == null && it.isScript(StringScriptSource("", file.name)) &&
                         KotlinScriptingSettings.getInstance(project).isScriptDefinitionEnabled(it)
             }
             .toList()
