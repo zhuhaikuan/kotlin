@@ -17,6 +17,7 @@ import java.io.PrintStream
 import java.nio.file.Files
 import java.util.concurrent.TimeUnit
 import kotlin.concurrent.thread
+import kotlin.test.assertEquals
 
 // TODO: partially copypasted from LauncherReplTest, consider extracting common parts to some (new) test util module
 fun runWithKotlinc(
@@ -112,15 +113,26 @@ fun runWithK2JVMCompiler(
         add("-script")
         add(scriptPath)
     }
+    runWithK2JVMCompiler(args.toTypedArray(), expectedOutPatterns, expectedExitCode)
+}
+
+fun runWithK2JVMCompiler(
+    args: Array<String>,
+    expectedOutPatterns: List<String> = emptyList(),
+    expectedExitCode: Int = 0
+) {
     val (out, err, ret) = captureOutErrRet {
         CLITool.doMainNoExit(
             K2JVMCompiler(),
-            args.toTypedArray()
+            args
         )
     }
     try {
         val outLines = out.lines()
-        Assert.assertEquals(expectedOutPatterns.size, outLines.size)
+        assertEquals(
+            expectedOutPatterns.size, outLines.size,
+            "Expecting pattern:\n  ${expectedOutPatterns.joinToString("\n  ")}\nGot:\n  ${outLines.joinToString("\n  ")}"
+        )
         for ((expectedPattern, actualLine) in expectedOutPatterns.zip(outLines)) {
             Assert.assertTrue(
                 "line \"$actualLine\" do not match with expected pattern \"$expectedPattern\"",
