@@ -5,8 +5,12 @@
 
 package org.jetbrains.kotlin.idea.intentions.branchedTransformations
 
+import com.intellij.openapi.application.ApplicationManager
+import com.intellij.openapi.application.TransactionGuard
+import com.intellij.openapi.command.CommandProcessor
 import com.intellij.openapi.editor.Editor
 import com.intellij.openapi.fileEditor.FileDocumentManager
+import com.intellij.openapi.project.Project
 import com.intellij.openapi.util.TextRange
 import com.intellij.psi.search.LocalSearchScope
 import com.intellij.psi.search.searches.ReferencesSearch
@@ -137,6 +141,15 @@ fun KtIfExpression.introduceValueForCondition(occurrenceInThenClause: KtExpressi
         listOf(occurrenceInConditional, occurrenceInThenClause), null
     )
 }
+private inline fun invokeRefactoringLater(project: Project, crossinline body: () -> Unit) {
+    ApplicationManager.getApplication().invokeLater {
+        CommandProcessor.getInstance().executeCommand(project, {
+            TransactionGuard.getInstance().submitTransactionAndWait {
+                body()
+            }
+        }, null, null)
+    }
+}
 
 fun KtNameReferenceExpression.inlineIfDeclaredLocallyAndOnlyUsedOnceWithPrompt(editor: Editor?) {
     val declaration = this.mainReference.resolve() as? KtProperty ?: return
@@ -149,7 +162,15 @@ fun KtNameReferenceExpression.inlineIfDeclaredLocallyAndOnlyUsedOnceWithPrompt(e
 
     val references = ReferencesSearch.search(declaration, scope).findAll()
     if (references.size == 1) {
-        KotlinInlineValHandler().inlineElement(this.project, editor, declaration)
+        if (!ApplicationManager.getApplication().isUnitTestMode) {
+            invokeRefactoringLater(this.project) {
+                if (declaration.isValid) {
+                    KotlinInlineValHandler().inlineElement(this.project, editor, declaration)
+                }
+            }
+        } else {
+            KotlinInlineValHandler().inlineElement(this.project, editor, declaration)
+        }
     }
 }
 
