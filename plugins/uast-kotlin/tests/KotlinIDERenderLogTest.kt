@@ -20,7 +20,7 @@ class KotlinIDERenderLogTest : AbstractKotlinUastLightCodeInsightFixtureTest(), 
 
     override fun setUp() {
         super.setUp()
-        Registry.get("kotlin.use.ultra.light.classes").setValue(false, testRootDisposable)
+        //Registry.get("kotlin.use.ultra.light.classes").setValue(false, testRootDisposable)
     }
 
     @Test
