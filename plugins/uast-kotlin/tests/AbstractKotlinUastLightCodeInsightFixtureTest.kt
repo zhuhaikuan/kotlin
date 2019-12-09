@@ -37,7 +37,7 @@ abstract class AbstractKotlinUastLightCodeInsightFixtureTest : KotlinLightCodeIn
     fun doTest(testName: String, checkCallback: (String, UFile) -> Unit = { testName, file -> check(testName, file) }) {
         val virtualFile = getVirtualFile(testName)
 
-        val psiFile = this.myFixture.configureByFile(virtualFile.canonicalPath!!) ?: error("Can't get psi file for $testName")
+        val psiFile = myFixture.configureByText(virtualFile.name, File(virtualFile.canonicalPath!!).readText())
         val uFile = UastFacade.convertElementWithParent(psiFile, null) ?: error("Can't get UFile for $testName")
         checkCallback(testName, uFile as UFile)
     }
