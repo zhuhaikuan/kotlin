@@ -73,7 +73,7 @@ open class FakeFileForLightClass(
         return thisClass == anotherClass
     }
 
-    override fun isEquivalentTo(another: PsiElement?) = this == another
+    override fun isEquivalentTo(another: PsiElement?) = this == another || ktFile.isEquivalentTo(another)
 
     override fun setPackageName(packageName: String) {
         if (lightClass() is KtLightClassForFacade) {
