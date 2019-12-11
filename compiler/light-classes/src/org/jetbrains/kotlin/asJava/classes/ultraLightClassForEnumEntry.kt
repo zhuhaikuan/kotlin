@@ -13,7 +13,7 @@ internal class KtUltraLightClassForEnumEntry(
     private val enumConstant: PsiEnumConstant
 ) : KtUltraLightClass(enumEntry, support), PsiEnumConstantInitializer {
 
-    private val baseClassReferenceAndType: Pair<PsiJavaCodeReferenceElement, PsiClassType> by lazyPub {
+    private val baseClassReferenceAndType: Pair<PsiJavaCodeReferenceElement, PsiClassType> by enumEntry.psiDependent {
         // It should not be null for not-too-complex classes and that is not the case because
         // the containing class is not too complex (since we created KtUltraLightClassForEnumEntry instance)
         val extendsList =

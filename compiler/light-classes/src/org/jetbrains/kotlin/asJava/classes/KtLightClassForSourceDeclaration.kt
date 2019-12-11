@@ -55,15 +55,17 @@ import org.jetbrains.kotlin.psi.stubs.KotlinClassOrObjectStub
 import org.jetbrains.kotlin.resolve.DescriptorUtils
 import java.util.*
 import javax.swing.Icon
+import kotlin.properties.ReadOnlyProperty
 
-private class KtLightClassModifierList(containingClass: KtLightClassForSourceDeclaration, computeModifiers: () -> Set<String>) :
-    KtLightModifierList<KtLightClassForSourceDeclaration>(containingClass) {
+private class KtLightClassModifierList(
+    containingClass: KtLightClassForSourceDeclaration,
+    modifiersGetter: ReadOnlyProperty<Any, Set<String>>
+) : KtLightModifierList<KtLightClassForSourceDeclaration>(containingClass) {
 
-    private val modifiers by lazyPub { computeModifiers() }
+    private val modifiers by modifiersGetter
 
     override fun hasModifierProperty(name: String): Boolean =
         if (name != PsiModifier.FINAL) name in modifiers else owner.isFinal(PsiModifier.FINAL in modifiers)
-
 }
 
 abstract class KtLightClassForSourceDeclaration(
@@ -197,11 +199,13 @@ abstract class KtLightClassForSourceDeclaration(
 
     override fun getName(): String? = classOrObject.nameAsName?.asString()
 
-    private val _modifierList: PsiModifierList by lazyPub { KtLightClassModifierList(this) { computeModifiers() } }
+    private val _modifierList: PsiModifierList by classOrObject.psiDependent {
+        KtLightClassModifierList(this, modifiersGetter)
+    }
 
     override fun getModifierList(): PsiModifierList? = _modifierList
 
-    protected open fun computeModifiers(): Set<String> {
+    protected open val modifiersGetter = classOrObject.psiDependent {
         val psiModifiers = hashSetOf<String>()
 
         // PUBLIC, PROTECTED, PRIVATE, ABSTRACT, FINAL
@@ -240,7 +244,7 @@ abstract class KtLightClassForSourceDeclaration(
             psiModifiers.add(PsiModifier.STATIC)
         }
 
-        return psiModifiers
+        psiModifiers
     }
 
     private fun isAbstract(): Boolean = classOrObject.hasModifier(ABSTRACT_KEYWORD) || isInterface

@@ -145,10 +145,12 @@ internal class KtUltraLightMethodForSourceDeclaration(
 
     private val methodDescriptor get() = kotlinOrigin?.resolve() as? FunctionDescriptor
 
-    private val _throwsList: PsiReferenceList by lazyPub { computeThrowsList(methodDescriptor) }
+    private val _throwsList: PsiReferenceList by kotlinOrigin.psiDependedOrNotCached { computeThrowsList(methodDescriptor) }
+
     override fun getThrowsList(): PsiReferenceList = _throwsList
 
-    override val checkNeedToErasureParametersTypes: Boolean by lazyPub { computeCheckNeedToErasureParametersTypes(methodDescriptor) }
+    override val checkNeedToErasureParametersTypes: Boolean
+            by kotlinOrigin.psiDependedOrNotCached { computeCheckNeedToErasureParametersTypes(methodDescriptor) }
 }
 
 internal class KtUltraLightMethodForDescriptor(

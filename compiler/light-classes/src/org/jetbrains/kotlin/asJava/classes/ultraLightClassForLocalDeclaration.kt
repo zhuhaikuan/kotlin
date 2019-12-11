@@ -14,7 +14,7 @@ open class KtUltraLightClassForLocalDeclaration(
     support: KtUltraLightSupport
 ) : KtUltraLightClass(classOrObject, support) {
 
-    private val _parent: PsiElement? by lazyPub { getParentForLocalDeclaration(classOrObject) }
+    private val _parent: PsiElement? by classOrObject.psiDependent { getParentForLocalDeclaration(classOrObject) }
 
     override fun copy() = KtUltraLightClassForLocalDeclaration(classOrObject.copy() as KtClassOrObject, support)
 

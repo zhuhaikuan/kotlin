@@ -8,6 +8,7 @@ package org.jetbrains.kotlin.asJava.classes
 import com.intellij.psi.*
 import com.intellij.psi.impl.PsiSuperMethodImplUtil
 import com.intellij.psi.util.CachedValue
+import org.jetbrains.kotlin.analyzer.KotlinModificationTrackerService
 import org.jetbrains.kotlin.asJava.builder.LightClassDataHolder
 import org.jetbrains.kotlin.asJava.elements.KtLightField
 import org.jetbrains.kotlin.asJava.elements.KtLightMethod
@@ -15,6 +16,7 @@ import org.jetbrains.kotlin.name.FqName
 import org.jetbrains.kotlin.psi.KtFile
 import org.jetbrains.kotlin.psi.KtNamedFunction
 import org.jetbrains.kotlin.psi.KtProperty
+import kotlin.properties.ReadOnlyProperty
 
 class KtUltraLightClassForFacade(
     manager: PsiManager,
@@ -32,7 +34,14 @@ class KtUltraLightClassForFacade(
 
     override fun getScope(): PsiElement? = parent
 
-    private val filesWithSupportsWithCreators by lazyPub {
+    private val fileTrackers = KotlinModificationTrackerService.getInstance(project).let { service ->
+        files.map { service.fileModificationTracker(it) }
+    }
+
+    private inline fun <T> multiFileDependent(crossinline body: () -> T): ReadOnlyProperty<Any, T> =
+        project.createDepended(::fileTrackers, body)
+
+    private val filesWithSupportsWithCreators by multiFileDependent {
         filesWithSupports.map { (file, support) ->
             Triple(
                 file,
@@ -71,7 +80,7 @@ class KtUltraLightClassForFacade(
         }
     }
 
-    private val _ownMethods: List<KtLightMethod> by lazyPub {
+    private val _ownMethods: List<KtLightMethod> by multiFileDependent {
         mutableListOf<KtLightMethod>().also { result ->
             for ((file, support, creator) in filesWithSupportsWithCreators) {
                 loadMethodsFromFile(file, support, creator, result)
@@ -79,7 +88,7 @@ class KtUltraLightClassForFacade(
         }
     }
 
-    private val _ownFields: List<KtLightField> by lazyPub {
+    private val _ownFields: List<KtLightField> by multiFileDependent {
         hashSetOf<String>().let { nameCache ->
             filesWithSupportsWithCreators.flatMap { (file, _, creator) ->
                 file.declarations.filterIsInstance<KtProperty>().mapNotNull {

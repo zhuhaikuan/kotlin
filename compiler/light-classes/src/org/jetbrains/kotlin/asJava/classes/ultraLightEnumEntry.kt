@@ -18,7 +18,7 @@ internal class KtUltraLightEnumEntry(
 
     private val enumEntry get() = declaration as KtEnumEntry
 
-    private val _initializingClass by lazyPub {
+    private val _initializingClass by declaration.psiDependent {
         enumEntry.body?.let { KtUltraLightClassForEnumEntry(enumEntry, support, this) }
     }
 

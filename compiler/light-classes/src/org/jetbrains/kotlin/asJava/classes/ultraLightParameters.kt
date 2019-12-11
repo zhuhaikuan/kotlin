@@ -148,13 +148,13 @@ internal abstract class KtAbstractUltraLightParameterForDeclaration(
 
     protected abstract fun tryGetKotlinType(): KotlinType?
 
-    private val _parameterType: PsiType by lazyPub {
+    private val _parameterType: PsiType by kotlinOrigin.psiDependedOrNotCached {
         computeParameterType(tryGetKotlinType(), tryGetContainingDescriptor())
     }
 
     override fun getType(): PsiType = _parameterType
 
-    override val qualifiedNameForNullabilityAnnotation: String? by lazyPub {
+    override val qualifiedNameForNullabilityAnnotation: String? by kotlinOrigin.psiDependedOrNotCached {
         computeQualifiedNameForNullabilityAnnotation(tryGetKotlinType())
     }
 }

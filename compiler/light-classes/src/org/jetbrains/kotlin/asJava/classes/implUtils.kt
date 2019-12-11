@@ -5,16 +5,21 @@
 
 package org.jetbrains.kotlin.asJava.classes
 
+import com.intellij.openapi.project.Project
 import com.intellij.openapi.util.ModificationTracker
 import com.intellij.psi.PsiJavaCodeReferenceElement
 import com.intellij.psi.PsiReferenceList
 import com.intellij.psi.impl.light.LightElement
+import com.intellij.psi.util.CachedValueProvider
+import com.intellij.psi.util.CachedValuesManager
 import com.intellij.util.IncorrectOperationException
 import org.jetbrains.kotlin.analyzer.KotlinModificationTrackerService
 import org.jetbrains.kotlin.asJava.LightClassGenerationSupport
 import org.jetbrains.kotlin.psi.*
 import org.jetbrains.kotlin.resolve.BindingContext
 import org.jetbrains.kotlin.resolve.descriptorUtil.fqNameUnsafe
+import kotlin.properties.ReadOnlyProperty
+import kotlin.reflect.KProperty
 
 // NOTE: avoid using blocking lazy in light classes, it leads to deadlocks
 fun <T> lazyPub(initializer: () -> T) = lazy(LazyThreadSafetyMode.PUBLICATION, initializer)
@@ -38,7 +43,9 @@ fun PsiReferenceList.addSuperTypeEntry(
 ) {
     // Only classes may be mentioned in 'extends' list, thus create super call instead simple type reference
     val entryToAdd =
-        if ((reference.parent as? PsiReferenceList)?.role == PsiReferenceList.Role.IMPLEMENTS_LIST && role == PsiReferenceList.Role.EXTENDS_LIST) {
+        if ((reference.parent as? PsiReferenceList)?.role == PsiReferenceList.Role.IMPLEMENTS_LIST && role == PsiReferenceList.Role
+                .EXTENDS_LIST
+        ) {
             KtPsiFactory(this).createSuperTypeCallEntry("${entry.text}()")
         } else entry
     // TODO: implement KtSuperListEntry qualification/shortening when inserting reference from another context
@@ -50,7 +57,37 @@ fun PsiReferenceList.addSuperTypeEntry(
     }
 }
 
-internal fun KtClassOrObject.getExternalDependencies(): List<ModificationTracker> {
+internal inline fun <T> delegateOn(crossinline body: () -> T): ReadOnlyProperty<Any, T> =
+    object : ReadOnlyProperty<Any, T> {
+        override fun getValue(thisRef: Any, property: KProperty<*>) = body()
+    }
+
+internal inline fun <T> KtElement?.psiDependedOrNotCached(crossinline body: () -> T): ReadOnlyProperty<Any, T> =
+    if (this === null) delegateOn(body) else psiDependent(body)
+
+internal inline fun <T> Project.createDepended(
+    crossinline getDependencies: () -> List<ModificationTracker>,
+    crossinline body: () -> T
+): ReadOnlyProperty<Any, T> {
+    val dependentValue = CachedValuesManager.getManager(this).createCachedValue(
+        {
+            CachedValueProvider.Result.create(
+                body(),
+                getDependencies()
+            )
+        }, false
+    )
+    return delegateOn { dependentValue.value }
+}
+
+internal inline fun <T> KtElement.psiDependent(crossinline body: () -> T): ReadOnlyProperty<Any, T> =
+    project.createDepended(::getExternalDependencies, body)
+
+internal fun KtElement.getExternalDependencies(): List<ModificationTracker> =
+    if (this is KtClassOrObject) this.getExternalDependencies()
+    else listOf(KotlinModificationTrackerService.getInstance(project).outOfBlockModificationTracker)
+
+private fun KtClassOrObject.getExternalDependencies(): List<ModificationTracker> {
     return with(KotlinModificationTrackerService.getInstance(project)) {
         if (!safeIsLocal()) return listOf(outOfBlockModificationTracker)
         else when (val file = containingFile) {

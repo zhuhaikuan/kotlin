@@ -22,7 +22,7 @@ class KtUltraLightInlineClass(
 
     override fun getScope(): PsiElement? = parent
 
-    private val membersBuilder: UltraLightMembersCreator by lazyPub {
+    private val membersBuilder: UltraLightMembersCreator by classOrObject.psiDependent {
         UltraLightMembersCreator(
             containingClass = this,
             containingClassIsNamedObject = false,
@@ -32,7 +32,7 @@ class KtUltraLightInlineClass(
         )
     }
 
-    private val _ownMethods: List<KtLightMethod> by lazyPub {
+    private val _ownMethods: List<KtLightMethod> by classOrObject.psiDependent {
 
         val result = arrayListOf<KtLightMethod>()
 

@@ -16,7 +16,6 @@ import org.jetbrains.kotlin.asJava.elements.*
 import org.jetbrains.kotlin.codegen.PropertyCodegen
 import org.jetbrains.kotlin.descriptors.ClassDescriptor
 import org.jetbrains.kotlin.descriptors.PropertyDescriptor
-import org.jetbrains.kotlin.descriptors.VariableDescriptor
 import org.jetbrains.kotlin.descriptors.annotations.AnnotationUseSiteTarget
 import org.jetbrains.kotlin.idea.KotlinLanguage
 import org.jetbrains.kotlin.load.kotlin.TypeMappingMode
@@ -69,7 +68,7 @@ internal open class KtUltraLightFieldImpl protected constructor(
 ) : LightFieldBuilder(name, PsiType.NULL, declaration), KtLightField,
     KtUltraLightElementWithNullabilityAnnotation<KtDeclaration, PsiField> {
 
-    private val modifierList by lazyPub {
+    private val modifierList by declaration.psiDependent {
         KtUltraLightSimpleModifierListField(support, declaration, this, modifiers)
     }
 
@@ -111,7 +110,7 @@ internal open class KtUltraLightFieldImpl protected constructor(
     override val psiTypeForNullabilityAnnotation: PsiType?
         get() = type
 
-    private val _type: PsiType by lazyPub {
+    private val _type: PsiType by declaration.psiDependent {
         fun nonExistent() = JavaPsiFacade.getElementFactory(project).createTypeFromText("error.NonExistentClass", declaration)
 
         when {
@@ -120,8 +119,8 @@ internal open class KtUltraLightFieldImpl protected constructor(
                     ?.let(TypeConversionUtil::erasure)
                     ?: nonExistent()
             else -> {
-                val kotlinType = declaration.getKotlinType() ?: return@lazyPub PsiType.NULL
-                val descriptor = propertyDescriptor ?: return@lazyPub PsiType.NULL
+                val kotlinType = declaration.getKotlinType() ?: return@psiDependent PsiType.NULL
+                val descriptor = propertyDescriptor ?: return@psiDependent PsiType.NULL
 
                 support.mapType(this) { typeMapper, sw ->
                     typeMapper.writeFieldSignature(kotlinType, descriptor, sw)
@@ -135,7 +134,7 @@ internal open class KtUltraLightFieldImpl protected constructor(
     override fun getContainingClass() = containingClass
     override fun getContainingFile(): PsiFile? = containingClass.containingFile
 
-    private val _initializer by lazyPub {
+    private val _initializer by declaration.psiDependent {
         _constantInitializer?.createPsiLiteral(declaration)
     }
 
@@ -143,10 +142,10 @@ internal open class KtUltraLightFieldImpl protected constructor(
 
     override fun hasInitializer(): Boolean = initializer !== null
 
-    private val _constantInitializer by lazyPub {
-        if ((declaration as? KtProperty)?.hasInitializer() != true) return@lazyPub null
-        if (!hasModifierProperty(PsiModifier.FINAL)) return@lazyPub null
-        if (!TypeConversionUtil.isPrimitiveAndNotNull(_type) && !_type.equalsToText(CommonClassNames.JAVA_LANG_STRING)) return@lazyPub null
+    private val _constantInitializer by declaration.psiDependent {
+        if ((declaration as? KtProperty)?.hasInitializer() != true) return@psiDependent null
+        if (!hasModifierProperty(PsiModifier.FINAL)) return@psiDependent null
+        if (!TypeConversionUtil.isPrimitiveAndNotNull(_type) && !_type.equalsToText(CommonClassNames.JAVA_LANG_STRING)) return@psiDependent null
         propertyDescriptor?.compileTimeInitializer
     }
 

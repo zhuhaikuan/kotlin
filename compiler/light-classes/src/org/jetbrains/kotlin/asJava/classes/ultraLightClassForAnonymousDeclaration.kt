@@ -17,16 +17,16 @@ open class KtUltraLightClassForAnonymousDeclaration(classOrObject: KtClassOrObje
     override fun getBaseClassReference() =
         JavaPsiFacade.getElementFactory(classOrObject.project).createReferenceElementByType(baseClassType)
 
-    private val _baseClassType by lazyPub {
+    private val _baseClassType by classOrObject.psiDependent {
 
         val firstSupertypeFQName = getFirstSupertypeFQNameForAnonymousDeclaration()
 
         if (firstSupertypeFQName == CommonClassNames.JAVA_LANG_OBJECT) {
-            return@lazyPub PsiType.getJavaLangObject(kotlinOrigin.manager, resolveScope)
+            return@psiDependent PsiType.getJavaLangObject(kotlinOrigin.manager, resolveScope)
         }
 
-        extendsListTypes.find { it.resolve()?.qualifiedName == firstSupertypeFQName }?.let { return@lazyPub it }
-        implementsListTypes.find { it.resolve()?.qualifiedName == firstSupertypeFQName }?.let { return@lazyPub it }
+        extendsListTypes.find { it.resolve()?.qualifiedName == firstSupertypeFQName }?.let { return@psiDependent it }
+        implementsListTypes.find { it.resolve()?.qualifiedName == firstSupertypeFQName }?.let { return@psiDependent it }
 
         PsiType.getJavaLangObject(kotlinOrigin.manager, resolveScope)
     }

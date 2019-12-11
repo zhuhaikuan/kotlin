@@ -10,9 +10,6 @@ import com.intellij.psi.impl.InheritanceImplUtil
 import com.intellij.psi.impl.PsiClassImplUtil
 import com.intellij.psi.impl.PsiSuperMethodImplUtil
 import com.intellij.psi.impl.light.LightMethodBuilder
-import com.intellij.psi.util.CachedValue
-import com.intellij.psi.util.CachedValueProvider
-import com.intellij.psi.util.CachedValuesManager
 import org.jetbrains.kotlin.asJava.builder.LightClassData
 import org.jetbrains.kotlin.asJava.elements.KtLightField
 import org.jetbrains.kotlin.asJava.elements.KtLightMethod
@@ -39,6 +36,7 @@ import org.jetbrains.kotlin.resolve.constants.EnumValue
 import org.jetbrains.kotlin.resolve.jvm.annotations.JVM_OVERLOADS_FQ_NAME
 import org.jetbrains.kotlin.types.KotlinType
 import org.jetbrains.kotlin.types.typeUtil.isAnyOrNullableAny
+import kotlin.properties.ReadOnlyProperty
 
 open class KtUltraLightClass(classOrObject: KtClassOrObject, internal val support: KtUltraLightSupport) :
     KtLightClassImpl(classOrObject) {
@@ -46,19 +44,18 @@ open class KtUltraLightClass(classOrObject: KtClassOrObject, internal val suppor
     private class KtUltraLightClassModifierList(
         private val containingClass: KtLightClassForSourceDeclaration,
         private val support: KtUltraLightSupport,
-        private val computeModifiers: () -> Set<String>
-    ) :
-        KtUltraLightModifierList<KtLightClassForSourceDeclaration>(containingClass, support) {
-        private val modifiers by lazyPub { computeModifiers() }
+        private val modifiersGetter: ReadOnlyProperty<Any, Set<String>>
+    ) : KtUltraLightModifierList<KtLightClassForSourceDeclaration>(containingClass, support) {
+
+        private val modifiers by modifiersGetter
 
         override fun hasModifierProperty(name: String): Boolean =
             if (name != PsiModifier.FINAL) name in modifiers else owner.isFinal(PsiModifier.FINAL in modifiers)
 
-        override fun copy(): PsiElement = KtUltraLightClassModifierList(containingClass, support, computeModifiers)
+        override fun copy(): PsiElement = KtUltraLightClassModifierList(containingClass, support, modifiersGetter)
     }
 
-
-    private val membersBuilder by lazyPub {
+    private val membersBuilder by classOrObject.psiDependent {
         UltraLightMembersCreator(
             this,
             isNamedObject(),
@@ -68,7 +65,7 @@ open class KtUltraLightClass(classOrObject: KtClassOrObject, internal val suppor
         )
     }
 
-    private val _deprecated by lazyPub { classOrObject.isDeprecated(support) }
+    private val _deprecated by classOrObject.psiDependent { classOrObject.isDeprecated(support) }
 
     override fun isFinal(isFinalByPsi: Boolean) = isFinalByPsi
 
@@ -76,8 +73,8 @@ open class KtUltraLightClass(classOrObject: KtClassOrObject, internal val suppor
 
     override fun getDelegate(): PsiClass = invalidAccess()
 
-    private val _modifierList: PsiModifierList? by lazyPub {
-        KtUltraLightClassModifierList(this, support) { computeModifiers() }
+    private val _modifierList: PsiModifierList? by classOrObject.psiDependent {
+        KtUltraLightClassModifierList(this, support, modifiersGetter)
     }
 
     override fun getModifierList(): PsiModifierList? = _modifierList
@@ -172,7 +169,7 @@ open class KtUltraLightClass(classOrObject: KtClassOrObject, internal val suppor
     override fun getRBrace(): PsiElement? = null
     override fun getLBrace(): PsiElement? = null
 
-    private val _ownFields: List<KtLightField> by lazyPub {
+    private val _ownFields: List<KtLightField> by classOrObject.psiDependent {
 
         val result = arrayListOf<KtLightField>()
         val usedNames = hashSetOf<String>()
@@ -206,7 +203,7 @@ open class KtUltraLightClass(classOrObject: KtClassOrObject, internal val suppor
             }
         }
 
-        if (isAnnotationType) return@lazyPub result.updateWithCompilerPlugins()
+        if (isAnnotationType) return@psiDependent result.updateWithCompilerPlugins()
 
         for (parameter in propertyParameters()) {
             membersBuilder.createPropertyField(parameter, usedNames, forceStatic = false)?.let(result::add)
@@ -320,14 +317,7 @@ open class KtUltraLightClass(classOrObject: KtClassOrObject, internal val suppor
         return result
     }
 
-    private val _ownMethods: CachedValue<List<KtLightMethod>> = CachedValuesManager.getManager(project).createCachedValue(
-        {
-            CachedValueProvider.Result.create(
-                ownMethods(),
-                classOrObject.getExternalDependencies()
-            )
-        }, false
-    )
+    private val _ownMethods: List<KtLightMethod> by classOrObject.psiDependent { ownMethods() }
 
     private fun addMethodsFromDataClass(result: MutableList<KtLightMethod>) {
         if (!classOrObject.hasModifier(DATA_KEYWORD)) return
@@ -443,7 +433,7 @@ open class KtUltraLightClass(classOrObject: KtClassOrObject, internal val suppor
 
     private fun isJvmStatic(declaration: KtAnnotated): Boolean = declaration.hasAnnotation(JVM_STATIC_ANNOTATION_FQ_NAME)
 
-    override fun getOwnMethods(): List<KtLightMethod> = _ownMethods.value
+    override fun getOwnMethods(): List<KtLightMethod> = _ownMethods
 
     private fun KtAnnotated.hasAnnotation(name: FqName) = support.findAnnotation(this, name) != null
 
