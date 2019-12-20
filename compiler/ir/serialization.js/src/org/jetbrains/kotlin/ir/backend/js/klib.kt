@@ -16,11 +16,6 @@ import org.jetbrains.kotlin.backend.common.serialization.KlibIrVersion
 import org.jetbrains.kotlin.backend.common.serialization.metadata.DynamicTypeDeserializer
 import org.jetbrains.kotlin.backend.common.serialization.metadata.KlibMetadataVersion
 import org.jetbrains.kotlin.builtins.KotlinBuiltIns
-import org.jetbrains.kotlin.cli.common.CLIConfigurationKeys
-import org.jetbrains.kotlin.cli.common.messages.AnalyzerWithCompilerReport
-import org.jetbrains.kotlin.cli.common.messages.MessageCollector
-import org.jetbrains.kotlin.cli.common.messages.MessageRenderer
-import org.jetbrains.kotlin.cli.common.messages.PrintingMessageCollector
 import org.jetbrains.kotlin.config.*
 import org.jetbrains.kotlin.descriptors.DeclarationDescriptor
 import org.jetbrains.kotlin.descriptors.ModuleDescriptor
@@ -39,6 +34,7 @@ import org.jetbrains.kotlin.ir.util.generateTypicalIrProviderList
 import org.jetbrains.kotlin.ir.visitors.acceptVoid
 import org.jetbrains.kotlin.js.analyzer.JsAnalysisResult
 import org.jetbrains.kotlin.js.config.JSConfigurationKeys
+import org.jetbrains.kotlin.js.config.JSIRConfigurationKeys
 import org.jetbrains.kotlin.konan.properties.propertyList
 import org.jetbrains.kotlin.konan.util.KlibMetadataFactories
 import org.jetbrains.kotlin.library.*
@@ -299,16 +295,10 @@ private class ModulesStructure(
     val builtInsDep = allDependencies.getFullList().find { it.isBuiltIns }
 
     fun runAnalysis(): JsAnalysisResult {
-        // TODO: Should we not provide default message collector?
-        val messageCollector: MessageCollector =
-            compilerConfiguration.get(CLIConfigurationKeys.MESSAGE_COLLECTOR_KEY) ?: MessageCollector.NONE
-
-        val analyzerWithCompilerReport = AnalyzerWithCompilerReport(
-            messageCollector,
-            compilerConfiguration.languageVersionSettings
+        val analyzeAndReport = compilerConfiguration.getNotNull(
+            JSIRConfigurationKeys.ANALYZE_AND_REPORT_FUNCTION
         )
-
-        analyzerWithCompilerReport.analyzeAndReport(files) {
+        val analysisResult = analyzeAndReport(files) {
             TopDownAnalyzerFacadeForJSIR.analyzeFiles(
                 files,
                 project,
@@ -320,9 +310,7 @@ private class ModulesStructure(
             )
         }
 
-        val analysisResult = analyzerWithCompilerReport.analysisResult
-
-        if (analyzerWithCompilerReport.hasErrors() || analysisResult !is JsAnalysisResult)
+        if (analysisResult !is JsAnalysisResult)
             throw JsIrCompilationError
 
         ProgressIndicatorAndCompilationCanceledStatus.checkCanceled()

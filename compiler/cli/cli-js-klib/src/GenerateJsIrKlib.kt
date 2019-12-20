@@ -13,10 +13,15 @@ import com.intellij.openapi.vfs.VirtualFileManager
 import com.intellij.psi.PsiManager
 import org.jetbrains.kotlin.cli.common.CLIConfigurationKeys
 import org.jetbrains.kotlin.cli.common.messages.*
+import org.jetbrains.kotlin.cli.common.createAnalyzerAndReporter
+import org.jetbrains.kotlin.cli.common.messages.CompilerMessageSeverity
+import org.jetbrains.kotlin.cli.common.messages.GroupingMessageCollector
+import org.jetbrains.kotlin.cli.common.messages.MessageCollector
 import org.jetbrains.kotlin.cli.jvm.compiler.EnvironmentConfigFiles
 import org.jetbrains.kotlin.cli.jvm.compiler.KotlinCoreEnvironment
 import org.jetbrains.kotlin.config.*
 import org.jetbrains.kotlin.js.config.JSConfigurationKeys
+import org.jetbrains.kotlin.js.config.JSIRConfigurationKeys
 import org.jetbrains.kotlin.library.resolver.KotlinLibraryResolveResult
 import org.jetbrains.kotlin.psi.KtFile
 import org.jetbrains.kotlin.resolve.multiplatform.isCommonSource
@@ -46,6 +51,15 @@ fun buildConfiguration(environment: KotlinCoreEnvironment, moduleName: String): 
                 "kotlin.ExperimentalMultiplatform"
             ),
             AnalysisFlags.allowResultReturnType to true
+        )
+    )
+
+    runtimeConfiguration.put(
+        JSIRConfigurationKeys.ANALYZE_AND_REPORT_FUNCTION,
+        createAnalyzerAndReporter(
+            // TODO: Use proper message collector
+            MessageCollector.NONE,
+            runtimeConfiguration.languageVersionSettings
         )
     )
 

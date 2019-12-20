@@ -16,10 +16,13 @@
 
 package org.jetbrains.kotlin.cli.common
 
+import org.jetbrains.kotlin.analyzer.AnalysisResult
+import org.jetbrains.kotlin.cli.common.messages.AnalyzerWithCompilerReport
 import org.jetbrains.kotlin.cli.common.messages.CompilerMessageSeverity
 import org.jetbrains.kotlin.cli.common.messages.MessageCollector
 import org.jetbrains.kotlin.cli.common.messages.MessageUtil
 import org.jetbrains.kotlin.cli.jvm.compiler.KotlinCoreEnvironment
+import org.jetbrains.kotlin.config.LanguageVersionSettings
 import org.jetbrains.kotlin.name.FqName
 import org.jetbrains.kotlin.name.isSubpackageOf
 import org.jetbrains.kotlin.psi.KtFile
@@ -65,4 +68,14 @@ fun getLibraryFromHome(
                 "or the correct '-kotlin-home'", null
     )
     return null
+}
+
+fun createAnalyzerAndReporter(
+    messageCollector: MessageCollector,
+    languageVersionSettings: LanguageVersionSettings
+) = fun(files: Collection<KtFile>, analyze: () -> AnalysisResult): AnalysisResult? {
+    AnalyzerWithCompilerReport(messageCollector, languageVersionSettings).apply {
+        analyzeAndReport(files, analyze)
+        return if (hasErrors()) null else analysisResult
+    }
 }

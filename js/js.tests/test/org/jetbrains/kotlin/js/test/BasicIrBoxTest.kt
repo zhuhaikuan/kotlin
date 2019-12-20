@@ -7,6 +7,7 @@ package org.jetbrains.kotlin.js.test
 
 import org.jetbrains.kotlin.backend.common.phaser.PhaseConfig
 import org.jetbrains.kotlin.backend.common.phaser.toPhaseMap
+import org.jetbrains.kotlin.cli.common.createAnalyzerAndReporter
 import org.jetbrains.kotlin.cli.common.messages.MessageCollector
 import org.jetbrains.kotlin.cli.js.messageCollectorLogger
 import org.jetbrains.kotlin.ir.backend.js.compile
@@ -14,6 +15,7 @@ import org.jetbrains.kotlin.ir.backend.js.generateKLib
 import org.jetbrains.kotlin.ir.backend.js.jsPhases
 import org.jetbrains.kotlin.ir.backend.js.jsResolveLibraries
 import org.jetbrains.kotlin.js.config.JSConfigurationKeys
+import org.jetbrains.kotlin.js.config.JSIRConfigurationKeys
 import org.jetbrains.kotlin.js.config.JsConfig
 import org.jetbrains.kotlin.js.facade.MainCallParameters
 import org.jetbrains.kotlin.js.facade.TranslationUnit
@@ -94,6 +96,15 @@ abstract class BasicIrBoxTest(
         val actualOutputFile = outputFile.absolutePath.let {
             if (!isMainModule) it.replace("_v5.js", "/") else it
         }
+
+        config.configuration.put(
+            JSIRConfigurationKeys.ANALYZE_AND_REPORT_FUNCTION,
+            createAnalyzerAndReporter(
+                // TODO: Use proper message collector
+                MessageCollector.NONE,
+                config.languageVersionSettings
+            )
+        )
 
         if (isMainModule) {
             val debugMode = getBoolean("kotlin.js.debugMode")
