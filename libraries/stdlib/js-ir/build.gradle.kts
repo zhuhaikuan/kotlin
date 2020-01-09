@@ -2,7 +2,7 @@ import com.moowork.gradle.node.npm.NpmTask
 import com.moowork.gradle.node.task.NodeTask
 
 plugins {
-    kotlin("jvm")
+    id("base")
     id("com.github.node-gradle.node")
 }
 
@@ -15,6 +15,7 @@ val fullJsIrCli: Configuration by configurations.creating
 
 dependencies {
     jsIrKlibCli(project(":compiler:cli-js-klib"))
+    jsIrKlibCli(project(":kotlin-reflect"))
 
     fullJsIrCli(project(":compiler:cli-js"))
     fullJsIrCli(project(":compiler:util"))
@@ -30,6 +31,7 @@ dependencies {
     fullJsIrCli(project(":js:js.serializer"))
     fullJsIrCli(project(":js:js.dce"))
     fullJsIrCli(kotlin("reflect"))
+    fullJsIrCli(project(":kotlin-reflect"))
     fullJsIrCli(intellijCoreDep()) { includeJars("intellij-core") }
     fullJsIrCli(intellijDep()) {
         includeJars("picocontainer", "trove4j", "guava", "jdom", "asm-all", rootProject = rootProject)
@@ -337,7 +339,7 @@ val runMocha by task<NodeTask> {
 }
 
 tasks {
-    test {
+    check {
         dependsOn(runMocha)
     }
 }
