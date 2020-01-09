@@ -40,7 +40,6 @@ import org.jetbrains.kotlin.metadata.deserialization.BinaryVersion
 import org.jetbrains.kotlin.psi.KtFile
 import org.jetbrains.kotlin.serialization.js.ModuleKind
 import org.jetbrains.kotlin.util.Logger
-import org.jetbrains.kotlin.utils.JsMetadataVersion
 import org.jetbrains.kotlin.utils.KotlinPaths
 import org.jetbrains.kotlin.utils.PathUtil
 import org.jetbrains.kotlin.utils.fileUtils.withReplacedExtensionOrNull
@@ -203,7 +202,7 @@ class K2JsIrCompiler : CLICompiler<K2JSCompilerArguments>() {
             val compiledModule = try {
                 compile(
                     projectJs,
-                    sourcesFiles,
+                    MainModule.SourceFiles(sourcesFiles),
                     config.configuration,
                     phaseConfig,
                     allDependencies = resolvedLibraries,

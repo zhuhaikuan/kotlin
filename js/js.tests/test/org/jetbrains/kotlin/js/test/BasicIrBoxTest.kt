@@ -9,14 +9,12 @@ import org.jetbrains.kotlin.backend.common.phaser.PhaseConfig
 import org.jetbrains.kotlin.backend.common.phaser.toPhaseMap
 import org.jetbrains.kotlin.cli.common.messages.MessageCollector
 import org.jetbrains.kotlin.cli.js.messageCollectorLogger
-import org.jetbrains.kotlin.ir.backend.js.compile
-import org.jetbrains.kotlin.ir.backend.js.generateKLib
-import org.jetbrains.kotlin.ir.backend.js.jsPhases
-import org.jetbrains.kotlin.ir.backend.js.jsResolveLibraries
+import org.jetbrains.kotlin.ir.backend.js.*
 import org.jetbrains.kotlin.js.config.JSConfigurationKeys
 import org.jetbrains.kotlin.js.config.JsConfig
 import org.jetbrains.kotlin.js.facade.MainCallParameters
 import org.jetbrains.kotlin.js.facade.TranslationUnit
+import org.jetbrains.kotlin.library.resolver.KotlinLibraryResolveResult
 import org.jetbrains.kotlin.name.FqName
 import org.jetbrains.kotlin.test.TargetBackend
 import org.jetbrains.kotlin.utils.fileUtils.withReplacedExtensionOrNull
@@ -91,9 +89,19 @@ abstract class BasicIrBoxTest(
 
         val resolvedLibraries = jsResolveLibraries(allKlibPaths, messageCollectorLogger(MessageCollector.NONE))
 
-        val actualOutputFile = outputFile.absolutePath.let {
-            if (!isMainModule) it.replace("_v5.js", "/") else it
-        }
+        val klibOutputFile = outputFile.absolutePath.replace("_v5.js", "/")
+
+        generateKLib(
+            project = config.project,
+            files = filesToCompile,
+            configuration = config.configuration,
+            allDependencies = resolvedLibraries,
+            friendDependencies = emptyList(),
+            outputKlibPath = klibOutputFile,
+            nopack = true
+        )
+
+        compilationCache[outputFile.name.replace(".js", ".meta.js")] = klibOutputFile
 
         if (isMainModule) {
             val debugMode = getBoolean("kotlin.js.debugMode")
@@ -113,12 +121,20 @@ abstract class BasicIrBoxTest(
                 PhaseConfig(jsPhases)
             }
 
+            val resolvedWithMain: KotlinLibraryResolveResult = jsResolveLibraries(
+                listOf(klibOutputFile) + allKlibPaths,
+                messageCollectorLogger(MessageCollector.NONE)
+            )
+
+            val allList = resolvedWithMain.getFullList()
+            val mainLib = allList.find { it.manifestProperties["unique_name"] == config.moduleId }!!
+
             val compiledModule = compile(
                 project = config.project,
-                files = filesToCompile,
+                mainModule = MainModule.Klib(mainLib),
                 configuration = config.configuration,
                 phaseConfig = phaseConfig,
-                allDependencies = resolvedLibraries,
+                allDependencies = resolvedWithMain,
                 friendDependencies = emptyList(),
                 mainArguments = mainCallParameters.run { if (shouldBeGenerated()) arguments() else null },
                 exportedDeclarations = setOf(FqName.fromSegments(listOfNotNull(testPackage, testFunction))),
@@ -138,19 +154,6 @@ abstract class BasicIrBoxTest(
                 val dtsFile = outputFile.withReplacedExtensionOrNull("_v5.js", ".d.ts")
                 dtsFile?.write(compiledModule.tsDefinitions ?: error("No ts definitions"))
             }
-
-        } else {
-            generateKLib(
-                project = config.project,
-                files = filesToCompile,
-                configuration = config.configuration,
-                allDependencies = resolvedLibraries,
-                friendDependencies = emptyList(),
-                outputKlibPath = actualOutputFile,
-                nopack = true
-            )
-
-            compilationCache[outputFile.name.replace(".js", ".meta.js")] = actualOutputFile
         }
     }
 
