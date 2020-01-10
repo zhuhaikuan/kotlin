@@ -1,7 +1,10 @@
 // IGNORE_BACKEND_FIR: JVM_IR
-// IGNORE_BACKEND: JS_IR
 // IGNORE_BACKEND: NATIVE
+// IGNORE_BACKEND: JS_IR
 //For KT-6020
+
+// MODULE: lib
+// FILE: lib.kt
 import kotlin.reflect.KProperty1
 import kotlin.reflect.KMutableProperty1
 import kotlin.reflect.KProperty
@@ -18,6 +21,8 @@ class DVal<T, R, P: KProperty1<T, R>>(val kmember: P) {
     }
 }
 
+// MODULE: main(lib)
+// FILE: main.kt
 fun box(): String {
     val p = Value("O", "K")
     return p.additionalValue + p.additionalText

@@ -1,13 +1,15 @@
 // IGNORE_BACKEND: JS_IR
 // IGNORE_BACKEND_FIR: JVM_IR
-import Class.C.f
-import Class.C.p
-import Class.C.ext
-import Class.C.g1
-import Class.C.g2
-import Class.C.fromClass
-import Class.C.fromInterface
-import Class.C.genericFromSuper
+// MODULE: lib
+// FILE: lib.kt
+import C.f
+import C.p
+import C.ext
+import C.g1
+import C.g2
+import C.fromClass
+import C.fromInterface
+import C.genericFromSuper
 
 interface I<G> {
     fun <T> T.fromInterface(): T = this
@@ -20,21 +22,30 @@ open class BaseClass {
         get() = this
 }
 
-class Class {
-    companion object C: BaseClass(), I<String> {
-        fun f(s: Int) = 1
-        fun f(s: String) = 2
-        fun Boolean.f() = 3
+object C: BaseClass(), I<String> {
+    fun f(s: Int) = 1
+    fun f(s: String) = 2
+    fun Boolean.f() = 3
 
-        var p: Int = 4
-        val Int.ext: Int
-            get() = 6
+    var p: Int = 4
+    val Int.ext: Int
+        get() = 6
 
-        fun <T> g1(t: T): T = t
-        val <T> T.g2: T
-            get() = this
-    }
+    fun <T> g1(t: T): T = t
+    val <T> T.g2: T
+        get() = this
 }
+
+// MODULE: main(lib)
+// FILE: main.kt
+import C.f
+import C.p
+import C.ext
+import C.g1
+import C.g2
+import C.fromClass
+import C.fromInterface
+import C.genericFromSuper
 
 fun box(): String {
     if (f(1) != 1) return "1"
