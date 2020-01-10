@@ -252,11 +252,11 @@ fun IrClass.isSubclassOf(ancestor: IrClass): Boolean {
 fun IrSimpleFunction.collectRealOverrides(): Set<IrSimpleFunction> {
     if (isReal) return setOf(this)
 
-    val visited = mutableSetOf<IrSimpleFunction>()
+    val visited = mutableSetOf<FqName>()
     val realOverrides = mutableSetOf<IrSimpleFunction>()
 
     fun collectRealOverrides(func: IrSimpleFunction) {
-        if (!visited.add(func)) return
+        if (!visited.add(func.parentAsClass.fqNameForIrSerialization)) return
 
         if (func.isReal) {
             realOverrides += func
@@ -268,7 +268,7 @@ fun IrSimpleFunction.collectRealOverrides(): Set<IrSimpleFunction> {
     overriddenSymbols.forEach { collectRealOverrides(it.owner) }
 
     fun excludeRepeated(func: IrSimpleFunction) {
-        if (!visited.add(func)) return
+        if (!visited.add(func.parentAsClass.fqNameForIrSerialization)) return
 
         func.overriddenSymbols.forEach {
             realOverrides.remove(it.owner)

@@ -153,6 +153,11 @@ public class IrCompileKotlinAgainstKotlinTestGenerated extends AbstractIrCompile
         runTest("compiler/testData/compileKotlinAgainstKotlin/innerClassConstructor.kt");
     }
 
+    @TestMetadata("interfaceBothInSourcesAndDependencies.kt")
+    public void testInterfaceBothInSourcesAndDependencies() throws Exception {
+        runTest("compiler/testData/compileKotlinAgainstKotlin/interfaceBothInSourcesAndDependencies.kt");
+    }
+
     @TestMetadata("internalSetterOverridden.kt")
     public void testInternalSetterOverridden() throws Exception {
         runTest("compiler/testData/compileKotlinAgainstKotlin/internalSetterOverridden.kt");

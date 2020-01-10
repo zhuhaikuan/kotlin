@@ -93,7 +93,7 @@ internal class InterfaceLowering(val context: JvmBackendContext) : IrElementTran
                  *    ```
                  */
                 function.origin == IrDeclarationOrigin.FAKE_OVERRIDE -> {
-                    val implementation = function.resolveFakeOverride()!!
+                    val implementation = function.resolveFakeOverride() ?: error("Unresolved fake override for ${function.render()}")
 
                     when {
                         Visibilities.isPrivate(implementation.visibility) ||
