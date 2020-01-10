@@ -283,6 +283,11 @@ classes.dependsOn compileJs
 jar {
     enabled false
 }
+configurations.archives.outgoing.artifacts.with { artifacts ->
+    def defaultJarArtifact = artifacts.find { it.buildDependencies.getDependencies(null).contains(jar) }
+    artifacts.remove(defaultJarArtifact)
+}
+
 
 task libraryJarWithoutIr(type: Jar, dependsOn: compileJs) {
     classifier = null
