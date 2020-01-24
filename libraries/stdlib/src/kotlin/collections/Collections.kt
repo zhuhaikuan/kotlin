@@ -158,7 +158,8 @@ public inline fun <T> MutableList(size: Int, init: (index: Int) -> T): MutableLi
  * Builds a new read-only [List] by populating a [MutableList] using the given [builderAction]
  * and returning a read-only list with the same elements.
  *
- * The list passed as a receiver to the [builderAction] is ephemeral and should not be used outside of that function.
+ * The list passed as a receiver to the [builderAction] is valid only inside that function.
+ * Using it outside of the function produces an unspecified behavior.
  *
  * @sample samples.collections.Builders.Lists.buildListSample
  */
@@ -174,7 +175,8 @@ public inline fun <E> buildList(@BuilderInference builderAction: MutableList<E>.
  * Builds a new read-only [List] by populating a [MutableList] using the given [builderAction]
  * and returning a read-only list with the same elements.
  *
- * The list passed as a receiver to the [builderAction] is ephemeral and should not be used outside of that function.
+ * The list passed as a receiver to the [builderAction] is valid only inside that function.
+ * Using it outside of the function produces an unspecified behavior.
  *
  * [capacity] is used to hint the expected number of elements added in the [builderAction].
  *

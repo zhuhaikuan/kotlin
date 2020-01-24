@@ -127,7 +127,8 @@ public fun <K, V> linkedMapOf(vararg pairs: Pair<K, V>): LinkedHashMap<K, V> = p
  * Builds a new read-only [Map] by populating a [MutableMap] using the given [builderAction]
  * and returning a read-only map with the same key-value pairs.
  *
- * The map passed as a receiver to the [builderAction] is ephemeral and should not be used outside of that function.
+ * The map passed as a receiver to the [builderAction] is valid only inside that function.
+ * Using it outside of the function produces an unspecified behavior.
  *
  * Entries of the map are iterated in the order they were added by the [builderAction].
  *
@@ -145,7 +146,8 @@ public inline fun <K, V> buildMap(@BuilderInference builderAction: MutableMap<K,
  * Builds a new read-only [Map] by populating a [MutableMap] using the given [builderAction]
  * and returning a read-only map with the same key-value pairs.
  *
- * The map passed as a receiver to the [builderAction] is ephemeral and should not be used outside of that function.
+ * The map passed as a receiver to the [builderAction] is valid only inside that function.
+ * Using it outside of the function produces an unspecified behavior.
  *
  * [capacity] is used to hint the expected number of pairs added in the [builderAction].
  *

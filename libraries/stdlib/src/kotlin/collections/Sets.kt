@@ -94,7 +94,8 @@ public fun <T> linkedSetOf(vararg elements: T): LinkedHashSet<T> = elements.toCo
  * Builds a new read-only [Set] by populating a [MutableSet] using the given [builderAction]
  * and returning a read-only set with the same elements.
  *
- * The set passed as a receiver to the [builderAction] is ephemeral and should not be used outside of that function.
+ * The set passed as a receiver to the [builderAction] is valid only inside that function.
+ * Using it outside of the function produces an unspecified behavior.
  *
  * Elements of the set are iterated in the order they were added by the [builderAction].
  *
@@ -112,7 +113,8 @@ public inline fun <E> buildSet(@BuilderInference builderAction: MutableSet<E>.()
  * Builds a new read-only [Set] by populating a [MutableSet] using the given [builderAction]
  * and returning a read-only set with the same elements.
  *
- * The set passed as a receiver to the [builderAction] is ephemeral and should not be used outside of that function.
+ * The set passed as a receiver to the [builderAction] is valid only inside that function.
+ * Using it outside of the function produces an unspecified behavior.
  *
  * [capacity] is used to hint the expected number of elements added in the [builderAction].
  *
