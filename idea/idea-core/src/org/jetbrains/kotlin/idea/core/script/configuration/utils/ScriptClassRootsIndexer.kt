@@ -31,6 +31,10 @@ internal class ScriptClassRootsIndexer(val project: Project) {
         newRootsPresent = true
     }
 
+    fun noNewRoots(): Boolean {
+        return !newRootsPresent
+    }
+
     fun checkInTransaction() {
         check(concurrentTransactions.get() > 0)
     }

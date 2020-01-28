@@ -208,7 +208,7 @@ internal abstract class AbstractScriptConfigurationManager(
         debug(file) { "configuration changed = $newConfiguration" }
 
         if (newConfiguration != null) {
-            if (hasNotCachedRoots(newConfiguration)) {
+            if (rootsIndexer.noNewRoots() && hasNotCachedRoots(newConfiguration)) {
                 rootsIndexer.markNewRoot(file, newConfiguration)
             }
 
