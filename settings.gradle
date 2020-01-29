@@ -292,6 +292,7 @@ include ":kotlin-build-common",
 if (buildProperties.includeCidrPlugins) {
     logger.info("Including CIDR modules in settings.gradle")
     include ":kotlin-ultimate:ide:cidr-gradle-tooling",
+            ":kotlin-ultimate:ide:cidr-konan-workspace",
             ":kotlin-ultimate:ide:common-native",
             ":kotlin-ultimate:ide:common-cidr-native",
             ":kotlin-ultimate:ide:common-cidr-swift-native",
