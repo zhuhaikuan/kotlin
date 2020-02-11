@@ -6,16 +6,12 @@
 package org.jetbrains.kotlin.idea.scripting.gradle
 
 import com.intellij.openapi.components.*
+import com.intellij.openapi.externalSystem.service.project.autoimport.AsyncFileChangeListenerBase
 import com.intellij.openapi.project.Project
-import com.intellij.openapi.util.io.FileUtil
 import com.intellij.openapi.vfs.VirtualFile
 import com.intellij.openapi.vfs.VirtualFileManager
-import com.intellij.openapi.vfs.newvfs.BulkFileListener
 import com.intellij.openapi.vfs.newvfs.events.VFileEvent
-import com.intellij.util.PathUtil
 import org.jetbrains.annotations.TestOnly
-import org.junit.Assert.assertEquals
-import org.junit.Test
 
 @State(
     name = "KotlinBuildScriptsModificationInfo",
@@ -25,43 +21,40 @@ class GradleScriptInputsWatcher(val project: Project) : PersistentStateComponent
     private var storage = Storage()
 
     fun startWatching() {
-        project.messageBus.connect().subscribe(
-            VirtualFileManager.VFS_CHANGES,
-            object : BulkFileListener {
-                override fun after(events: List<VFileEvent>) {
-                    if (project.isDisposed) return
-
+        VirtualFileManager.getInstance().addAsyncFileListener(
+            object : AsyncFileChangeListenerBase() {
+                override fun isRelevant(path: String): Boolean {
                     val files = getAffectedGradleProjectFiles(project)
-                    for (event in events) {
-                        val file = event.file ?: return
-                        if (isInAffectedGradleProjectFiles(files, event.path)) {
-                            storage.fileChanged(file, file.timeStamp)
-                        }
-                    }
+                    return isInAffectedGradleProjectFiles(files, path)
                 }
-            })
+
+                override fun updateFile(file: VirtualFile, event: VFileEvent) {
+                    storage.fileChanged(event.path, file.timeStamp)
+                }
+
+                // do nothing
+                override fun prepareFileDeletion(file: VirtualFile) {}
+                override fun apply() {}
+                override fun reset() {}
+
+            },
+            project,
+        )
     }
 
     fun areRelatedFilesUpToDate(file: VirtualFile, timeStamp: Long): Boolean {
-        return storage.lastModifiedTimeStampExcept(file) < timeStamp
+        return storage.lastModifiedTimeStampExcept(file.path) < timeStamp
     }
 
     class Storage {
         private val lastModifiedFiles = LastModifiedFiles()
 
-        fun lastModifiedTimeStampExcept(file: VirtualFile): Long {
-            val fileId = getFileId(file)
-            return lastModifiedFiles.lastModifiedTimeStampExcept(fileId)
+        fun lastModifiedTimeStampExcept(filePath: String): Long {
+            return lastModifiedFiles.lastModifiedTimeStampExcept(filePath)
         }
 
-        fun fileChanged(file: VirtualFile, ts: Long) {
-            val fileId = getFileId(file)
-            lastModifiedFiles.fileChanged(ts, fileId)
-        }
-
-        private fun getFileId(file: VirtualFile): String {
-            val canonized = PathUtil.getCanonicalPath(file.path)
-            return FileUtil.toSystemIndependentName(canonized)
+        fun fileChanged(filePath: String, ts: Long) {
+            lastModifiedFiles.fileChanged(ts, filePath)
         }
     }
 
@@ -80,6 +73,6 @@ class GradleScriptInputsWatcher(val project: Project) : PersistentStateComponent
 
     @TestOnly
     fun fileChanged(file: VirtualFile, ts: Long) {
-        storage.fileChanged(file, ts)
+        storage.fileChanged(file.path, ts)
     }
 }
