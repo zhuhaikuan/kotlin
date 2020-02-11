@@ -6,40 +6,42 @@
 package org.jetbrains.kotlin.idea.scripting.gradle
 
 import com.intellij.openapi.components.*
+import com.intellij.openapi.externalSystem.service.project.autoimport.AsyncFileChangeListenerBase
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.util.io.FileUtil
 import com.intellij.openapi.vfs.VirtualFile
 import com.intellij.openapi.vfs.VirtualFileManager
-import com.intellij.openapi.vfs.newvfs.BulkFileListener
 import com.intellij.openapi.vfs.newvfs.events.VFileEvent
 import com.intellij.util.PathUtil
 import org.jetbrains.annotations.TestOnly
-import org.junit.Assert.assertEquals
-import org.junit.Test
 
 @State(
     name = "KotlinBuildScriptsModificationInfo",
-    storages = [Storage(StoragePathMacros.CACHE_FILE)]
+    storages = [Storage(StoragePathMacros.CACHE_FILE)],
 )
 class GradleScriptInputsWatcher(val project: Project) : PersistentStateComponent<GradleScriptInputsWatcher.Storage> {
     private var storage = Storage()
 
     fun startWatching() {
-        project.messageBus.connect().subscribe(
-            VirtualFileManager.VFS_CHANGES,
-            object : BulkFileListener {
-                override fun after(events: List<VFileEvent>) {
-                    if (project.isDisposed) return
-
+        VirtualFileManager.getInstance().addAsyncFileListener(
+            object : AsyncFileChangeListenerBase() {
+                override fun isRelevant(path: String): Boolean {
                     val files = getAffectedGradleProjectFiles(project)
-                    for (event in events) {
-                        val file = event.file ?: return
-                        if (isInAffectedGradleProjectFiles(files, event.path)) {
-                            storage.fileChanged(file, file.timeStamp)
-                        }
-                    }
+                    return isInAffectedGradleProjectFiles(files, path)
                 }
-            })
+
+                override fun updateFile(file: VirtualFile, event: VFileEvent) {
+                    storage.fileChanged(file, file.timeStamp)
+                }
+
+                // do nothing
+                override fun prepareFileDeletion(file: VirtualFile) {}
+                override fun apply() {}
+                override fun reset() {}
+
+            },
+            project,
+        )
     }
 
     fun areRelatedFilesUpToDate(file: VirtualFile, timeStamp: Long): Boolean {
