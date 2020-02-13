@@ -34,6 +34,7 @@ import com.intellij.psi.search.searches.IndexPatternSearch;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.kotlin.idea.reporter.KotlinReportSubmitter;
 import org.jetbrains.kotlin.idea.search.ideaExtensions.KotlinTodoSearcher;
+import org.jetbrains.kotlin.util.IDECanceled;
 import org.jetbrains.kotlin.utils.PathUtil;
 
 import static org.jetbrains.kotlin.idea.TestResourceBundleKt.registerAdditionalResourceBundleInTests;
@@ -76,6 +77,7 @@ public class PluginStartupActivity implements StartupActivity.DumbAware {
         indexPatternSearch.registerExecutor(kotlinTodoSearcher);
 
         KotlinPluginCompatibilityVerifier.checkCompatibility();
+        IDECanceled.INSTANCE.check();
 
         KotlinReportSubmitter.Companion.setupReportingFromRelease();
 

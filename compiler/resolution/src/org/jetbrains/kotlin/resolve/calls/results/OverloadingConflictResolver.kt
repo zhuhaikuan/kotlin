@@ -31,6 +31,7 @@ import org.jetbrains.kotlin.types.KotlinType
 import org.jetbrains.kotlin.types.TypeUtils
 import org.jetbrains.kotlin.types.checker.requireOrDescribe
 import org.jetbrains.kotlin.types.model.KotlinTypeMarker
+import org.jetbrains.kotlin.util.Canceled.Companion.checkCanceled
 import java.util.*
 
 open class OverloadingConflictResolver<C : Any>(
@@ -124,6 +125,7 @@ open class OverloadingConflictResolver<C : Any>(
 
         val result = LinkedHashSet<C>()
         outerLoop@ for (meD in fromSourcesGoesFirst) {
+            checkCanceled()
             for (otherD in result) {
                 val me = meD.resultingDescriptor.originalIfTypeRefinementEnabled
                 val other = otherD.resultingDescriptor.originalIfTypeRefinementEnabled
@@ -209,6 +211,7 @@ open class OverloadingConflictResolver<C : Any>(
         }
 
         val bestCandidatesByParameterTypes = conflictingCandidates.filter { candidate ->
+            checkCanceled()
             isMostSpecific(candidate, conflictingCandidates) { call1, call2 ->
                 isNotLessSpecificCallWithArgumentMapping(call1, call2, discriminateGenerics)
             }

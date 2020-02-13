@@ -37,6 +37,7 @@ import org.jetbrains.kotlin.types.TypeConstructor;
 import org.jetbrains.kotlin.types.checker.KotlinTypeChecker;
 import org.jetbrains.kotlin.types.checker.KotlinTypeCheckerImpl;
 import org.jetbrains.kotlin.types.checker.KotlinTypeRefiner;
+import org.jetbrains.kotlin.util.Canceled;
 import org.jetbrains.kotlin.utils.SmartSet;
 
 import java.util.*;
@@ -117,6 +118,7 @@ public class OverridingUtil {
         outerLoop:
         for (D meD : candidateSet) {
             for (Iterator<D> iterator = result.iterator(); iterator.hasNext(); ) {
+                Canceled.Companion.checkCanceled();
                 D otherD = iterator.next();
                 Pair<CallableDescriptor, CallableDescriptor> meAndOther = transformFirst.invoke(meD, otherD);
                 CallableDescriptor me = meAndOther.component1();

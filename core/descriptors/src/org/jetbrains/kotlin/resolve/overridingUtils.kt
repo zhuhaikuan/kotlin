@@ -17,6 +17,7 @@
 package org.jetbrains.kotlin.resolve
 
 import org.jetbrains.kotlin.descriptors.CallableDescriptor
+import org.jetbrains.kotlin.util.Canceled.Companion.checkCanceled
 import org.jetbrains.kotlin.utils.DFS
 import org.jetbrains.kotlin.utils.SmartSet
 import java.util.*
@@ -54,6 +55,7 @@ fun <H : Any> Collection<H>.selectMostSpecificInEachOverridableGroup(
     val result = SmartSet.create<H>()
 
     while (queue.isNotEmpty()) {
+        checkCanceled()
         val nextHandle: H = queue.first()
 
         val conflictedHandles = SmartSet.create<H>()
