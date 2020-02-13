@@ -51,6 +51,7 @@ import org.jetbrains.kotlin.storage.NotNullLazyValue
 import org.jetbrains.kotlin.storage.getValue
 import org.jetbrains.kotlin.types.KotlinType
 import org.jetbrains.kotlin.types.TypeUtils
+import org.jetbrains.kotlin.util.Canceled.Companion.checkCanceled
 import org.jetbrains.kotlin.utils.Printer
 import org.jetbrains.kotlin.utils.addIfNotNull
 import org.jetbrains.kotlin.utils.addToStdlib.safeAs
@@ -117,6 +118,8 @@ abstract class LazyJavaScope(
         val result = LinkedHashSet<SimpleFunctionDescriptor>(declaredFunctions(name))
 
         result.retainMostSpecificInEachOverridableGroup()
+
+        checkCanceled()
 
         computeNonDeclaredFunctions(result, name)
 

@@ -25,6 +25,7 @@ import org.jetbrains.kotlin.load.java.lazy.types.RawTypeImpl
 import org.jetbrains.kotlin.resolve.ExternalOverridabilityCondition
 import org.jetbrains.kotlin.resolve.ExternalOverridabilityCondition.Result
 import org.jetbrains.kotlin.resolve.OverridingUtil
+import org.jetbrains.kotlin.util.Canceled.Companion.checkCanceled
 
 class ErasedOverridabilityCondition : ExternalOverridabilityCondition {
     override fun isOverridable(
@@ -44,6 +45,7 @@ class ErasedOverridabilityCondition : ExternalOverridabilityCondition {
         if (signatureTypes.any { it.arguments.isNotEmpty() && it.unwrap() !is RawTypeImpl }) return Result.UNKNOWN
 
         var erasedSuper = superDescriptor.substitute(RawSubstitution.buildSubstitutor()) ?: return Result.UNKNOWN
+        checkCanceled()
 
         if (erasedSuper is SimpleFunctionDescriptor && erasedSuper.typeParameters.isNotEmpty()) {
             // Only simple functions are supported now for erased overrides

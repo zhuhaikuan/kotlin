@@ -15,6 +15,7 @@ import org.jetbrains.kotlin.descriptors.annotations.AnnotationsKt;
 import org.jetbrains.kotlin.name.Name;
 import org.jetbrains.kotlin.resolve.scopes.receivers.ExtensionReceiver;
 import org.jetbrains.kotlin.types.*;
+import org.jetbrains.kotlin.util.Canceled;
 import org.jetbrains.kotlin.utils.SmartList;
 
 import java.util.*;
@@ -796,6 +797,7 @@ public abstract class FunctionDescriptorImpl extends DeclarationDescriptorNonRoo
     ) {
         List<ValueParameterDescriptor> result = new ArrayList<ValueParameterDescriptor>(unsubstitutedValueParameters.size());
         for (ValueParameterDescriptor unsubstitutedValueParameter : unsubstitutedValueParameters) {
+            Canceled.Companion.checkCanceled();
             // TODO : Lazy?
             KotlinType substitutedType = substitutor.substitute(unsubstitutedValueParameter.getType(), Variance.IN_VARIANCE);
             KotlinType varargElementType = unsubstitutedValueParameter.getVarargElementType();

@@ -27,10 +27,7 @@ import org.jetbrains.kotlin.types.DeferredType;
 import org.jetbrains.kotlin.types.ErrorUtils;
 import org.jetbrains.kotlin.types.KotlinType;
 import org.jetbrains.kotlin.types.expressions.typeInfoFactory.TypeInfoFactoryKt;
-import org.jetbrains.kotlin.util.KotlinFrontEndException;
-import org.jetbrains.kotlin.util.LookupTrackerUtilKt;
-import org.jetbrains.kotlin.util.PerformanceCounter;
-import org.jetbrains.kotlin.util.ReenteringLazyValueComputationException;
+import org.jetbrains.kotlin.util.*;
 import org.jetbrains.kotlin.utils.KotlinExceptionWithAttachments;
 
 import static org.jetbrains.kotlin.diagnostics.Errors.TYPECHECKER_HAS_RUN_INTO_RECURSIVE_PROBLEM;
@@ -159,6 +156,7 @@ public abstract class ExpressionTypingVisitorDispatcher extends KtVisitor<Kotlin
 
     @NotNull
     private KotlinTypeInfo getTypeInfo(@NotNull KtExpression expression, ExpressionTypingContext context, KtVisitor<KotlinTypeInfo, ExpressionTypingContext> visitor) {
+        Canceled.Companion.checkCanceled();
         return typeInfoPerfCounter.time(() -> {
             try {
                 KotlinTypeInfo recordedTypeInfo = BindingContextUtils.getRecordedTypeInfo(expression, context.trace.getBindingContext());

@@ -60,6 +60,7 @@ import org.jetbrains.kotlin.types.model.TypeSystemInferenceExtensionContextDeleg
 import org.jetbrains.kotlin.types.typeUtil.contains
 import org.jetbrains.kotlin.types.typeUtil.makeNotNullable
 import org.jetbrains.kotlin.types.typeUtil.makeNullable
+import org.jetbrains.kotlin.util.Canceled.Companion.checkCanceled
 import org.jetbrains.kotlin.utils.addToStdlib.cast
 import org.jetbrains.kotlin.utils.addToStdlib.safeAs
 import java.util.*
@@ -238,6 +239,7 @@ class KotlinToResolvedCallTransformer(
             else resolvedCall.call.callElement
 
         for (callChecker in callCheckers) {
+            checkCanceled()
             callChecker.check(resolvedCall, reportOn, callCheckerContext)
 
             if (resolvedCall is VariableAsFunctionResolvedCall) {

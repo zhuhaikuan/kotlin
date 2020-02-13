@@ -19,15 +19,18 @@ package org.jetbrains.kotlin.descriptors.impl
 import org.jetbrains.kotlin.descriptors.PackageFragmentDescriptor
 import org.jetbrains.kotlin.descriptors.PackageFragmentProvider
 import org.jetbrains.kotlin.name.FqName
-import java.util.*
 import org.jetbrains.kotlin.name.Name
+import org.jetbrains.kotlin.util.Canceled.Companion.checkCanceled
+import java.util.*
 
 class CompositePackageFragmentProvider(// can be modified from outside
-        private val providers: List<PackageFragmentProvider>) : PackageFragmentProvider {
+    private val providers: List<PackageFragmentProvider>
+) : PackageFragmentProvider {
 
     override fun getPackageFragments(fqName: FqName): List<PackageFragmentDescriptor> {
         val result = ArrayList<PackageFragmentDescriptor>()
         for (provider in providers) {
+            checkCanceled()
             result.addAll(provider.getPackageFragments(fqName))
         }
         return result.toList()

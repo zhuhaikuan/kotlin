@@ -118,7 +118,7 @@ public class OverridingUtil {
         outerLoop:
         for (D meD : candidateSet) {
             for (Iterator<D> iterator = result.iterator(); iterator.hasNext(); ) {
-                Canceled.Companion.checkCanceled();
+                checkCanceled();
                 D otherD = iterator.next();
                 Pair<CallableDescriptor, CallableDescriptor> meAndOther = transformFirst.invoke(meD, otherD);
                 CallableDescriptor me = meAndOther.component1();
@@ -209,6 +209,7 @@ public class OverridingUtil {
         boolean wasSuccess = basicResult.getResult() == OVERRIDABLE;
 
         for (ExternalOverridabilityCondition externalCondition : EXTERNAL_CONDITIONS) {
+            checkCanceled();
             // Do not run CONFLICTS_ONLY while there was no success
             if (externalCondition.getContract() == ExternalOverridabilityCondition.Contract.CONFLICTS_ONLY) continue;
             if (wasSuccess && externalCondition.getContract() == ExternalOverridabilityCondition.Contract.SUCCESS_ONLY) continue;
@@ -779,6 +780,7 @@ public class OverridingUtil {
         overridable.add(overrider);
         CallableDescriptor overriderDescriptor = descriptorByHandle.invoke(overrider);
         for (Iterator<H> iterator = extractFrom.iterator(); iterator.hasNext(); ) {
+            checkCanceled();
             H candidate = iterator.next();
             CallableDescriptor candidateDescriptor = descriptorByHandle.invoke(candidate);
             if (overrider == candidate) {
@@ -805,12 +807,18 @@ public class OverridingUtil {
             CallableDescriptor overriderDescriptor,
             CallableDescriptor candidateDescriptor
     ) {
+        checkCanceled();
         OverrideCompatibilityInfo.Result result1 = DEFAULT.isOverridableBy(candidateDescriptor, overriderDescriptor, null).getResult();
+        checkCanceled();
         OverrideCompatibilityInfo.Result result2 = DEFAULT.isOverridableBy(overriderDescriptor, candidateDescriptor, null).getResult();
 
         return result1 == OVERRIDABLE && result2 == OVERRIDABLE
                ? OVERRIDABLE
                : ((result1 == CONFLICT || result2 == CONFLICT) ? CONFLICT : INCOMPATIBLE);
+    }
+
+    protected static void checkCanceled() {
+        Canceled.Companion.checkCanceled();
     }
 
     @NotNull

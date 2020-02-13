@@ -8,7 +8,7 @@ package org.jetbrains.kotlin.idea.caches.resolve
 import com.google.common.collect.ImmutableMap
 import com.intellij.openapi.diagnostic.ControlFlowException
 import com.intellij.openapi.progress.ProcessCanceledException
-import com.intellij.openapi.progress.ProgressIndicatorProvider
+import com.intellij.openapi.progress.ProgressManager
 import com.intellij.openapi.project.DumbService
 import com.intellij.openapi.project.IndexNotReadyException
 import com.intellij.openapi.project.Project
@@ -59,7 +59,7 @@ internal class PerFileAnalysisCache(val file: KtFile, componentProvider: Compone
         val analyzableParent = KotlinResolveDataProvider.findAnalyzableParent(element)
 
         return synchronized(this) {
-            ProgressIndicatorProvider.checkCanceled()
+            ProgressManager.checkCanceled()
 
             // step 1: perform incremental analysis IF it is applicable
             getIncrementalAnalysisResult()?.let { return it }
@@ -182,7 +182,7 @@ internal class PerFileAnalysisCache(val file: KtFile, componentProvider: Compone
     }
 
     private fun analyze(analyzableElement: KtElement, bindingTrace: BindingTrace? = null): AnalysisResult {
-        ProgressIndicatorProvider.checkCanceled()
+        ProgressManager.checkCanceled()
 
         val project = analyzableElement.project
         if (DumbService.isDumb(project)) {
