@@ -5,10 +5,10 @@
 
 package org.jetbrains.kotlin.descriptors.commonizer.mergedtree.ir
 
-import org.jetbrains.kotlin.builtins.KotlinBuiltIns
 import org.jetbrains.kotlin.descriptors.ModuleDescriptor
+import org.jetbrains.kotlin.descriptors.commonizer.utils.intern
 import org.jetbrains.kotlin.name.Name
 
-data class CirModule(val name: Name, val builtIns: KotlinBuiltIns) : CirDeclaration {
-    constructor(descriptor: ModuleDescriptor) : this(descriptor.name, descriptor.builtIns)
+data class CirModule(val name: Name) : CirDeclaration {
+    constructor(descriptor: ModuleDescriptor) : this(descriptor.name.intern())
 }

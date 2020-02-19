@@ -6,12 +6,12 @@
 package org.jetbrains.kotlin.descriptors.commonizer.mergedtree.ir
 
 import org.jetbrains.kotlin.descriptors.*
-import org.jetbrains.kotlin.descriptors.commonizer.InputTarget
-import org.jetbrains.kotlin.descriptors.commonizer.OutputTarget
+import org.jetbrains.kotlin.descriptors.commonizer.TargetProvider
 import org.jetbrains.kotlin.descriptors.commonizer.core.*
 import org.jetbrains.kotlin.descriptors.commonizer.mergedtree.ir.CirRootNode.ClassifiersCacheImpl
 import org.jetbrains.kotlin.descriptors.commonizer.utils.CommonizedGroup
 import org.jetbrains.kotlin.descriptors.commonizer.utils.firstNonNull
+import org.jetbrains.kotlin.descriptors.commonizer.utils.intern
 import org.jetbrains.kotlin.name.FqName
 import org.jetbrains.kotlin.name.Name
 import org.jetbrains.kotlin.resolve.descriptorUtil.fqNameSafe
@@ -21,12 +21,14 @@ import org.jetbrains.kotlin.storage.StorageManager
 
 internal fun buildRootNode(
     storageManager: StorageManager,
-    targets: List<InputTarget>
-): CirRootNode = CirRootNode(
-    target = targets.map { CirRoot(it) },
-    common = storageManager.createNullableLazyValue {
-        CirRoot(OutputTarget(targets.toSet()))
-    }
+    targetProviders: List<TargetProvider>
+): CirRootNode = buildNode(
+    storageManager = storageManager,
+    descriptors = targetProviders,
+    targetDeclarationProducer = { CirRoot(it.target, it.builtInsClass.name, it.builtInsProvider) },
+    commonValueProducer = { commonize(it, RootCommonizer.default()) },
+    recursionMarker = null,
+    nodeProducer = ::CirRootNode
 )
 
 internal fun buildModuleNode(
@@ -66,7 +68,7 @@ internal fun buildPropertyNode(
 ): CirPropertyNode = buildNode(
     storageManager = storageManager,
     descriptors = properties,
-    targetDeclarationProducer = ::CirWrappedProperty,
+    targetDeclarationProducer = ::CirPropertyImpl,
     commonValueProducer = { commonize(containingDeclarationCommon, it, PropertyCommonizer(cache)) },
     recursionMarker = null,
     nodeProducer = ::CirPropertyNode
@@ -80,7 +82,7 @@ internal fun buildFunctionNode(
 ): CirFunctionNode = buildNode(
     storageManager = storageManager,
     descriptors = functions,
-    targetDeclarationProducer = ::CirWrappedFunction,
+    targetDeclarationProducer = ::CirFunctionImpl,
     commonValueProducer = { commonize(containingDeclarationCommon, it, FunctionCommonizer(cache)) },
     recursionMarker = null,
     nodeProducer = ::CirFunctionNode
@@ -94,12 +96,12 @@ internal fun buildClassNode(
 ): CirClassNode = buildNode(
     storageManager = storageManager,
     descriptors = classes,
-    targetDeclarationProducer = ::CirWrappedClass,
+    targetDeclarationProducer = ::CirClassImpl,
     commonValueProducer = { commonize(containingDeclarationCommon, it, ClassCommonizer(cacheRW)) },
     recursionMarker = CirClassRecursionMarker,
     nodeProducer = ::CirClassNode
 ).also { node ->
-    classes.firstNonNull().fqNameSafe.let { fqName ->
+    classes.firstNonNull().fqNameSafe.intern().let { fqName ->
         node.fqName = fqName
         cacheRW.classes.putSafe(fqName, node)
     }
@@ -113,7 +115,7 @@ internal fun buildClassConstructorNode(
 ): CirClassConstructorNode = buildNode(
     storageManager = storageManager,
     descriptors = constructors,
-    targetDeclarationProducer = ::CirWrappedClassConstructor,
+    targetDeclarationProducer = ::CirClassConstructorImpl,
     commonValueProducer = { commonize(containingDeclarationCommon, it, ClassConstructorCommonizer(cache)) },
     recursionMarker = null,
     nodeProducer = ::CirClassConstructorNode
@@ -126,12 +128,12 @@ internal fun buildTypeAliasNode(
 ): CirTypeAliasNode = buildNode(
     storageManager = storageManager,
     descriptors = typeAliases,
-    targetDeclarationProducer = ::CirWrappedTypeAlias,
+    targetDeclarationProducer = ::CirTypeAliasImpl,
     commonValueProducer = { commonize(it, TypeAliasCommonizer(cacheRW)) },
     recursionMarker = CirClassRecursionMarker,
     nodeProducer = ::CirTypeAliasNode
 ).also { node ->
-    typeAliases.firstNonNull().fqNameSafe.let { fqName ->
+    typeAliases.firstNonNull().fqNameSafe.intern().let { fqName ->
         node.fqName = fqName
         cacheRW.typeAliases.putSafe(fqName, node)
     }

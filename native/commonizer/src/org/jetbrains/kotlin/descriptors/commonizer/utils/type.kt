@@ -7,23 +7,31 @@ package org.jetbrains.kotlin.descriptors.commonizer.utils
 
 import org.jetbrains.kotlin.descriptors.ClassifierDescriptor
 import org.jetbrains.kotlin.name.FqName
+import org.jetbrains.kotlin.name.Name
 import org.jetbrains.kotlin.resolve.descriptorUtil.fqNameSafe
 import org.jetbrains.kotlin.types.KotlinType
 import org.jetbrains.kotlin.types.TypeUtils
 import org.jetbrains.kotlin.types.Variance
 import org.jetbrains.kotlin.types.typeUtil.makeNotNullable
+import kotlin.collections.HashSet
 
 internal inline val KotlinType.declarationDescriptor: ClassifierDescriptor
     get() = (constructor.declarationDescriptor ?: error("No declaration descriptor found for $constructor"))
 
-internal inline val KotlinType.fqName: FqName
-    get() = declarationDescriptor.fqNameSafe
+internal inline val KotlinType.fqNameInterned: FqName
+    get() = declarationDescriptor.fqNameSafe.intern()
+
+internal fun FqName.intern(): FqName = fqNameInterner.intern(this)
+internal fun Name.intern(): Name = nameInterner.intern(this)
 
 internal val KotlinType.fqNameWithTypeParameters: String
-    get() = buildString { buildFqNameWithTypeParameters(this@fqNameWithTypeParameters, HashSet()) }
+    get() {
+        // use of interner saves up to 95% of duplicates
+        return stringInterner.intern(buildString { buildFqNameWithTypeParameters(this@fqNameWithTypeParameters, HashSet()) })
+    }
 
 private fun StringBuilder.buildFqNameWithTypeParameters(type: KotlinType, exploredTypeParameters: MutableSet<KotlinType>) {
-    append(type.fqName)
+    append(type.fqNameInterned)
 
     val typeParameterDescriptor = TypeUtils.getTypeParameterDescriptorOrNull(type)
     if (typeParameterDescriptor != null) {
@@ -64,3 +72,9 @@ private fun StringBuilder.buildFqNameWithTypeParameters(type: KotlinType, explor
     if (type.isMarkedNullable)
         append("?")
 }
+
+// dedicated to hold unique entries of "fqNameWithTypeParameters"
+private val stringInterner = NonThreadSafeInterner<String>()
+
+private val fqNameInterner = NonThreadSafeInterner<FqName>()
+private val nameInterner = NonThreadSafeInterner<Name>()

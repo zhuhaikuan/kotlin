@@ -44,7 +44,9 @@ import org.jetbrains.kotlin.types.expressions.OperatorConventions
 import org.jetbrains.kotlin.util.OperatorNameConventions
 import org.jetbrains.kotlin.utils.addToStdlib.firstIsInstanceOrNull
 
-class RawFirBuilder(session: FirSession, val baseScopeProvider: FirScopeProvider, val stubMode: Boolean) : BaseFirBuilder<PsiElement>(session) {
+class RawFirBuilder(
+    session: FirSession, val baseScopeProvider: FirScopeProvider, val stubMode: Boolean
+) : BaseFirBuilder<PsiElement>(session) {
 
     fun buildFirFile(file: KtFile): FirFile {
         return file.accept(Visitor(), Unit) as FirFile
@@ -122,21 +124,23 @@ class RawFirBuilder(session: FirSession, val baseScopeProvider: FirScopeProvider
         private fun KtTypeReference?.toFirOrErrorType(): FirTypeRef =
             convertSafe() ?: buildErrorTypeRef {
                 source = this@toFirOrErrorType?.toFirSourceElement()
-                diagnostic = FirSimpleDiagnostic(if (this@toFirOrErrorType == null) "Incomplete code" else "Conversion failed", DiagnosticKind.Syntax)
+                diagnostic = FirSimpleDiagnostic(
+                    if (this@toFirOrErrorType == null) "Incomplete code" else "Conversion failed", DiagnosticKind.Syntax
+                )
             }
 
         // Here we accept lambda as receiver to prevent expression calculation in stub mode
         private fun (() -> KtExpression?).toFirExpression(errorReason: String): FirExpression =
             if (stubMode) buildExpressionStub()
             else with(this()) {
-                convertSafe<FirExpression>() ?: buildErrorExpression(
+                convertSafe() ?: buildErrorExpression(
                     this?.toFirSourceElement(), FirSimpleDiagnostic(errorReason, DiagnosticKind.Syntax),
                 )
             }
 
         private fun KtExpression?.toFirExpression(errorReason: String): FirExpression =
             if (stubMode) buildExpressionStub()
-            else convertSafe<FirExpression>() ?: buildErrorExpression(
+            else convertSafe() ?: buildErrorExpression(
                 this?.toFirSourceElement(), FirSimpleDiagnostic(errorReason, DiagnosticKind.Syntax),
             )
 
@@ -464,14 +468,17 @@ class RawFirBuilder(session: FirSession, val baseScopeProvider: FirScopeProvider
             fun defaultVisibility() = when {
                 // TODO: object / enum is HIDDEN (?)
                 owner is KtObjectDeclaration || owner.hasModifier(ENUM_KEYWORD) -> Visibilities.PRIVATE
-                owner.hasModifier(SEALED_KEYWORD) -> Visibilities.PUBLIC
+                owner.hasModifier(SEALED_KEYWORD) -> Visibilities.PRIVATE
                 else -> Visibilities.UNKNOWN
             }
 
-            val status = FirDeclarationStatusImpl(this?.visibility ?: defaultVisibility(), Modality.FINAL).apply {
+            val explicitVisibility = this?.visibility
+            val status = FirDeclarationStatusImpl(explicitVisibility ?: defaultVisibility(), Modality.FINAL).apply {
                 isExpect = this@toFirConstructor?.hasExpectModifier() ?: false
                 isActual = this@toFirConstructor?.hasActualModifier() ?: false
                 isInner = owner.hasModifier(INNER_KEYWORD)
+                isFromSealedClass = owner.hasModifier(SEALED_KEYWORD) && explicitVisibility !== Visibilities.PRIVATE
+                isFromEnumClass = owner.hasModifier(ENUM_KEYWORD)
             }
             return buildPrimaryConstructor {
                 source = constructorSource
@@ -603,7 +610,9 @@ class RawFirBuilder(session: FirSession, val baseScopeProvider: FirScopeProvider
                     val primaryConstructor = classOrObject.primaryConstructor
                     val firPrimaryConstructor = declarations.firstOrNull() as? FirConstructor
                     if (primaryConstructor != null && firPrimaryConstructor != null) {
-                        primaryConstructor.valueParameters.zip(firPrimaryConstructor.valueParameters).forEach { (ktParameter, firParameter) ->
+                        primaryConstructor.valueParameters.zip(
+                            firPrimaryConstructor.valueParameters
+                        ).forEach { (ktParameter, firParameter) ->
                             if (ktParameter.hasValOrVar()) {
                                 addDeclaration(ktParameter.toFirProperty(firParameter))
                             }
@@ -635,7 +644,6 @@ class RawFirBuilder(session: FirSession, val baseScopeProvider: FirScopeProvider
                         generateValuesFunction(baseSession, context.packageFqName, context.className)
                         generateValueOfFunction(baseSession, context.packageFqName, context.className)
                     }
-                    calculateSAM()
                 }.build()
             }
         }
@@ -839,10 +847,13 @@ class RawFirBuilder(session: FirSession, val baseScopeProvider: FirScopeProvider
                 source = this@toFirConstructor.toFirSourceElement()
                 session = baseSession
                 returnTypeRef = delegatedSelfTypeRef
-                status = FirDeclarationStatusImpl(visibility, Modality.FINAL).apply {
+                val explicitVisibility = visibility
+                status = FirDeclarationStatusImpl(explicitVisibility, Modality.FINAL).apply {
                     isExpect = hasExpectModifier()
                     isActual = hasActualModifier()
                     isInner = owner.hasModifier(INNER_KEYWORD)
+                    isFromSealedClass = owner.hasModifier(SEALED_KEYWORD) && explicitVisibility !== Visibilities.PRIVATE
+                    isFromEnumClass = owner.hasModifier(ENUM_KEYWORD)
                 }
                 symbol = FirConstructorSymbol(callableIdForClassConstructor())
                 delegatedConstructor = getDelegationCall().convert(delegatedSuperTypeRef, delegatedSelfTypeRef, hasPrimaryConstructor)
@@ -945,7 +956,8 @@ class RawFirBuilder(session: FirSession, val baseScopeProvider: FirScopeProvider
 
                     val receiver = delegateExpression?.toFirExpression("Should have delegate")
                     generateAccessorsByDelegate(
-                        delegateBuilder,baseSession,
+                        delegateBuilder,
+                        baseSession,
                         member = !property.isTopLevel,
                         extension = property.receiverTypeReference != null,
                         stubMode,

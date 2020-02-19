@@ -121,10 +121,16 @@ open class FirDeclarationStatusImpl(
             this[STATIC] = value
         }
 
-    override var isNotSAM: Boolean
-        get() = this[NOT_SAM]
+    override var isFromSealedClass: Boolean
+        get() = this[FROM_SEALED]
         set(value) {
-            this[NOT_SAM] = value
+            this[FROM_SEALED] = value
+        }
+
+    override var isFromEnumClass: Boolean
+        get() = this[FROM_ENUM]
+        set(value) {
+            this[FROM_ENUM] = value
         }
 
     private enum class Modifier(val mask: Int) {
@@ -143,7 +149,8 @@ open class FirDeclarationStatusImpl(
         DATA(0x1000),
         SUSPEND(0x2000),
         STATIC(0x4000),
-        NOT_SAM(0x8000)
+        FROM_SEALED(0x8000),
+        FROM_ENUM(0x10000)
     }
 
     override fun <R, D> acceptChildren(visitor: FirVisitor<R, D>, data: D) {}

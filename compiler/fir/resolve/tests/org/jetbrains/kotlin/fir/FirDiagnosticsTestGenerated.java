@@ -263,6 +263,11 @@ public class FirDiagnosticsTestGenerated extends AbstractFirDiagnosticsTest {
         runTest("compiler/fir/resolve/testData/resolve/recursiveCallOnWhenWithSealedClass.kt");
     }
 
+    @TestMetadata("sealedClass.kt")
+    public void testSealedClass() throws Exception {
+        runTest("compiler/fir/resolve/testData/resolve/sealedClass.kt");
+    }
+
     @TestMetadata("simpleClass.kt")
     public void testSimpleClass() throws Exception {
         runTest("compiler/fir/resolve/testData/resolve/simpleClass.kt");
@@ -1723,6 +1728,37 @@ public class FirDiagnosticsTestGenerated extends AbstractFirDiagnosticsTest {
             @TestMetadata("smartcastAfterReassignment.kt")
             public void testSmartcastAfterReassignment() throws Exception {
                 runTest("compiler/fir/resolve/testData/resolve/smartcasts/variables/smartcastAfterReassignment.kt");
+            }
+        }
+    }
+
+    @TestMetadata("compiler/fir/resolve/testData/resolve/stdlib")
+    @TestDataPath("$PROJECT_ROOT")
+    @RunWith(JUnit3RunnerWithInners.class)
+    public static class Stdlib extends AbstractFirDiagnosticsTest {
+        private void runTest(String testDataFilePath) throws Exception {
+            KotlinTestUtils.runTest(this::doTest, this, testDataFilePath);
+        }
+
+        public void testAllFilesPresentInStdlib() throws Exception {
+            KotlinTestUtils.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("compiler/fir/resolve/testData/resolve/stdlib"), Pattern.compile("^([^.]+)\\.kt$"), null, true);
+        }
+
+        @TestMetadata("compiler/fir/resolve/testData/resolve/stdlib/j+k")
+        @TestDataPath("$PROJECT_ROOT")
+        @RunWith(JUnit3RunnerWithInners.class)
+        public static class J_k extends AbstractFirDiagnosticsTest {
+            private void runTest(String testDataFilePath) throws Exception {
+                KotlinTestUtils.runTest(this::doTest, this, testDataFilePath);
+            }
+
+            public void testAllFilesPresentInJ_k() throws Exception {
+                KotlinTestUtils.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("compiler/fir/resolve/testData/resolve/stdlib/j+k"), Pattern.compile("^([^.]+)\\.kt$"), null, true);
+            }
+
+            @TestMetadata("flexibleWildcard.kt")
+            public void testFlexibleWildcard() throws Exception {
+                runTest("compiler/fir/resolve/testData/resolve/stdlib/j+k/flexibleWildcard.kt");
             }
         }
     }

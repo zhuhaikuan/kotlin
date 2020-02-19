@@ -28,11 +28,11 @@ internal fun mergeModules(
 
     modules.forEachIndexed { index, module ->
         module?.collectNonEmptyPackageMemberScopes { packageFqName, memberScope ->
-            packageMemberScopesMap[packageFqName][index] = memberScope
+            packageMemberScopesMap[packageFqName.intern()][index] = memberScope
         }
     }
 
-    val moduleName = modules.firstNonNull().name
+    val moduleName = modules.firstNonNull().name.intern()
     for ((packageFqName, packageMemberScopesGroup) in packageMemberScopesMap) {
         node.packages += mergePackages(storageManager, cacheRW, moduleName, packageFqName, packageMemberScopesGroup.toList())
     }

@@ -4061,6 +4061,16 @@ public class NewJavaToKotlinConverterSingleFileTestGenerated extends AbstractNew
             KotlinTestUtils.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("nj2k/testData/newJ2k/objectLiteral"), Pattern.compile("^([^\\.]+)\\.java$"), null, true);
         }
 
+        @TestMetadata("kt-36149.java")
+        public void testKt_36149() throws Exception {
+            runTest("nj2k/testData/newJ2k/objectLiteral/kt-36149.java");
+        }
+
+        @TestMetadata("kt-36152.java")
+        public void testKt_36152() throws Exception {
+            runTest("nj2k/testData/newJ2k/objectLiteral/kt-36152.java");
+        }
+
         @TestMetadata("MyFrame.java")
         public void testMyFrame() throws Exception {
             runTest("nj2k/testData/newJ2k/objectLiteral/MyFrame.java");
@@ -4636,6 +4646,11 @@ public class NewJavaToKotlinConverterSingleFileTestGenerated extends AbstractNew
             runTest("nj2k/testData/newJ2k/superExpression/classAextendsB.java");
         }
 
+        @TestMetadata("kotlinSuperClassWithImplicitConstructor.java")
+        public void testKotlinSuperClassWithImplicitConstructor() throws Exception {
+            runTest("nj2k/testData/newJ2k/superExpression/kotlinSuperClassWithImplicitConstructor.java");
+        }
+
         @TestMetadata("superStatement.java")
         public void testSuperStatement() throws Exception {
             runTest("nj2k/testData/newJ2k/superExpression/superStatement.java");
@@ -5195,6 +5210,11 @@ public class NewJavaToKotlinConverterSingleFileTestGenerated extends AbstractNew
         @TestMetadata("capturedWildcardTypeAsLambdaParameter.java")
         public void testCapturedWildcardTypeAsLambdaParameter() throws Exception {
             runTest("nj2k/testData/newJ2k/types/capturedWildcardTypeAsLambdaParameter.java");
+        }
+
+        @TestMetadata("recursiveType.java")
+        public void testRecursiveType() throws Exception {
+            runTest("nj2k/testData/newJ2k/types/recursiveType.java");
         }
 
         @TestMetadata("unusedCapturedWildcardTypeInSAM.java")

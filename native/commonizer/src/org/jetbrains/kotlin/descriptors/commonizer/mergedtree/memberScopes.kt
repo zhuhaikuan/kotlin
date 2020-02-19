@@ -7,8 +7,10 @@ package org.jetbrains.kotlin.descriptors.commonizer.mergedtree
 
 import org.jetbrains.kotlin.descriptors.*
 import org.jetbrains.kotlin.descriptors.commonizer.core.Commonizer
+import org.jetbrains.kotlin.descriptors.commonizer.utils.*
 import org.jetbrains.kotlin.descriptors.commonizer.utils.fqNameWithTypeParameters
 import org.jetbrains.kotlin.descriptors.commonizer.utils.isBlacklistedDarwinFunction
+import org.jetbrains.kotlin.descriptors.commonizer.utils.isDeprecated
 import org.jetbrains.kotlin.descriptors.commonizer.utils.isKniBridgeFunction
 import org.jetbrains.kotlin.name.Name
 import org.jetbrains.kotlin.resolve.scopes.MemberScope
@@ -53,8 +55,13 @@ internal inline fun PropertyCollector(
 internal inline fun FunctionCollector(
     crossinline typedCollector: (SimpleFunctionDescriptor) -> Unit
 ): (DeclarationDescriptor) -> Boolean = Collector<SimpleFunctionDescriptor> { candidate ->
-    if (candidate.kind.isReal && !candidate.isKniBridgeFunction() && !candidate.isBlacklistedDarwinFunction())
+    if (candidate.kind.isReal
+        && !candidate.isKniBridgeFunction()
+        && !candidate.isDeprecated()
+        && !candidate.isBlacklistedDarwinFunction()
+    ) {
         typedCollector(candidate)
+    }
 }
 
 /** Used for approximation of [PropertyDescriptor]s before running concrete [Commonizer]s */
@@ -63,7 +70,7 @@ internal data class PropertyApproximationKey(
     val extensionReceiverParameter: String?
 ) {
     constructor(property: PropertyDescriptor) : this(
-        property.name,
+        property.name.intern(),
         property.extensionReceiverParameter?.type?.fqNameWithTypeParameters
     )
 }
@@ -75,8 +82,8 @@ internal data class FunctionApproximationKey(
     val extensionReceiverParameter: String?
 ) {
     constructor(function: SimpleFunctionDescriptor) : this(
-        function.name,
-        function.valueParameters.map { it.name to it.type.fqNameWithTypeParameters },
+        function.name.intern(),
+        function.valueParameters.map { it.name.intern() to it.type.fqNameWithTypeParameters },
         function.extensionReceiverParameter?.type?.fqNameWithTypeParameters
     )
 }
@@ -86,6 +93,6 @@ internal data class ConstructorApproximationKey(
     val valueParameters: List<Pair<Name, String>>
 ) {
     constructor(constructor: ConstructorDescriptor) : this(
-        constructor.valueParameters.map { it.name to it.type.fqNameWithTypeParameters }
+        constructor.valueParameters.map { it.name.intern() to it.type.fqNameWithTypeParameters }
     )
 }

@@ -55,6 +55,11 @@ import org.jetbrains.kotlin.utils.addToStdlib.safeAs
 import org.jetbrains.kotlin.utils.mapToIndex
 
 class ConvertGettersAndSettersToPropertyProcessing : ElementsBasedPostProcessing() {
+    override val options: PostProcessingOptions =
+        PostProcessingOptions(
+            disablePostprocessingFormatting = false // without it comment saver will make the file invalid :(
+        )
+
     override fun runProcessing(elements: List<PsiElement>, converterContext: NewJ2kConverterContext) {
         val ktElements = elements.filterIsInstance<KtElement>()
         val resolutionFacade = runReadAction {
@@ -258,10 +263,11 @@ private class ConvertGettersAndSettersToPropertyStatefulProcessing(
 
     private fun KtExpression.isReferenceToThis() =
         when (this) {
-            is KtThisExpression -> instanceReference.resolve() == getStrictParentOfType<KtClassOrObject>()
-            is KtReferenceExpression -> resolve() == getStrictParentOfType<KtClassOrObject>()
-            else -> false
-        }
+            is KtThisExpression -> instanceReference
+            is KtReferenceExpression -> this
+            is KtQualifiedExpression -> selectorExpression as? KtReferenceExpression
+            else -> null
+        }?.resolve() == getStrictParentOfType<KtClassOrObject>()
 
     private fun KtElement.usages(scope: PsiElement? = null) =
         searcher.search(this, scope)

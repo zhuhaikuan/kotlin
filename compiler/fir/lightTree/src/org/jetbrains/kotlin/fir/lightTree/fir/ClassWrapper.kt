@@ -12,9 +12,6 @@ import org.jetbrains.kotlin.descriptors.Visibility
 import org.jetbrains.kotlin.fir.expressions.FirExpression
 import org.jetbrains.kotlin.fir.lightTree.fir.modifier.Modifier
 import org.jetbrains.kotlin.fir.types.FirTypeRef
-import org.jetbrains.kotlin.fir.types.FirUserTypeRef
-import org.jetbrains.kotlin.fir.types.builder.buildUserTypeRef
-import org.jetbrains.kotlin.fir.types.impl.FirQualifierPartImpl
 import org.jetbrains.kotlin.name.Name
 import org.jetbrains.kotlin.name.SpecialNames
 
@@ -40,11 +37,11 @@ class ClassWrapper(
         return classKind == ClassKind.OBJECT
     }
 
-    private fun isSealed(): Boolean {
+    fun isSealed(): Boolean {
         return modifiers.hasModality(Modality.SEALED)
     }
 
-    private fun isEnum(): Boolean {
+    fun isEnum(): Boolean {
         return modifiers.isEnum()
     }
 
@@ -59,15 +56,8 @@ class ClassWrapper(
     fun defaultConstructorVisibility(): Visibility {
         return when {
             isObject() || isEnum() -> Visibilities.PRIVATE
-            isSealed() -> Visibilities.PUBLIC
+            isSealed() -> Visibilities.PRIVATE
             else -> Visibilities.UNKNOWN
-        }
-    }
-
-    fun getFirUserTypeFromClassName(): FirUserTypeRef {
-        return buildUserTypeRef {
-            isMarkedNullable = false
-            qualifier.add(FirQualifierPartImpl(className))
         }
     }
 }
