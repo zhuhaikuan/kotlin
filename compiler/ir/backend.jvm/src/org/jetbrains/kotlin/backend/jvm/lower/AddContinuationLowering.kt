@@ -15,9 +15,10 @@ import org.jetbrains.kotlin.backend.jvm.JvmLoweredDeclarationOrigin
 import org.jetbrains.kotlin.backend.jvm.codegen.isInvokeSuspendForInlineOfLambda
 import org.jetbrains.kotlin.backend.jvm.codegen.isInvokeSuspendOfContinuation
 import org.jetbrains.kotlin.backend.jvm.codegen.isInvokeSuspendOfLambda
-import org.jetbrains.kotlin.backend.jvm.ir.*
+import org.jetbrains.kotlin.backend.jvm.codegen.isReadOfCrossinline
+import org.jetbrains.kotlin.backend.jvm.ir.IrInlineReferenceLocator
+import org.jetbrains.kotlin.backend.jvm.ir.defaultValue
 import org.jetbrains.kotlin.backend.jvm.localDeclarationsPhase
-import org.jetbrains.kotlin.builtins.functions.FunctionInvokeDescriptor.Factory.BIG_ARITY
 import org.jetbrains.kotlin.codegen.coroutines.*
 import org.jetbrains.kotlin.codegen.inline.coroutines.FOR_INLINE_SUFFIX
 import org.jetbrains.kotlin.descriptors.Modality
@@ -29,7 +30,10 @@ import org.jetbrains.kotlin.ir.builders.*
 import org.jetbrains.kotlin.ir.builders.declarations.*
 import org.jetbrains.kotlin.ir.declarations.*
 import org.jetbrains.kotlin.ir.expressions.*
-import org.jetbrains.kotlin.ir.expressions.impl.*
+import org.jetbrains.kotlin.ir.expressions.impl.IrCallImpl
+import org.jetbrains.kotlin.ir.expressions.impl.IrGetFieldImpl
+import org.jetbrains.kotlin.ir.expressions.impl.IrGetValueImpl
+import org.jetbrains.kotlin.ir.expressions.impl.IrTypeOperatorCallImpl
 import org.jetbrains.kotlin.ir.symbols.IrSimpleFunctionSymbol
 import org.jetbrains.kotlin.ir.types.*
 import org.jetbrains.kotlin.ir.types.impl.IrSimpleTypeImpl
@@ -69,18 +73,6 @@ private class AddContinuationLowering(private val context: JvmBackendContext) : 
             override fun visitFunction(declaration: IrFunction): IrStatement {
                 functionStack.push(declaration)
                 return super.visitFunction(declaration).also { functionStack.pop() }
-            }
-
-            override fun visitMemberAccess(expression: IrMemberAccessExpression): IrExpression {
-                val receiverType = expression.dispatchReceiver?.type
-                val newExpression = super.visitMemberAccess(expression) as IrMemberAccessExpression
-                if (receiverType != null && receiverType != newExpression.dispatchReceiver?.type) {
-                    newExpression.dispatchReceiver = IrTypeOperatorCallImpl(
-                        expression.startOffset, expression.endOffset, receiverType,
-                        IrTypeOperator.IMPLICIT_CAST, receiverType, newExpression.dispatchReceiver!!
-                    )
-                }
-                return newExpression
             }
 
             override fun visitCall(expression: IrCall): IrExpression {
@@ -177,7 +169,18 @@ private class AddContinuationLowering(private val context: JvmBackendContext) : 
                 addField("p\$", it.type)
             }
 
-            val parametersFields = info.function.valueParameters.map { addField(it.name, it.type) }
+            val parametersFields = info.function.valueParameters.map {
+                addField {
+                    name = it.name
+                    type = it.type
+                    origin = if (it.isCrossinline)
+                        LocalDeclarationsLowering.DECLARATION_ORIGIN_FIELD_FOR_CROSSINLINE_CAPTURED_VALUE
+                    else
+                        LocalDeclarationsLowering.DECLARATION_ORIGIN_FIELD_FOR_CAPTURED_VALUE
+                    isFinal = true
+                    visibility = JavaVisibilities.PACKAGE_VISIBILITY
+                }
+            }
             val parametersWithoutArguments = parametersFields.withIndex()
                 .mapNotNull { (i, field) -> if (info.reference.getValueArgument(i) == null) field else null }
             val parametersWithArguments = parametersFields.withIndex()
@@ -679,13 +682,7 @@ private class AddContinuationLowering(private val context: JvmBackendContext) : 
     private class SuspendLambdaInfo(val reference: IrFunctionReference) {
         val function = reference.symbol.owner
         val arity = (reference.type as IrSimpleType).arguments.size - 1
-        val capturesCrossinline = function.valueParameters.any {
-            when (val argument = reference.getValueArgument(it.index)) {
-                is IrGetValue -> (argument.symbol.owner as? IrValueParameter)?.isCrossinline == true
-                is IrGetField -> argument.symbol.owner.origin == LocalDeclarationsLowering.DECLARATION_ORIGIN_FIELD_FOR_CROSSINLINE_CAPTURED_VALUE
-                else -> false
-            }
-        }
+        val capturesCrossinline = function.valueParameters.any { reference.getValueArgument(it.index).isReadOfCrossinline() }
         lateinit var constructor: IrConstructor
     }
 }
@@ -781,25 +778,14 @@ private fun IrCall.createSuspendFunctionCallViewIfNeeded(context: JvmBackendCont
     val view = (symbol.owner as IrSimpleFunction).suspendFunctionViewOrStub(context)
     if (view == symbol.owner) return this
 
-    val isBigAritySuspendFunctionN =
-        symbol.owner.parentAsClass?.defaultType?.let { it.isSuspendFunction() || it.isKSuspendFunction() } && valueArgumentsCount + 1 >= BIG_ARITY
-    val calleeSymbol =
-        if (isBigAritySuspendFunctionN) context.ir.symbols.functionN.functions.single { it.owner.name.toString() == "invoke" } else view.symbol
-    return IrCallImpl(startOffset, endOffset, view.returnType, calleeSymbol, superQualifierSymbol = superQualifierSymbol).also {
+    // While the new callee technically returns `<original type> | COROUTINE_SUSPENDED`, the latter case is handled
+    // by a method visitor so at an IR overview we don't need to consider it.
+    return IrCallImpl(startOffset, endOffset, type, view.symbol, superQualifierSymbol = superQualifierSymbol).also {
         it.copyTypeArgumentsFrom(this)
         it.dispatchReceiver = dispatchReceiver
         it.extensionReceiver = extensionReceiver
         val valueArguments = computeSuspendFunctionCallViewValueArguments(caller, context, view)
-        if (isBigAritySuspendFunctionN) {
-            // If we are calling FunctionN.invoke, wrap arguments in an array.
-            it.putValueArgument(0, context.createJvmIrBuilder(caller.symbol).run {
-                irArray(irSymbols.array.typeWith(context.irBuiltIns.anyNType)) {
-                    valueArguments.forEach { argument -> +argument }
-                }
-            })
-        } else {
-            valueArguments.forEachIndexed { index, argument -> it.putValueArgument(index, argument) }
-        }
+        valueArguments.forEachIndexed { index, argument -> it.putValueArgument(index, argument) }
     }
 }
 

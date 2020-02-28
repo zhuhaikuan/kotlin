@@ -3,30 +3,33 @@ package org.jetbrains.kotlin.tools.projectWizard.wizard.ui.secondStep.modulesEdi
 import com.intellij.ui.JBColor
 import org.jetbrains.kotlin.idea.projectWizard.UiEditorUsageStats
 import org.jetbrains.kotlin.tools.projectWizard.core.entity.ListSettingType
-import org.jetbrains.kotlin.tools.projectWizard.core.ValuesReadingContext
+import org.jetbrains.kotlin.tools.projectWizard.core.context.ReadingContext
+import org.jetbrains.kotlin.tools.projectWizard.core.entity.ValidationResult
 import org.jetbrains.kotlin.tools.projectWizard.core.entity.reference
 import org.jetbrains.kotlin.tools.projectWizard.plugins.kotlin.KotlinPlugin
 import org.jetbrains.kotlin.tools.projectWizard.plugins.kotlin.ProjectKind
 import org.jetbrains.kotlin.tools.projectWizard.settings.DisplayableSettingItem
 import org.jetbrains.kotlin.tools.projectWizard.settings.buildsystem.Module
+import org.jetbrains.kotlin.tools.projectWizard.wizard.IdeContext
 import org.jetbrains.kotlin.tools.projectWizard.wizard.ui.panel
+import org.jetbrains.kotlin.tools.projectWizard.wizard.ui.setting.AlwaysShownValidationIndicator
 import org.jetbrains.kotlin.tools.projectWizard.wizard.ui.setting.SettingComponent
-import org.jetbrains.kotlin.tools.projectWizard.wizard.ui.setting.ValidationIndicator
 import java.awt.BorderLayout
 import javax.swing.BorderFactory
 import javax.swing.JComponent
 
 
 class ModulesEditorComponent(
-    valuesReadingContext: ValuesReadingContext,
+    ideContext: IdeContext,
     uiEditorUsagesStats: UiEditorUsageStats,
-    oneEntrySelected: (data: DisplayableSettingItem?) -> Unit
-) : SettingComponent<List<Module>, ListSettingType<Module>>(KotlinPlugin::modules.reference, valuesReadingContext) {
+    oneEntrySelected: (data: DisplayableSettingItem?) -> Unit,
+    selectSettingWithError: (ValidationResult.ValidationError) -> Unit
+) : SettingComponent<List<Module>, ListSettingType<Module>>(KotlinPlugin::modules.reference, ideContext) {
     private val tree: ModulesEditorTree =
         ModulesEditorTree(
             onSelected = { oneEntrySelected(it) },
             addModule = { component ->
-                val isMppProject = KotlinPlugin::projectKind.value == ProjectKind.Multiplatform
+                val isMppProject = KotlinPlugin::projectKind.value == ProjectKind.Singleplatform
                 moduleCreator.create(
                     target = null, // The empty tree case
                     allowMultiplatform = isMppProject,
@@ -39,7 +42,7 @@ class ModulesEditorComponent(
             }
         )
 
-    private val model = TargetsModel(tree, ::value, valuesReadingContext.context, uiEditorUsagesStats)
+    private val model = TargetsModel(tree, ::value, ideContext, uiEditorUsagesStats)
 
     override fun onInit() {
         super.onInit()
@@ -53,7 +56,7 @@ class ModulesEditorComponent(
         moduleCreator = moduleCreator,
         model = model,
         getModules = { value ?: emptyList() },
-        isMultiplatformProject = { KotlinPlugin::projectKind.value == ProjectKind.Multiplatform }
+        isMultiplatformProject = { KotlinPlugin::projectKind.value != ProjectKind.Singleplatform }
     )
 
     override val component: JComponent by lazy(LazyThreadSafetyMode.NONE) {
@@ -64,7 +67,9 @@ class ModulesEditorComponent(
         }
     }
 
-    override val validationIndicator = ValidationIndicator(showText = true).apply {
-        background = tree.background
+    override val validationIndicator = AlwaysShownValidationIndicator(showText = true) { error ->
+        val module = error.target as? Module ?: return@AlwaysShownValidationIndicator
+        tree.selectModule(module)
+        selectSettingWithError(error)
     }
 }

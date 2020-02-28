@@ -9,22 +9,22 @@
 package org.jetbrains.kotlin.gradle.plugin.mpp
 
 import org.gradle.api.Project
-import org.jetbrains.kotlin.gradle.plugin.KotlinPlatformType
+import org.jetbrains.kotlin.gradle.plugin.*
 import org.jetbrains.kotlin.gradle.targets.js.KotlinJsTarget
 import org.jetbrains.kotlin.gradle.targets.js.KotlinJsTargetConfigurator
-import org.jetbrains.kotlin.gradle.targets.js.ir.*
-import org.jetbrains.kotlin.gradle.targets.js.ir.KotlinJsIrSingleTargetPreset
-import org.jetbrains.kotlin.gradle.targets.js.ir.KotlinJsIrTargetConfigurator
 import org.jetbrains.kotlin.gradle.targets.js.ir.KotlinJsIrTargetPreset
+import org.jetbrains.kotlin.gradle.utils.lowerCamelCaseName
 
 open class KotlinJsTargetPreset(
     project: Project,
-    kotlinPluginVersion: String,
-    val irPreset: KotlinJsIrTargetPreset?
+    kotlinPluginVersion: String
 ) : KotlinOnlyTargetPreset<KotlinJsTarget, KotlinJsCompilation>(
     project,
     kotlinPluginVersion
 ) {
+    var irPreset: KotlinJsIrTargetPreset? = null
+        internal set
+
     override val platformType: KotlinPlatformType
         get() = KotlinPlatformType.js
 
@@ -34,23 +34,43 @@ open class KotlinJsTargetPreset(
             project,
             platformType
         ).apply {
-            this.irTarget = irPreset?.createTarget("$name$IR_TARGET_SUFFIX")
+            this.irTarget = irPreset?.createTarget(
+                lowerCamelCaseName(
+                    name.removeJsCompilerSuffix(KotlinJsCompilerType.LEGACY),
+                    KotlinJsCompilerType.IR.lowerName
+                )
+            )
+
+            project.whenEvaluated {
+                if (!isBrowserConfigured && !isNodejsConfigured) {
+                    project.logger.warn(
+                        """
+                            Please choose a JavaScript environment to build distributions and run tests.
+                            Not choosing any of them will be an error in the future releases.
+                            kotlin {
+                                js {
+                                    // To build distributions for and run tests on browser or Node.js use one or both of:
+                                    browser()
+                                    nodejs()
+                                }
+                            }
+                        """.trimIndent()
+                    )
+                }
+            }
         }
     }
-
-    override fun provideTargetDisambiguationClassifier(target: KotlinOnlyTarget<KotlinJsCompilation>): String? =
-        if (irPreset == null) {
-            super.provideTargetDisambiguationClassifier(target)
-        } else {
-            LEGACY_DISAMBIGUATION_CLASSIFIER +
-                    super.provideTargetDisambiguationClassifier(target)
-        }
 
     override fun createKotlinTargetConfigurator() = KotlinJsTargetConfigurator(
         kotlinPluginVersion
     )
 
-    override fun getName(): String = PRESET_NAME
+    override fun getName(): String {
+        return lowerCamelCaseName(
+            PRESET_NAME,
+            irPreset?.let { KotlinJsCompilerType.BOTH.lowerName }
+        )
+    }
 
     override fun createCompilationFactory(forTarget: KotlinOnlyTarget<KotlinJsCompilation>): KotlinJsCompilationFactory {
         return KotlinJsCompilationFactory(project, forTarget, irPreset?.let { (forTarget as KotlinJsTarget).irTarget })
@@ -63,21 +83,20 @@ open class KotlinJsTargetPreset(
 
 class KotlinJsSingleTargetPreset(
     project: Project,
-    kotlinPluginVersion: String,
-    irPreset: KotlinJsIrSingleTargetPreset?
+    kotlinPluginVersion: String
 ) : KotlinJsTargetPreset(
     project,
-    kotlinPluginVersion,
-    irPreset
+    kotlinPluginVersion
 ) {
-
     // In a Kotlin/JS single-platform project, we don't need any disambiguation suffixes or prefixes in the names:
     override fun provideTargetDisambiguationClassifier(target: KotlinOnlyTarget<KotlinJsCompilation>): String? =
-        irPreset?.let { LEGACY_DISAMBIGUATION_CLASSIFIER }
+        irPreset?.let {
+            super.provideTargetDisambiguationClassifier(target)
+                ?.removePrefix(target.name.removeJsCompilerSuffix(KotlinJsCompilerType.LEGACY))
+                ?.decapitalize()
+        }
 
     override fun createKotlinTargetConfigurator() = KotlinJsTargetConfigurator(
         kotlinPluginVersion
     )
 }
-
-const val LEGACY_DISAMBIGUATION_CLASSIFIER = "legacy"

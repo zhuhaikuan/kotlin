@@ -2,15 +2,18 @@ package org.jetbrains.kotlin.tools.projectWizard.moduleConfigurators
 
 import org.jetbrains.kotlin.tools.projectWizard.Identificator
 import org.jetbrains.kotlin.tools.projectWizard.SettingsOwner
+import org.jetbrains.kotlin.tools.projectWizard.core.context.ReadingContext
+import org.jetbrains.kotlin.tools.projectWizard.core.context.WritingContext
 import org.jetbrains.kotlin.tools.projectWizard.core.*
 import org.jetbrains.kotlin.tools.projectWizard.core.cached
+import org.jetbrains.kotlin.tools.projectWizard.core.context.SettingsWritingContext
 import org.jetbrains.kotlin.tools.projectWizard.core.entity.*
+import org.jetbrains.kotlin.tools.projectWizard.enumSettingImpl
 import org.jetbrains.kotlin.tools.projectWizard.ir.buildsystem.BuildSystemIR
 import org.jetbrains.kotlin.tools.projectWizard.ir.buildsystem.KotlinBuildSystemPluginIR
 import org.jetbrains.kotlin.tools.projectWizard.ir.buildsystem.StdlibType
 import org.jetbrains.kotlin.tools.projectWizard.phases.GenerationPhase
 import org.jetbrains.kotlin.tools.projectWizard.plugins.kotlin.ModuleConfigurationData
-import org.jetbrains.kotlin.tools.projectWizard.plugins.kotlin.ModuleType
 import org.jetbrains.kotlin.tools.projectWizard.plugins.kotlin.correspondingStdlib
 import org.jetbrains.kotlin.tools.projectWizard.settings.DisplayableSettingItem
 import org.jetbrains.kotlin.tools.projectWizard.settings.buildsystem.*
@@ -52,17 +55,15 @@ fun <T> withSettingsOf(
 ): T = function(ModuleBasedConfiguratorSettingsEnvironment(configurator, module))
 
 
-abstract class ModuleConfiguratorWithSettings : ModuleConfigurator, SettingsOwner {
-    override fun <V : Any, T : SettingType<V>> settingDelegate(
+abstract class ModuleConfiguratorSettings : SettingsOwner {
+    final override fun <V : Any, T : SettingType<V>> settingDelegate(
         create: (path: String) -> SettingBuilder<V, T>
     ): ReadOnlyProperty<Any?, ModuleConfiguratorSetting<V, T>> = cached { name ->
         ModuleConfiguratorSetting(create(name).buildInternal())
     }
 
-    abstract val settings: List<ModuleConfiguratorSetting<*, *>>
-
     @Suppress("UNCHECKED_CAST")
-    override fun <V : DisplayableSettingItem> dropDownSetting(
+    final override fun <V : DisplayableSettingItem> dropDownSetting(
         title: String,
         neededAtPhase: GenerationPhase,
         parser: Parser<V>,
@@ -76,7 +77,7 @@ abstract class ModuleConfiguratorWithSettings : ModuleConfigurator, SettingsOwne
         ) as ReadOnlyProperty<Any, ModuleConfiguratorSetting<V, DropDownSettingType<V>>>
 
     @Suppress("UNCHECKED_CAST")
-    override fun stringSetting(
+    final override fun stringSetting(
         title: String,
         neededAtPhase: GenerationPhase,
         init: StringSettingType.Builder.() -> Unit
@@ -88,7 +89,7 @@ abstract class ModuleConfiguratorWithSettings : ModuleConfigurator, SettingsOwne
         ) as ReadOnlyProperty<Any, ModuleConfiguratorSetting<String, StringSettingType>>
 
     @Suppress("UNCHECKED_CAST")
-    override fun booleanSetting(
+    final override fun booleanSetting(
         title: String,
         neededAtPhase: GenerationPhase,
         init: BooleanSettingType.Builder.() -> Unit
@@ -100,7 +101,7 @@ abstract class ModuleConfiguratorWithSettings : ModuleConfigurator, SettingsOwne
         ) as ReadOnlyProperty<Any, ModuleConfiguratorSetting<Boolean, BooleanSettingType>>
 
     @Suppress("UNCHECKED_CAST")
-    override fun <V : Any> valueSetting(
+    final override fun <V : Any> valueSetting(
         title: String,
         neededAtPhase: GenerationPhase,
         parser: Parser<V>,
@@ -114,7 +115,7 @@ abstract class ModuleConfiguratorWithSettings : ModuleConfigurator, SettingsOwne
         ) as ReadOnlyProperty<Any, ModuleConfiguratorSetting<V, ValueSettingType<V>>>
 
     @Suppress("UNCHECKED_CAST")
-    override fun versionSetting(
+    final override fun versionSetting(
         title: String,
         neededAtPhase: GenerationPhase,
         init: VersionSettingType.Builder.() -> Unit
@@ -126,7 +127,7 @@ abstract class ModuleConfiguratorWithSettings : ModuleConfigurator, SettingsOwne
         ) as ReadOnlyProperty<Any, ModuleConfiguratorSetting<Version, VersionSettingType>>
 
     @Suppress("UNCHECKED_CAST")
-    override fun <V : Any> listSetting(
+    final override fun <V : Any> listSetting(
         title: String,
         neededAtPhase: GenerationPhase,
         parser: Parser<V>,
@@ -140,7 +141,7 @@ abstract class ModuleConfiguratorWithSettings : ModuleConfigurator, SettingsOwne
         ) as ReadOnlyProperty<Any, ModuleConfiguratorSetting<List<V>, ListSettingType<V>>>
 
     @Suppress("UNCHECKED_CAST")
-    override fun pathSetting(
+    final override fun pathSetting(
         title: String,
         neededAtPhase: GenerationPhase,
         init: PathSettingType.Builder.() -> Unit
@@ -151,21 +152,25 @@ abstract class ModuleConfiguratorWithSettings : ModuleConfigurator, SettingsOwne
             init
         ) as ReadOnlyProperty<Any, ModuleConfiguratorSetting<Path, PathSettingType>>
 
+    @Suppress("UNCHECKED_CAST")
     inline fun <reified E> enumSetting(
         title: String,
         neededAtPhase: GenerationPhase,
         crossinline init: DropDownSettingType.Builder<E>.() -> Unit = {}
-    ) where E : Enum<E>, E : DisplayableSettingItem = dropDownSetting<E>(title, neededAtPhase, enumParser()) {
-        values = enumValues<E>().asList()
-        init()
-    }
+    ): ReadOnlyProperty<Any, ModuleConfiguratorSetting<E, DropDownSettingType<E>>> where E : Enum<E>, E : DisplayableSettingItem =
+        enumSettingImpl(title, neededAtPhase, init) as ReadOnlyProperty<Any, ModuleConfiguratorSetting<E, DropDownSettingType<E>>>
+}
+
+interface ModuleConfiguratorWithSettings : ModuleConfigurator {
+    fun getConfiguratorSettings(): List<ModuleConfiguratorSetting<*, *>> = emptyList()
+    fun getPluginSettings(): List<PluginSettingReference<Any, SettingType<Any>>> = emptyList()
 
 
-    fun initDefaultValuesFor(module: Module, context: Context) {
+    fun SettingsWritingContext.initDefaultValuesFor(module: Module) {
         withSettingsOf(module) {
-            settings.forEach { setting ->
+            getConfiguratorSettings().forEach { setting ->
                 val defaultValue = setting.defaultValue ?: return@forEach
-                context.settingContext[setting.reference] = defaultValue
+                setting.reference.setValue(defaultValue)
             }
         }
     }
@@ -173,38 +178,56 @@ abstract class ModuleConfiguratorWithSettings : ModuleConfigurator, SettingsOwne
 
 val ModuleConfigurator.settings
     get() = when (this) {
-        is ModuleConfiguratorWithSettings -> settings
+        is ModuleConfiguratorWithSettings -> getConfiguratorSettings()
         else -> emptyList()
     }
 
-val Module.configuratorSettings
-    get() = configurator.settings.map { setting ->
-        ModuleBasedConfiguratorSettingReference(configurator, this, setting)
+fun ReadingContext.allSettingsOfModuleConfigurator(moduleConfigurator: ModuleConfigurator) = when (moduleConfigurator) {
+    is ModuleConfiguratorWithSettings -> buildList<Setting<Any, SettingType<Any>>> {
+        +moduleConfigurator.getConfiguratorSettings()
+        +moduleConfigurator.getPluginSettings().map { it.pluginSetting }
     }
+    else -> emptyList()
+}
+
+fun Module.getConfiguratorSettings() = buildList<SettingReference<*, *>> {
+    +configurator.settings.map { setting ->
+        ModuleBasedConfiguratorSettingReference(configurator, this@getConfiguratorSettings, setting)
+    }
+    configurator.safeAs<ModuleConfiguratorWithSettings>()?.getPluginSettings()?.let { +it }
+}
+
 
 interface ModuleConfigurator : DisplayableSettingItem, EntitiesOwnerDescriptor {
     val moduleKind: ModuleKind
-    val moduleType: ModuleType
     override val text: String
         get() = id
 
     val suggestedModuleName: String? get() = null
     val canContainSubModules: Boolean get() = false
 
-    fun createBuildFileIRs(configurationData: ModuleConfigurationData, module: Module): List<BuildSystemIR> =
+    fun createBuildFileIRs(
+        readingContext: ReadingContext,
+        configurationData: ModuleConfigurationData,
+        module: Module
+    ): List<BuildSystemIR> =
         emptyList()
 
-    fun ValuesReadingContext.createModuleIRs(configurationData: ModuleConfigurationData, module: Module): List<BuildSystemIR> =
+    fun createModuleIRs(
+        readingContext: ReadingContext,
+        configurationData: ModuleConfigurationData,
+        module: Module
+    ): List<BuildSystemIR> =
         emptyList()
 
     fun createStdlibType(configurationData: ModuleConfigurationData, module: Module): StdlibType? =
-        moduleType.correspondingStdlib()
+        safeAs<ModuleConfiguratorWithModuleType>()?.moduleType?.correspondingStdlib()
 
     fun createRootBuildFileIrs(configurationData: ModuleConfigurationData): List<BuildSystemIR> = emptyList()
     fun createKotlinPluginIR(configurationData: ModuleConfigurationData, module: Module): KotlinBuildSystemPluginIR? =
         null
 
-    fun TaskRunningContext.runArbitraryTask(
+    fun WritingContext.runArbitraryTask(
         configurationData: ModuleConfigurationData,
         module: Module,
         modulePath: Path
@@ -233,19 +256,24 @@ interface ModuleConfigurator : DisplayableSettingItem, EntitiesOwnerDescriptor {
         val BY_ID = ALL.associateBy(ModuleConfigurator::id)
         val BY_MODULE_KIND = ALL.groupBy(ModuleConfigurator::moduleKind)
 
-        fun getParser(moduleIdentificator: Identificator): Parser<ModuleConfigurator> = mapParser { map, path ->
-            val (id) = map.parseValue<String>(path, "name")
-            val (configurator) = BY_ID[id].toResult { ConfiguratorNotFoundError(id) }
-            val (settingsWithValues) = configurator.settings.mapComputeM { setting ->
-                val (settingValue) = map[setting.path].toResult { ParseError("No value was found for a key `$path.${setting.path}`") }
-                val reference = withSettingsOf(moduleIdentificator, configurator) { setting.reference }
-                setting.type.parse(this, settingValue, setting.path).map { reference to it }
-            }.sequence()
-            updateState { it.withSettings(settingsWithValues) }
-            configurator
-        } or valueParserM { value, path ->
-            val (id) = value.parseAs<String>(path)
-            BY_ID[id].toResult { ConfiguratorNotFoundError(id) }
-        }
+        fun getParser(moduleIdentificator: Identificator): Parser<ModuleConfigurator> =
+            valueParserM { value, path ->
+                val (id) = value.parseAs<String>(path)
+                BY_ID[id].toResult { ConfiguratorNotFoundError(id) }
+            } or mapParser { map, path ->
+                val (id) = map.parseValue<String>(path, "name")
+                val (configurator) = BY_ID[id].toResult { ConfiguratorNotFoundError(id) }
+                val (settingsWithValues) = configurator.settings.mapComputeM { setting ->
+                    val (settingValue) = map[setting.path].toResult { ParseError("No value was found for a key `$path.${setting.path}`") }
+                    val reference = withSettingsOf(moduleIdentificator, configurator) { setting.reference }
+                    setting.type.parse(this, settingValue, setting.path).map { reference to it }
+                }.sequence()
+                updateState { it.withSettings(settingsWithValues) }
+                configurator
+            }
     }
+}
+
+interface GradleModuleConfigurator : ModuleConfigurator {
+    fun ReadingContext.createSettingsGradleIRs(module: Module): List<BuildSystemIR> = emptyList()
 }

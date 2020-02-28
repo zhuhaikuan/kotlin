@@ -1,5 +1,7 @@
 package org.jetbrains.kotlin.tools.projectWizard.plugins.buildSystem
 
+import org.jetbrains.kotlin.tools.projectWizard.core.context.ReadingContext
+import org.jetbrains.kotlin.tools.projectWizard.core.context.WritingContext
 import org.jetbrains.kotlin.tools.projectWizard.core.*
 import org.jetbrains.kotlin.tools.projectWizard.core.entity.ValidationResult
 import org.jetbrains.kotlin.tools.projectWizard.core.entity.reference
@@ -15,25 +17,25 @@ import org.jetbrains.kotlin.tools.projectWizard.plugins.kotlin.ProjectKind
 import org.jetbrains.kotlin.tools.projectWizard.plugins.printer.BuildFilePrinter
 import org.jetbrains.kotlin.tools.projectWizard.plugins.printer.printBuildFile
 import org.jetbrains.kotlin.tools.projectWizard.plugins.projectPath
-import org.jetbrains.kotlin.tools.projectWizard.plugins.templates.TemplatePlugin
 import org.jetbrains.kotlin.tools.projectWizard.plugins.templates.TemplatesPlugin
 import org.jetbrains.kotlin.tools.projectWizard.settings.DisplayableSettingItem
 import org.jetbrains.kotlin.tools.projectWizard.settings.buildsystem.Repository
 import org.jetbrains.kotlin.tools.projectWizard.settings.buildsystem.updateBuildFiles
-import java.nio.file.Path
 
 abstract class BuildSystemPlugin(context: Context) : Plugin(context) {
     val type by enumSetting<BuildSystemType>("Build System", GenerationPhase.FIRST_STEP) {
+        isSavable = true
         filter = { _, type ->
-            val service = service<BuildSystemAvailabilityWizardService>()!!
+            val service = service<BuildSystemAvailabilityWizardService>()
             service.isAvailable(type)
         }
 
         validate { buildSystemType ->
             if (!buildSystemType.isGradle
-                && KotlinPlugin::projectKind.reference.notRequiredSettingValue == ProjectKind.Multiplatform
+                && KotlinPlugin::projectKind.reference.notRequiredSettingValue != ProjectKind.Singleplatform
             ) {
-                ValidationResult.ValidationError("Multiplatform project cannot be generated using ${buildSystemType.text}")
+                val projectKind = KotlinPlugin::projectKind.reference.notRequiredSettingValue?.text?.capitalize() ?: "Project"
+                ValidationResult.ValidationError("$projectKind cannot be generated using ${buildSystemType.text}")
             } else ValidationResult.OK
         }
     }
@@ -69,7 +71,7 @@ abstract class BuildSystemPlugin(context: Context) : Plugin(context) {
     val createModules by pipelineTask(GenerationPhase.PROJECT_GENERATION) {
         runAfter(StructurePlugin::createProjectDir)
         withAction {
-            val fileSystem = service<FileSystemWizardService>()!!
+            val fileSystem = service<FileSystemWizardService>()
             val data = BuildSystemPlugin::buildSystemData.propertyValue.first { it.type == buildSystemType }
             val buildFileData = data.buildFileData ?: return@withAction UNIT_SUCCESS
             BuildSystemPlugin::buildFiles.propertyValue.mapSequenceIgnore { buildFile ->
@@ -86,13 +88,12 @@ abstract class BuildSystemPlugin(context: Context) : Plugin(context) {
         withAction {
             val data = BuildSystemPlugin::buildSystemData.propertyValue.first { it.type == buildSystemType }
             service<ProjectImportingWizardService> { service -> service.isSuitableFor(data.type) }!!
-                .importProject(StructurePlugin::projectPath.reference.settingValue, allModules)
+                .importProject(StructurePlugin::projectPath.reference.settingValue, allIRModules)
         }
     }
 
     protected fun addBuildSystemData(data: BuildSystemData) = pipelineTask(GenerationPhase.PREPARE) {
         runBefore(BuildSystemPlugin::createModules)
-        activityChecker = Checker.ALWAYS_AVAILABLE
         withAction {
             BuildSystemPlugin::buildSystemData.addValues(data)
         }
@@ -125,12 +126,12 @@ val BuildSystemType.isGradle
     get() = this == BuildSystemType.GradleGroovyDsl
             || this == BuildSystemType.GradleKotlinDsl
 
-val TaskRunningContext.allModules
+val ReadingContext.allIRModules
     get() = BuildSystemPlugin::buildFiles.propertyValue.flatMap { buildFile ->
         buildFile.modules.modules
     }
 
-val TaskRunningContext.allModulesPaths
+val WritingContext.allModulesPaths
     get() = BuildSystemPlugin::buildFiles.propertyValue.flatMap { buildFile ->
         val paths = when (val structure = buildFile.modules) {
             is MultiplatformModulesStructureIR -> listOf(buildFile.directoryPath)
@@ -145,6 +146,6 @@ val TaskRunningContext.allModulesPaths
     }
 
 
-val ValuesReadingContext.buildSystemType: BuildSystemType
+val ReadingContext.buildSystemType: BuildSystemType
     get() = BuildSystemPlugin::type.reference.settingValue
 

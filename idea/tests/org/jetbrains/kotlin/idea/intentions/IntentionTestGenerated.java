@@ -2327,6 +2327,11 @@ public class IntentionTestGenerated extends AbstractIntentionTest {
                     runTest("idea/testData/intentions/branched/ifWhen/ifToWhen/comment.kt");
                 }
 
+                @TestMetadata("doNotSwallowComment.kt")
+                public void testDoNotSwallowComment() throws Exception {
+                    runTest("idea/testData/intentions/branched/ifWhen/ifToWhen/doNotSwallowComment.kt");
+                }
+
                 @TestMetadata("ifElseSwallowComments.kt")
                 public void testIfElseSwallowComments() throws Exception {
                     runTest("idea/testData/intentions/branched/ifWhen/ifToWhen/ifElseSwallowComments.kt");
@@ -4500,6 +4505,11 @@ public class IntentionTestGenerated extends AbstractIntentionTest {
             runTest("idea/testData/intentions/convertFunctionToProperty/nothingFun.kt");
         }
 
+        @TestMetadata("onFunKeyword.kt")
+        public void testOnFunKeyword() throws Exception {
+            runTest("idea/testData/intentions/convertFunctionToProperty/onFunKeyword.kt");
+        }
+
         @TestMetadata("otherRefs.kt")
         public void testOtherRefs() throws Exception {
             runTest("idea/testData/intentions/convertFunctionToProperty/otherRefs.kt");
@@ -5886,6 +5896,11 @@ public class IntentionTestGenerated extends AbstractIntentionTest {
 
         public void testAllFilesPresentInConvertPropertyToFunction() throws Exception {
             KotlinTestUtils.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("idea/testData/intentions/convertPropertyToFunction"), Pattern.compile("^([\\w\\-_]+)\\.(kt|kts)$"), null, true);
+        }
+
+        @TestMetadata("annotationUseSiteTarget.kt")
+        public void testAnnotationUseSiteTarget() throws Exception {
+            runTest("idea/testData/intentions/convertPropertyToFunction/annotationUseSiteTarget.kt");
         }
 
         @TestMetadata("blockBody.kt")
@@ -9489,6 +9504,16 @@ public class IntentionTestGenerated extends AbstractIntentionTest {
             runTest("idea/testData/intentions/invertIfCondition/is.kt");
         }
 
+        @TestMetadata("isEmpty.kt")
+        public void testIsEmpty() throws Exception {
+            runTest("idea/testData/intentions/invertIfCondition/isEmpty.kt");
+        }
+
+        @TestMetadata("isNotEmpty.kt")
+        public void testIsNotEmpty() throws Exception {
+            runTest("idea/testData/intentions/invertIfCondition/isNotEmpty.kt");
+        }
+
         @TestMetadata("lambdaNonLocalAndLocalReturn.kt")
         public void testLambdaNonLocalAndLocalReturn() throws Exception {
             runTest("idea/testData/intentions/invertIfCondition/lambdaNonLocalAndLocalReturn.kt");
@@ -9554,6 +9579,16 @@ public class IntentionTestGenerated extends AbstractIntentionTest {
             runTest("idea/testData/intentions/invertIfCondition/negatedExpression.kt");
         }
 
+        @TestMetadata("negatedIsEmpty.kt")
+        public void testNegatedIsEmpty() throws Exception {
+            runTest("idea/testData/intentions/invertIfCondition/negatedIsEmpty.kt");
+        }
+
+        @TestMetadata("negatedIsNotEmpty.kt")
+        public void testNegatedIsNotEmpty() throws Exception {
+            runTest("idea/testData/intentions/invertIfCondition/negatedIsNotEmpty.kt");
+        }
+
         @TestMetadata("nestedIfWithReturn.kt")
         public void testNestedIfWithReturn() throws Exception {
             runTest("idea/testData/intentions/invertIfCondition/nestedIfWithReturn.kt");
@@ -9617,6 +9652,21 @@ public class IntentionTestGenerated extends AbstractIntentionTest {
         @TestMetadata("simple.kt")
         public void testSimple() throws Exception {
             runTest("idea/testData/intentions/invertIfCondition/simple.kt");
+        }
+
+        @TestMetadata("unnecessaryContinue.kt")
+        public void testUnnecessaryContinue() throws Exception {
+            runTest("idea/testData/intentions/invertIfCondition/unnecessaryContinue.kt");
+        }
+
+        @TestMetadata("unnecessaryContinue2.kt")
+        public void testUnnecessaryContinue2() throws Exception {
+            runTest("idea/testData/intentions/invertIfCondition/unnecessaryContinue2.kt");
+        }
+
+        @TestMetadata("unnecessaryContinue3.kt")
+        public void testUnnecessaryContinue3() throws Exception {
+            runTest("idea/testData/intentions/invertIfCondition/unnecessaryContinue3.kt");
         }
 
         @TestMetadata("valueAndReturnBranches.kt")

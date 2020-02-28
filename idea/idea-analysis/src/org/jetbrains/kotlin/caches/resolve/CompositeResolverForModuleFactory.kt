@@ -51,7 +51,7 @@ import org.jetbrains.kotlin.serialization.deserialization.MetadataPackageFragmen
 import org.jetbrains.kotlin.serialization.deserialization.MetadataPartProvider
 import org.jetbrains.kotlin.serialization.js.KotlinJavascriptSerializationUtil
 import org.jetbrains.kotlin.serialization.js.createKotlinJavascriptPackageFragmentProvider
-import org.jetbrains.kotlin.serialization.konan.NullFlexibleTypeDeserializer
+import org.jetbrains.kotlin.library.metadata.NullFlexibleTypeDeserializer
 import org.jetbrains.kotlin.serialization.konan.impl.KlibMetadataModuleDescriptorFactoryImpl
 import org.jetbrains.kotlin.storage.StorageManager
 import org.jetbrains.kotlin.utils.KotlinJavascriptMetadataUtils
@@ -136,15 +136,16 @@ class CompositeResolverForModuleFactory(
 
             val packageFragmentNames = parseModuleHeader(library.moduleHeaderData).packageFragmentNameList
 
-            val MetadataFactories = KlibMetadataFactories(
+            val metadataFactories = KlibMetadataFactories(
                 { DefaultBuiltIns.Instance },
                 NullFlexibleTypeDeserializer
             )
 
             val klibMetadataModuleDescriptorFactory = KlibMetadataModuleDescriptorFactoryImpl(
-                MetadataFactories.DefaultDescriptorFactory,
-                MetadataFactories.DefaultPackageFragmentsFactory,
-                MetadataFactories.flexibleTypeDeserializer
+                metadataFactories.DefaultDescriptorFactory,
+                metadataFactories.DefaultPackageFragmentsFactory,
+                metadataFactories.flexibleTypeDeserializer,
+                metadataFactories.platformDependentTypeTransformer
             )
 
             klibMetadataProvider = klibMetadataModuleDescriptorFactory.createPackageFragmentProvider(

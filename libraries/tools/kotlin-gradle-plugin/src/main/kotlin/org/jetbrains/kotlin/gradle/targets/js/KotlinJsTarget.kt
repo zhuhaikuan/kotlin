@@ -7,19 +7,12 @@ package org.jetbrains.kotlin.gradle.targets.js
 
 import org.gradle.api.NamedDomainObjectContainer
 import org.gradle.api.Project
-import org.gradle.api.attributes.Attribute
-import org.gradle.api.attributes.AttributesSchema
 import org.gradle.api.tasks.TaskProvider
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 import org.jetbrains.kotlin.gradle.dsl.kotlinExtension
+import org.jetbrains.kotlin.gradle.plugin.*
 import org.jetbrains.kotlin.gradle.plugin.AbstractKotlinTargetConfigurator.Companion.runTaskNameSuffix
-import org.jetbrains.kotlin.gradle.plugin.KotlinCompilation
-import org.jetbrains.kotlin.gradle.plugin.KotlinPlatformType
-import org.jetbrains.kotlin.gradle.plugin.KotlinTargetComponent
-import org.jetbrains.kotlin.gradle.plugin.KotlinTargetWithTests
-import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinJsCompilation
-import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinOnlyTarget
-import org.jetbrains.kotlin.gradle.plugin.mpp.PRIMARY_SINGLE_COMPONENT_NAME
+import org.jetbrains.kotlin.gradle.plugin.mpp.*
 import org.jetbrains.kotlin.gradle.targets.js.dsl.*
 import org.jetbrains.kotlin.gradle.targets.js.ir.KotlinJsIrTarget
 import org.jetbrains.kotlin.gradle.targets.js.subtargets.KotlinBrowserJs
@@ -45,6 +38,9 @@ constructor(
     override lateinit var testRuns: NamedDomainObjectContainer<KotlinJsReportAggregatingTestRun>
         internal set
 
+    val disambiguationClassifierInPlatform: String?
+        get() = disambiguationClassifier?.removeJsCompilerSuffix(KotlinJsCompilerType.LEGACY)
+
     override val kotlinComponents: Set<KotlinTargetComponent> by lazy {
         if (irTarget == null)
             super.kotlinComponents
@@ -65,6 +61,18 @@ constructor(
             )
 
             setOf(result)
+        }
+    }
+
+    override fun createKotlinVariant(
+        componentName: String,
+        compilation: KotlinCompilation<*>,
+        usageContexts: Set<DefaultKotlinUsageContext>
+    ): KotlinVariant {
+        return super.createKotlinVariant(componentName, compilation, usageContexts).apply {
+            irTarget?.let {
+                artifactTargetName = targetName.removeJsCompilerSuffix(KotlinJsCompilerType.LEGACY)
+            }
         }
     }
 
@@ -97,7 +105,8 @@ constructor(
 
     override val browser by browserLazyDelegate
 
-    override val isBrowserConfigured: Boolean = browserLazyDelegate.isInitialized()
+    override val isBrowserConfigured: Boolean
+        get() = browserLazyDelegate.isInitialized()
 
     override fun browser(body: KotlinJsBrowserDsl.() -> Unit) {
         body(browser)
@@ -119,7 +128,8 @@ constructor(
 
     override val nodejs by nodejsLazyDelegate
 
-    override val isNodejsConfigured: Boolean = nodejsLazyDelegate.isInitialized()
+    override val isNodejsConfigured: Boolean
+        get() = nodejsLazyDelegate.isInitialized()
 
     override fun nodejs(body: KotlinJsNodeDsl.() -> Unit) {
         body(nodejs)
@@ -142,6 +152,10 @@ constructor(
     ) {
         check(this.producingType == null || this.producingType == producingType) {
             "Only one producing type supported. Try to set $producingType but previously ${this.producingType} found"
+        }
+
+        if (this.producingType != null) {
+            return
         }
 
         this.producingType = producingType
@@ -175,7 +189,7 @@ constructor(
         }
     }
 
-    fun useCommonJs() {
+    override fun useCommonJs() {
         compilations.all {
             it.compileKotlinTask.kotlinOptions {
                 moduleKind = "commonjs"
@@ -183,16 +197,6 @@ constructor(
                 sourceMapEmbedSources = null
             }
         }
-    }
-
-    companion object {
-        val jsCompilerAttribute = Attribute.of(
-            "org.jetbrains.kotlin.js.compiler",
-            JsCompilerType::class.java
-        )
-
-        fun setupAttributesMatchingStrategy(attributesSchema: AttributesSchema) {
-            attributesSchema.attribute(jsCompilerAttribute)
-        }
+        irTarget?.useCommonJs()
     }
 }

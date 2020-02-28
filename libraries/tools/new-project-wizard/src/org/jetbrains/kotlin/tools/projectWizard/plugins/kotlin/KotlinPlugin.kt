@@ -1,6 +1,8 @@
 package org.jetbrains.kotlin.tools.projectWizard.plugins.kotlin
 
+import org.jetbrains.kotlin.tools.projectWizard.core.context.WritingContext
 import org.jetbrains.kotlin.tools.projectWizard.core.*
+import org.jetbrains.kotlin.tools.projectWizard.core.context.ReadingContext
 import org.jetbrains.kotlin.tools.projectWizard.core.entity.*
 import org.jetbrains.kotlin.tools.projectWizard.core.service.FileSystemWizardService
 import org.jetbrains.kotlin.tools.projectWizard.core.service.KotlinVersionProviderService
@@ -10,7 +12,6 @@ import org.jetbrains.kotlin.tools.projectWizard.ir.buildsystem.*
 import org.jetbrains.kotlin.tools.projectWizard.phases.GenerationPhase
 import org.jetbrains.kotlin.tools.projectWizard.plugins.StructurePlugin
 import org.jetbrains.kotlin.tools.projectWizard.plugins.buildSystem.BuildSystemPlugin
-import org.jetbrains.kotlin.tools.projectWizard.plugins.buildSystem.BuildSystemType
 import org.jetbrains.kotlin.tools.projectWizard.plugins.buildSystem.buildSystemType
 import org.jetbrains.kotlin.tools.projectWizard.plugins.pomIR
 import org.jetbrains.kotlin.tools.projectWizard.plugins.projectPath
@@ -26,7 +27,7 @@ class KotlinPlugin(context: Context) : Plugin(context) {
         title = "Downloading list of Kotlin versions"
 
         withAction {
-            val version = service<KotlinVersionProviderService>()!!.getKotlinVersion()
+            val version = service<KotlinVersionProviderService>().getKotlinVersion()
             KotlinPlugin::version.update { version.asSuccess() }
         }
     }
@@ -84,7 +85,7 @@ class KotlinPlugin(context: Context) : Plugin(context) {
     val createSourcesetDirectories by pipelineTask(GenerationPhase.PROJECT_GENERATION) {
         runAfter(KotlinPlugin::createModules)
         withAction {
-            fun Path.createKotlinAndResourceDirectories() = with(service<FileSystemWizardService>()!!) {
+            fun Path.createKotlinAndResourceDirectories() = with(service<FileSystemWizardService>()) {
                 createDirectory(this@createKotlinAndResourceDirectories / Defaults.KOTLIN_DIR) andThen
                         createDirectory(this@createKotlinAndResourceDirectories / Defaults.RESOURCES_DIR)
             }
@@ -98,7 +99,7 @@ class KotlinPlugin(context: Context) : Plugin(context) {
     }
 
 
-    private fun TaskRunningContext.createBuildFiles(modules: List<Module>): TaskResult<List<BuildFileIR>> =
+    private fun WritingContext.createBuildFiles(modules: List<Module>): TaskResult<List<BuildFileIR>> =
         with(
             ModulesToIRsConverter(
                 ModuleConfigurationData(
@@ -123,13 +124,15 @@ class KotlinPlugin(context: Context) : Plugin(context) {
 
 enum class ProjectKind(override val text: String) : DisplayableSettingItem {
     Singleplatform("Singleplatform JVM project"),
-    Multiplatform("Multiplatform project")
+    Multiplatform("Multiplatform project"),
+    Android("Android project"),
+    Js("Kotlin/JS project")
 }
 
 fun List<Module>.withAllSubModules(includeSourcesets: Boolean = false): List<Module> = buildList {
     fun handleModule(module: Module) {
         +module
-        if (module.kind == ModuleKind.singleplatformJvm
+        if (module.kind != ModuleKind.multiplatform
             || includeSourcesets && module.kind == ModuleKind.multiplatform
         ) {
             module.subModules.forEach(::handleModule)

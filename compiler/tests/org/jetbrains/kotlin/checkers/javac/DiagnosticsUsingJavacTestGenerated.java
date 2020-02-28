@@ -10103,6 +10103,11 @@ public class DiagnosticsUsingJavacTestGenerated extends AbstractDiagnosticsUsing
                 runTest("compiler/testData/diagnostics/tests/inference/kt35702.kt");
             }
 
+            @TestMetadata("kt36819.kt")
+            public void testKt36819() throws Exception {
+                runTest("compiler/testData/diagnostics/tests/inference/kt36819.kt");
+            }
+
             @TestMetadata("kt6175.kt")
             public void testKt6175() throws Exception {
                 runTest("compiler/testData/diagnostics/tests/inference/kt6175.kt");
@@ -12761,6 +12766,11 @@ public class DiagnosticsUsingJavacTestGenerated extends AbstractDiagnosticsUsing
             @TestMetadata("kt3311.kt")
             public void testKt3311() throws Exception {
                 runTest("compiler/testData/diagnostics/tests/j+k/kt3311.kt");
+            }
+
+            @TestMetadata("kt36856.kt")
+            public void testKt36856() throws Exception {
+                runTest("compiler/testData/diagnostics/tests/j+k/kt36856.kt");
             }
 
             @TestMetadata("kt6720_abstractProperty.kt")
@@ -21216,6 +21226,11 @@ public class DiagnosticsUsingJavacTestGenerated extends AbstractDiagnosticsUsing
                 @TestMetadata("smartCastOnReceiver.kt")
                 public void testSmartCastOnReceiver() throws Exception {
                     runTest("compiler/testData/diagnostics/tests/smartCasts/inference/smartCastOnReceiver.kt");
+                }
+
+                @TestMetadata("stabilityOfSmartcastsAgainstGenericFunctions.kt")
+                public void testStabilityOfSmartcastsAgainstGenericFunctions() throws Exception {
+                    runTest("compiler/testData/diagnostics/tests/smartCasts/inference/stabilityOfSmartcastsAgainstGenericFunctions.kt");
                 }
             }
 

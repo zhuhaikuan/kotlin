@@ -3,8 +3,12 @@ package org.jetbrains.kotlin.tools.projectWizard.templates
 import org.jetbrains.kotlin.tools.projectWizard.Identificator
 import org.jetbrains.kotlin.tools.projectWizard.SettingsOwner
 import org.jetbrains.kotlin.tools.projectWizard.WizardRunConfiguration
+import org.jetbrains.kotlin.tools.projectWizard.core.context.ReadingContext
+import org.jetbrains.kotlin.tools.projectWizard.core.context.WritingContext
 import org.jetbrains.kotlin.tools.projectWizard.core.*
+import org.jetbrains.kotlin.tools.projectWizard.core.context.SettingsWritingContext
 import org.jetbrains.kotlin.tools.projectWizard.core.entity.*
+import org.jetbrains.kotlin.tools.projectWizard.enumSettingImpl
 import org.jetbrains.kotlin.tools.projectWizard.ir.buildsystem.BuildSystemIR
 import org.jetbrains.kotlin.tools.projectWizard.ir.buildsystem.DependencyIR
 import org.jetbrains.kotlin.tools.projectWizard.ir.buildsystem.ModuleIR
@@ -55,7 +59,7 @@ fun <T> withSettingsOf(
 ): T = function(IdBasedTemplateEnvironment(template, identificator))
 
 
-abstract class Template : SettingsOwner {
+abstract class Template : SettingsOwner, EntitiesOwnerDescriptor {
     final override fun <V : Any, T : SettingType<V>> settingDelegate(
         create: (path: String) -> SettingBuilder<V, T>
     ): ReadOnlyProperty<Any, TemplateSetting<V, T>> = cached { name ->
@@ -71,19 +75,19 @@ abstract class Template : SettingsOwner {
     open val settings: List<TemplateSetting<*, *>> = emptyList()
     open val interceptionPoints: List<InterceptionPoint<Any>> = emptyList()
 
-    fun initDefaultValuesFor(module: Module, context: Context) {
+    fun SettingsWritingContext.initDefaultValuesFor(module: Module) {
         withSettingsOf(module) {
             settings.forEach { setting ->
-                val defaultValue = setting.defaultValue ?: return@forEach
-                context.settingContext[setting.reference] = defaultValue
+                val defaultValue = setting.savedOrDefaultValue ?: return@forEach
+                setting.reference.setValue(defaultValue)
             }
         }
     }
 
-    open fun TaskRunningContext.getRequiredLibraries(module: ModuleIR): List<DependencyIR> = emptyList()
+    open fun WritingContext.getRequiredLibraries(module: ModuleIR): List<DependencyIR> = emptyList()
 
     //TODO: use setting reading context
-    open fun TaskRunningContext.getIrsToAddToBuildFile(
+    open fun WritingContext.getIrsToAddToBuildFile(
         module: ModuleIR
     ): List<BuildSystemIR> = emptyList()
 
@@ -92,13 +96,13 @@ abstract class Template : SettingsOwner {
         targetConfigurationIR: TargetConfigurationIR
     ): TargetConfigurationIR = targetConfigurationIR
 
-    open fun TaskRunningContext.getFileTemplates(module: ModuleIR): List<FileTemplateDescriptorWithPath> = emptyList()
+    open fun WritingContext.getFileTemplates(module: ModuleIR): List<FileTemplateDescriptorWithPath> = emptyList()
 
     open fun createInterceptors(module: ModuleIR): List<TemplateInterceptor> = emptyList()
 
-    open fun ValuesReadingContext.createRunConfigurations(module: ModuleIR): List<WizardRunConfiguration> = emptyList()
+    open fun ReadingContext.createRunConfigurations(module: ModuleIR): List<WizardRunConfiguration> = emptyList()
 
-    fun TaskRunningContext.applyToSourceset(
+    fun WritingContext.applyToSourceset(
         module: ModuleIR
     ): TaskResult<TemplateApplicationResult> {
         val librariesToAdd = getRequiredLibraries(module)
@@ -118,7 +122,7 @@ abstract class Template : SettingsOwner {
         return result.asSuccess()
     }
 
-    fun TaskRunningContext.settingsAsMap(module: Module): Map<String, Any> =
+    fun WritingContext.settingsAsMap(module: Module): Map<String, Any> =
         withSettingsOf(module) {
             settings.associate { setting ->
                 setting.path to setting.reference.settingValue
@@ -126,7 +130,7 @@ abstract class Template : SettingsOwner {
         } + createDefaultSettings()
 
 
-    private fun TaskRunningContext.createDefaultSettings() = mapOf(
+    private fun WritingContext.createDefaultSettings() = mapOf(
         "projectName" to StructurePlugin::name.settingValue.capitalize()
     )
 
@@ -221,14 +225,13 @@ abstract class Template : SettingsOwner {
             init
         ) as ReadOnlyProperty<Any, TemplateSetting<Path, PathSettingType>>
 
+    @Suppress("UNCHECKED_CAST")
     inline fun <reified E> enumSetting(
         title: String,
         neededAtPhase: GenerationPhase,
         crossinline init: DropDownSettingType.Builder<E>.() -> Unit = {}
-    ) where E : Enum<E>, E : DisplayableSettingItem = dropDownSetting<E>(title, neededAtPhase, enumParser()) {
-        values = enumValues<E>().asList()
-        init()
-    }
+    ): ReadOnlyProperty<Any, TemplateSetting<E, DropDownSettingType<E>>> where E : Enum<E>, E : DisplayableSettingItem =
+        enumSettingImpl(title, neededAtPhase, init) as ReadOnlyProperty<Any, TemplateSetting<E, DropDownSettingType<E>>>
 
     companion object {
         fun parser(sourcesetIdentificator: Identificator): Parser<Template> = mapParser { map, path ->
@@ -252,7 +255,7 @@ fun Template.settings(module: Module) = withSettingsOf(module) {
     settings.map { it.reference }
 }
 
-fun TaskRunningContext.applyTemplateToModule(
+fun WritingContext.applyTemplateToModule(
     template: Template?,
     module: ModuleIR
 ): TaskResult<TemplateApplicationResult> = when (template) {

@@ -57,13 +57,13 @@ fun FirClass<*>.buildUseSiteMemberScope(useSiteSession: FirSession, builder: Sco
 /* TODO REMOVE */
 fun createSubstitution(
     typeParameters: List<FirTypeParameter>,
-    typeArguments: Array<out ConeKotlinTypeProjection>,
+    typeArguments: Array<out ConeTypeProjection>,
     session: FirSession
 ): Map<FirTypeParameterSymbol, ConeKotlinType> {
     return typeParameters.zip(typeArguments) { typeParameter, typeArgument ->
         val typeParameterSymbol = typeParameter.symbol
         typeParameterSymbol to when (typeArgument) {
-            is ConeTypedProjection -> {
+            is ConeKotlinTypeProjection -> {
                 typeArgument.type
             }
             else /* StarProjection */ -> {
@@ -94,9 +94,11 @@ fun ConeClassLikeType.wrapSubstitutionScopeIfNeed(
             // to determine parameter types properly (e.g. String, String instead of K, V)
             val javaTypeParameters = javaClass.typeParameters
             val javaSubstitution = createSubstitution(javaTypeParameters, typeArguments, session)
-            FirClassSubstitutionScope(session, useSiteMemberScope, builder, originalSubstitution + javaSubstitution)
+            FirClassSubstitutionScope(
+                session, useSiteMemberScope, builder, originalSubstitution + javaSubstitution, skipPrivateMembers = true
+            )
         } else {
-            FirClassSubstitutionScope(session, useSiteMemberScope, builder, originalSubstitution)
+            FirClassSubstitutionScope(session, useSiteMemberScope, builder, originalSubstitution, skipPrivateMembers = true)
         }
     }
 }

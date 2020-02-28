@@ -5,27 +5,36 @@
 
 package org.jetbrains.kotlin.tools.projectWizard.wizard.ui.components
 
-import org.jetbrains.kotlin.tools.projectWizard.core.ValuesReadingContext
-import org.jetbrains.kotlin.tools.projectWizard.core.entity.Setting
-import org.jetbrains.kotlin.tools.projectWizard.core.entity.SettingType
-import org.jetbrains.kotlin.tools.projectWizard.core.entity.SettingValidator
+import com.intellij.openapi.Disposable
+import org.jetbrains.kotlin.tools.projectWizard.core.context.ReadingContext
+import org.jetbrains.kotlin.tools.projectWizard.core.entity.*
+import org.jetbrains.kotlin.tools.projectWizard.wizard.IdeContext
 import org.jetbrains.kotlin.tools.projectWizard.wizard.ui.DynamicComponent
+import org.jetbrains.kotlin.tools.projectWizard.wizard.ui.FocusableComponent
+import org.jetbrains.kotlin.tools.projectWizard.wizard.ui.label
 import org.jetbrains.kotlin.tools.projectWizard.wizard.ui.panel
-import org.jetbrains.kotlin.tools.projectWizard.wizard.ui.setting.ValidationIndicator
+import org.jetbrains.kotlin.tools.projectWizard.wizard.ui.setting.ErrorAwareComponent
+import org.jetbrains.kotlin.tools.projectWizard.wizard.ui.setting.IdeaBasedComponentValidator
 import java.awt.BorderLayout
 import javax.swing.JComponent
 
 abstract class UIComponent<V : Any>(
-    private val valuesReadingContext: ValuesReadingContext,
+    ideContext: IdeContext,
     labelText: String? = null,
     private val validator: SettingValidator<V>? = null,
     private val onValueUpdate: (V) -> Unit = {}
-) : DynamicComponent(valuesReadingContext) {
-    private val validationIndicator = if (validator != null)
-        ValidationIndicator(defaultText = labelText, showText = true)
-    else null
+) : DynamicComponent(ideContext), ErrorAwareComponent, FocusableComponent, Disposable {
+    private val validationIndicator by lazy(LazyThreadSafetyMode.NONE) {
+        if (validator != null)
+            IdeaBasedComponentValidator(this, getValidatorTarget())
+        else null
+    }
+
+    override fun dispose() {}
 
     protected abstract val uiComponent: JComponent
+
+    protected open fun getValidatorTarget() = uiComponent
 
     abstract fun updateUiValue(newValue: V)
     abstract fun getUiValue(): V?
@@ -46,7 +55,7 @@ abstract class UIComponent<V : Any>(
 
     final override val component: JComponent by lazy(LazyThreadSafetyMode.NONE) {
         panel {
-            validationIndicator?.let { add(it, BorderLayout.NORTH) }
+            labelText?.let { add(label("$it:"), BorderLayout.NORTH) }
             add(uiComponent, BorderLayout.CENTER)
         }
     }
@@ -61,9 +70,23 @@ abstract class UIComponent<V : Any>(
     fun validate(value: V) {
         if (validator == null) return
         if (validationIndicator == null) return
-        validationIndicator.validationState = validator.validate(valuesReadingContext, value)
+        read {
+            validationIndicator?.updateValidationState(validator.validate(this, value))
+        }
+    }
+
+    override fun focusOn() {
+        uiComponent.requestFocus()
+    }
+
+    override fun findComponentWithError(error: ValidationResult.ValidationError): FocusableComponent? = takeIf {
+        read {
+            getUiValue()?.let { validator?.validate?.invoke(this, it)?.isSpecificError(error) } == true
+        }
     }
 }
 
-fun <V : Any> UIComponent<V>.valueForSetting(setting: Setting<V, SettingType<V>>): V? =
-    setting.defaultValue ?: getUiValue()
+fun <V : Any> ReadingContext.valueForSetting(
+    uiComponent: UIComponent<V>,
+    setting: Setting<V, SettingType<V>>
+): V? = setting.savedOrDefaultValue ?: uiComponent.getUiValue()

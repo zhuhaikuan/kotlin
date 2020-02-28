@@ -12,7 +12,9 @@ import org.jetbrains.kotlin.fir.declarations.impl.FirDefaultPropertyGetter
 import org.jetbrains.kotlin.fir.declarations.impl.FirDefaultPropertySetter
 import org.jetbrains.kotlin.fir.descriptors.FirModuleDescriptor
 import org.jetbrains.kotlin.fir.expressions.*
-import org.jetbrains.kotlin.fir.expressions.impl.*
+import org.jetbrains.kotlin.fir.expressions.impl.FirElseIfTrueCondition
+import org.jetbrains.kotlin.fir.expressions.impl.FirNoReceiverExpression
+import org.jetbrains.kotlin.fir.expressions.impl.FirUnitExpression
 import org.jetbrains.kotlin.fir.references.FirReference
 import org.jetbrains.kotlin.fir.references.FirResolvedNamedReference
 import org.jetbrains.kotlin.fir.references.FirSuperReference
@@ -24,6 +26,7 @@ import org.jetbrains.kotlin.fir.resolve.transformers.IntegerLiteralTypeApproxima
 import org.jetbrains.kotlin.fir.scopes.impl.FirClassSubstitutionScope
 import org.jetbrains.kotlin.fir.scopes.impl.FirIntegerOperator
 import org.jetbrains.kotlin.fir.symbols.AccessorSymbol
+import org.jetbrains.kotlin.fir.symbols.StandardClassIds
 import org.jetbrains.kotlin.fir.symbols.impl.*
 import org.jetbrains.kotlin.fir.types.*
 import org.jetbrains.kotlin.fir.visitors.FirDefaultVisitor
@@ -44,12 +47,9 @@ import org.jetbrains.kotlin.ir.symbols.*
 import org.jetbrains.kotlin.ir.types.*
 import org.jetbrains.kotlin.ir.util.*
 import org.jetbrains.kotlin.lexer.KtTokens
-import org.jetbrains.kotlin.name.ClassId
-import org.jetbrains.kotlin.name.FqName
 import org.jetbrains.kotlin.name.Name
 import org.jetbrains.kotlin.psi.*
 import org.jetbrains.kotlin.psi2ir.PsiSourceManager
-import org.jetbrains.kotlin.types.AbstractStrictEqualityTypeChecker
 import java.util.*
 
 class Fir2IrVisitor(
@@ -206,7 +206,7 @@ class Fir2IrVisitor(
                         declarations += irFunction.setParentByParentStack().withFunction {
                             setFunctionContent(irFunction.descriptor, originalFunction, firOverriddenSymbol = baseSymbol)
                         }
-                    } else if (fakeOverrideMode != FakeOverrideMode.SUBSTITUTION) {
+                    } else if (fakeOverrideMode != FakeOverrideMode.SUBSTITUTION && originalFunction.visibility != Visibilities.PRIVATE) {
                         // Trivial fake override case
                         val fakeOverrideSymbol =
                             FirClassSubstitutionScope.createFakeOverrideFunction(session, originalFunction, functionSymbol)
@@ -234,7 +234,7 @@ class Fir2IrVisitor(
                         declarations += irProperty.setParentByParentStack().withProperty {
                             setPropertyContent(irProperty.descriptor, originalProperty, firOverriddenSymbol = baseSymbol)
                         }
-                    } else if (fakeOverrideMode != FakeOverrideMode.SUBSTITUTION) {
+                    } else if (fakeOverrideMode != FakeOverrideMode.SUBSTITUTION && originalProperty.visibility != Visibilities.PRIVATE) {
                         // Trivial fake override case
                         val fakeOverrideSymbol =
                             FirClassSubstitutionScope.createFakeOverrideProperty(session, originalProperty, propertySymbol)
@@ -404,16 +404,31 @@ class Fir2IrVisitor(
         }
     }
 
-    private fun FirDelegatedConstructorCall.toIrDelegatingConstructorCall(): IrDelegatingConstructorCall? {
+    private fun FirDelegatedConstructorCall.toIrDelegatingConstructorCall(): IrCallWithIndexedArgumentsBase? {
         val constructedIrType = constructedTypeRef.toIrType(this@Fir2IrVisitor.session, declarationStorage)
         val constructorSymbol = (this.calleeReference as? FirResolvedNamedReference)?.resolvedSymbol as? FirConstructorSymbol
             ?: return null
         return convertWithOffsets { startOffset, endOffset ->
-            IrDelegatingConstructorCallImpl(
-                startOffset, endOffset,
-                constructedIrType,
-                declarationStorage.getIrFunctionSymbol(constructorSymbol) as IrConstructorSymbol
-            ).apply {
+            val irConstructorSymbol = declarationStorage.getIrFunctionSymbol(constructorSymbol) as IrConstructorSymbol
+            if (constructorSymbol.fir.isFromEnumClass || constructorSymbol.fir.returnTypeRef.isEnum) {
+                IrEnumConstructorCallImpl(
+                    startOffset, endOffset,
+                    constructedIrType,
+                    irConstructorSymbol
+                ).apply {
+                    val typeArguments = (constructedTypeRef as? FirResolvedTypeRef)?.type?.typeArguments
+                    if (typeArguments?.isNotEmpty() == true) {
+                        val irType = (typeArguments.first() as ConeKotlinTypeProjection).type.toIrType(session, declarationStorage, irBuiltIns)
+                        putTypeArgument(0, irType)
+                    }
+                }
+            } else {
+                IrDelegatingConstructorCallImpl(
+                    startOffset, endOffset,
+                    constructedIrType,
+                    irConstructorSymbol
+                )
+            }.apply {
                 for ((index, argument) in arguments.withIndex()) {
                     val argumentExpression = argument.toIrExpression()
                     putValueArgument(index, argumentExpression)
@@ -832,7 +847,8 @@ class Fir2IrVisitor(
                 val ownerFunction = symbol.owner
                 if (ownerFunction.dispatchReceiverParameter != null) {
                     dispatchReceiver = qualifiedAccess.findIrDispatchReceiver()
-                } else if (ownerFunction.extensionReceiverParameter != null) {
+                }
+                if (ownerFunction.extensionReceiverParameter != null) {
                     extensionReceiver = qualifiedAccess.findIrExtensionReceiver()
                 }
                 this
@@ -848,7 +864,7 @@ class Fir2IrVisitor(
         }
     }
 
-    override fun visitFunctionCall(functionCall: FirFunctionCall, data: Any?): IrElement {
+    override fun visitFunctionCall(functionCall: FirFunctionCall, data: Any?): IrExpression {
         val convertibleCall = if (functionCall.toResolvedCallableSymbol()?.fir is FirIntegerOperator) {
             functionCall.copy().transformSingle(integerApproximator, null)
         } else {
@@ -920,7 +936,7 @@ class Fir2IrVisitor(
 
     override fun visitExpressionWithSmartcast(expressionWithSmartcast: FirExpressionWithSmartcast, data: Any?): IrElement {
         // Generate the expression with the original type and then cast it to the smart cast type.
-        val value = expressionWithSmartcast.toIrExpression(expressionWithSmartcast.originalType).applyReceivers(expressionWithSmartcast)
+        val value = expressionWithSmartcast.originalExpression.toIrExpression()
         val castType = expressionWithSmartcast.typeRef.toIrType(session, declarationStorage)
         if (value.type == castType) return value
         return IrTypeOperatorCallImpl(
@@ -1296,50 +1312,72 @@ class Fir2IrVisitor(
         }
     }
 
-    private fun generateComparisonCall(
-        startOffset: Int, endOffset: Int, operation: FirOperation, first: FirExpression, second: FirExpression
-    ): IrExpression {
-        val firstType = first.typeRef as? FirResolvedTypeRef
-        val secondType = second.typeRef as? FirResolvedTypeRef
-        if (firstType == null || secondType == null) {
-            return IrErrorCallExpressionImpl(startOffset, endOffset, booleanType, "Comparison of arguments with unresolved types")
+    override fun visitComparisonExpression(comparisonExpression: FirComparisonExpression, data: Any?): IrElement {
+        return comparisonExpression.convertWithOffsets { startOffset, endOffset ->
+            generateComparisonCall(startOffset, endOffset, comparisonExpression)
         }
-        if (!AbstractStrictEqualityTypeChecker.strictEqualTypes(typeContext, firstType.type, secondType.type)) {
-            return IrErrorCallExpressionImpl(
-                startOffset, endOffset, booleanType,
-                "Comparison of arguments with different types: ${firstType.type.render()}, ${secondType.type.render()}"
+    }
+
+    private fun generateComparisonCall(
+        startOffset: Int, endOffset: Int,
+        comparisonExpression: FirComparisonExpression
+    ): IrExpression {
+        val operation = comparisonExpression.operation
+
+        fun fallbackToRealCall(): IrExpression {
+            val (symbol, origin) = getSymbolAndOriginForComparison(operation, irBuiltIns.intType.classifierOrFail)
+            return primitiveOp2(
+                startOffset, endOffset,
+                symbol!!,
+                booleanType,
+                origin,
+                visitFunctionCall(comparisonExpression.compareToCall, null),
+                IrConstImpl.int(startOffset, endOffset, irBuiltIns.intType, 0)
             )
         }
-        // TODO: it's temporary hack which should be refactored
-        val simpleType = when (val classId = (firstType.type as? ConeClassLikeType)?.lookupTag?.classId) {
-            ClassId(FqName("kotlin"), FqName("Long"), false) -> irBuiltIns.longType
-            ClassId(FqName("kotlin"), FqName("Int"), false) -> irBuiltIns.intType
-            ClassId(FqName("kotlin"), FqName("Float"), false) -> irBuiltIns.floatType
-            ClassId(FqName("kotlin"), FqName("Double"), false) -> irBuiltIns.doubleType
-            ClassId(FqName("kotlin"), FqName("Char"), false) -> irBuiltIns.charType
-            else -> {
-                return IrErrorCallExpressionImpl(
-                    startOffset, endOffset, booleanType, "Comparison of arguments with unsupported type: $classId"
-                )
-            }
+
+        val comparisonInfo = comparisonExpression.inferPrimitiveNumericComparisonInfo() ?: return fallbackToRealCall()
+        val comparisonType = comparisonInfo.comparisonType
+
+        // Currently inferPrimitiveNumericComparisonInfo returns null for different primitive values
+        // TODO: Support different primitive types as well and fix inferPrimitiveNumericComparisonInfo
+        require(comparisonInfo.leftPrimitiveType == comparisonInfo.rightPrimitiveType && comparisonInfo.leftType == comparisonInfo.rightType) {
+            "Contract for inferPrimitiveNumericComparisonInfo is violated"
         }
-        val classifier = simpleType.classifierOrFail
-        val (symbol, origin) = when (operation) {
+
+        val simpleType = when ((comparisonType.type as? ConeClassLikeType)?.lookupTag?.classId) {
+            StandardClassIds.Long -> irBuiltIns.longType
+            StandardClassIds.Int -> irBuiltIns.intType
+            StandardClassIds.Float -> irBuiltIns.floatType
+            StandardClassIds.Double -> irBuiltIns.doubleType
+            StandardClassIds.Char -> irBuiltIns.charType
+            else -> return fallbackToRealCall()
+        }
+
+        val (symbol, origin) = getSymbolAndOriginForComparison(operation, simpleType.classifierOrFail)
+
+        return primitiveOp2(
+            startOffset, endOffset, symbol!!, booleanType, origin,
+            comparisonExpression.left.toIrExpression(), comparisonExpression.right.toIrExpression()
+        )
+    }
+
+    private fun getSymbolAndOriginForComparison(
+        operation: FirOperation,
+        classifier: IrClassifierSymbol
+    ): Pair<IrSimpleFunctionSymbol?, IrStatementOriginImpl> {
+        return when (operation) {
             FirOperation.LT -> irBuiltIns.lessFunByOperandType[classifier] to IrStatementOrigin.LT
             FirOperation.GT -> irBuiltIns.greaterFunByOperandType[classifier] to IrStatementOrigin.GT
             FirOperation.LT_EQ -> irBuiltIns.lessOrEqualFunByOperandType[classifier] to IrStatementOrigin.LTEQ
             FirOperation.GT_EQ -> irBuiltIns.greaterOrEqualFunByOperandType[classifier] to IrStatementOrigin.GTEQ
-            else -> throw AssertionError("Unexpected comparison operation: $operation")
+            else -> error("Unexpected comparison operation: $operation")
         }
-        return primitiveOp2(startOffset, endOffset, symbol!!, booleanType, origin, first.toIrExpression(), second.toIrExpression())
     }
 
     private fun generateOperatorCall(
         startOffset: Int, endOffset: Int, operation: FirOperation, arguments: List<FirExpression>
     ): IrExpression {
-        if (operation in FirOperation.COMPARISONS) {
-            return generateComparisonCall(startOffset, endOffset, operation, arguments[0], arguments[1])
-        }
         val (type, symbol, origin) = when (operation) {
             FirOperation.EQ -> Triple(booleanType, irBuiltIns.eqeqSymbol, IrStatementOrigin.EQEQ)
             FirOperation.NOT_EQ -> Triple(booleanType, irBuiltIns.eqeqSymbol, IrStatementOrigin.EXCLEQ)

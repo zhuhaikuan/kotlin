@@ -9,11 +9,13 @@
 package org.jetbrains.kotlin.gradle.plugin.mpp
 
 import org.jetbrains.kotlin.gradle.dsl.KotlinJsOptions
+import org.jetbrains.kotlin.gradle.plugin.KotlinCompilation
 import org.jetbrains.kotlin.gradle.plugin.KotlinCompilationWithResources
 import org.jetbrains.kotlin.gradle.plugin.KotlinTarget
+import org.jetbrains.kotlin.gradle.targets.js.KotlinJsTarget
 import org.jetbrains.kotlin.gradle.targets.js.npm.PackageJson
 import org.jetbrains.kotlin.gradle.tasks.Kotlin2JsCompile
-import org.jetbrains.kotlin.gradle.utils.lowerCamelCaseName
+import org.jetbrains.kotlin.gradle.utils.*
 
 open class KotlinJsCompilation(
     target: KotlinTarget,
@@ -32,9 +34,37 @@ open class KotlinJsCompilation(
         packageJsonHandlers.add(handler)
     }
 
-    override val defaultSourceSetName: String
-        get() = lowerCamelCaseName(
-            target.disambiguationClassifier?.removePrefix(LEGACY_DISAMBIGUATION_CLASSIFIER),
-            compilationName
+    override val apiConfigurationName: String
+        get() = disambiguateNameInPlatform(API)
+
+    override val implementationConfigurationName: String
+        get() = disambiguateNameInPlatform(IMPLEMENTATION)
+
+    override val compileOnlyConfigurationName: String
+        get() = disambiguateNameInPlatform(COMPILE_ONLY)
+
+    override val runtimeOnlyConfigurationName: String
+        get() = disambiguateNameInPlatform(RUNTIME_ONLY)
+
+    protected open val disambiguationClassifierInPlatform: String?
+        get() = (target as KotlinJsTarget).disambiguationClassifierInPlatform
+
+    private fun disambiguateNameInPlatform(simpleName: String): String {
+        return lowerCamelCaseName(
+            disambiguationClassifierInPlatform,
+            compilationName.takeIf { it != KotlinCompilation.MAIN_COMPILATION_NAME },
+            simpleName
         )
+    }
+
+    override val defaultSourceSetName: String
+        get() {
+            val target = target as KotlinJsTarget
+            return lowerCamelCaseName(
+                target.irTarget?.let {
+                    target.disambiguationClassifierInPlatform
+                } ?: target.disambiguationClassifier,
+                compilationName
+            )
+        }
 }

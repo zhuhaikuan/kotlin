@@ -1,19 +1,18 @@
 package org.jetbrains.kotlin.tools.projectWizard.wizard.ui.components
 
 import com.intellij.ui.components.JBCheckBox
-import com.intellij.ui.components.JBTextField
-import org.jetbrains.kotlin.tools.projectWizard.core.ValuesReadingContext
+import org.jetbrains.kotlin.tools.projectWizard.core.context.ReadingContext
 import org.jetbrains.kotlin.tools.projectWizard.core.entity.SettingValidator
-import org.jetbrains.kotlin.tools.projectWizard.wizard.ui.textField
+import org.jetbrains.kotlin.tools.projectWizard.wizard.IdeContext
 
 class CheckboxComponent(
-    valuesReadingContext: ValuesReadingContext,
+    ideContext: IdeContext,
     labelText: String? = null,
     initialValue: Boolean? = null,
     validator: SettingValidator<Boolean>? = null,
     onValueUpdate: (Boolean) -> Unit = {}
 ) : UIComponent<Boolean>(
-    valuesReadingContext,
+    ideContext,
     labelText,
     validator,
     onValueUpdate

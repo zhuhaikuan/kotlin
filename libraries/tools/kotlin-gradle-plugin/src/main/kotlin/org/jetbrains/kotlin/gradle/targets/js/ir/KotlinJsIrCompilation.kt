@@ -5,7 +5,6 @@
 
 package org.jetbrains.kotlin.gradle.targets.js.ir
 
-import org.gradle.api.Task
 import org.gradle.api.file.SourceDirectorySet
 import org.gradle.api.tasks.TaskProvider
 import org.jetbrains.kotlin.gradle.plugin.KotlinCompilation
@@ -46,12 +45,14 @@ class KotlinJsIrCompilation(
         allSources.add(sourceSet.kotlin)
     }
 
+    override val disambiguationClassifierInPlatform: String?
+        get() = (target as KotlinJsIrTarget).disambiguationClassifierInPlatform
+
     override val defaultSourceSetName: String
         get() {
             return lowerCamelCaseName(
                 if ((target as KotlinJsIrTarget).mixedMode)
-                    target.disambiguationClassifier
-                        ?.removeSuffix(IR_TARGET_SUFFIX)
+                    target.disambiguationClassifierInPlatform
                 else
                     target.disambiguationClassifier,
                 compilationName

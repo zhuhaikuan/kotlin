@@ -88,7 +88,6 @@ private fun ModuleType.createDefaultSourcesets() =
     SourcesetType.values().map { sourcesetType ->
         Sourceset(
             sourcesetType,
-            this,
             dependencies = emptyList()
         )
     }
@@ -201,7 +200,7 @@ object AndroidApplication : ProjectTemplate() {
        Simple <b>Android</b> application with single activity 
         """.trimIndent()
     override val suggestedProjectName = "myAndroidApplication"
-    override val projectKind = ProjectKind.Multiplatform
+    override val projectKind = ProjectKind.Android
 
     override val setsPluginSettings: List<SettingWithValue<*, *>>
         get() = listOf(
@@ -212,7 +211,7 @@ object AndroidApplication : ProjectTemplate() {
                     AndroidSinglePlatformModuleConfigurator,
                     template = null,
                     sourcesets = SourcesetType.ALL.map { type ->
-                        Sourceset(type, ModuleType.jvm, dependencies = emptyList())
+                        Sourceset(type, dependencies = emptyList())
                     },
                     subModules = emptyList()
                 )
@@ -249,7 +248,7 @@ object JsBrowserApplication : ProjectTemplate() {
     override val title = "Kotlin/JS Frontend Application"
     override val htmlDescription = "Gradle project for a Kotlin/JS frontend web application"
     override val suggestedProjectName = "myKotlinJsApplication"
-    override val projectKind = ProjectKind.Multiplatform
+    override val projectKind = ProjectKind.Js
 
     override val setsPluginSettings: List<SettingWithValue<*, *>>
         get() = listOf(
@@ -260,7 +259,7 @@ object JsBrowserApplication : ProjectTemplate() {
                     JsSingleplatformModuleConfigurator,
                     template = SimpleJsClientTemplate(),
                     sourcesets = SourcesetType.ALL.map { type ->
-                        Sourceset(type, ModuleType.jvm, dependencies = emptyList())
+                        Sourceset(type, dependencies = emptyList())
                     },
                     subModules = emptyList()
                 )

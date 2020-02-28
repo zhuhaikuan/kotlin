@@ -41,13 +41,6 @@ internal val jvmPresetEntry = KotlinPresetEntry(
     typeName("org.jetbrains.kotlin.gradle.targets.jvm.KotlinJvmTarget")
 )
 
-internal val jsPresetEntry = KotlinPresetEntry(
-    "js",
-    // need for commonization KotlinJsTargetPreset and KotlinJsIrTargetPreset
-    typeName("org.jetbrains.kotlin.gradle.plugin.KotlinTargetPreset", "org.jetbrains.kotlin.gradle.targets.js.dsl.KotlinJsTargetDsl"),
-    typeName("org.jetbrains.kotlin.gradle.targets.js.dsl.KotlinJsTargetDsl")
-)
-
 internal val androidPresetEntry = KotlinPresetEntry(
     "android",
     typeName("$MPP_PACKAGE.KotlinAndroidTargetPreset"),
@@ -77,6 +70,5 @@ internal val nativePresetEntries = HostManager().targets
 
 internal val allPresetEntries = listOf(
     jvmPresetEntry,
-    jsPresetEntry,
     androidPresetEntry
 ) + nativePresetEntries

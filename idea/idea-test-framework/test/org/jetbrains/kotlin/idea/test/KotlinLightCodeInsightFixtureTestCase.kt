@@ -5,7 +5,6 @@
 
 package org.jetbrains.kotlin.idea.test
 
-import com.intellij.codeInsight.daemon.impl.EditorTracker
 import com.intellij.ide.highlighter.JavaFileType
 import com.intellij.ide.startup.impl.StartupManagerImpl
 import com.intellij.openapi.actionSystem.ActionPlaces
@@ -33,17 +32,12 @@ import com.intellij.testFramework.LightProjectDescriptor
 import com.intellij.testFramework.LoggedErrorProcessor
 import org.apache.log4j.Logger
 import org.jetbrains.kotlin.cli.common.arguments.K2JVMCompilerArguments
-import org.jetbrains.kotlin.config.CompilerSettings
+import org.jetbrains.kotlin.config.*
 import org.jetbrains.kotlin.config.CompilerSettings.Companion.DEFAULT_ADDITIONAL_ARGUMENTS
-import org.jetbrains.kotlin.config.JvmTarget
-import org.jetbrains.kotlin.config.LanguageFeature
-import org.jetbrains.kotlin.config.LanguageVersion
 import org.jetbrains.kotlin.idea.KotlinFileType
 import org.jetbrains.kotlin.idea.compiler.configuration.KotlinCommonCompilerArgumentsHolder
 import org.jetbrains.kotlin.idea.compiler.configuration.KotlinCompilerSettings
-import org.jetbrains.kotlin.idea.facet.KotlinFacet
-import org.jetbrains.kotlin.idea.facet.configureFacet
-import org.jetbrains.kotlin.idea.facet.getOrCreateFacet
+import org.jetbrains.kotlin.idea.facet.*
 import org.jetbrains.kotlin.idea.inspections.UnusedSymbolInspection
 import org.jetbrains.kotlin.idea.test.CompilerTestDirectives.COMPILER_ARGUMENTS_DIRECTIVE
 import org.jetbrains.kotlin.idea.test.CompilerTestDirectives.JVM_TARGET_DIRECTIVE
@@ -89,7 +83,7 @@ abstract class KotlinLightCodeInsightFixtureTestCase : KotlinLightCodeInsightFix
         (StartupManager.getInstance(project) as StartupManagerImpl).runPostStartupActivities()
         VfsRootAccess.allowRootAccess(project, KotlinTestUtils.getHomeDirectory())
 
-        EditorTracker.getInstance(project)
+        editorTrackerProjectOpened(project)
 
         invalidateLibraryCache(project)
 
@@ -229,7 +223,6 @@ abstract class KotlinLightCodeInsightFixtureTestCase : KotlinLightCodeInsightFix
 
 }
 
-
 object CompilerTestDirectives {
     const val LANGUAGE_VERSION_DIRECTIVE = "LANGUAGE_VERSION:"
     const val JVM_TARGET_DIRECTIVE = "JVM_TARGET:"
@@ -238,7 +231,19 @@ object CompilerTestDirectives {
     val ALL_COMPILER_TEST_DIRECTIVES = listOf(LANGUAGE_VERSION_DIRECTIVE, JVM_TARGET_DIRECTIVE, COMPILER_ARGUMENTS_DIRECTIVE)
 }
 
-fun configureCompilerOptions(fileText: String, project: Project, module: Module): Boolean {
+fun <T> withCustomCompilerOptions(fileText: String, project: Project, module: Module, body: () -> T): T {
+    val removeFacet = !module.hasKotlinFacet()
+    val configured = configureCompilerOptions(fileText, project, module)
+    try {
+        return body()
+    } finally {
+        if (configured) {
+            rollbackCompilerOptions(project, module, removeFacet)
+        }
+    }
+}
+
+private fun configureCompilerOptions(fileText: String, project: Project, module: Module): Boolean {
     val version = InTextDirectivesUtils.findStringWithPrefixes(fileText, "// $LANGUAGE_VERSION_DIRECTIVE ")
     val jvmTarget = InTextDirectivesUtils.findStringWithPrefixes(fileText, "// $JVM_TARGET_DIRECTIVE ")
     // We can have several such directives in quickFixMultiFile tests
@@ -246,7 +251,11 @@ fun configureCompilerOptions(fileText: String, project: Project, module: Module)
     val options = InTextDirectivesUtils.findListWithPrefixes(fileText, "// $COMPILER_ARGUMENTS_DIRECTIVE ").firstOrNull()
 
     if (version != null || jvmTarget != null || options != null) {
-        configureLanguageAndApiVersion(project, module, version ?: LanguageVersion.LATEST_STABLE.versionString)
+        configureLanguageAndApiVersion(
+            project, module,
+            version ?: LanguageVersion.LATEST_STABLE.versionString,
+            null
+        )
 
         val facetSettings = KotlinFacet.get(module)!!.configuration.settings
 
@@ -287,8 +296,16 @@ fun <T> configureRegistryAndRun(fileText: String, body: () -> T) {
     }
 }
 
-fun rollbackCompilerOptions(project: Project, module: Module) {
-    configureLanguageAndApiVersion(project, module, LanguageVersion.LATEST_STABLE.versionString)
+private fun rollbackCompilerOptions(project: Project, module: Module, removeFacet: Boolean) {
+    KotlinCompilerSettings.getInstance(project).update { this.additionalArguments = DEFAULT_ADDITIONAL_ARGUMENTS }
+    KotlinCommonCompilerArgumentsHolder.getInstance(project).update { this.languageVersion = LanguageVersion.LATEST_STABLE.versionString }
+
+    if (removeFacet) {
+        module.removeKotlinFacet(IdeModifiableModelsProviderImpl(project), commitModel = true)
+        return
+    }
+
+    configureLanguageAndApiVersion(project, module, LanguageVersion.LATEST_STABLE.versionString, ApiVersion.LATEST_STABLE.versionString)
 
     val facetSettings = KotlinFacet.get(module)!!.configuration.settings
     (facetSettings.compilerArguments as? K2JVMCompilerArguments)?.jvmTarget = JvmTarget.DEFAULT.description
@@ -298,18 +315,50 @@ fun rollbackCompilerOptions(project: Project, module: Module) {
     }
     compilerSettings.additionalArguments = DEFAULT_ADDITIONAL_ARGUMENTS
     facetSettings.updateMergedArguments()
-    KotlinCompilerSettings.getInstance(project).update { this.additionalArguments = DEFAULT_ADDITIONAL_ARGUMENTS }
 }
 
-fun configureLanguageAndApiVersion(
+fun withCustomLanguageAndApiVersion(
     project: Project,
     module: Module,
     languageVersion: String,
-    apiVersion: String? = null
+    apiVersion: String?,
+    body: () -> Unit
+) {
+    val removeFacet = !module.hasKotlinFacet()
+    configureLanguageAndApiVersion(project, module, languageVersion, apiVersion)
+    try {
+        body()
+    } finally {
+        if (removeFacet) {
+            KotlinCommonCompilerArgumentsHolder.getInstance(project)
+                .update { this.languageVersion = LanguageVersion.LATEST_STABLE.versionString }
+            module.removeKotlinFacet(IdeModifiableModelsProviderImpl(project), commitModel = true)
+        } else {
+            configureLanguageAndApiVersion(
+                project,
+                module,
+                LanguageVersion.LATEST_STABLE.versionString,
+                ApiVersion.LATEST_STABLE.versionString
+            )
+        }
+    }
+}
+
+private fun configureLanguageAndApiVersion(
+    project: Project,
+    module: Module,
+    languageVersion: String,
+    apiVersion: String?
 ) {
     WriteAction.run<Throwable> {
         val modelsProvider = IdeModifiableModelsProviderImpl(project)
         val facet = module.getOrCreateFacet(modelsProvider, useProjectSettings = false)
+
+        val compilerArguments = facet.configuration.settings.compilerArguments
+        if (compilerArguments != null) {
+            compilerArguments.apiVersion = null
+        }
+
         facet.configureFacet(languageVersion, LanguageFeature.State.DISABLED, null, modelsProvider)
         if (apiVersion != null) {
             facet.configuration.settings.apiLevel = LanguageVersion.fromVersionString(apiVersion)

@@ -120,15 +120,21 @@ class PostponedArgumentsAnalyzer(
             else FilteredAnnotations(annotations, true) { it != KotlinBuiltIns.FQ_NAMES.extensionFunctionType }
         }
 
-        val (returnArgumentsInfo, inferenceSession) = resolutionCallbacks.analyzeAndGetLambdaReturnArguments(
-            lambda.atom,
-            lambda.isSuspend,
-            receiver,
-            parameters,
-            expectedTypeForReturnArguments,
-            convertedAnnotations ?: Annotations.EMPTY,
-            stubsForPostponedVariables.cast()
-        )
+        val (returnArgumentsInfo, inferenceSession, hasInapplicableCallForBuilderInference) =
+            resolutionCallbacks.analyzeAndGetLambdaReturnArguments(
+                lambda.atom,
+                lambda.isSuspend,
+                receiver,
+                parameters,
+                expectedTypeForReturnArguments,
+                convertedAnnotations ?: Annotations.EMPTY,
+                stubsForPostponedVariables.cast()
+            )
+
+        if (hasInapplicableCallForBuilderInference) {
+            c.getBuilder().removePostponedVariables()
+            return
+        }
 
         val returnArguments = returnArgumentsInfo.nonErrorArguments
         returnArguments.forEach { c.addSubsystemFromArgument(it) }
@@ -159,6 +165,10 @@ class PostponedArgumentsAnalyzer(
             val storageSnapshot = c.getBuilder().currentStorage()
 
             val postponedVariables = inferenceSession.inferPostponedVariables(lambda, storageSnapshot, diagnosticHolder)
+            if (postponedVariables == null) {
+                c.getBuilder().removePostponedVariables()
+                return
+            }
 
             for ((constructor, resultType) in postponedVariables) {
                 val variableWithConstraints = storageSnapshot.notFixedTypeVariables[constructor] ?: continue

@@ -30,7 +30,6 @@ import org.jetbrains.kotlin.ir.types.*
 import org.jetbrains.kotlin.ir.util.*
 import org.jetbrains.kotlin.ir.visitors.IrElementTransformerVoid
 import org.jetbrains.kotlin.name.Name
-import org.jetbrains.kotlin.resolve.DescriptorUtils
 import org.jetbrains.kotlin.util.OperatorNameConventions
 import org.jetbrains.kotlin.utils.getOrPutNullable
 import org.jetbrains.org.objectweb.asm.Type
@@ -224,7 +223,7 @@ private class BridgeLowering(val context: JvmBackendContext) : FileLoweringPass,
                     bridgeTarget = when {
                         irFunction.isJvmAbstract -> {
                             irClass.declarations.remove(irFunction)
-                            irClass.addAbstractMethodStub(irFunction)
+                            irClass.addAbstractMethodStub(irFunction, specialBridge.methodInfo?.needsArgumentBoxing == true)
                         }
                         irFunction.modality != Modality.FINAL -> {
                             val superTarget = irFunction.overriddenSymbols.first { !it.owner.parentAsClass.isInterface }.owner
@@ -332,7 +331,7 @@ private class BridgeLowering(val context: JvmBackendContext) : FileLoweringPass,
             it.specialBridgeOrNull?.signature?.takeIf { bridgeSignature -> bridgeSignature != it.jvmMethod }
     }
 
-    private fun IrClass.addAbstractMethodStub(irFunction: IrSimpleFunction) =
+    private fun IrClass.addAbstractMethodStub(irFunction: IrSimpleFunction, needsArgumentBoxing: Boolean) =
         addFunction {
             updateFrom(irFunction)
             modality = Modality.ABSTRACT
@@ -340,9 +339,7 @@ private class BridgeLowering(val context: JvmBackendContext) : FileLoweringPass,
             name = irFunction.name
             returnType = irFunction.returnType
         }.apply {
-            dispatchReceiverParameter = thisReceiver?.copyTo(this, type = defaultType)
-            extensionReceiverParameter = irFunction.extensionReceiverParameter?.copyTo(this)
-            valueParameters = irFunction.valueParameters.map { it.copyTo(this) }
+            copyParametersWithErasure(this@addAbstractMethodStub, irFunction, needsArgumentBoxing)
         }
 
     private fun IrClass.addBridge(bridge: Bridge, target: IrSimpleFunction): IrSimpleFunction =
@@ -482,8 +479,10 @@ private class BridgeLowering(val context: JvmBackendContext) : FileLoweringPass,
     private fun IrBuilderWithScope.irCastIfNeeded(expression: IrExpression, to: IrType): IrExpression =
         if (expression.type == to || to.isAny() || to.isNullableAny()) expression else irImplicitCast(expression, to)
 
+    private val signatureCache = mutableMapOf<IrFunction, Method>()
+
     private val IrFunction.jvmMethod: Method
-        get() = context.methodSignatureMapper.mapAsmMethod(this)
+        get() = signatureCache.getOrPut(this) { context.methodSignatureMapper.mapAsmMethod(this) }
 }
 
 private fun IrDeclaration.comesFromJava() = parentAsClass.origin == IrDeclarationOrigin.IR_EXTERNAL_JAVA_DECLARATION_STUB

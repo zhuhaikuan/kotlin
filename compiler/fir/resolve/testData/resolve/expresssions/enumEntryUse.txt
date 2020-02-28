@@ -1,23 +1,11 @@
 FILE: enumEntryUse.kt
     public final enum class TestEnum : R|kotlin/Enum<TestEnum>| {
         private constructor(): R|TestEnum| {
-            super<R|kotlin/Any|>()
+            super<R|kotlin/Enum<TestEnum>|>()
         }
 
-        public final static enum entry FIRST: R|TestEnum| = object : R|TestEnum| {
-            private constructor(): R|anonymous| {
-                super<R|TestEnum|>()
-            }
-
-        }
-
-        public final static enum entry SECOND: R|TestEnum| = object : R|TestEnum| {
-            private constructor(): R|anonymous| {
-                super<R|TestEnum|>()
-            }
-
-        }
-
+        public final static enum entry FIRST: R|TestEnum|
+        public final static enum entry SECOND: R|TestEnum|
         public final static enum entry THIRD: R|TestEnum| = object : R|TestEnum| {
             private constructor(): R|anonymous| {
                 super<R|TestEnum|>()
@@ -39,7 +27,7 @@ FILE: enumEntryUse.kt
     }
     public final fun useEnum(some: R|TestEnum|): R|kotlin/Unit| {
     }
-    public final fun useVararg(vararg some: R|kotlin/Array<TestEnum>|): R|kotlin/Unit| {
+    public final fun useVararg(vararg some: R|kotlin/Array<out TestEnum>|): R|kotlin/Unit| {
     }
     public final fun test(): R|kotlin/Unit| {
         R|/use|(Q|TestEnum|.R|/TestEnum.FIRST|)

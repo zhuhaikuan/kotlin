@@ -32,6 +32,7 @@ import org.jetbrains.kotlin.tools.projectWizard.plugins.buildSystem.BuildSystemT
 import org.jetbrains.kotlin.tools.projectWizard.plugins.projectTemplates.ProjectTemplatesPlugin
 import org.jetbrains.kotlin.tools.projectWizard.wizard.service.IdeaServices
 import org.jetbrains.kotlin.tools.projectWizard.wizard.ui.PomWizardStepComponent
+import org.jetbrains.kotlin.tools.projectWizard.wizard.ui.asHtml
 import org.jetbrains.kotlin.tools.projectWizard.wizard.ui.firstStep.FirstWizardStepComponent
 import org.jetbrains.kotlin.tools.projectWizard.wizard.ui.secondStep.SecondStepWizardComponent
 import org.jetbrains.kotlin.utils.addToStdlib.safeAs
@@ -64,6 +65,7 @@ class NewProjectWizardModuleBuilder : EmptyModuleBuilder() {
     override fun isAvailable(): Boolean = ExperimentalFeatures.NewWizard.isEnabled
 
     private var wizardContext: WizardContext? = null
+    private var pomValuesAreSet: Boolean = false
 
     override fun getModuleType(): ModuleType<*> = NewProjectWizardModuleType()
     override fun getParentGroup(): String = KotlinTemplatesFactory.KOTLIN_PARENT_GROUP_NAME
@@ -136,7 +138,7 @@ class NewProjectWizardModuleBuilder : EmptyModuleBuilder() {
     }
 
     private fun updateProjectNameAndPomDate(settingsStep: SettingsStep) {
-        if (wizard.artifactId != null || wizard.groupId != null) return
+        if (pomValuesAreSet) return
         val suggestedProjectName = with(wizard.valuesReadingContext) {
             ProjectTemplatesPlugin::template.settingValue.suggestedProjectName.decapitalize()
         }
@@ -149,6 +151,7 @@ class NewProjectWizardModuleBuilder : EmptyModuleBuilder() {
 
         wizard.artifactId = suggestedProjectName
         wizard.groupId = suggestGroupId()
+        pomValuesAreSet = true
     }
 
     private fun suggestGroupId(): String {
@@ -178,8 +181,7 @@ abstract class WizardStep(protected val wizard: IdeWizard, private val phase: Ge
         when (val result = with(wizard.valuesReadingContext) { with(wizard) { validate(setOf(phase)) } }) {
             is Success<*> -> true
             is Failure -> {
-                val messages = result.errors.joinToString(separator = "\n") { it.message }
-                throw ConfigurationException(messages, "Validation Error")
+                throw ConfigurationException(result.asHtml(), "Validation Error")
             }
         }
 }
@@ -188,7 +190,7 @@ private class PomWizardStep(
     originalSettingStep: SettingsStep,
     wizard: IdeWizard
 ) : WizardStep(wizard, GenerationPhase.PROJECT_GENERATION) {
-    private val pomWizardStepComponent = PomWizardStepComponent(wizard.valuesReadingContext)
+    private val pomWizardStepComponent = PomWizardStepComponent(wizard.ideContext)
 
     init {
         originalSettingStep.addSettingsComponent(component)

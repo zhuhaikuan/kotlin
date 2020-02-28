@@ -30,16 +30,10 @@ FILE: qualifiedExpressions.kt
     }
     public final enum class E : R|kotlin/Enum<a/b/E>| {
         private constructor(): R|a/b/E| {
-            super<R|kotlin/Any|>()
+            super<R|kotlin/Enum<a/b/E>|>()
         }
 
-        public final static enum entry entry: R|a/b/E| = object : R|a/b/E| {
-            private constructor(): R|anonymous| {
-                super<R|a/b/E|>()
-            }
-
-        }
-
+        public final static enum entry entry: R|a/b/E|
         public final static fun values(): R|kotlin/Array<a/b/E>| {
         }
 

@@ -103,7 +103,7 @@ internal sealed class CheckReceivers : ResolutionStage() {
             if (receiverType != null) return receiverType
             val returnTypeRef = callable.returnTypeRef as? FirResolvedTypeRef ?: return null
             if (!returnTypeRef.isExtensionFunctionType(bodyResolveComponents.session)) return null
-            return (returnTypeRef.type.typeArguments.firstOrNull() as? ConeTypedProjection)?.type
+            return (returnTypeRef.type.typeArguments.firstOrNull() as? ConeKotlinTypeProjection)?.type
         }
     }
 
@@ -421,7 +421,7 @@ internal object CheckVisibility : CheckerStage() {
             }
             Visibilities.PRIVATE, Visibilities.PRIVATE_TO_THIS -> {
                 if (declaration.session == callInfo.session) {
-                    if (ownerId == null || declaration is FirConstructor && declaration.status.isFromSealedClass) {
+                    if (ownerId == null || declaration is FirConstructor && declaration.isFromSealedClass) {
                         // Top-level: visible in file
                         candidateFile == useSiteFile
                     } else {

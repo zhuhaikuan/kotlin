@@ -19,8 +19,7 @@ package org.jetbrains.kotlin.gradle.plugin
 import org.gradle.api.Project
 import org.jetbrains.kotlin.gradle.dsl.Coroutines
 import org.jetbrains.kotlin.gradle.dsl.NativeCacheKind
-import org.jetbrains.kotlin.gradle.targets.js.JsCompilerType
-import org.jetbrains.kotlin.gradle.targets.js.JsCompilerType.Companion.jsCompilerProperty
+import org.jetbrains.kotlin.gradle.plugin.KotlinJsCompilerType.Companion.jsCompilerProperty
 import org.jetbrains.kotlin.gradle.targets.native.DisabledNativeTargetsReporter
 import org.jetbrains.kotlin.gradle.tasks.AbstractKotlinCompile
 import org.jetbrains.kotlin.gradle.tasks.Kotlin2JsCompile
@@ -171,10 +170,10 @@ internal class PropertiesProvider private constructor(private val project: Proje
         get() = booleanProperty("kotlin.js.experimental.discoverTypes")
 
     /**
-     * Use Kotlin/JS backend mode
+     * Use Kotlin/JS backend compiler type
      */
-    val jsCompiler: JsCompilerType
-        get() = property(jsCompilerProperty)?.let { JsCompilerType.byArgument(it) } ?: JsCompilerType.legacy
+    val jsCompiler: KotlinJsCompilerType
+        get() = property(jsCompilerProperty)?.let { KotlinJsCompilerType.byArgument(it) } ?: KotlinJsCompilerType.LEGACY
 
     private fun propertyWithDeprecatedVariant(propName: String, deprecatedPropName: String): String? {
         val deprecatedProperty = property(deprecatedPropName)

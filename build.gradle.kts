@@ -28,6 +28,7 @@ buildscript {
     dependencies {
         bootstrapCompilerClasspath(kotlin("compiler-embeddable", bootstrapKotlinVersion))
 
+        classpath("org.jetbrains.kotlin:kotlin-build-gradle-plugin:0.0.12")
         classpath("com.gradle.publish:plugin-publish-plugin:0.9.7")
         classpath(kotlin("gradle-plugin", bootstrapKotlinVersion))
         classpath("net.sf.proguard:proguard-gradle:6.1.0")
@@ -179,7 +180,7 @@ extra["versions.r8"] = "1.5.70"
 extra["versions.ktor-network"] = "1.0.1"
 
 if (!project.hasProperty("versions.kotlin-native")) {
-    extra["versions.kotlin-native"] = "1.4-dev-14287"
+    extra["versions.kotlin-native"] = "1.4-dev-14579"
 }
 
 val intellijUltimateEnabled by extra(project.kotlinBuildProperties.intellijUltimateEnabled)
@@ -546,7 +547,18 @@ tasks {
         dependsOn(":compiler:fir:fir2ir:test")
         dependsOn(":compiler:fir:lightTree:test")
     }
-    
+
+    register("firAllTest") {
+        dependsOn(
+            ":compiler:fir:psi2fir:test",
+            ":compiler:fir:lightTree:test",
+            ":compiler:fir:resolve:test",
+            ":compiler:fir:fir2ir:test",
+            ":compiler:firBlackBox:test",
+            ":idea:firTest"
+        )
+    }
+
     register("compilerFrontendVisualizerTest") {
         dependsOn("compiler:visualizer:test")
     }

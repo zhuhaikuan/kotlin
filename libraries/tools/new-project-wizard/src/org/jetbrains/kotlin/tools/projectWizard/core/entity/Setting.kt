@@ -1,6 +1,7 @@
 package org.jetbrains.kotlin.tools.projectWizard.core.entity
 
 import org.jetbrains.kotlin.tools.projectWizard.Identificator
+import org.jetbrains.kotlin.tools.projectWizard.core.context.ReadingContext
 import org.jetbrains.kotlin.tools.projectWizard.core.*
 import org.jetbrains.kotlin.tools.projectWizard.moduleConfigurators.ModuleConfigurator
 import org.jetbrains.kotlin.tools.projectWizard.phases.GenerationPhase
@@ -10,6 +11,7 @@ import org.jetbrains.kotlin.tools.projectWizard.settings.version.Version
 import org.jetbrains.kotlin.tools.projectWizard.templates.Template
 import java.nio.file.Files
 import java.nio.file.Path
+import java.nio.file.Paths
 import kotlin.reflect.KClass
 import kotlin.reflect.KProperty1
 
@@ -17,16 +19,16 @@ sealed class SettingReference<out V : Any, out T : SettingType<V>> {
     abstract val path: String
     abstract val type: KClass<out T>
 
-    abstract fun Context.getSetting(): Setting<V, T>
+    abstract fun ReadingContext.getSetting(): Setting<V, T>
 
     final override fun toString() = path
     final override fun equals(other: Any?) = other.safeAs<SettingReference<*, *>>()?.path == path
     final override fun hashCode() = path.hashCode()
 }
 
-data class PluginSettingReference<V : Any, T : SettingType<V>>(
+data class PluginSettingReference<out V : Any, out T : SettingType<V>>(
     override val path: String,
-    override val type: KClass<T>
+    override val type: KClass<@UnsafeVariance T>
 ) : SettingReference<V, T>() {
 
     constructor(kProperty: KProperty1<out Plugin, PluginSetting<V, T>>, type: KClass<T>) :
@@ -36,9 +38,11 @@ data class PluginSettingReference<V : Any, T : SettingType<V>>(
     constructor(setting: PluginSetting<V, T>) :
             this(setting.path, setting.type::class as KClass<T>)
 
-    override fun Context.getSetting(): Setting<V, T> =
-        settingContext.getPluginSetting(this@PluginSettingReference)
+    override fun ReadingContext.getSetting(): Setting<V, T> = pluginSetting
 }
+
+inline val <V : Any, reified T : SettingType<V>> PluginSetting<V, T>.reference: PluginSettingReference<V, T>
+    get() = PluginSettingReference(path, T::class)
 
 sealed class ModuleConfiguratorSettingReference<V : Any, T : SettingType<V>> : SettingReference<V, T>() {
     abstract val descriptor: ModuleConfigurator
@@ -51,7 +55,7 @@ sealed class ModuleConfiguratorSettingReference<V : Any, T : SettingType<V>> : S
     override val type: KClass<out T>
         get() = setting.type::class
 
-    override fun Context.getSetting(): Setting<V, T> = setting
+    override fun ReadingContext.getSetting(): Setting<V, T> = setting
     abstract val module: Module?
 }
 
@@ -83,7 +87,7 @@ sealed class TemplateSettingReference<V : Any, T : SettingType<V>> : SettingRefe
     override val type: KClass<out T>
         get() = setting.type::class
 
-    override fun Context.getSetting(): Setting<V, T> = setting
+    override fun ReadingContext.getSetting(): Setting<V, T> = setting
     abstract val module: Module?
 }
 
@@ -127,9 +131,9 @@ class SettingContext(val onUpdated: (SettingReference<*, *>) -> Unit) {
         onUpdated(reference)
     }
 
-    fun initPluginSettings(settings: List<PluginSetting<*, *>>) {
+    fun ReadingContext.initPluginSettings(settings: List<PluginSetting<*, *>>) {
         for (setting in settings) {
-            setting.defaultValue?.let { values[setting.path] = it }
+            setting.savedOrDefaultValue?.let { values[setting.path] = it }
         }
     }
 
@@ -164,17 +168,18 @@ interface Setting<out V : Any, out T : SettingType<V>> : Entity, ActivityChecker
     val title: String
     val defaultValue: V?
     val isRequired: Boolean
+    val isSavable: Boolean
     var neededAtPhase: GenerationPhase
     val type: T
-
 }
 
 data class InternalSetting<out V : Any, out T : SettingType<V>>(
     override val path: String,
     override val title: String,
     override val defaultValue: V?,
-    override val activityChecker: Checker,
+    override val isAvailable: Checker,
     override val isRequired: Boolean,
+    override val isSavable: Boolean,
     override var neededAtPhase: GenerationPhase,
     override val validator: SettingValidator<@UnsafeVariance V>,
     override val type: T
@@ -195,13 +200,16 @@ class TemplateSetting<out V : Any, out T : SettingType<V>>(
 ) : SettingImpl<V, T>(), Setting<V, T> by internal
 
 
+
 abstract class SettingBuilder<V : Any, T : SettingType<V>>(
     private val path: String,
     private val title: String,
     private val neededAtPhase: GenerationPhase
 ) {
-    var checker: Checker = Checker.ALWAYS_AVAILABLE
+    var isAvailable: ReadingContext.() -> Boolean = { true }
     var defaultValue: V? = null
+    var isSavable: Boolean = false
+    var isRequired: Boolean? = null
 
     protected var validator = SettingValidator<V> { ValidationResult.OK }
 
@@ -209,7 +217,7 @@ abstract class SettingBuilder<V : Any, T : SettingType<V>>(
         this.validator = this.validator and validator
     }
 
-    fun validate(validator: ValuesReadingContext.(V) -> ValidationResult) {
+    fun validate(validator: ReadingContext.(V) -> ValidationResult) {
         this.validator = this.validator and settingValidator(validator)
     }
 
@@ -220,8 +228,9 @@ abstract class SettingBuilder<V : Any, T : SettingType<V>>(
         path = path,
         title = title,
         defaultValue = defaultValue,
-        activityChecker = checker,
-        isRequired = defaultValue == null,
+        isAvailable = isAvailable,
+        isRequired = isRequired ?: (defaultValue == null),
+        isSavable = isSavable,
         neededAtPhase = neededAtPhase,
         validator = validator,
         type = type
@@ -229,13 +238,25 @@ abstract class SettingBuilder<V : Any, T : SettingType<V>>(
 }
 
 
+sealed class SettingSerializer<out V : Any>()
+
+object NonSerializable : SettingSerializer<Nothing>()
+
+data class SerializerImpl<V : Any>(
+    val fromString: (String) -> V?,
+    val toString: (V) -> String = Any::toString
+) : SettingSerializer<V>()
+
 sealed class SettingType<out V : Any> {
     abstract fun parse(context: ParsingContext, value: Any, name: String): TaskResult<V>
+    open val serializer: SettingSerializer<V> = NonSerializable
 }
 
 object StringSettingType : SettingType<String>() {
     override fun parse(context: ParsingContext, value: Any, name: String) =
         value.parseAs<String>(name)
+
+    override val serializer: SettingSerializer<String> = SerializerImpl(fromString = { it })
 
     class Builder(
         path: String,
@@ -254,6 +275,8 @@ object BooleanSettingType : SettingType<Boolean>() {
     override fun parse(context: ParsingContext, value: Any, name: String) =
         value.parseAs<Boolean>(name)
 
+    override val serializer: SettingSerializer<Boolean> = SerializerImpl(fromString = { it.toBoolean() })
+
     class Builder(
         path: String,
         title: String,
@@ -261,6 +284,7 @@ object BooleanSettingType : SettingType<Boolean>() {
     ) : SettingBuilder<Boolean, BooleanSettingType>(path, title, neededAtPhase) {
         override val type = BooleanSettingType
     }
+
 }
 
 class DropDownSettingType<V : DisplayableSettingItem>(
@@ -273,6 +297,12 @@ class DropDownSettingType<V : DisplayableSettingItem>(
             parser.parse(this, value, name)
         }
     }
+
+    override val serializer: SettingSerializer<V> = SerializerImpl(fromString = { value ->
+        ComputeContext.runInComputeContextWithState(ParsingState.EMPTY) {
+            parser.parse(this, value, "")
+        }.asNullable?.first
+    })
 
     class Builder<V : DisplayableSettingItem>(
         path: String,
@@ -289,7 +319,8 @@ class DropDownSettingType<V : DisplayableSettingItem>(
     }
 }
 
-typealias DropDownSettingTypeFilter<V> = ValuesReadingContext.(SettingReference<V, DropDownSettingType<V>>, V) -> Boolean
+typealias DropDownSettingTypeFilter <V> =
+        ReadingContext.(SettingReference<V, DropDownSettingType<V>>, V) -> Boolean
 
 
 class ValueSettingType<V : Any>(
@@ -354,7 +385,7 @@ class ListSettingType<V : Any>(private val parser: Parser<V>) : SettingType<List
             validate { values ->
                 values.fold(ValidationResult.OK as ValidationResult) { result, value ->
                     result and when (value) {
-                        is Validatable<*> -> (value.validator as SettingValidator<Any>).validate(this, value)
+                        is Validatable<*> -> (value.validator as SettingValidator<Any>).validate(this, value).withTargetIfNull(value)
                         else -> ValidationResult.OK
                     }
                 }
@@ -371,6 +402,8 @@ object PathSettingType : SettingType<Path>() {
             pathParser.parse(this, value, name)
         }
     }
+
+    override val serializer: SettingSerializer<Path> = SerializerImpl(fromString = { Paths.get(it) })
 
     class Builder(
         path: String,

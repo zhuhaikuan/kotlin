@@ -6,7 +6,6 @@
 package org.jetbrains.kotlin.backend.jvm.codegen
 
 import org.jetbrains.kotlin.backend.common.lower.BOUND_RECEIVER_PARAMETER
-import org.jetbrains.kotlin.backend.common.lower.LocalDeclarationsLowering
 import org.jetbrains.kotlin.backend.jvm.JvmLoweredDeclarationOrigin
 import org.jetbrains.kotlin.backend.jvm.JvmLoweredDeclarationOrigin.*
 import org.jetbrains.kotlin.backend.jvm.intrinsics.IrIntrinsicMethods
@@ -437,13 +436,6 @@ class ExpressionCodegen(
         }
 
         if (expression.isSuspensionPoint()) {
-            // Check return type of non-lowered suspend call, in order to replace the result of the call with Unit,
-            // otherwise, it would seem like the call returns non-unit upon resume.
-            // See box/coroutines/tailCallOptimization/unit tests.
-            if (expression.symbol.owner.suspendFunctionOriginal().returnType.isUnit()) {
-                addReturnsUnitMarker(mv)
-            }
-
             addSuspendMarker(mv, isStartNotEnd = false)
             addInlineMarker(mv, isStartNotEnd = false)
         }
@@ -456,8 +448,12 @@ class ExpressionCodegen(
             }
             expression is IrConstructorCall ->
                 MaterialValue(this, asmType, expression.type)
-            expression.type.isUnit() -> {
+            !irFunction.shouldNotContainSuspendMarkers() && expression.type.isUnit() -> {
                 // NewInference allows casting `() -> T` to `() -> Unit`. A CHECKCAST here will fail.
+                // Also, if the callee is a suspend function with a suspending tail call, the next `resumeWith`
+                // will continue from here, but the value passed to it might not have been `Unit`. An exception
+                // is methods that do not pass through the state machine generating MethodVisitor, since getting
+                // COROUTINE_SUSPENDED here is still possible; luckily, all those methods are bridges.
                 if (callable.asmMethod.returnType != Type.VOID_TYPE)
                     MaterialValue(this, callable.asmMethod.returnType, callee.returnType).discard()
                 // don't generate redundant UNIT/pop instructions
@@ -476,28 +472,16 @@ class ExpressionCodegen(
         }
     }
 
-    private fun IrFunctionAccessExpression.isSuspensionPoint(): Boolean {
-        val owner = symbol.owner
-        return when {
-            // Only suspend functions are suspension points
-            !owner.isSuspend -> false
-            // But not inside continuation classes and bridges
-            irFunction.shouldNotContainSuspendMarkers() -> false
-            // Noinline function are always suspension points
-            !owner.isInline -> true
-            // The suspend intrinsics are, albeit inline, also suspension points
-            owner.fqNameForIrSerialization == FqName("kotlin.coroutines.intrinsics.IntrinsicsKt.suspendCoroutineUninterceptedOrReturn") -> true
-            // Inside $$forInline functions crossinline calls are (usually) not suspension points, otherwise, flow will be pessimized
-            (dispatchReceiver as? IrGetField)?.symbol?.owner?.origin ==
-                    LocalDeclarationsLowering.DECLARATION_ORIGIN_FIELD_FOR_CROSSINLINE_CAPTURED_VALUE ->
-                irFunction.origin != FOR_INLINE_STATE_MACHINE_TEMPLATE_CAPTURES_CROSSINLINE
-            // The same goes for inline lambdas
-            (dispatchReceiver as? IrGetValue)?.let {
-                it.origin == IrStatementOrigin.VARIABLE_AS_FUNCTION && (it.symbol.owner as? IrValueParameter)?.isNoinline != true
-            } == true -> irFunction.origin != FOR_INLINE_STATE_MACHINE_TEMPLATE
-            // Otherwise, this is normal inline call, ergo not a suspension point
-            else -> false
-        }
+    private fun IrFunctionAccessExpression.isSuspensionPoint(): Boolean = when {
+        !symbol.owner.isSuspend || irFunction.shouldNotContainSuspendMarkers() -> false
+        // Copy-pasted bytecode blocks are not suspension points.
+        symbol.owner.isInline ->
+            symbol.owner.fqNameForIrSerialization == FqName("kotlin.coroutines.intrinsics.IntrinsicsKt.suspendCoroutineUninterceptedOrReturn")
+        // This includes inline lambdas, but only in functions intended for the inliner; in others, they stay as `f.invoke()`.
+        dispatchReceiver.isReadOfInlineLambda() ->
+            irFunction.origin != FOR_INLINE_STATE_MACHINE_TEMPLATE && irFunction.origin != FOR_INLINE_STATE_MACHINE_TEMPLATE_CAPTURES_CROSSINLINE &&
+                    irFunction.origin != IrDeclarationOrigin.LOCAL_FUNCTION_FOR_LAMBDA
+        else -> true
     }
 
     override fun visitVariable(declaration: IrVariable, data: BlockInfo): PromisedValue {
@@ -661,13 +645,6 @@ class ExpressionCodegen(
         val returnType = if (owner == irFunction) signature.returnType else methodSignatureMapper.mapReturnType(owner)
         val afterReturnLabel = Label()
         expression.value.accept(this, data).coerce(returnType, owner.returnType).materialize()
-        // We replaced COERTION_TO_UNIT with IrReturn during TailCallOptimizationLowering.
-        // Generate POP GETSTATIC kotlin/Unit.INSTANCE now.
-        // Otherwise, tail-call optimization will not work. See tailSuspendUnitFun.kt test.
-        if (expression in context.suspendTailCallsWithUnitReplacement) {
-            mv.pop()
-            mv.getstatic("kotlin/Unit", "INSTANCE", "Lkotlin/Unit;")
-        }
         generateFinallyBlocksIfNeeded(returnType, afterReturnLabel, data)
         expression.markLineNumber(startOffset = true)
         if (isNonLocalReturn) {

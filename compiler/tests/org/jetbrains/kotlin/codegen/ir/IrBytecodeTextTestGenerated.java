@@ -119,6 +119,11 @@ public class IrBytecodeTextTestGenerated extends AbstractIrBytecodeTextTest {
         runTest("compiler/testData/codegen/bytecodeText/flagsInMultiFileInherit.kt");
     }
 
+    @TestMetadata("inheritedPropertyAnnotations.kt")
+    public void testInheritedPropertyAnnotations() throws Exception {
+        runTest("compiler/testData/codegen/bytecodeText/inheritedPropertyAnnotations.kt");
+    }
+
     @TestMetadata("inlineFromOtherModule.kt")
     public void testInlineFromOtherModule() throws Exception {
         runTest("compiler/testData/codegen/bytecodeText/inlineFromOtherModule.kt");
@@ -911,6 +916,11 @@ public class IrBytecodeTextTestGenerated extends AbstractIrBytecodeTextTest {
             KotlinTestUtils.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("compiler/testData/codegen/bytecodeText/companion"), Pattern.compile("^(.+)\\.kt$"), null, TargetBackend.JVM_IR, true);
         }
 
+        @TestMetadata("floatingPointCompanionAccess.kt")
+        public void testFloatingPointCompanionAccess() throws Exception {
+            runTest("compiler/testData/codegen/bytecodeText/companion/floatingPointCompanionAccess.kt");
+        }
+
         @TestMetadata("kt14258_1.kt")
         public void testKt14258_1() throws Exception {
             runTest("compiler/testData/codegen/bytecodeText/companion/kt14258_1.kt");
@@ -1374,6 +1384,11 @@ public class IrBytecodeTextTestGenerated extends AbstractIrBytecodeTextTest {
         @TestMetadata("returnUnitInLambda.kt")
         public void testReturnUnitInLambda_1_3() throws Exception {
             runTestWithPackageReplacement("compiler/testData/codegen/bytecodeText/coroutines/returnUnitInLambda.kt", "kotlin.coroutines");
+        }
+
+        @TestMetadata("suspendMain.kt")
+        public void testSuspendMain() throws Exception {
+            runTest("compiler/testData/codegen/bytecodeText/coroutines/suspendMain.kt");
         }
 
         @TestMetadata("throwOnFailure.kt")

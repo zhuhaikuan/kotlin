@@ -720,7 +720,7 @@ public fun <T, C : MutableCollection<in T>> Sequence<T>.toCollection(destination
 }
 
 /**
- * Returns a [HashSet] of all elements.
+ * Returns a new [HashSet] of all elements.
  *
  * The operation is _terminal_.
  */
@@ -738,7 +738,7 @@ public fun <T> Sequence<T>.toList(): List<T> {
 }
 
 /**
- * Returns a [MutableList] filled with all elements of this sequence.
+ * Returns a new [MutableList] filled with all elements of this sequence.
  *
  * The operation is _terminal_.
  */
@@ -975,6 +975,7 @@ public fun <T> Sequence<T>.withIndex(): Sequence<IndexedValue<T>> {
 /**
  * Returns a sequence containing only distinct elements from the given sequence.
  * 
+ * Among equal elements of the given sequence, only the first one will be present in the resulting sequence.
  * The elements in the resulting sequence are in the same order as they were in the source sequence.
  *
  * The operation is _intermediate_ and _stateful_.
@@ -989,6 +990,7 @@ public fun <T> Sequence<T>.distinct(): Sequence<T> {
  * Returns a sequence containing only elements from the given sequence
  * having distinct keys returned by the given [selector] function.
  * 
+ * Among elements of the given sequence with equal keys, only the first one will be present in the resulting sequence.
  * The elements in the resulting sequence are in the same order as they were in the source sequence.
  *
  * The operation is _intermediate_ and _stateful_.
@@ -1000,7 +1002,7 @@ public fun <T, K> Sequence<T>.distinctBy(selector: (T) -> K): Sequence<T> {
 }
 
 /**
- * Returns a mutable set containing all distinct elements from the given sequence.
+ * Returns a new [MutableSet] containing all distinct elements from the given sequence.
  * 
  * The returned set preserves the element iteration order of the original sequence.
  *

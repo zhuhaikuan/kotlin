@@ -7,6 +7,8 @@ package org.jetbrains.kotlin.tools.projectWizard.templates
 
 import org.jetbrains.kotlin.tools.projectWizard.WizardGradleRunConfiguration
 import org.jetbrains.kotlin.tools.projectWizard.WizardRunConfiguration
+import org.jetbrains.kotlin.tools.projectWizard.core.context.ReadingContext
+import org.jetbrains.kotlin.tools.projectWizard.core.context.WritingContext
 import org.jetbrains.kotlin.tools.projectWizard.core.*
 import org.jetbrains.kotlin.tools.projectWizard.core.entity.TemplateSetting
 import org.jetbrains.kotlin.tools.projectWizard.core.safeAs
@@ -42,7 +44,7 @@ class SimpleJsClientTemplate : Template() {
 
     override val settings: List<TemplateSetting<*, *>> = listOf(renderEngine)
 
-    override fun ValuesReadingContext.createRunConfigurations(module: ModuleIR): List<WizardRunConfiguration> = buildList {
+    override fun ReadingContext.createRunConfigurations(module: ModuleIR): List<WizardRunConfiguration> = buildList {
         if (module.originalModule.kind == ModuleKind.singleplatformJs) {
             +WizardGradleRunConfiguration(
                 "BrowserDevelopmentRun in continuous mode",
@@ -57,7 +59,7 @@ class SimpleJsClientTemplate : Template() {
         }
     }
 
-    override fun TaskRunningContext.getRequiredLibraries(module: ModuleIR): List<DependencyIR> = withSettingsOf(module.originalModule) {
+    override fun WritingContext.getRequiredLibraries(module: ModuleIR): List<DependencyIR> = withSettingsOf(module.originalModule) {
         buildList {
             +ArtifactBasedLibraryDependencyIR(
                 MavenArtifact(DefaultRepository.JCENTER, "org.jetbrains.kotlinx", "kotlinx-html-js"),
@@ -81,7 +83,7 @@ class SimpleJsClientTemplate : Template() {
     }
 
 
-    override fun TaskRunningContext.getFileTemplates(module: ModuleIR): List<FileTemplateDescriptorWithPath> =
+    override fun WritingContext.getFileTemplates(module: ModuleIR): List<FileTemplateDescriptorWithPath> =
         withSettingsOf(module.originalModule) {
             buildList {
                 val hasKtorServNeighbourTarget = module.safeAs<MultiplatformModuleIR>()
@@ -112,7 +114,7 @@ class SimpleJsClientTemplate : Template() {
         +interceptTemplate(KtorServerTemplate()) {
             applicableIf { buildFileIR ->
                 val tasks = buildFileIR.irsOfTypeOrNull<GradleConfigureTaskIR>() ?: return@applicableIf false
-                tasks.none { it.taskAccess.name.endsWith("Jar") }
+                tasks.none { it.taskAccess.safeAs<GradleByNameTaskAccessIR>()?.name?.endsWith("Jar") == true }
             }
 
             interceptAtPoint(template.routes) { value ->
@@ -200,7 +202,7 @@ class SimpleJsClientTemplate : Template() {
         }
     }
 
-    override fun TaskRunningContext.getIrsToAddToBuildFile(module: ModuleIR): List<BuildSystemIR> = buildList {
+    override fun WritingContext.getIrsToAddToBuildFile(module: ModuleIR): List<BuildSystemIR> = buildList {
         +RepositoryIR(DefaultRepository.JCENTER)
         if (module is MultiplatformModuleIR) {
             +GradleImportIR("org.jetbrains.kotlin.gradle.targets.js.webpack.KotlinWebpack")

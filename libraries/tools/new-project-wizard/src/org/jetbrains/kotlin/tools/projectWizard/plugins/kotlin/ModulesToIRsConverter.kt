@@ -1,10 +1,14 @@
 package org.jetbrains.kotlin.tools.projectWizard.plugins.kotlin
 
+import org.jetbrains.kotlin.tools.projectWizard.core.context.ReadingContext
+import org.jetbrains.kotlin.tools.projectWizard.core.context.WritingContext
 import org.jetbrains.kotlin.tools.projectWizard.core.*
 import org.jetbrains.kotlin.tools.projectWizard.ir.buildsystem.*
 import org.jetbrains.kotlin.tools.projectWizard.moduleConfigurators.AndroidSinglePlatformModuleConfigurator
+import org.jetbrains.kotlin.tools.projectWizard.moduleConfigurators.GradleModuleConfigurator
 import org.jetbrains.kotlin.tools.projectWizard.moduleConfigurators.TargetConfigurator
 import org.jetbrains.kotlin.tools.projectWizard.plugins.buildSystem.BuildSystemType
+import org.jetbrains.kotlin.tools.projectWizard.plugins.buildSystem.gradle.GradlePlugin
 import org.jetbrains.kotlin.tools.projectWizard.plugins.buildSystem.isGradle
 import org.jetbrains.kotlin.tools.projectWizard.settings.buildsystem.*
 import org.jetbrains.kotlin.tools.projectWizard.settings.version.Version
@@ -17,7 +21,7 @@ data class ModuleConfigurationData(
     val kotlinVersion: Version,
     val buildSystemType: BuildSystemType,
     val pomIr: PomIR,
-    val taskRunningContext: TaskRunningContext
+    val writingContext: WritingContext
 ) {
     val allModules = rootModules.withAllSubModules()
 }
@@ -57,7 +61,7 @@ class ModulesToIRsConverter(
         else -> rootPath / module.name
     }
 
-    fun ValuesReadingContext.createBuildFiles(): TaskResult<List<BuildFileIR>> = with(data) {
+    fun ReadingContext.createBuildFiles(): TaskResult<List<BuildFileIR>> = with(data) {
         val needExplicitRootBuildFile = !needFlattening
         val parentModuleHasTransitivelySpecifiedKotlinVersion = allModules.any { modules ->
             modules.configurator == AndroidSinglePlatformModuleConfigurator
@@ -82,7 +86,7 @@ class ModulesToIRsConverter(
     }
 
 
-    private fun ValuesReadingContext.createBuildFileForModule(
+    private fun ReadingContext.createBuildFileForModule(
         module: Module,
         state: ModulesToIrsState
     ): TaskResult<List<BuildFileIR>> = when (module.kind) {
@@ -91,18 +95,18 @@ class ModulesToIRsConverter(
         else -> Success(emptyList())
     }
 
-    private fun ValuesReadingContext.createSinglePlatformModule(
+    private fun ReadingContext.createSinglePlatformModule(
         module: Module,
         state: ModulesToIrsState
     ): TaskResult<List<BuildFileIR>> = with(data) {
         val modulePath = calculatePathForModule(module, state.parentPath)
-        taskRunningContext.mutateProjectStructureByModuleConfigurator(module, modulePath)
+        writingContext.mutateProjectStructureByModuleConfigurator(module, modulePath)
         val configurator = module.configurator
         val dependenciesIRs = buildList<BuildSystemIR> {
             +module.sourcesets.flatMap { sourceset ->
                 sourceset.dependencies.map { it.toIR(sourceset.sourcesetType.toDependencyType()) }
             }
-            with(configurator) { +createModuleIRs(data, module) }
+            with(configurator) { +createModuleIRs(this@createSinglePlatformModule, data, module) }
             addIfNotNull(
                 configurator.createStdlibType(data, module)?.let { stdlibType ->
                     KotlinStdlibDependencyIR(
@@ -120,7 +124,6 @@ class ModulesToIRsConverter(
             modulePath,
             dependenciesIRs,
             module.template,
-            module.configurator.moduleType,
             module,
             module.sourcesets.map { sourceset ->
                 SingleplatformSourcesetIR(
@@ -150,18 +153,18 @@ class ModulesToIRsConverter(
         }.map { it.flatten() + buildFileIr }
     }
 
-    private fun ValuesReadingContext.createMultiplatformModule(
+    private fun ReadingContext.createMultiplatformModule(
         module: Module,
         state: ModulesToIrsState
     ): TaskResult<List<BuildFileIR>> = with(data) {
         val modulePath = calculatePathForModule(module, state.parentPath)
-        taskRunningContext.mutateProjectStructureByModuleConfigurator(module, modulePath)
+        writingContext.mutateProjectStructureByModuleConfigurator(module, modulePath)
         val targetIrs = module.subModules.flatMap { subModule ->
-            (subModule.configurator as TargetConfigurator).createTargetIrs(subModule)
+            with(subModule.configurator as TargetConfigurator) { createTargetIrs(subModule) }
         }
 
         val targetModuleIrs = module.subModules.map { target ->
-            createTargetSourceset(target, modulePath)
+            createTargetModule(target, modulePath)
         }
 
         return BuildFileIR(
@@ -180,7 +183,8 @@ class ModulesToIRsConverter(
         ).asSingletonList().asSuccess()
     }
 
-    private fun ValuesReadingContext.createTargetSourceset(target: Module, modulePath: Path): MultiplatformModuleIR {
+    private fun ReadingContext.createTargetModule(target: Module, modulePath: Path): MultiplatformModuleIR {
+        data.writingContext.mutateProjectStructureByModuleConfigurator(target, modulePath)
         val sourcesetss = target.sourcesets.map { sourceset ->
             val sourcesetName = target.name + sourceset.sourcesetType.name.capitalize()
             val sourcesetIrs = buildList<BuildSystemIR> {
@@ -209,23 +213,27 @@ class ModulesToIRsConverter(
         return MultiplatformModuleIR(
             target.name,
             modulePath,
-            with(target.configurator) { createModuleIRs(data, target) },
-            target.configurator.moduleType,
+            with(target.configurator) { createModuleIRs(this@createTargetModule, data, target) },
             target.template,
             target,
             sourcesetss
         )
     }
 
-    private fun TaskRunningContext.mutateProjectStructureByModuleConfigurator(
+    private fun WritingContext.mutateProjectStructureByModuleConfigurator(
         module: Module,
         modulePath: Path
     ): TaskResult<Unit> = with(module.configurator) {
-        rootBuildFileIrs += createRootBuildFileIrs(data)
-        runArbitraryTask(data, module, modulePath)
+        compute {
+            rootBuildFileIrs += createRootBuildFileIrs(data)
+            runArbitraryTask(data, module, modulePath).ensure()
+            if (this@with is GradleModuleConfigurator) {
+                GradlePlugin::settingsGradleFileIRs.addValues(createSettingsGradleIRs(module)).ensure()
+            }
+        }
     }
 
-    private fun createBuildFileIRs(
+    private fun ReadingContext.createBuildFileIRs(
         module: Module,
         state: ModulesToIrsState
     ) = buildList<BuildSystemIR> {
@@ -241,7 +249,7 @@ class ModulesToIRsConverter(
                 }
             }
         addIfNotNull(kotlinPlugin)
-        +module.configurator.createBuildFileIRs(data, module)
+        +with(module.configurator) { createBuildFileIRs(this@createBuildFileIRs, data, module) }
     }
 
     private fun SourcesetDependency.toIR(type: DependencyType): DependencyIR = with(data) {

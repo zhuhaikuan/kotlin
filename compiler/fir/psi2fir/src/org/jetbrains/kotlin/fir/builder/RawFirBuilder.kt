@@ -154,16 +154,25 @@ class RawFirBuilder(
             delegatedSuperType: FirTypeRef?, delegatedSelfType: FirResolvedTypeRef?, owner: KtClassOrObject, hasPrimaryConstructor: Boolean,
         ): FirDeclaration {
             return when (this) {
-                is KtSecondaryConstructor -> toFirConstructor(
-                    delegatedSuperType,
-                    delegatedSelfType ?: buildErrorTypeRef {
-                        source = this@toFirDeclaration.toFirSourceElement()
-                        diagnostic = FirSimpleDiagnostic("Constructor in object", DiagnosticKind.ConstructorInObject)
-                    },
-                    owner,
-                    hasPrimaryConstructor,
-                )
-                is KtEnumEntry -> toFirEnumEntry(delegatedSelfType!!)
+                is KtSecondaryConstructor -> {
+                    toFirConstructor(
+                        delegatedSuperType,
+                        delegatedSelfType ?: buildErrorTypeRef {
+                            source = this@toFirDeclaration.toFirSourceElement()
+                            diagnostic = FirSimpleDiagnostic("Constructor in object", DiagnosticKind.ConstructorInObject)
+                        },
+                        owner,
+                        hasPrimaryConstructor,
+                    )
+                }
+                is KtEnumEntry -> {
+                    val primaryConstructor = owner.primaryConstructor
+                    val ownerClassHasDefaultConstructor =
+                        primaryConstructor?.valueParameters?.isEmpty() ?: owner.secondaryConstructors.let { constructors ->
+                            constructors.isEmpty() || constructors.any { it.valueParameters.isEmpty() }
+                        }
+                    toFirEnumEntry(delegatedSelfType!!, ownerClassHasDefaultConstructor)
+                }
                 else -> convert()
             }
         }
@@ -408,13 +417,14 @@ class RawFirBuilder(
                      *   for correct resolve of super constructor call or just call kotlin.Any constructor
                      *   and convert it to right call at backend, because of it doesn't affects frontend work
                      */
-                    container.superTypeRefs += buildResolvedTypeRef {
+                    delegatedSuperTypeRef = buildResolvedTypeRef {
                         type = ConeClassLikeTypeImpl(
                             implicitEnumType.type.lookupTag,
                             delegatedSelfTypeRef?.coneTypeUnsafe<ConeKotlinType>()?.let { arrayOf(it) } ?: emptyArray(),
                             isNullable = false,
                         )
                     }
+                    container.superTypeRefs += delegatedSuperTypeRef
                 }
                 this is KtClass && classKind == ClassKind.ANNOTATION_CLASS -> {
                     container.superTypeRefs += implicitAnnotationType
@@ -517,13 +527,26 @@ class RawFirBuilder(
             }
         }
 
-        private fun KtEnumEntry.toFirEnumEntry(delegatedEnumSelfTypeRef: FirResolvedTypeRef): FirDeclaration {
+        private fun KtEnumEntry.toFirEnumEntry(
+            delegatedEnumSelfTypeRef: FirResolvedTypeRef,
+            ownerClassHasDefaultConstructor: Boolean
+        ): FirDeclaration {
             val ktEnumEntry = this@toFirEnumEntry
             return buildEnumEntry {
                 source = toFirSourceElement()
                 session = baseSession
                 returnTypeRef = delegatedEnumSelfTypeRef
                 name = nameAsSafeName
+                status = FirDeclarationStatusImpl(Visibilities.PUBLIC, Modality.FINAL).apply {
+                    isStatic = true
+                }
+                symbol = FirVariableSymbol(callableIdForName(nameAsSafeName))
+                // NB: not sure should annotations be on enum entry itself, or on its corresponding object
+                if (ownerClassHasDefaultConstructor && ktEnumEntry.initializerList == null &&
+                    ktEnumEntry.annotationEntries.isEmpty() && ktEnumEntry.body == null
+                ) {
+                    return@buildEnumEntry
+                }
                 initializer = withChildClassName(nameAsSafeName) {
                     buildAnonymousObject {
                         source = toFirSourceElement()
@@ -558,12 +581,6 @@ class RawFirBuilder(
                         }
                     }
                 }
-                status = FirDeclarationStatusImpl(
-                    Visibilities.PUBLIC, Modality.FINAL,
-                ).apply {
-                    isStatic = true
-                }
-                symbol = FirVariableSymbol(callableIdForName(nameAsSafeName))
             }
         }
 
@@ -1355,6 +1372,10 @@ class RawFirBuilder(
                 in OperatorConventions.IN_OPERATIONS ->
                     return rightArgument.generateContainsOperation(
                         leftArgument, operationToken == NOT_IN, expression, expression.operationReference,
+                    )
+                in OperatorConventions.COMPARISON_OPERATIONS ->
+                    return leftArgument.generateComparisonExpression(
+                        rightArgument, operationToken, expression, expression.operationReference,
                     )
             }
             val conventionCallName = operationToken.toBinaryName()

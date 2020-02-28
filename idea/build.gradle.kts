@@ -154,6 +154,10 @@ dependencies {
     if (Ide.IJ()) {
         testCompileOnly(intellijPluginDep("maven"))
         testRuntime(intellijPluginDep("maven"))
+
+        if (Ide.IJ201.orHigher()) {
+            testRuntime(intellijPluginDep("repository-search"))
+        }
     }
 
     testRuntime(intellijPluginDep("junit"))
@@ -181,6 +185,15 @@ tasks.named<Copy>("processResources") {
 projectTest(parallel = true) {
     dependsOn(":dist")
     workingDir = rootDir
+}
+
+projectTest("firTest", parallel = true) {
+    dependsOn(":dist")
+    workingDir = rootDir
+    filter {
+        includeTestsMatching("org.jetbrains.kotlin.idea.fir.*")
+        includeTestsMatching("org.jetbrains.kotlin.idea.resolve.FirReferenceResolveTestGenerated")
+    }
 }
 
 configureFormInstrumentation()

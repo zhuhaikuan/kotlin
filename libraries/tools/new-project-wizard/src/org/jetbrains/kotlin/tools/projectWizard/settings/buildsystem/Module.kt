@@ -3,18 +3,23 @@ package org.jetbrains.kotlin.tools.projectWizard.settings.buildsystem
 import org.jetbrains.kotlin.tools.projectWizard.GeneratedIdentificator
 import org.jetbrains.kotlin.tools.projectWizard.Identificator
 import org.jetbrains.kotlin.tools.projectWizard.IdentificatorOwner
+import org.jetbrains.kotlin.tools.projectWizard.core.context.ReadingContext
 import org.jetbrains.kotlin.tools.projectWizard.core.*
+import org.jetbrains.kotlin.tools.projectWizard.core.context.SettingsWritingContext
 import org.jetbrains.kotlin.tools.projectWizard.core.entity.*
 import org.jetbrains.kotlin.tools.projectWizard.moduleConfigurators.*
 import org.jetbrains.kotlin.tools.projectWizard.settings.DisplayableSettingItem
 import org.jetbrains.kotlin.tools.projectWizard.templates.Template
 
 @Suppress("EnumEntryName")
-enum class ModuleKind {
+enum class ModuleKind : DisplayableSettingItem {
     multiplatform,
     target,
     singleplatformJvm,
-    singleplatformJs,
+    singleplatformJs, ;
+
+    override val text: String
+        get() = name
 }
 
 // TODO separate to classes
@@ -35,9 +40,13 @@ class Module(
         StringValidators.shouldBeValidIdentifier("Module name `$name`", ALLOWED_SPECIAL_CHARS_IN_MODULE_NAMES).validate(this, module.name)
     } and settingValidator { module ->
         withSettingsOf(module) {
-            configurator.settings.map { setting ->
-                val value = setting.reference.notRequiredSettingValue
-                    ?: setting.defaultValue
+            allSettingsOfModuleConfigurator(configurator).map { setting ->
+                val value = when (setting) {
+                    is PluginSetting<Any, SettingType<Any>> -> setting.reference.notRequiredSettingValue
+                    is ModuleConfiguratorSetting<Any, SettingType<Any>> -> setting.reference.notRequiredSettingValue
+                    else -> null
+                }
+                    ?: setting.savedOrDefaultValue
                     ?: return@map ValidationResult.ValidationError("${setting.title.capitalize()} should not be blank")
                 (setting.validator as SettingValidator<Any>).validate(this@settingValidator, value)
             }.fold()
@@ -47,7 +56,7 @@ class Module(
         org.jetbrains.kotlin.tools.projectWizard.templates.withSettingsOf(module) {
             template.settings.map { setting ->
                 val value = setting.reference.notRequiredSettingValue
-                    ?: setting.defaultValue
+                    ?: setting.savedOrDefaultValue
                     ?: return@map ValidationResult.ValidationError("${setting.title.capitalize()} should not be blank")
                 (setting.validator as SettingValidator<Any>).validate(this@settingValidator, value)
             }.fold()
@@ -75,12 +84,13 @@ class Module(
             configurator == MppModuleConfigurator -> "MPP Module"
             configurator == AndroidSinglePlatformModuleConfigurator -> "Android Module"
             configurator == IOSSinglePlatformModuleConfigurator -> "IOS Module"
+            configurator == JsSingleplatformModuleConfigurator -> "JS Module"
             else -> "Module"
         }
 
-    fun initDefaultValuesForSettings(context: Context) {
-        configurator.safeAs<ModuleConfiguratorWithSettings>()?.initDefaultValuesFor(this, context)
-        template?.initDefaultValuesFor(this, context)
+    fun SettingsWritingContext.initDefaultValuesForSettings() {
+        configurator.safeAs<ModuleConfiguratorWithSettings>()?.apply { initDefaultValuesFor(this@Module) }
+        template?.apply { initDefaultValuesFor(this@Module) }
     }
 
     companion object {
@@ -98,7 +108,7 @@ class Module(
                 this,
                 path,
                 "sourcesets",
-                listParser(Sourceset.parser(configurator.moduleType))
+                listParser(Sourceset.parser())
             ) { emptyList() }
             val (submodules) = map.parseValue(this, path, "subModules", listParser(Module.parser)) { emptyList() }
             Module(name, kind, configurator, template, sourcesets, submodules, identificator = identificator)

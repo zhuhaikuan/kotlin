@@ -30,6 +30,7 @@ import org.jetbrains.kotlin.ir.symbols.*
 import org.jetbrains.kotlin.ir.symbols.impl.*
 import org.jetbrains.kotlin.ir.types.IrType
 import org.jetbrains.kotlin.ir.types.impl.IrUninitializedType
+import org.jetbrains.kotlin.serialization.deserialization.descriptors.DescriptorWithContainerSource
 
 interface IrProvider {
     fun getDeclaration(symbol: IrSymbol): IrDeclaration?
@@ -81,7 +82,7 @@ interface ReferenceSymbolTable {
     fun leaveScope(owner: DeclarationDescriptor)
 }
 
-open class SymbolTable(private val signaturer: IdSignatureComposer) : ReferenceSymbolTable {
+open class SymbolTable(val signaturer: IdSignatureComposer) : ReferenceSymbolTable {
 
     @Suppress("LeakingThis")
     val lazyWrapper = IrLazySymbolTable(this)
@@ -830,6 +831,21 @@ open class SymbolTable(private val signaturer: IdSignatureComposer) : ReferenceS
             else ->
                 throw IllegalArgumentException("Unexpected value descriptor: $value")
         }
+
+    fun wrappedTopLevelCallableDescriptors(): Set<DescriptorWithContainerSource> {
+        val result = mutableSetOf<DescriptorWithContainerSource>()
+        for (descriptor in simpleFunctionSymbolTable.descriptorToSymbol.keys) {
+            if (descriptor is WrappedFunctionDescriptorWithContainerSource && descriptor.owner.parent !is IrClass) {
+                result.add(descriptor)
+            }
+        }
+        for (descriptor in propertySymbolTable.descriptorToSymbol.keys) {
+            if (descriptor is WrappedPropertyDescriptorWithContainerSource && descriptor.owner.parent !is IrClass) {
+                result.add(descriptor)
+            }
+        }
+        return result
+    }
 }
 
 inline fun <T, D : DeclarationDescriptor> SymbolTable.withScope(owner: D, block: SymbolTable.(D) -> T): T {

@@ -1,13 +1,14 @@
 package org.jetbrains.kotlin.tools.projectWizard.plugins.buildSystem.gradle
 
+import org.jetbrains.kotlin.tools.projectWizard.core.context.ReadingContext
 import org.jetbrains.kotlin.tools.projectWizard.core.*
 import org.jetbrains.kotlin.tools.projectWizard.core.entity.reference
 import org.jetbrains.kotlin.tools.projectWizard.core.service.FileSystemWizardService
-import org.jetbrains.kotlin.tools.projectWizard.ir.buildsystem.BuildFileIR
+import org.jetbrains.kotlin.tools.projectWizard.ir.buildsystem.BuildSystemIR
+import org.jetbrains.kotlin.tools.projectWizard.ir.buildsystem.PluginManagementRepositoryIR
 import org.jetbrains.kotlin.tools.projectWizard.ir.buildsystem.RepositoryIR
 import org.jetbrains.kotlin.tools.projectWizard.ir.buildsystem.gradle.SettingsGradleFileIR
 import org.jetbrains.kotlin.tools.projectWizard.ir.buildsystem.render
-import org.jetbrains.kotlin.tools.projectWizard.ir.buildsystem.withIrs
 import org.jetbrains.kotlin.tools.projectWizard.phases.GenerationPhase
 import org.jetbrains.kotlin.tools.projectWizard.plugins.StructurePlugin
 import org.jetbrains.kotlin.tools.projectWizard.plugins.buildSystem.*
@@ -17,7 +18,6 @@ import org.jetbrains.kotlin.tools.projectWizard.plugins.printer.printBuildFile
 import org.jetbrains.kotlin.tools.projectWizard.plugins.projectPath
 import org.jetbrains.kotlin.tools.projectWizard.plugins.templates.TemplatesPlugin
 import org.jetbrains.kotlin.tools.projectWizard.settings.buildsystem.DefaultRepository
-import org.jetbrains.kotlin.tools.projectWizard.settings.buildsystem.Repositories
 import org.jetbrains.kotlin.tools.projectWizard.settings.version.Version
 import org.jetbrains.kotlin.tools.projectWizard.templates.FileTemplate
 import org.jetbrains.kotlin.tools.projectWizard.templates.FileTemplateDescriptor
@@ -26,23 +26,25 @@ import org.jetbrains.kotlin.tools.projectWizard.templates.FileTemplateDescriptor
 abstract class GradlePlugin(context: Context) : BuildSystemPlugin(context) {
     val createGradleWrapper by booleanSetting("Create Gradle Wrapper", GenerationPhase.FIRST_STEP) {
         defaultValue = true
-        checker = isGradle
+        isAvailable = isGradle
     }
 
 
     val version by versionSetting("Gradle Version", GenerationPhase.FIRST_STEP) {
         defaultValue = defaultVersions.first()
-        checker = isGradle
+        isAvailable = isGradle
     }
 
     val gradleVersions by property<List<Version>>(emptyList())
 
     val gradleProperties by listProperty<Pair<String, String>>()
 
+    val settingsGradleFileIRs by listProperty<BuildSystemIR>()
+
     val createGradlePropertiesFile by pipelineTask(GenerationPhase.PROJECT_GENERATION) {
         runAfter(KotlinPlugin::createModules)
         runBefore(TemplatesPlugin::renderFileTemplates)
-        activityChecker = isGradle
+        isAvailable = isGradle
         withAction {
             TemplatesPlugin::addFileTemplate.execute(
                 FileTemplate(
@@ -66,7 +68,7 @@ abstract class GradlePlugin(context: Context) : BuildSystemPlugin(context) {
     val createLocalPropertiesFile by pipelineTask(GenerationPhase.PROJECT_GENERATION) {
         runAfter(KotlinPlugin::createModules)
         runBefore(TemplatesPlugin::renderFileTemplates)
-        activityChecker = isGradle
+        isAvailable = isGradle
         withAction {
             TemplatesPlugin::addFileTemplate.execute(
                 FileTemplate(
@@ -83,17 +85,12 @@ abstract class GradlePlugin(context: Context) : BuildSystemPlugin(context) {
         }
     }
 
-    private val isGradle = checker {
-        rule(
-            (BuildSystemPlugin::type.reference shouldBeEqual BuildSystemType.GradleKotlinDsl) or
-                    (BuildSystemPlugin::type.reference shouldBeEqual BuildSystemType.GradleGroovyDsl)
-        )
-    }
+    private val isGradle = checker { buildSystemType.isGradle }
 
 
     val initGradleWrapperTask by pipelineTask(GenerationPhase.PROJECT_GENERATION) {
         runBefore(TemplatesPlugin::renderFileTemplates)
-        activityChecker = isGradle
+        isAvailable = isGradle
         withAction {
             if (!GradlePlugin::createGradleWrapper.reference.settingValue) return@withAction UNIT_SUCCESS
             TemplatesPlugin::addFileTemplate.execute(
@@ -113,8 +110,9 @@ abstract class GradlePlugin(context: Context) : BuildSystemPlugin(context) {
 
 
     val createSettingsFileTask by pipelineTask(GenerationPhase.PROJECT_GENERATION) {
+        runAfter(KotlinPlugin::createModules)
         runAfter(KotlinPlugin::createPluginRepositories)
-        activityChecker = isGradle
+        isAvailable = isGradle
         withAction {
             val (createBuildFile, buildFileName) = settingsGradleBuildFileData ?: return@withAction UNIT_SUCCESS
 
@@ -123,14 +121,15 @@ abstract class GradlePlugin(context: Context) : BuildSystemPlugin(context) {
                 if (isNotEmpty()) {
                     +RepositoryIR(DefaultRepository.MAVEN_CENTRAL)
                 }
-            }
+            }.map(::PluginManagementRepositoryIR)
+
             val settingsGradleIR = SettingsGradleFileIR(
                 StructurePlugin::name.settingValue,
                 allModulesPaths.map { path -> path.joinToString(separator = "") { ":$it" } },
-                repositories
+                repositories + GradlePlugin::settingsGradleFileIRs.propertyValue
             )
             val buildFileText = createBuildFile().printBuildFile { settingsGradleIR.render(this) }
-            service<FileSystemWizardService>()!!.createFile(
+            service<FileSystemWizardService>().createFile(
                 projectPath / buildFileName,
                 buildFileText
             )
@@ -143,7 +142,7 @@ abstract class GradlePlugin(context: Context) : BuildSystemPlugin(context) {
     }
 }
 
-val ValuesReadingContext.settingsGradleBuildFileData
+val ReadingContext.settingsGradleBuildFileData
     get() = when (buildSystemType) {
         BuildSystemType.GradleKotlinDsl ->
             BuildFileData(

@@ -1361,6 +1361,11 @@ public class DiagnosticsTestWithStdLibUsingJavacGenerated extends AbstractDiagno
                 runTest("compiler/testData/diagnostics/testsWithStdLib/contracts/smartcasts/extensionReceiver_after.kt");
             }
 
+            @TestMetadata("externalArguments.kt")
+            public void testExternalArguments() throws Exception {
+                runTest("compiler/testData/diagnostics/testsWithStdLib/contracts/smartcasts/externalArguments.kt");
+            }
+
             @TestMetadata("intersectingInfo.kt")
             public void testIntersectingInfo() throws Exception {
                 runTest("compiler/testData/diagnostics/testsWithStdLib/contracts/smartcasts/intersectingInfo.kt");
@@ -1507,6 +1512,11 @@ public class DiagnosticsTestWithStdLibUsingJavacGenerated extends AbstractDiagno
 
                 public void testAllFilesPresentInWhen() throws Exception {
                     KotlinTestUtils.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("compiler/testData/diagnostics/testsWithStdLib/contracts/smartcasts/when"), Pattern.compile("^(.+)\\.kt$"), Pattern.compile("^(.+)\\.fir\\.kts?$"), true);
+                }
+
+                @TestMetadata("kt36818.kt")
+                public void testKt36818() throws Exception {
+                    runTest("compiler/testData/diagnostics/testsWithStdLib/contracts/smartcasts/when/kt36818.kt");
                 }
 
                 @TestMetadata("withSubject.kt")
@@ -1957,6 +1967,16 @@ public class DiagnosticsTestWithStdLibUsingJavacGenerated extends AbstractDiagno
                 runTest("compiler/testData/diagnostics/testsWithStdLib/coroutines/inference/kt15516.kt");
             }
 
+            @TestMetadata("kt32097.kt")
+            public void testKt32097() throws Exception {
+                runTest("compiler/testData/diagnostics/testsWithStdLib/coroutines/inference/kt32097.kt");
+            }
+
+            @TestMetadata("kt32203.kt")
+            public void testKt32203() throws Exception {
+                runTest("compiler/testData/diagnostics/testsWithStdLib/coroutines/inference/kt32203.kt");
+            }
+
             @TestMetadata("kt32271.kt")
             public void testKt32271() throws Exception {
                 runTest("compiler/testData/diagnostics/testsWithStdLib/coroutines/inference/kt32271.kt");
@@ -1967,9 +1987,24 @@ public class DiagnosticsTestWithStdLibUsingJavacGenerated extends AbstractDiagno
                 runTest("compiler/testData/diagnostics/testsWithStdLib/coroutines/inference/kt33542.kt");
             }
 
+            @TestMetadata("kt35306.kt")
+            public void testKt35306() throws Exception {
+                runTest("compiler/testData/diagnostics/testsWithStdLib/coroutines/inference/kt35306.kt");
+            }
+
             @TestMetadata("kt35684.kt")
             public void testKt35684() throws Exception {
                 runTest("compiler/testData/diagnostics/testsWithStdLib/coroutines/inference/kt35684.kt");
+            }
+
+            @TestMetadata("kt36202.kt")
+            public void testKt36202() throws Exception {
+                runTest("compiler/testData/diagnostics/testsWithStdLib/coroutines/inference/kt36202.kt");
+            }
+
+            @TestMetadata("kt36220.kt")
+            public void testKt36220() throws Exception {
+                runTest("compiler/testData/diagnostics/testsWithStdLib/coroutines/inference/kt36220.kt");
             }
 
             @TestMetadata("nestedLambdaInferenceWithListMap.kt")
@@ -1980,6 +2015,11 @@ public class DiagnosticsTestWithStdLibUsingJavacGenerated extends AbstractDiagno
             @TestMetadata("nestedSuspendCallInsideLambda.kt")
             public void testNestedSuspendCallInsideLambda() throws Exception {
                 runTest("compiler/testData/diagnostics/testsWithStdLib/coroutines/inference/nestedSuspendCallInsideLambda.kt");
+            }
+
+            @TestMetadata("qualifiedResolvedExpressionInsideBuilderInference.kt")
+            public void testQualifiedResolvedExpressionInsideBuilderInference() throws Exception {
+                runTest("compiler/testData/diagnostics/testsWithStdLib/coroutines/inference/qualifiedResolvedExpressionInsideBuilderInference.kt");
             }
 
             @TestMetadata("recursiveGenerators.kt")

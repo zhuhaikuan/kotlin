@@ -9,30 +9,35 @@ import com.intellij.util.ui.StatusText
 import com.intellij.util.ui.UIUtil
 import org.jetbrains.kotlin.idea.KotlinIcons
 import org.jetbrains.kotlin.idea.projectWizard.UiEditorUsageStats
-import org.jetbrains.kotlin.tools.projectWizard.core.ValuesReadingContext
+import org.jetbrains.kotlin.tools.projectWizard.core.context.ReadingContext
+import org.jetbrains.kotlin.tools.projectWizard.core.entity.ValidationResult
+import org.jetbrains.kotlin.tools.projectWizard.moduleConfigurators.moduleType
 import org.jetbrains.kotlin.tools.projectWizard.plugins.templates.TemplatesPlugin
 import org.jetbrains.kotlin.tools.projectWizard.settings.buildsystem.Module
 import org.jetbrains.kotlin.tools.projectWizard.templates.Template
 import org.jetbrains.kotlin.tools.projectWizard.templates.settings
+import org.jetbrains.kotlin.tools.projectWizard.wizard.IdeContext
 import org.jetbrains.kotlin.tools.projectWizard.wizard.ui.*
 import org.jetbrains.kotlin.tools.projectWizard.wizard.ui.Component
+import org.jetbrains.kotlin.tools.projectWizard.wizard.ui.setting.ErrorAwareComponent
+import org.jetbrains.kotlin.tools.projectWizard.wizard.ui.setting.SettingComponent
 import org.jetbrains.kotlin.tools.projectWizard.wizard.ui.setting.SettingsList
 import java.awt.*
 import javax.swing.JComponent
 import javax.swing.JPanel
 
 class TemplatesComponent(
-    valuesReadingContext: ValuesReadingContext,
+    ideContext: IdeContext,
     uiEditorUsagesStats: UiEditorUsageStats
-) : DynamicComponent(valuesReadingContext) {
+) : DynamicComponent(ideContext), ErrorAwareComponent {
     private val chooseTemplateComponent: ChooseTemplateComponent =
-        ChooseTemplateComponent(valuesReadingContext) { template ->
+        ChooseTemplateComponent(ideContext) { template ->
             uiEditorUsagesStats.moduleTemplatesSet++
             module?.template = template
             switchState(template)
-        }
+        }.asSubComponent()
 
-    private val templateSettingsComponent = TemplateSettingsComponent(valuesReadingContext) {
+    private val templateSettingsComponent = TemplateSettingsComponent(ideContext) {
         if (MessagesEx.showOkCancelDialog(
                 component,
                 "Do you want to remove selected template from module",
@@ -46,7 +51,10 @@ class TemplatesComponent(
             module?.template = null
             switchState(null)
         }
-    }
+    }.asSubComponent()
+
+    override fun findComponentWithError(error: ValidationResult.ValidationError): SettingComponent<*, *>? =
+        templateSettingsComponent.findComponentWithError(error)
 
     private fun switchState(selectedTemplate: Template?) {
         panel.removeAll()
@@ -77,9 +85,9 @@ class TemplatesComponent(
 }
 
 class ChooseTemplateComponent(
-    private val valuesReadingContext: ValuesReadingContext,
+    ideContext: IdeContext,
     private val onTemplateChosen: (Template) -> Unit
-) : DynamicComponent(valuesReadingContext) {
+) : DynamicComponent(ideContext) {
     private enum class State(val text: String) {
         MODULE_SELECTED_AND_TEMPLATES_AVAILABLE("You can configure a template for selected module"),
         MODULE_SELECTED_AND_NO_TEMPLATES_AVAILABLE("No templates available for selected module"),
@@ -98,7 +106,7 @@ class ChooseTemplateComponent(
     }
 
     private val allTemplates
-        get() = with(valuesReadingContext) {
+        get() = read {
             TemplatesPlugin::templates.propertyValue
         }
 
@@ -240,9 +248,9 @@ class TemplateDescriptionComponent(
 }
 
 private class TemplateSettingsComponent(
-    valuesReadingContext: ValuesReadingContext,
+    ideContext: IdeContext,
     removeTemplate: () -> Unit
-) : DynamicComponent(valuesReadingContext) {
+) : DynamicComponent(ideContext), ErrorAwareComponent {
     private val templateDescriptionComponent = TemplateDescriptionComponent(
         needRemoveButton = true,
         nonDefaultBackgroundColor = UIUtil.getEditorPaneBackground(),
@@ -251,9 +259,13 @@ private class TemplateSettingsComponent(
         component.bordered(needTopEmptyBorder = false, needBottomEmptyBorder = false)
     }
 
-    private val settings = SettingsList(emptyList(), valuesReadingContext).apply {
+    private val settings = SettingsList(emptyList(), ideContext).apply {
         component.bordered()
     }
+
+    override fun findComponentWithError(error: ValidationResult.ValidationError): SettingComponent<*, *>? =
+        settings.findComponentWithError(error)
+
 
     fun setTemplate(module: Module, selectedTemplate: Template) {
         settings.setSettings(selectedTemplate.settings(module))

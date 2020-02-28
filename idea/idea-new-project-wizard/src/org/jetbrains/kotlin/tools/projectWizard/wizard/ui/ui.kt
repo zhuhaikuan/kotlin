@@ -12,11 +12,13 @@ import com.intellij.ui.components.JBLabel
 import com.intellij.ui.components.JBTextField
 import com.intellij.util.ui.UIUtil
 import org.jetbrains.kotlin.idea.KotlinIcons
+import org.jetbrains.kotlin.tools.projectWizard.core.Failure
 import org.jetbrains.kotlin.tools.projectWizard.moduleConfigurators.ModuleConfigurator
 import org.jetbrains.kotlin.tools.projectWizard.moduleConfigurators.SimpleTargetConfigurator
 import org.jetbrains.kotlin.tools.projectWizard.moduleConfigurators.TargetConfigurator
 import org.jetbrains.kotlin.tools.projectWizard.plugins.kotlin.ModuleSubType
 import org.jetbrains.kotlin.tools.projectWizard.plugins.kotlin.ModuleType
+import org.jetbrains.kotlin.tools.projectWizard.plugins.kotlin.ProjectKind
 import org.jetbrains.kotlin.tools.projectWizard.settings.DisplayableSettingItem
 import org.jetbrains.kotlin.tools.projectWizard.settings.buildsystem.Module
 import org.jetbrains.kotlin.tools.projectWizard.settings.buildsystem.ModuleKind
@@ -63,6 +65,14 @@ internal fun hyperlinkLabel(
 
 internal fun String.asHtml() = "<html><body>$this</body></html>"
 
+fun Failure.asHtml() = when (errors.size) {
+    0 -> ""
+    1 -> errors.single().message
+    else -> {
+        val errorsList = errors.joinToString(separator = "") { "<li>${it.message}</li>" }
+        "<ul>$errorsList</ul>".asHtml()
+    }
+}
 
 val DisplayableSettingItem.htmlText
     get() = (text + greyText?.let { " <i>($greyText)</i>" }.orEmpty()).asHtml()
@@ -89,21 +99,37 @@ val ModuleType.icon: Icon
 
 val Module.icon: Icon
     get() = when (kind) {
-        ModuleKind.target -> configurator.moduleType.icon
+        ModuleKind.target -> (configurator as TargetConfigurator).moduleType.icon
         ModuleKind.multiplatform -> AllIcons.Nodes.Module
         ModuleKind.singleplatformJs -> KotlinIcons.JS
         ModuleKind.singleplatformJvm -> AllIcons.Nodes.Module
+    }
+
+val ProjectKind.icon: Icon
+    get() = when (this) {
+        ProjectKind.Singleplatform -> KotlinIcons.SMALL_LOGO
+        ProjectKind.Multiplatform -> KotlinIcons.MPP
+        ProjectKind.Android -> KotlinIcons.SMALL_LOGO
+        ProjectKind.Js -> KotlinIcons.JS
     }
 
 
 val ModuleSubType.icon: Icon
     get() = moduleType.icon
 
+val ModuleKind.icon: Icon
+    get() = when (this) {
+        ModuleKind.multiplatform -> KotlinIcons.MPP
+        ModuleKind.singleplatformJs -> KotlinIcons.JS
+        ModuleKind.singleplatformJvm -> AllIcons.Nodes.Module
+        ModuleKind.target -> AllIcons.Nodes.Module
+    }
+
 val ModuleConfigurator.icon: Icon
     get() = when (this) {
         is SimpleTargetConfigurator -> moduleSubType.icon
         is TargetConfigurator -> moduleType.icon
-        else -> AllIcons.Nodes.Module
+        else -> moduleKind.icon
     }
 
 fun ToolbarDecorator.createPanelWithPopupHandler(popupTarget: JComponent) = createPanel().apply toolbarApply@{

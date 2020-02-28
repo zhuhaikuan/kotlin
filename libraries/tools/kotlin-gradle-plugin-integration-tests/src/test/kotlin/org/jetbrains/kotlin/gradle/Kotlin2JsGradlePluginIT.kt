@@ -1,7 +1,7 @@
 package org.jetbrains.kotlin.gradle
 
 import org.gradle.api.logging.LogLevel
-import org.jetbrains.kotlin.gradle.targets.js.JsCompilerType
+import org.jetbrains.kotlin.gradle.plugin.KotlinJsCompilerType
 import org.jetbrains.kotlin.gradle.tasks.USING_JS_INCREMENTAL_COMPILATION_MESSAGE
 import org.jetbrains.kotlin.gradle.tasks.USING_JS_IR_BACKEND_MESSAGE
 import org.jetbrains.kotlin.gradle.util.getFileByName
@@ -39,7 +39,7 @@ class Kotlin2JsIrGradlePluginIT : AbstractKotlin2JsGradlePluginIT(true) {
 
             build(
                 "build",
-                options = defaultBuildOptions().copy(jsCompilerType = JsCompilerType.ir)
+                options = defaultBuildOptions().copy(jsCompilerType = KotlinJsCompilerType.IR)
             ) {
                 assertSuccessful()
 
@@ -53,7 +53,8 @@ class Kotlin2JsIrGradlePluginIT : AbstractKotlin2JsGradlePluginIT(true) {
             gradleBuildScript().appendText(
                 """${"\n"}
                 tasks {
-                    compileProductionKotlinJs {
+                    named("compileProductionKotlinJs").configure {
+                        this as org.jetbrains.kotlin.gradle.targets.js.ir.KotlinJsIrLink
                         type = org.jetbrains.kotlin.gradle.targets.js.ir.KotlinJsIrType.DEVELOPMENT
                     }
                 }
@@ -62,7 +63,7 @@ class Kotlin2JsIrGradlePluginIT : AbstractKotlin2JsGradlePluginIT(true) {
 
             build(
                 "build",
-                options = defaultBuildOptions().copy(jsCompilerType = JsCompilerType.ir)
+                options = defaultBuildOptions().copy(jsCompilerType = KotlinJsCompilerType.IR)
             ) {
                 assertSuccessful()
 
@@ -551,7 +552,7 @@ abstract class AbstractKotlin2JsGradlePluginIT(private val irBackend: Boolean) :
         gradleSettingsScript().modify(::transformBuildScriptWithPluginsDsl)
 
         if (irBackend) {
-            gradleProperties().appendText(jsCompilerType(JsCompilerType.ir))
+            gradleProperties().appendText(jsCompilerType(KotlinJsCompilerType.IR))
         }
 
         build("build") {

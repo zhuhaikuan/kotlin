@@ -449,6 +449,11 @@ public class FirDiagnosticsWithLightTreeTestGenerated extends AbstractFirDiagnos
         public void testVararg() throws Exception {
             runTest("compiler/fir/resolve/testData/resolve/arguments/vararg.kt");
         }
+
+        @TestMetadata("varargProjection.kt")
+        public void testVarargProjection() throws Exception {
+            runTest("compiler/fir/resolve/testData/resolve/arguments/varargProjection.kt");
+        }
     }
 
     @TestMetadata("compiler/fir/resolve/testData/resolve/builtins")
@@ -1299,9 +1304,19 @@ public class FirDiagnosticsWithLightTreeTestGenerated extends AbstractFirDiagnos
             runTest("compiler/fir/resolve/testData/resolve/problems/definitelyNotNullAndOriginalType.kt");
         }
 
+        @TestMetadata("extensionLambdaInDefaultArgument.kt")
+        public void testExtensionLambdaInDefaultArgument() throws Exception {
+            runTest("compiler/fir/resolve/testData/resolve/problems/extensionLambdaInDefaultArgument.kt");
+        }
+
         @TestMetadata("javaAccessorConversion.kt")
         public void testJavaAccessorConversion() throws Exception {
             runTest("compiler/fir/resolve/testData/resolve/problems/javaAccessorConversion.kt");
+        }
+
+        @TestMetadata("typesInLocalFunctions.kt")
+        public void testTypesInLocalFunctions() throws Exception {
+            runTest("compiler/fir/resolve/testData/resolve/problems/typesInLocalFunctions.kt");
         }
     }
 
@@ -1524,6 +1539,11 @@ public class FirDiagnosticsWithLightTreeTestGenerated extends AbstractFirDiagnos
             @TestMetadata("boundSmartcastsInBranches.kt")
             public void testBoundSmartcastsInBranches() throws Exception {
                 runTest("compiler/fir/resolve/testData/resolve/smartcasts/boundSmartcasts/boundSmartcastsInBranches.kt");
+            }
+
+            @TestMetadata("functionCallBound.kt")
+            public void testFunctionCallBound() throws Exception {
+                runTest("compiler/fir/resolve/testData/resolve/smartcasts/boundSmartcasts/functionCallBound.kt");
             }
         }
 
