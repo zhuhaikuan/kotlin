@@ -12,6 +12,7 @@ package kotlin
 public inline class UIntArray
 @Suppress("NON_PUBLIC_PRIMARY_CONSTRUCTOR_OF_INLINE_CLASS")
 @PublishedApi
+@CompileTimeCalculation
 internal constructor(@PublishedApi internal val storage: IntArray) : Collection<UInt> {
 
     /** Creates a new array of the specified [size], with all elements initialized to zero. */
@@ -72,6 +73,7 @@ internal constructor(@PublishedApi internal val storage: IntArray) : Collection<
 @SinceKotlin("1.3")
 @ExperimentalUnsignedTypes
 @kotlin.internal.InlineOnly
+@CompileTimeCalculation
 public inline fun UIntArray(size: Int, init: (Int) -> UInt): UIntArray {
     return UIntArray(IntArray(size) { index -> init(index).toInt() })
 }
@@ -79,4 +81,5 @@ public inline fun UIntArray(size: Int, init: (Int) -> UInt): UIntArray {
 @SinceKotlin("1.3")
 @ExperimentalUnsignedTypes
 @kotlin.internal.InlineOnly
+@CompileTimeCalculation
 public inline fun uintArrayOf(vararg elements: UInt): UIntArray = elements

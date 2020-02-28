@@ -12,6 +12,7 @@ package kotlin
 public inline class UByteArray
 @Suppress("NON_PUBLIC_PRIMARY_CONSTRUCTOR_OF_INLINE_CLASS")
 @PublishedApi
+@CompileTimeCalculation
 internal constructor(@PublishedApi internal val storage: ByteArray) : Collection<UByte> {
 
     /** Creates a new array of the specified [size], with all elements initialized to zero. */
@@ -72,6 +73,7 @@ internal constructor(@PublishedApi internal val storage: ByteArray) : Collection
 @SinceKotlin("1.3")
 @ExperimentalUnsignedTypes
 @kotlin.internal.InlineOnly
+@CompileTimeCalculation
 public inline fun UByteArray(size: Int, init: (Int) -> UByte): UByteArray {
     return UByteArray(ByteArray(size) { index -> init(index).toByte() })
 }
@@ -79,4 +81,5 @@ public inline fun UByteArray(size: Int, init: (Int) -> UByte): UByteArray {
 @SinceKotlin("1.3")
 @ExperimentalUnsignedTypes
 @kotlin.internal.InlineOnly
+@CompileTimeCalculation
 public inline fun ubyteArrayOf(vararg elements: UByte): UByteArray = elements
