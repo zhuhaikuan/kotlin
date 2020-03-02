@@ -18,7 +18,7 @@ fun addVfsListener(watcher: GradleScriptInputsWatcher) {
             private var files: Set<String> = Collections.emptySet()
 
             override fun isRelevant(path: String): Boolean {
-                return isInAffectedGradleProjectFiles(files, path)
+                return isInAffectedGradleProjectFiles(path)
             }
 
             override fun updateFile(file: VirtualFile, event: VFileEvent) {
@@ -33,6 +33,6 @@ fun addVfsListener(watcher: GradleScriptInputsWatcher) {
             }
 
         },
-        watcher.project,
+        watcher.project
     )
 }
