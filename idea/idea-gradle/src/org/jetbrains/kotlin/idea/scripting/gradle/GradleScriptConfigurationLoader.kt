@@ -78,7 +78,14 @@ class GradleScriptConfigurationLoader(project: Project) : DefaultScriptConfigura
             }
         }
 
-        return super.loadDependencies(isFirstLoad, ktFile, scriptDefinition, context)
+        // TODO gradle version
+        if (kotlinDslScriptsModelImportSupported("6.0")) {
+            runGradleImport(project)
+        } else {
+            super.loadDependencies(isFirstLoad, ktFile, scriptDefinition, context)
+        }
+
+        return true
     }
 
     override fun getInputsStamp(virtualFile: VirtualFile, file: KtFile): CachedConfigurationInputs {

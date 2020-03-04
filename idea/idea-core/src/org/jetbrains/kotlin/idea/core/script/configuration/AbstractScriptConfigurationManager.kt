@@ -7,6 +7,10 @@ package org.jetbrains.kotlin.idea.core.script.configuration
 
 import com.intellij.ProjectTopics
 import com.intellij.codeInsight.daemon.DaemonCodeAnalyzer
+import com.intellij.notification.NotificationAction
+import com.intellij.notification.NotificationDisplayType
+import com.intellij.notification.NotificationGroup
+import com.intellij.notification.NotificationType
 import com.intellij.openapi.extensions.Extensions
 import com.intellij.openapi.fileEditor.FileEditorManager
 import com.intellij.openapi.project.Project
@@ -159,6 +163,40 @@ internal abstract class AbstractScriptConfigurationManager(
         override fun postponeConfigurationReload(scope: ScriptConfigurationCacheScope) {
             cache.markOutOfDate(scope)
         }
+
+        override fun suggestToUpdateConfigurationIfOutOfDate(file: KtFile) {
+            val virtualFile = file.originalFile.virtualFile
+            if (virtualFile != null) {
+                val state = cache[virtualFile]
+                if (state != null && state.isUpToDate(project, virtualFile, file)) {
+                    return
+                }
+            }
+
+            if (false /* old gradle */) {
+                // todo for old gradle: we should show notification at the top of the editor
+                // todo to reload configuration for concrete file, but do not load configuration in advance
+            }
+
+            /* todo ? GradleImportHelper
+            showNotificationToRunProjectImport(project) { }
+            */
+
+            fun getNotificationGroup(): NotificationGroup {
+                return NotificationGroup.findRegisteredGroup("Kotlin script configurations")
+                    ?: NotificationGroup("Kotlin script configurations", NotificationDisplayType.STICKY_BALLOON, true)
+            }
+
+            val notification = getNotificationGroup().createNotification(
+                "Script configuration should be updated",
+                NotificationType.INFORMATION
+            )
+            notification.addAction(NotificationAction.createSimple("Load script configurations...") {
+                reloadIfOutOfDate(listOf(file), true)
+                notification.expire()
+            })
+            notification.notify(file.project)
+        }
     }
 
     private fun reloadIfOutOfDate(files: List<KtFile>, loadEvenWillNotBeApplied: Boolean): Boolean {
@@ -282,6 +320,7 @@ internal abstract class AbstractScriptConfigurationManager(
     // ScriptRootsCache
 
     private val classpathRootsLock = ReentrantLock()
+
     @Volatile
     private var _classpathRoots: ScriptClassRootsCache? = null
     private val classpathRoots: ScriptClassRootsCache
