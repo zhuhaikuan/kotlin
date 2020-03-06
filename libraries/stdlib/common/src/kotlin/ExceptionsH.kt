@@ -116,3 +116,22 @@ internal class KotlinNothingValueException : RuntimeException {
     constructor(message: String?, cause: Throwable?) : super(message, cause)
     constructor(cause: Throwable?) : super(cause)
 }
+
+
+/**
+ * When supported by the platform, adds the specified exception to the list of exceptions that were
+ * suppressed in order to deliver this exception.
+ */
+@SinceKotlin("1.4")
+public expect fun Throwable.addSuppressed(exception: Throwable)
+
+/**
+ * Returns a list of all exceptions that were suppressed in order to deliver this exception.
+ *
+ * The list can be empty:
+ * - if no exceptions were suppressed;
+ * - if the platform doesn't support suppressed exceptions;
+ * - if this [Throwable] instance has disabled the suppression.
+ */
+@SinceKotlin("1.4")
+public expect val Throwable.suppressedExceptions: List<Throwable>
