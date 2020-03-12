@@ -10,6 +10,7 @@
 package kotlin.collections
 
 import kotlin.contracts.*
+import kotlin.collections.builders.*
 
 internal object EmptyIterator : ListIterator<Nothing> {
     override fun hasNext(): Boolean = false
@@ -168,7 +169,7 @@ public inline fun <T> MutableList(size: Int, init: (index: Int) -> T): MutableLi
 @kotlin.internal.InlineOnly
 public inline fun <E> buildList(@BuilderInference builderAction: MutableList<E>.() -> Unit): List<E> {
     contract { callsInPlace(builderAction, InvocationKind.EXACTLY_ONCE) }
-    return ArrayList<E>().apply(builderAction)
+    return ListBuilder<E>().apply(builderAction)
 }
 
 /**
@@ -190,7 +191,7 @@ public inline fun <E> buildList(@BuilderInference builderAction: MutableList<E>.
 public inline fun <E> buildList(capacity: Int, @BuilderInference builderAction: MutableList<E>.() -> Unit): List<E> {
     contract { callsInPlace(builderAction, InvocationKind.EXACTLY_ONCE) }
     checkBuilderCapacity(capacity)
-    return ArrayList<E>(capacity).apply(builderAction)
+    return ListBuilder<E>(capacity).apply(builderAction).build()
 }
 
 
