@@ -7,10 +7,13 @@
 
 package org.jetbrains.kotlin.idea.scripting.gradle
 
+import com.intellij.notification.*
 import com.intellij.openapi.externalSystem.importing.ImportSpecBuilder
 import com.intellij.openapi.externalSystem.util.ExternalSystemApiUtil
 import com.intellij.openapi.externalSystem.util.ExternalSystemUtil
 import com.intellij.openapi.project.Project
+import com.intellij.openapi.util.Key
+import org.jetbrains.kotlin.psi.UserDataProperty
 import org.jetbrains.kotlin.idea.scripting.gradle.importing.KotlinDslScriptModelResolver
 import org.jetbrains.plugins.gradle.service.project.GradleIncrementalResolverPolicy
 import org.jetbrains.plugins.gradle.util.GradleConstants
