@@ -7,7 +7,6 @@ package org.jetbrains.kotlin.idea.inspections
 
 import com.intellij.codeInspection.InspectionSuppressor
 import com.intellij.codeInspection.ProblemDescriptor
-import com.intellij.codeInspection.SuppressManager
 import com.intellij.codeInspection.SuppressQuickFix
 import com.intellij.openapi.project.Project
 import com.intellij.psi.PsiElement
@@ -33,15 +32,7 @@ class KotlinInspectionSuppressor : InspectionSuppressor {
         }.toTypedArray()
     }
 
-    override fun isSuppressedFor(element: PsiElement, toolId: String): Boolean {
-        if (SuppressManager.getInstance()!!.isSuppressedFor(element, toolId)) {
-            return true
-        }
-
-        if (KotlinCacheService.getInstance(element.project).getSuppressionCache().isSuppressed(element, toolId, Severity.WARNING)) {
-            return true
-        }
-
-        return false
-    }
+    override fun isSuppressedFor(element: PsiElement, toolId: String): Boolean = KotlinCacheService.getInstance(element.project)
+        .getSuppressionCache()
+        .isSuppressed(element, toolId, Severity.WARNING)
 }
