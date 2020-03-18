@@ -14,11 +14,11 @@ import com.intellij.openapi.externalSystem.util.ExternalSystemUtil
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.util.Key
 import org.jetbrains.kotlin.psi.UserDataProperty
-import org.jetbrains.plugins.gradle.settings.GradleProjectSettings
+import org.jetbrains.kotlin.idea.scripting.gradle.importing.KotlinDslScriptModelResolver
+import org.jetbrains.plugins.gradle.service.project.GradleIncrementalResolverPolicy
 import org.jetbrains.plugins.gradle.util.GradleConstants
 
 fun runPartialGradleImport(project: Project) {
-    // TODO: partial import
     val gradleSettings = ExternalSystemApiUtil.getSettings(project, GradleConstants.SYSTEM_ID)
     val projectSettings = gradleSettings.getLinkedProjectsSettings()
         .filterIsInstance<GradleProjectSettings>()
@@ -27,6 +27,10 @@ fun runPartialGradleImport(project: Project) {
     ExternalSystemUtil.refreshProject(
         projectSettings.externalProjectPath,
         ImportSpecBuilder(project, GradleConstants.SYSTEM_ID)
-            .build()
+            .projectResolverPolicy(
+                GradleIncrementalResolverPolicy {
+                    it is KotlinDslScriptModelResolver
+                }
+            )
     )
 }
