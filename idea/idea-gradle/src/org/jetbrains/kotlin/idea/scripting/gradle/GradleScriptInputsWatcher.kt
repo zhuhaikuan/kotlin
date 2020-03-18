@@ -35,6 +35,8 @@ class GradleScriptInputsWatcher(val project: Project) : PersistentStateComponent
         fun fileChanged(filePath: String, ts: Long) {
             lastModifiedFiles.fileChanged(ts, filePath)
         }
+
+        var gradleProjectRoots: Set<String>? = null
     }
 
     override fun getState(): Storage {
@@ -52,6 +54,12 @@ class GradleScriptInputsWatcher(val project: Project) : PersistentStateComponent
     fun clearState() {
         storage = Storage()
     }
+
+    fun addGradleProjectRoots(roots: Set<String>) {
+        storage.gradleProjectRoots = roots
+    }
+
+    fun getGradleProjectRoots(): Set<String>? = storage.gradleProjectRoots
 
     @TestOnly
     fun clearAndRefillState() {

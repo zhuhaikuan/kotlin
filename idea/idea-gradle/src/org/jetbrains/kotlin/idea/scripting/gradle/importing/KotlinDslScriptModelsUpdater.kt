@@ -62,6 +62,7 @@ class KotlinDslScriptModelsUpdater : ExternalSystemTaskNotificationListenerAdapt
                 .firstOrNull() ?: return
 
             saveGradleProjectRootsAfterImport(
+                project,
                 projectSettings.modules.takeIf { it.isNotEmpty() } ?: setOf(projectSettings.externalProjectPath)
             )
 

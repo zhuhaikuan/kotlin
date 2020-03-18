@@ -6,6 +6,7 @@
 package org.jetbrains.kotlin.idea.scripting.gradle
 
 import com.intellij.openapi.application.ApplicationManager
+import com.intellij.openapi.components.service
 import com.intellij.openapi.externalSystem.util.ExternalSystemApiUtil
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.util.registry.Registry
@@ -40,17 +41,17 @@ fun isInAffectedGradleProjectFiles(project: Project, filePath: String): Boolean 
     return false
 }
 
-private var cachedGradleProjectsRoots: Set<String>? = null
-
 private fun getGradleProjectsRoots(project: Project): Set<String> {
-    if (cachedGradleProjectsRoots == null) {
-        cachedGradleProjectsRoots = computeGradleProjectRoots(project)
+    val watcher = project.service<GradleScriptInputsWatcher>()
+    val roots = watcher.getGradleProjectRoots()
+    if (roots == null) {
+        watcher.addGradleProjectRoots(computeGradleProjectRoots(project))
     }
-    return cachedGradleProjectsRoots ?: emptySet()
+    return watcher.getGradleProjectRoots() ?: emptySet()
 }
 
-fun saveGradleProjectRootsAfterImport(roots: Set<String>) {
-    cachedGradleProjectsRoots = roots
+fun saveGradleProjectRootsAfterImport(project: Project, roots: Set<String>) {
+    project.service<GradleScriptInputsWatcher>().addGradleProjectRoots(roots)
 }
 
 private fun computeGradleProjectRoots(project: Project): Set<String> {
