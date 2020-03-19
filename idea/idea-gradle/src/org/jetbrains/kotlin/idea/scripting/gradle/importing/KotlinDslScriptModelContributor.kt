@@ -7,14 +7,15 @@ package org.jetbrains.kotlin.idea.scripting.gradle.importing
 
 import org.gradle.tooling.model.kotlin.dsl.KotlinDslScriptsModel
 import org.jetbrains.kotlin.idea.scripting.gradle.kotlinDslScriptsModelImportSupported
-import org.jetbrains.plugins.gradle.service.project.ProjectModelBuilder
+import org.jetbrains.plugins.gradle.service.project.ModifiableGradleProjectModel
 import org.jetbrains.plugins.gradle.service.project.ProjectModelContributor
 import org.jetbrains.plugins.gradle.service.project.ProjectResolverContext
 import org.jetbrains.plugins.gradle.service.project.ToolingModelsProvider
 
+@Suppress("UnstableApiUsage")
 class KotlinDslScriptModelContributor : ProjectModelContributor {
     override fun accept(
-        projectModelBuilder: ProjectModelBuilder,
+        projectModelBuilder: ModifiableGradleProjectModel,
         toolingModelsProvider: ToolingModelsProvider,
         resolverContext: ProjectResolverContext
     ) {
