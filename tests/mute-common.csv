@@ -57,3 +57,5 @@ org.jetbrains.kotlin.util.KotlinVersionsTest.testVersionsAreConsistent, KT-35567
 org.jetbrains.kotlinx.serialization.SerializationIrBytecodeListingTestGenerated.testBasic, wait until new serialziation runtime version will be publicly available
 org.jetbrains.kotlin.jvm.compiler.CompileKotlinAgainstJavaTestGenerated.WithAPT.testClassWithTypeParameter, KT-36448
 org.jetbrains.kotlin.jvm.compiler.CompileKotlinAgainstJavaTestGenerated.WithoutAPT.testClassWithTypeParameter, KT-36448
+org.jetbrains.kotlin.idea.quickfix.QuickFixTestGenerated$Suppress$AnnotationPosition.testTopLevelFunctionSuppressOnFileWithSuppress, FLAKY investigating
+org.jetbrains.kotlin.idea.quickfix.QuickFixTestGenerated$Suppress$AnnotationPosition.testTopLevelFunctionSuppressOnFile, FLAKY investigating
