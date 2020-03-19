@@ -19,3 +19,17 @@ public inline fun <T, R> Array<out T>.fold(initial: R, operation: (acc: R, T) ->
     for (element in this) accumulator = operation(accumulator, element)
     return accumulator
 }
+
+
+public actual fun Throwable.stackTraceToString(): String = toString()
+
+public actual fun Throwable.printStackTrace() {
+    TODO("Not implemented in reduced runtime")
+}
+
+public actual fun Throwable.addSuppressed(exception: Throwable) {
+    TODO("Not implemented in reduced runtime")
+}
+
+public actual val Throwable.suppressedExceptions: List<Throwable>
+    get() = TODO("Not implemented in reduced runtime")
