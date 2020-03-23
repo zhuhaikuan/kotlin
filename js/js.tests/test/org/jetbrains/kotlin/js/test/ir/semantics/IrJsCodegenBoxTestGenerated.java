@@ -9463,6 +9463,34 @@ public class IrJsCodegenBoxTestGenerated extends AbstractIrJsCodegenBoxTest {
         public void testSuspendFunInterfaceConversionCodegen() throws Exception {
             runTest("compiler/testData/codegen/box/funInterface/suspendFunInterfaceConversionCodegen.kt");
         }
+
+        @TestMetadata("compiler/testData/codegen/box/funInterface/equality")
+        @TestDataPath("$PROJECT_ROOT")
+        @RunWith(JUnit3RunnerWithInners.class)
+        public static class Equality extends AbstractIrJsCodegenBoxTest {
+            private void runTest(String testDataFilePath) throws Exception {
+                KotlinTestUtils.runTest0(this::doTest, TargetBackend.JS_IR, testDataFilePath);
+            }
+
+            public void testAllFilesPresentInEquality() throws Exception {
+                KotlinTestUtils.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("compiler/testData/codegen/box/funInterface/equality"), Pattern.compile("^(.+)\\.kt$"), null, TargetBackend.JS_IR, true);
+            }
+
+            @TestMetadata("functionReferences.kt")
+            public void testFunctionReferences() throws Exception {
+                runTest("compiler/testData/codegen/box/funInterface/equality/functionReferences.kt");
+            }
+
+            @TestMetadata("lambdaRuntimeConversion.kt")
+            public void testLambdaRuntimeConversion() throws Exception {
+                runTest("compiler/testData/codegen/box/funInterface/equality/lambdaRuntimeConversion.kt");
+            }
+
+            @TestMetadata("simpleLambdas.kt")
+            public void testSimpleLambdas() throws Exception {
+                runTest("compiler/testData/codegen/box/funInterface/equality/simpleLambdas.kt");
+            }
+        }
     }
 
     @TestMetadata("compiler/testData/codegen/box/functions")

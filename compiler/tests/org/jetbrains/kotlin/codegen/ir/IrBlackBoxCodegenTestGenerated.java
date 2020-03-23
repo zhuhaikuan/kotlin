@@ -11038,6 +11038,49 @@ public class IrBlackBoxCodegenTestGenerated extends AbstractIrBlackBoxCodegenTes
         public void testSuspendFunInterfaceConversionCodegen() throws Exception {
             runTest("compiler/testData/codegen/box/funInterface/suspendFunInterfaceConversionCodegen.kt");
         }
+
+        @TestMetadata("compiler/testData/codegen/box/funInterface/equality")
+        @TestDataPath("$PROJECT_ROOT")
+        @RunWith(JUnit3RunnerWithInners.class)
+        public static class Equality extends AbstractIrBlackBoxCodegenTest {
+            private void runTest(String testDataFilePath) throws Exception {
+                KotlinTestUtils.runTest(this::doTest, TargetBackend.JVM_IR, testDataFilePath);
+            }
+
+            public void testAllFilesPresentInEquality() throws Exception {
+                KotlinTestUtils.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("compiler/testData/codegen/box/funInterface/equality"), Pattern.compile("^(.+)\\.kt$"), null, TargetBackend.JVM_IR, true);
+            }
+
+            @TestMetadata("functionReferences.kt")
+            public void testFunctionReferences() throws Exception {
+                runTest("compiler/testData/codegen/box/funInterface/equality/functionReferences.kt");
+            }
+
+            @TestMetadata("functionReferencesJava.kt")
+            public void testFunctionReferencesJava() throws Exception {
+                runTest("compiler/testData/codegen/box/funInterface/equality/functionReferencesJava.kt");
+            }
+
+            @TestMetadata("lambdaRuntimeConversion.kt")
+            public void testLambdaRuntimeConversion() throws Exception {
+                runTest("compiler/testData/codegen/box/funInterface/equality/lambdaRuntimeConversion.kt");
+            }
+
+            @TestMetadata("lambdaRuntimeConversionJava.kt")
+            public void testLambdaRuntimeConversionJava() throws Exception {
+                runTest("compiler/testData/codegen/box/funInterface/equality/lambdaRuntimeConversionJava.kt");
+            }
+
+            @TestMetadata("simpleLambdas.kt")
+            public void testSimpleLambdas() throws Exception {
+                runTest("compiler/testData/codegen/box/funInterface/equality/simpleLambdas.kt");
+            }
+
+            @TestMetadata("simpleLambdasJava.kt")
+            public void testSimpleLambdasJava() throws Exception {
+                runTest("compiler/testData/codegen/box/funInterface/equality/simpleLambdasJava.kt");
+            }
+        }
     }
 
     @TestMetadata("compiler/testData/codegen/box/functions")

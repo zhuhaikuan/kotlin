@@ -72,18 +72,22 @@ internal class FunctionReferenceLowering(private val context: JvmBackendContext)
         return if (expression.isIgnored) expression else FunctionReferenceBuilder(expression).build()
     }
 
-    // Handle SAM conversions which wrap a function reference:
+    // Handle SAM conversions which wrap a function reference to a lambda:
     //     class sam$n(private val receiver: R) : Interface { override fun method(...) = receiver.target(...) }
     //
     // This avoids materializing an invokable KFunction representing, thus producing one less class.
     // This is actually very common, as `Interface { something }` is a local function + a SAM-conversion
     // of a reference to it into an implementation.
+    //
+    // Note that function references to non-lambdas, including adapted function references, are not handled here,
+    // because they need proper equals/hashCode, which is generated in JvmSingleAbstractMethodLowering.
     override fun visitTypeOperator(expression: IrTypeOperatorCall): IrExpression {
         if (expression.operator == IrTypeOperator.SAM_CONVERSION) {
             val invokable = expression.argument
-            val reference = if (invokable is IrFunctionReference) {
-                invokable
-            } else if (invokable is IrBlock && invokable.origin.isLambda && invokable.statements.last() is IrFunctionReference) {
+            val reference = if (
+                invokable is IrBlock && invokable.origin.isLambda && invokable.statements.last() is IrFunctionReference &&
+                (invokable.statements.first() as? IrFunction)?.origin != IrDeclarationOrigin.ADAPTER_FOR_CALLABLE_REFERENCE
+            ) {
                 invokable.statements.dropLast(1).forEach { it.transform(this, null) }
                 invokable.statements.last() as IrFunctionReference
             } else {
