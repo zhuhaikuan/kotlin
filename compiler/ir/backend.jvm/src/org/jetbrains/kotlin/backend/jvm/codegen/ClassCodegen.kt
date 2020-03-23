@@ -12,7 +12,6 @@ import org.jetbrains.kotlin.backend.jvm.lower.buildAssertionsDisabledField
 import org.jetbrains.kotlin.backend.jvm.lower.hasAssertionsDisabledField
 import org.jetbrains.kotlin.codegen.*
 import org.jetbrains.kotlin.codegen.binding.CodegenBinding
-import org.jetbrains.kotlin.codegen.inline.DefaultSourceMapper
 import org.jetbrains.kotlin.codegen.inline.NameGenerator
 import org.jetbrains.kotlin.codegen.inline.ReifiedTypeParametersUsages
 import org.jetbrains.kotlin.codegen.inline.SourceMapper
@@ -87,14 +86,7 @@ open class ClassCodegen protected constructor(
         return state.factory.newVisitor(classOrigin, type, irClass.fileParent.loadSourceFilesInfo())
     }
 
-    private var sourceMapper: DefaultSourceMapper? = null
-
-    fun getOrCreateSourceMapper(): DefaultSourceMapper {
-        if (sourceMapper == null) {
-            sourceMapper = context.getSourceMapper(irClass)
-        }
-        return sourceMapper!!
-    }
+    val sourceMapper = context.getSourceMapper(irClass)
 
     private val serializerExtension = JvmSerializerExtension(visitor.serializationBindings, state, typeMapper)
     private val serializer: DescriptorSerializer? =
@@ -117,10 +109,6 @@ open class ClassCodegen protected constructor(
     private var generatingClInit = false
 
     fun generate(): ReifiedTypeParametersUsages {
-        if (withinInline) {
-            getOrCreateSourceMapper() //initialize default mapping that would be later written in class file
-        }
-
         val signature = getSignature(irClass, type, irClass.getSuperClassInfo(typeMapper), typeMapper)
         // Ensure that the backend only produces class names that would be valid in the frontend for JVM.
         if (context.state.classBuilderMode.generateBodies && signature.hasInvalidName()) {
@@ -184,8 +172,8 @@ open class ClassCodegen protected constructor(
     fun done() {
         generateInnerAndOuterClasses()
 
-        sourceMapper?.let {
-            SourceMapper.flushToClassBuilder(it, visitor)
+        if (withinInline || !sourceMapper.isTrivial) {
+            SourceMapper.flushToClassBuilder(sourceMapper, visitor)
         }
 
         visitor.done()

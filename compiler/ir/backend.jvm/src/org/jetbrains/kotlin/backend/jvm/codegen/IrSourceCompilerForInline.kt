@@ -94,7 +94,7 @@ class IrSourceCompilerForInline(
         }
 
     override val lazySourceMapper: DefaultSourceMapper
-        get() = codegen.smapOverride ?: codegen.classCodegen.getOrCreateSourceMapper()
+        get() = codegen.smapOverride ?: codegen.classCodegen.sourceMapper
 
     override fun generateLambdaBody(lambdaInfo: ExpressionLambda): SMAPAndMethodNode {
         val smap = codegen.context.getSourceMapper(codegen.classCodegen.irClass)
@@ -120,7 +120,7 @@ class IrSourceCompilerForInline(
             callee
         val classCodegen = FakeClassCodegen(forInlineFunction, codegen.classCodegen)
         val node = FunctionCodegen(forInlineFunction, classCodegen).generate()
-        return SMAPAndMethodNode(node, SMAP(classCodegen.getOrCreateSourceMapper().resultMappings))
+        return SMAPAndMethodNode(node, SMAP(classCodegen.sourceMapper.resultMappings))
     }
 
     override fun hasFinallyBlocks() = data.hasFinallyBlocks()

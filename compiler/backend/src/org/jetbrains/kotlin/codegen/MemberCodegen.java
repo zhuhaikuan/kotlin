@@ -89,6 +89,7 @@ public abstract class MemberCodegen<T extends KtPureElement/* TODO: & KtDeclarat
     private NameGenerator inlineNameGenerator;
     private boolean jvmAssertFieldGenerated;
 
+    private boolean alwaysWriteSourceMap;
     private DefaultSourceMapper sourceMapper;
 
     public MemberCodegen(
@@ -183,8 +184,8 @@ public abstract class MemberCodegen<T extends KtPureElement/* TODO: & KtDeclarat
 
         writeInnerClasses();
 
-        if (sourceMapper != null) {
-            SourceMapper.Companion.flushToClassBuilder(sourceMapper, v);
+        if (alwaysWriteSourceMap || (sourceMapper != null && !sourceMapper.isTrivial())) {
+            SourceMapper.Companion.flushToClassBuilder(getOrCreateSourceMapper(), v);
         }
 
         v.done();
@@ -726,6 +727,19 @@ public abstract class MemberCodegen<T extends KtPureElement/* TODO: & KtDeclarat
             sourceMapper = new DefaultSourceMapper(SourceInfo.Companion.createInfo((KtElement)element, getClassName()));
         }
         return sourceMapper;
+    }
+
+    protected void initDefaultSourceMappingIfNeeded() {
+        if (state.isInlineDisabled()) return;
+
+        CodegenContext parentContext = context.getParentContext();
+        while (parentContext != null) {
+            if (parentContext.isInlineMethodContext()) {
+                alwaysWriteSourceMap = true;
+                return;
+            }
+            parentContext = parentContext.getParentContext();
+        }
     }
 
     protected void generateConstInstance(@NotNull Type thisAsmType, @NotNull Type fieldAsmType) {

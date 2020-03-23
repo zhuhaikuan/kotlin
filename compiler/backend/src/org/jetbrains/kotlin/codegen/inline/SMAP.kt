@@ -207,6 +207,9 @@ open class DefaultSourceMapper(val sourceInfo: SourceInfo) : SourceMapper {
         fileMappings.put(createKey(name, path), origin)
     }
 
+    val isTrivial: Boolean
+        get() = fileMappings.size == 1 && fileMappings.values.first().size == 1
+
     constructor(sourceInfo: SourceInfo, fileMappings: List<FileMapping>) : this(sourceInfo) {
         fileMappings.asSequence().drop(1)
             //default one mapped through sourceInfo
@@ -289,6 +292,9 @@ class RawFileMapping(val name: String, val path: String) {
                 addRangeMapping(range)
             }
         }
+
+    val size: Int
+        get() = rangeMappings.size
 
     fun initRange(start: Int, end: Int) {
         assert(rangeMappings.isEmpty()) { "initRange should only be called for empty mapping" }

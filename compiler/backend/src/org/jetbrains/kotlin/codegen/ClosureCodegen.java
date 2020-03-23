@@ -52,7 +52,6 @@ import java.util.List;
 import static org.jetbrains.kotlin.codegen.AsmUtil.*;
 import static org.jetbrains.kotlin.codegen.JvmCodegenUtil.isConst;
 import static org.jetbrains.kotlin.codegen.binding.CodegenBinding.CLOSURE;
-import static org.jetbrains.kotlin.codegen.inline.InlineCodegenUtilsKt.initDefaultSourceMappingIfNeeded;
 import static org.jetbrains.kotlin.codegen.serialization.JvmSerializationBindings.METHOD_FOR_FUNCTION;
 import static org.jetbrains.kotlin.resolve.jvm.AsmTypes.*;
 import static org.jetbrains.kotlin.resolve.jvm.diagnostics.JvmDeclarationOrigin.NO_ORIGIN;
@@ -156,7 +155,7 @@ public class ClosureCodegen extends MemberCodegen<KtElement> {
                 superInterfaceAsmTypes
         );
 
-        initDefaultSourceMappingIfNeeded(context, this, state);
+        initDefaultSourceMappingIfNeeded();
 
         v.visitSource(element.getContainingFile().getName(), null);
     }
