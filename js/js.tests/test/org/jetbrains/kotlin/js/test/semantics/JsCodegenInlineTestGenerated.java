@@ -3037,6 +3037,11 @@ public class JsCodegenInlineTestGenerated extends AbstractJsCodegenInlineTest {
             public void testNoSmapWithProperty() throws Exception {
                 runTest("compiler/testData/codegen/boxInline/smap/inlineOnly/noSmapWithProperty.kt");
             }
+
+            @TestMetadata("stdlibInlineOnly.kt")
+            public void testStdlibInlineOnly() throws Exception {
+                runTest("compiler/testData/codegen/boxInline/smap/inlineOnly/stdlibInlineOnly.kt");
+            }
         }
 
         @TestMetadata("compiler/testData/codegen/boxInline/smap/newsmap")

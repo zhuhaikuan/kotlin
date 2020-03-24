@@ -20,6 +20,7 @@ import org.jetbrains.kotlin.codegen.context.*;
 import org.jetbrains.kotlin.codegen.coroutines.CoroutineCodegenUtilKt;
 import org.jetbrains.kotlin.codegen.coroutines.SuspendFunctionGenerationStrategy;
 import org.jetbrains.kotlin.codegen.coroutines.SuspendInlineFunctionGenerationStrategy;
+import org.jetbrains.kotlin.codegen.inline.DefaultSourceMapper;
 import org.jetbrains.kotlin.codegen.state.GenerationState;
 import org.jetbrains.kotlin.codegen.state.KotlinTypeMapper;
 import org.jetbrains.kotlin.codegen.state.TypeMapperUtilsKt;
@@ -77,7 +78,6 @@ import static org.jetbrains.kotlin.codegen.state.KotlinTypeMapper.isAccessor;
 import static org.jetbrains.kotlin.descriptors.CallableMemberDescriptor.Kind.DECLARATION;
 import static org.jetbrains.kotlin.descriptors.CallableMemberDescriptor.Kind.DELEGATION;
 import static org.jetbrains.kotlin.descriptors.ModalityKt.isOverridable;
-import static org.jetbrains.kotlin.load.java.JvmAbi.LOCAL_VARIABLE_INLINE_ARGUMENT_SYNTHETIC_LINE_NUMBER;
 import static org.jetbrains.kotlin.resolve.DescriptorToSourceUtils.getSourceFromDescriptor;
 import static org.jetbrains.kotlin.resolve.DescriptorUtils.*;
 import static org.jetbrains.kotlin.resolve.inline.InlineOnlyKt.isEffectivelyInlineOnly;
@@ -647,7 +647,20 @@ public class FunctionCodegen {
                     KtDeclarationWithBody declaration = ((ClosureGenerationStrategy) strategy).getDeclaration();
                     BindingContext bindingContext = typeMapper.getBindingContext();
                     if (declaration instanceof KtFunctionLiteral && isLambdaPassedToInlineOnly((KtFunction) declaration, bindingContext)) {
-                        lineNumber = LOCAL_VARIABLE_INLINE_ARGUMENT_SYNTHETIC_LINE_NUMBER;
+                        // We want the debugger to be able to break both on the inline call itself, plus on each
+                        // invocation of the inline lambda passed to it. For that to happen there needs to be at least
+                        // one different line number in between those breakpoints for the VM to emit a locatable event.
+                        // @InlineOnly functions, however, contain no line numbers, so if the lambda is single-line,
+                        // the entire call will "meld" into a single region. To break it up, we insert a different line
+                        // number that is remapped by the SMAP back to the lambda.
+                        Integer lambdaLine = CodegenUtil.getLineNumberForElement(declaration, false);
+                        Integer firstBodyLine = CodegenUtil.getLineNumberForElement(declaration.getBodyExpression(), false);
+                        if (lambdaLine != null && lambdaLine.equals(firstBodyLine)) {
+                            DefaultSourceMapper smap = parentCodegen.getOrCreateSourceMapper();
+                            lineNumber = smap.mapLineNumber(
+                                    lambdaLine, smap.getSourceInfo().getSource(), smap.getSourceInfo().getPathOrCleanFQN()
+                            );
+                        }
                     }
                 }
                 lambdaFakeIndex = newFakeTempIndex(mv, frameMap, lineNumber);
