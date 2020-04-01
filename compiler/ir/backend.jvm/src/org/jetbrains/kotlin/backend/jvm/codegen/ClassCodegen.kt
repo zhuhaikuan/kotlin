@@ -12,7 +12,6 @@ import org.jetbrains.kotlin.backend.jvm.lower.buildAssertionsDisabledField
 import org.jetbrains.kotlin.backend.jvm.lower.hasAssertionsDisabledField
 import org.jetbrains.kotlin.codegen.*
 import org.jetbrains.kotlin.codegen.binding.CodegenBinding
-import org.jetbrains.kotlin.codegen.inline.DefaultSourceMapper
 import org.jetbrains.kotlin.codegen.inline.NameGenerator
 import org.jetbrains.kotlin.codegen.inline.ReifiedTypeParametersUsages
 import org.jetbrains.kotlin.codegen.inline.SourceMapper
@@ -88,9 +87,9 @@ open class ClassCodegen protected constructor(
         return state.factory.newVisitor(classOrigin, type, irClass.fileParent.loadSourceFilesInfo())
     }
 
-    private var sourceMapper: DefaultSourceMapper? = null
+    private var sourceMapper: SourceMapper? = null
 
-    fun getOrCreateSourceMapper(): DefaultSourceMapper {
+    fun getOrCreateSourceMapper(): SourceMapper {
         if (sourceMapper == null) {
             sourceMapper = context.getSourceMapper(irClass)
         }

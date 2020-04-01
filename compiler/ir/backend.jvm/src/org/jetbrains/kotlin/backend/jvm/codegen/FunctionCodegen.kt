@@ -12,7 +12,7 @@ import org.jetbrains.kotlin.backend.jvm.JvmBackendContext
 import org.jetbrains.kotlin.backend.jvm.JvmLoweredDeclarationOrigin
 import org.jetbrains.kotlin.backend.jvm.lower.suspendFunctionOriginal
 import org.jetbrains.kotlin.codegen.AsmUtil
-import org.jetbrains.kotlin.codegen.inline.DefaultSourceMapper
+import org.jetbrains.kotlin.codegen.inline.SourceMapper
 import org.jetbrains.kotlin.codegen.inline.wrapWithMaxLocalCalc
 import org.jetbrains.kotlin.codegen.mangleNameIfNeeded
 import org.jetbrains.kotlin.codegen.state.GenerationState
@@ -43,14 +43,14 @@ class FunctionCodegen(
 ) {
     private val context = classCodegen.context
 
-    fun generate(smapOverride: DefaultSourceMapper? = null): MethodNode =
+    fun generate(smapOverride: SourceMapper? = null): MethodNode =
         try {
             doGenerate(smapOverride)
         } catch (e: Throwable) {
             throw RuntimeException("Exception while generating code for:\n${irFunction.dump()}", e)
         }
 
-    private fun doGenerate(smapOverride: DefaultSourceMapper?): MethodNode {
+    private fun doGenerate(smapOverride: SourceMapper?): MethodNode {
         val signature = context.methodSignatureMapper.mapSignatureWithGeneric(irFunction)
         val flags = irFunction.calculateMethodFlags()
         val methodNode = MethodNode(

@@ -13,14 +13,12 @@ import org.jetbrains.annotations.Nullable;
 import org.jetbrains.kotlin.backend.common.CodegenUtil;
 import org.jetbrains.kotlin.codegen.binding.CodegenBinding;
 import org.jetbrains.kotlin.codegen.context.*;
-import org.jetbrains.kotlin.codegen.inline.DefaultSourceMapper;
 import org.jetbrains.kotlin.codegen.inline.NameGenerator;
 import org.jetbrains.kotlin.codegen.inline.ReifiedTypeParametersUsages;
 import org.jetbrains.kotlin.codegen.inline.SourceMapper;
 import org.jetbrains.kotlin.codegen.state.GenerationState;
 import org.jetbrains.kotlin.codegen.state.KotlinTypeMapper;
 import org.jetbrains.kotlin.codegen.state.TypeMapperUtilsKt;
-import org.jetbrains.kotlin.config.ApiVersion;
 import org.jetbrains.kotlin.config.LanguageFeature;
 import org.jetbrains.kotlin.descriptors.*;
 import org.jetbrains.kotlin.descriptors.annotations.AnnotatedImpl;
@@ -90,7 +88,7 @@ public abstract class MemberCodegen<T extends KtPureElement/* TODO: & KtDeclarat
     private NameGenerator inlineNameGenerator;
     private boolean jvmAssertFieldGenerated;
 
-    private DefaultSourceMapper sourceMapper;
+    private SourceMapper sourceMapper;
 
     public MemberCodegen(
             @NotNull GenerationState state,
@@ -721,10 +719,10 @@ public abstract class MemberCodegen<T extends KtPureElement/* TODO: & KtDeclarat
     }
 
     @NotNull
-    public DefaultSourceMapper getOrCreateSourceMapper() {
+    public SourceMapper getOrCreateSourceMapper() {
         if (sourceMapper == null) {
             // note: this is used in InlineCodegen and the element is always physical (KtElement) there
-            sourceMapper = new DefaultSourceMapper(SourceInfo.Companion.createInfo((KtElement)element, getClassName()));
+            sourceMapper = new SourceMapper(SourceInfo.Companion.createInfo((KtElement)element, getClassName()));
         }
         return sourceMapper;
     }

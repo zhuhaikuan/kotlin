@@ -8,7 +8,6 @@ package org.jetbrains.kotlin.codegen.inline
 import com.intellij.psi.PsiElement
 import com.intellij.util.ArrayUtil
 import org.jetbrains.kotlin.builtins.KotlinBuiltIns
-import org.jetbrains.kotlin.builtins.isSuspendFunctionTypeOrSubtype
 import org.jetbrains.kotlin.codegen.*
 import org.jetbrains.kotlin.codegen.AsmUtil.isPrimitive
 import org.jetbrains.kotlin.codegen.context.ClosureContext
@@ -233,7 +232,7 @@ abstract class InlineCodegen<out T : BaseExpressionCodegen>(
         val inliner = MethodInliner(
             node, parameters, info, FieldRemapper(null, null, parameters), isSameModule,
             "Method inlining " + sourceCompiler.callElementText,
-            NestedSourceMapper(defaultSourceMapper, nodeAndSmap.classSMAP), info.callSiteInfo,
+            SourceMapCopier(defaultSourceMapper, nodeAndSmap.classSMAP), info.callSiteInfo,
             if (functionDescriptor.isInlineOnly()) InlineOnlySmapSkipper(codegen) else null,
             !isInlinedToInlineFunInKotlinRuntime()
         ) //with captured
