@@ -2267,16 +2267,6 @@ class NewMultiplatformIT : BaseGradleIT() {
     }
 
     @Test
-    fun testKt29725() {
-        with(Project("new-mpp-native-libraries", GradleVersionRequired.Exact("5.2"))) {
-            // Assert that a project with a native target can be configured with Gradle 5.2
-            build("tasks") {
-                assertSuccessful()
-            }
-        }
-    }
-
-    @Test
     fun testIncrementalCompilation() = with(Project("new-mpp-jvm-js-ic", gradleVersion)) {
         build("build") {
             assertSuccessful()
