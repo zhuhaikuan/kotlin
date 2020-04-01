@@ -1,6 +1,6 @@
 // FILE: 1.kt
-
-
+// TODO JVM_IR generates different line numbers in `SchemaRetriever`
+// IGNORE_BACKEND_MULTI_MODULE: JVM_IR
 package test
 abstract class Introspector {
     abstract inner class SchemaRetriever(val transaction: String) {
@@ -66,15 +66,15 @@ IntrospectorImpl$SchemaRetriever
 *E
 
 SMAP
-1.kt
+2.kt
 Kotlin
 *S Kotlin
 *F
-+ 1 1.kt
-test/Introspector$SchemaRetriever$inSchema$1
-+ 2 2.kt
++ 1 2.kt
 IntrospectorImpl$SchemaRetriever
++ 2 1.kt
+test/Introspector$SchemaRetriever$inSchema$1
 *L
-1#1,12:1
-9#2:13
+1#1,21:1
+6#2,3:22
 *E

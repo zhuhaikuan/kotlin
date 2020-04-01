@@ -69,15 +69,15 @@ _2Kt
 *E
 
 SMAP
-1.kt
+2.kt
 Kotlin
 *S Kotlin
 *F
-+ 1 1.kt
-builders/_1Kt$call$1
-+ 2 2.kt
++ 1 2.kt
 _2Kt
++ 2 1.kt
+builders/_1Kt$call$1
 *L
-1#1,14:1
-10#2,2:15
+1#1,22:1
+7#2,4:23
 *E

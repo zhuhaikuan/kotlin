@@ -62,20 +62,19 @@ _2Kt
 *E
 
 SMAP
-1.kt
+2.kt
 Kotlin
 *S Kotlin
 *F
-+ 1 1.kt
-test/_1Kt$annotatedWith2$1
-+ 2 1.kt
-test/_1Kt
-+ 3 2.kt
++ 1 2.kt
 _2Kt
++ 2 1.kt
+test/_1Kt$annotatedWith2$1
++ 3 1.kt
+test/_1Kt
 *L
 1#1,18:1
-14#2:19
-10#2:20
-15#2:22
-7#3:21
+6#2:19
+14#3:20
+10#3,6:21
 *E

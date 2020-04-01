@@ -118,29 +118,32 @@ _2Kt$box$1
 *E
 
 SMAP
-1.kt
+2.kt
 Kotlin
 *S Kotlin
 *F
-+ 1 1.kt
-test/_1Kt$inlineMe2$2
-+ 2 2.kt
++ 1 2.kt
 _2Kt$box$1
++ 2 1.kt
+test/_1Kt$inlineMe2$2
 *L
-1#1,23:1
-23#2,2:24
+1#1,29:1
+20#2,2:30
 *E
 
 SMAP
-1.kt
+2.kt
 Kotlin
 *S Kotlin
 *F
-+ 1 1.kt
-test/_1Kt$inlineMe1$2
-+ 2 2.kt
++ 1 2.kt
 _2Kt$box$1
++ 2 1.kt
+test/_1Kt$inlineMe1$2
 *L
-1#1,23:1
-20#2,2:24
+1#1,29:1
+12#2,4:30
 *E
+
+// TODO JVM_IR generates different line numbers in the anonymous classes
+// IGNORE_BACKEND_MULTI_MODULE: JVM_IR

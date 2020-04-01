@@ -94,8 +94,8 @@ class SourceMapCopier(val parent: SourceMapper, private val smap: SMAP, private 
 
 data class CallSiteMarker(val lineNumber: Int)
 
-class SourceMapper() {
-    private var maxUsedValue: Int = 0
+class SourceMapper(val sourceInfo: SourceInfo) {
+    private var maxUsedValue: Int = sourceInfo.linesInFile
     private var fileMappings: LinkedHashMap<Pair<String, String>, FileMapping> = linkedMapOf()
 
     var callSiteMarker: CallSiteMarker? = null
@@ -103,9 +103,8 @@ class SourceMapper() {
     val resultMappings: List<FileMapping>
         get() = fileMappings.values.toList()
 
-    constructor(sourceInfo: SourceInfo) : this() {
-        maxUsedValue = sourceInfo.linesInFile
-        // Explicitly map the file to itself -- we'll probably need a lot of lines from it, so this will produce less ranges.
+    init {
+        // Explicitly map the file to itself -- we'll probably need a lot of lines from it, so this will produce fewer ranges.
         getOrRegisterNewSource(sourceInfo.source, sourceInfo.pathOrCleanFQN).mapNewInterval(1, 1, sourceInfo.linesInFile)
     }
 
@@ -120,13 +119,12 @@ class SourceMapper() {
     }
 }
 
+private fun FileMapping.toSourceInfo(): SourceInfo =
+    SourceInfo(name, path, lineMappings.fold(0) { maxLine, mapping -> max(maxLine, mapping.source + mapping.range - 1) })
+
 class SMAP(val fileMappings: List<FileMapping>) {
-    val sourceInfo: SourceInfo = run {
-        assert(fileMappings.isNotEmpty()) { "File Mappings shouldn't be empty" }
-        val defaultFile = fileMappings.first()
-        val linesInFile = defaultFile.lineMappings.fold(0) { result, mapping -> max(result, mapping.source + mapping.range - 1) }
-        SourceInfo(defaultFile.name, defaultFile.path, linesInFile)
-    }
+    val sourceInfo: SourceInfo
+        get() = fileMappings.firstOrNull()?.toSourceInfo() ?: throw AssertionError("no lines mapped")
 
     // assuming disjoint line mappings (otherwise binary search can't be used anyway)
     private val intervals = fileMappings.flatMap { it.lineMappings }.sortedBy { it.dest }

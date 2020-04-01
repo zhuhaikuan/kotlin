@@ -77,15 +77,18 @@ _2Kt
 *E
 
 SMAP
-1.kt
+2.kt
 Kotlin
 *S Kotlin
 *F
-+ 1 1.kt
-test/_1Kt$inlineFun$2
++ 1 2.kt
+_2Kt
 + 2 1.kt
+test/_1Kt$inlineFun$2
++ 3 1.kt
 test/_1Kt$inlineFun$1
 *L
-1#1,13:1
-7#2:14
+1#1,9:1
+9#2:10
+7#3:11
 *E

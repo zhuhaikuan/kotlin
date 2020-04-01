@@ -85,12 +85,12 @@ Kotlin
 *S Kotlin
 *F
 + 1 1.kt
-test/_1Kt$kValue$1
-+ 2 1.kt
 test/_1Kt$lParams$1
++ 2 1.kt
+test/_1Kt$kValue$1
 *L
 1#1,40:1
-34#2:41
+31#2:41
 *E
 
 SMAP
@@ -167,10 +167,10 @@ Kotlin
 *S Kotlin
 *F
 + 1 1.kt
-test/_1Kt$kValue$1
-+ 2 1.kt
 test/_1Kt$lParams$1
++ 2 1.kt
+test/_1Kt$kValue$1
 *L
 1#1,40:1
-34#2:41
+31#2:41
 *E
