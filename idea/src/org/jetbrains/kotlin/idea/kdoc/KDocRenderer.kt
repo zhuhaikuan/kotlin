@@ -78,7 +78,8 @@ object KDocRenderer {
         is KtDeclarationWithBody -> {
             when (val bodyExpression = bodyExpression) {
                 is KtBlockExpression -> bodyExpression.text.removeSurrounding("{", "}")
-                else -> bodyExpression!!.text
+                is PsiElement -> bodyExpression.text
+                else -> text
             }
         }
         else -> text
@@ -116,6 +117,7 @@ object KDocRenderer {
                             }
                         }
                     }
+                    append("</p>")
                 }
             }
         }
@@ -153,6 +155,7 @@ object KDocRenderer {
                     append("<p><code>")
                     DocumentationManagerUtil.createHyperlink(this@renderSection, subjectName, subjectName, false)
                     append("</code> - ${markdownToHtml(getContent().trimStart())}")
+                    append("</p>")
                 }
             }
 
@@ -170,7 +173,7 @@ object KDocRenderer {
             tags.forEach {
                 val subjectName = it.getSubjectName()
                 if (subjectName != null) {
-                    append("<p><code>$subjectName</code> - ${markdownToHtml(it.getContent().trimStart())}")
+                    append("<p><code>$subjectName</code> - ${markdownToHtml(it.getContent().trimStart())}</p>")
                 }
             }
         }
