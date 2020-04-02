@@ -5,15 +5,19 @@
 
 package org.jetbrains.kotlin.gradle
 
+import com.intellij.openapi.module.ModuleManager
 import com.intellij.openapi.roots.DependencyScope
 import com.intellij.util.text.VersionComparatorUtil
 import org.jetbrains.jps.model.java.JavaResourceRootType
 import org.jetbrains.jps.model.java.JavaSourceRootType
 import org.jetbrains.kotlin.config.*
 import org.jetbrains.kotlin.idea.codeInsight.gradle.MultiplePluginVersionGradleImportingTestCase
+import org.jetbrains.kotlin.idea.project.platform
+import org.jetbrains.kotlin.konan.target.HostManager
 import org.jetbrains.kotlin.platform.CommonPlatforms
 import org.jetbrains.kotlin.platform.js.JsPlatforms
 import org.jetbrains.kotlin.platform.jvm.JvmPlatforms
+import org.jetbrains.kotlin.platform.konan.NativePlatforms
 import org.jetbrains.kotlin.test.KotlinTestUtils
 import org.jetbrains.plugins.gradle.tooling.annotation.PluginTargetVersions
 import org.junit.After
@@ -296,10 +300,19 @@ class NewMultiplatformProjectImportingTest : MultiplePluginVersionGradleImportin
                 libraryDependency("Gradle: org.hamcrest:hamcrest-integration:1.3@jar", DependencyScope.TEST)
                 libraryDependency("Gradle: org.hamcrest:hamcrest-library:1.3@jar", DependencyScope.TEST)
                 if (gradleKotlinPluginVersion != MINIMAL_SUPPORTED_VERSION) {
-                    libraryDependency("Gradle: org.jetbrains.kotlin:kotlin-android-extensions-runtime:${gradleKotlinPluginVersion}@jar", DependencyScope.COMPILE)
+                    libraryDependency(
+                        "Gradle: org.jetbrains.kotlin:kotlin-android-extensions-runtime:${gradleKotlinPluginVersion}@jar",
+                        DependencyScope.COMPILE
+                    )
                 }
-                libraryDependency("Gradle: org.jetbrains.kotlin:kotlin-stdlib-common:${gradleKotlinPluginVersion}@jar", DependencyScope.COMPILE)
-                libraryDependency("Gradle: org.jetbrains.kotlin:kotlin-stdlib-jdk7:${gradleKotlinPluginVersion}@jar", DependencyScope.COMPILE)
+                libraryDependency(
+                    "Gradle: org.jetbrains.kotlin:kotlin-stdlib-common:${gradleKotlinPluginVersion}@jar",
+                    DependencyScope.COMPILE
+                )
+                libraryDependency(
+                    "Gradle: org.jetbrains.kotlin:kotlin-stdlib-jdk7:${gradleKotlinPluginVersion}@jar",
+                    DependencyScope.COMPILE
+                )
                 libraryDependency("Gradle: org.jetbrains.kotlin:kotlin-stdlib:${gradleKotlinPluginVersion}@jar", DependencyScope.COMPILE)
                 libraryDependency("Gradle: org.jetbrains:annotations:13.0@jar", DependencyScope.COMPILE)
                 moduleDependency("shared", DependencyScope.COMPILE)
@@ -804,7 +817,7 @@ class NewMultiplatformProjectImportingTest : MultiplePluginVersionGradleImportin
         configureByFiles()
         importProject(true)
 
-        checkProjectStructure(false, false, false ) {
+        checkProjectStructure(false, false, false) {
             module("project.javaModule.test") {
                 moduleDependency("project.mppModule.jvmTest", DependencyScope.COMPILE, true)
             }
@@ -886,6 +899,61 @@ class NewMultiplatformProjectImportingTest : MultiplePluginVersionGradleImportin
         }
     }
 
+    @Test
+    @PluginTargetVersions(gradleVersion = "4.0+", pluginVersion = "1.3.50+")
+    fun testIgnoreIncompatibleNativeTestTasks() {
+        configureByFiles()
+        importProject()
+
+        checkProjectStructure(exhaustiveSourceSourceRootList = false, exhaustiveDependencyList = false, exhaustiveTestsList = true) {
+            module("project")
+            module("project_commonMain") {
+
+            }
+            module("project_commonTest") {
+                externalSystemTestTask("jsBrowserTest", "project:jsTest", "js")
+                externalSystemTestTask("jsNodeTest", "project:jsTest", "js")
+                externalSystemTestTask("jvmTest", "project:jvmTest", "jvm")
+
+                when {
+                    HostManager.hostIsMac -> externalSystemTestTask("macosTest", "project:macosTest", "macos")
+                    HostManager.hostIsMingw -> externalSystemTestTask("winTest", "project:winTest", "win")
+                    HostManager.hostIsLinux -> externalSystemTestTask("linuxTest", "project:linuxTest", "linux")
+                }
+            }
+
+            module("project_jsMain")
+            module("project_jsTest") {
+                externalSystemTestTask("jsBrowserTest", "project:jsTest", "js")
+                externalSystemTestTask("jsNodeTest", "project:jsTest", "js")
+            }
+
+            module("project_jvmMain")
+            module("project_jvmTest") {
+                externalSystemTestTask("jvmTest", "project:jvmTest", "jvm")
+            }
+
+            module("project_macosMain") {
+            }
+            module("project_macosTest") {
+                if (HostManager.hostIsMac) externalSystemTestTask("macosTest", "project:macosTest", "macos")
+            }
+
+            module("project_winMain") {
+            }
+            module("project_winTest") {
+                if (HostManager.hostIsMingw) externalSystemTestTask("winTest", "project:winTest", "win")
+            }
+
+            module("project_linuxMain") {
+            }
+            module("project_linuxTest") {
+                if (HostManager.hostIsLinux) externalSystemTestTask("linuxTest", "project:linuxTest", "linux")
+            }
+        }
+    }
+
+
     private fun checkProjectStructure(
         exhaustiveModuleList: Boolean = true,
         exhaustiveSourceSourceRootList: Boolean = true,
@@ -900,7 +968,8 @@ class NewMultiplatformProjectImportingTest : MultiplePluginVersionGradleImportin
             exhaustiveSourceSourceRootList,
             exhaustiveDependencyList,
             exhaustiveTestsList,
-            body)
+            body
+        )
     }
 
     fun importProject(useQualifiedNames: Boolean) {
