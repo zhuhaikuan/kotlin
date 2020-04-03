@@ -5,10 +5,9 @@
 
 package org.jetbrains.kotlin.idea.completion.test.handlers
 
-import com.intellij.codeInsight.lookup.LookupFocusDegree
 import com.intellij.codeInsight.lookup.impl.LookupImpl
 
 // BUNCH: 193
 fun LookupImpl.setFocusedFocusDegree() {
-    this.lookupFocusDegree = LookupFocusDegree.FOCUSED
+    focusDegree = LookupImpl.FocusDegree.FOCUSED
 }

@@ -7,5 +7,5 @@ package org.jetbrains.kotlin.findUsages
 
 import com.intellij.util.Processor
 
-// BUNCH 201
-typealias ProcessorInCompat<T> = Processor<in T>
+// BUNCH 193
+typealias ProcessorInCompat<T> = Processor<T>
