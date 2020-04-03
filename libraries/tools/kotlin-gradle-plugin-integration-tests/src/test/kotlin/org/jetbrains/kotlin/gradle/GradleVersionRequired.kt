@@ -17,6 +17,7 @@
 package org.jetbrains.kotlin.gradle
 
 import org.gradle.util.GradleVersion
+import org.jetbrains.kotlin.gradle.GradleVersionRequired.Companion.OLDEST_SUPPORTED
 import org.junit.Assume
 
 sealed class GradleVersionRequired(val minVersion: String, val maxVersion: String?) {
@@ -38,7 +39,7 @@ sealed class GradleVersionRequired(val minVersion: String, val maxVersion: Strin
 
 fun BaseGradleIT.Project.chooseWrapperVersionOrFinishTest(): String {
     val gradleVersionForTests = System.getProperty("kotlin.gradle.version.for.tests")?.toGradleVersion()
-    val minVersion = gradleVersionRequirement.minVersion.toGradleVersion()
+    val minVersion = max(gradleVersionRequirement.minVersion.toGradleVersion(), OLDEST_SUPPORTED.toGradleVersion())
     val maxVersion = gradleVersionRequirement.maxVersion?.toGradleVersion()
 
     if (gradleVersionForTests == null) {
@@ -49,5 +50,7 @@ fun BaseGradleIT.Project.chooseWrapperVersionOrFinishTest(): String {
 
     return gradleVersionForTests.version
 }
+
+private fun <T : Comparable<T>> max(a: T, b: T): T = if (a < b) b else a
 
 private fun String.toGradleVersion() = GradleVersion.version(this)
