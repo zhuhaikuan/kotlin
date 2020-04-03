@@ -51,7 +51,9 @@ internal fun TaskInputs.dirCompatible(dirPath: Any) {
     inputsDirMethod(this, dirPath)
 }
 
-internal fun checkGradleCompatibility(minSupportedVersion: GradleVersion = GradleVersion.version("5.4")) {
+const val minSupportedGradleVersion = "5.4"
+
+internal fun checkGradleCompatibility(minSupportedVersion: GradleVersion = GradleVersion.version(minSupportedGradleVersion)) {
     val currentVersion = GradleVersion.current()
     if (currentVersion < minSupportedVersion) {
         throw GradleException(
