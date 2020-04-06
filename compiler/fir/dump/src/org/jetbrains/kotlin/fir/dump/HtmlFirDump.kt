@@ -702,7 +702,6 @@ class HtmlFirDump internal constructor(private var linkResolver: FirLinkResolver
                     symbolRef(symbol) {
                         simpleName(type.lookupTag.name)
                     }
-                    generateTypeArguments(type)
                     +" = "
                     val directlyExpanded = type.directExpansionType(session)
                     if (directlyExpanded != null) {
@@ -715,7 +714,6 @@ class HtmlFirDump internal constructor(private var linkResolver: FirLinkResolver
                     symbolRef(symbol) {
                         fqn(type.lookupTag.classId.relativeClassName)
                     }
-                    generateTypeArguments(type)
                 }
             }
         }
