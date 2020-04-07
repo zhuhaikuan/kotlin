@@ -32,8 +32,9 @@ import org.jetbrains.kotlin.scripting.definitions.ScriptDefinition
 import org.jetbrains.kotlin.scripting.definitions.getEnvironment
 import java.io.File
 import java.util.concurrent.Future
+import java.util.concurrent.locks.ReentrantLock
 import java.util.concurrent.locks.ReentrantReadWriteLock
-import kotlin.concurrent.read
+import kotlin.concurrent.withLock
 import kotlin.concurrent.write
 import kotlin.script.experimental.host.ScriptingHostConfiguration
 import kotlin.script.experimental.jvm.defaultJvmScriptingHostConfiguration
@@ -45,7 +46,7 @@ class ScriptTemplatesFromDependenciesProvider(private val project: Project) : Sc
 
     override val definitions: Sequence<ScriptDefinition>
         get() {
-            definitionsLock.read {
+            definitionsLock.withLock {
                 if (_definitions != null) {
                     return _definitions!!.asSequence()
                 }
@@ -72,11 +73,11 @@ class ScriptTemplatesFromDependenciesProvider(private val project: Project) : Sc
     }
 
     private fun asyncRunUpdateScriptTemplates() {
-        definitionsLock.read {
+        definitionsLock.withLock {
             if (!forceStartUpdate && _definitions != null) return
         }
 
-        inProgressLock.write {
+        inProgressLock.withLock {
             if (!inProgress) {
                 inProgress = true
 
@@ -97,7 +98,7 @@ class ScriptTemplatesFromDependenciesProvider(private val project: Project) : Sc
     }
 
     private var _definitions: List<ScriptDefinition>? = null
-    private val definitionsLock = ReentrantReadWriteLock()
+    private val definitionsLock = ReentrantLock()
 
     private val visitedRoots = hashSetOf<String>()
 
@@ -109,17 +110,17 @@ class ScriptTemplatesFromDependenciesProvider(private val project: Project) : Sc
     )
 
     private var inProgress = false
-    private val inProgressLock = ReentrantReadWriteLock()
+    private val inProgressLock = ReentrantLock()
 
     @Volatile
     private var forceStartUpdate = false
 
     private fun loadScriptDefinitions(indicator: ProgressIndicator) {
         if (ApplicationManager.getApplication().isUnitTestMode || project.isDefault) {
-            definitionsLock.write {
+            definitionsLock.withLock {
                 _definitions = emptyList()
             }
-            inProgressLock.write {
+            inProgressLock.withLock {
                 inProgress = false
             }
             return
@@ -152,81 +153,84 @@ class ScriptTemplatesFromDependenciesProvider(private val project: Project) : Sc
             return templatesFound
         }
 
-        nonBlocking<List<Module>> { project.allModules() }
-            .inSmartMode(project)
-            .submit(AppExecutorUtil.getAppExecutorService())
-            .onSuccess { allModules ->
-                allModules.map {
-                    it to OrderEnumerator.orderEntries(it).withoutDepModules().withoutLibraries().withoutSdk().sourceRoots.toHashSet()
-                }.forEach { (module, sourceRoots) ->
-                    indicator.checkCanceled()
+        ProgressIndicatorUtils.awaitWithCheckCanceled(
+            nonBlocking<List<Module>> { project.allModules() }
+                .inSmartMode(project)
+                .expireWith(project)
+                .submit(AppExecutorUtil.getAppExecutorService())
+                .onSuccess { allModules ->
+                    allModules.map {
+                        it to OrderEnumerator.orderEntries(it).withoutDepModules().withoutLibraries().withoutSdk().sourceRoots.toHashSet()
+                    }.forEach { (module, sourceRoots) ->
+                        indicator.checkCanceled()
 
-                    sourceRoots.forEach { root ->
-                        if (addTemplatesFromRoot(root)) {
+                        sourceRoots.forEach { root ->
+                            if (addTemplatesFromRoot(root)) {
 
-                            // assuming that all libraries are placed into classes roots
-                            // TODO: extract exact library dependencies instead of putting all module dependencies into classpath
-                            // minimizing the classpath needed to use the template by taking cp only from modules with new templates found
-                            // on the other hand the approach may fail if some module contains a template without proper classpath, while
-                            // the other has properly configured classpath, so assuming that the dependencies are set correctly everywhere
-                            classpath.addAll(
-                                OrderEnumerator.orderEntries(module).withoutSdk().classesRoots.mapNotNull {
-                                    it.canonicalPath?.removeSuffix("!/").let(::File)
-                                },
+                                // assuming that all libraries are placed into classes roots
+                                // TODO: extract exact library dependencies instead of putting all module dependencies into classpath
+                                // minimizing the classpath needed to use the template by taking cp only from modules with new templates found
+                                // on the other hand the approach may fail if some module contains a template without proper classpath, while
+                                // the other has properly configured classpath, so assuming that the dependencies are set correctly everywhere
+                                classpath.addAll(
+                                    OrderEnumerator.orderEntries(module).withoutSdk().classesRoots.mapNotNull {
+                                        it.canonicalPath?.removeSuffix("!/").let(::File)
+                                    },
+                                )
+                            }
+                        }
+                    }
+
+                    allModules
+                        .flatMap { OrderEnumerator.orderEntries(it).withoutSdk().classesRoots.toHashSet() }
+                        .forEach { root ->
+                            indicator.checkCanceled()
+
+                            if (addTemplatesFromRoot(root)) {
+                                classpath.add(root.canonicalPath?.removeSuffix("!/").let(::File))
+                            }
+                        }
+                }
+                .onProcessed {
+                    val newTemplates = TemplatesWithCp(templates.toList(), classpath.toList())
+                    if (newTemplates == oldTemplates) {
+                        inProgressLock.withLock {
+                            inProgress = false
+                        }
+
+                        return@onProcessed
+                    }
+
+                    val hostConfiguration = ScriptingHostConfiguration(defaultJvmScriptingHostConfiguration) {
+                        getEnvironment {
+                            mapOf(
+                                "projectRoot" to (project.basePath ?: project.baseDir.canonicalPath)?.let(::File),
                             )
                         }
                     }
-                }
 
-                allModules
-                    .flatMap { OrderEnumerator.orderEntries(it).withoutSdk().classesRoots.toHashSet() }
-                    .forEach { root ->
-                        indicator.checkCanceled()
+                    val newDefinitions = loadDefinitionsFromTemplates(
+                        templateClassNames = newTemplates.templates,
+                        templateClasspath = newTemplates.classpath,
+                        baseHostConfiguration = hostConfiguration,
+                    )
 
-                        if (addTemplatesFromRoot(root)) {
-                            classpath.add(root.canonicalPath?.removeSuffix("!/").let(::File))
+                    val needReload = definitionsLock.withLock {
+                        if (newDefinitions != _definitions) {
+                            _definitions = newDefinitions
+                            return@withLock true
                         }
+                        return@withLock false
                     }
-            }
-            .onProcessed {
-                val newTemplates = TemplatesWithCp(templates.toList(), classpath.toList())
-                if (newTemplates == oldTemplates) {
-                    inProgressLock.write {
+
+                    if (needReload) {
+                        ScriptDefinitionsManager.getInstance(project).reloadDefinitionsBy(this@ScriptTemplatesFromDependenciesProvider)
+                    }
+
+                    inProgressLock.withLock {
                         inProgress = false
                     }
-
-                    return@onProcessed
-                }
-
-                val hostConfiguration = ScriptingHostConfiguration(defaultJvmScriptingHostConfiguration) {
-                    getEnvironment {
-                        mapOf(
-                            "projectRoot" to (project.basePath ?: project.baseDir.canonicalPath)?.let(::File),
-                        )
-                    }
-                }
-
-                val newDefinitions = loadDefinitionsFromTemplates(
-                    templateClassNames = newTemplates.templates,
-                    templateClasspath = newTemplates.classpath,
-                    baseHostConfiguration = hostConfiguration,
-                )
-
-                val needReload = definitionsLock.write {
-                    if (newDefinitions != _definitions) {
-                        _definitions = newDefinitions
-                        return@write true
-                    }
-                    return@write false
-                }
-
-                if (needReload) {
-                    ScriptDefinitionsManager.getInstance(project).reloadDefinitionsBy(this@ScriptTemplatesFromDependenciesProvider)
-                }
-
-                inProgressLock.write {
-                    inProgress = false
-                }
-            }
+                } as Future<List<Module>>
+        )
     }
 }
