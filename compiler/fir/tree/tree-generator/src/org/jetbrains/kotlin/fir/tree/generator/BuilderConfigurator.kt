@@ -216,6 +216,8 @@ object BuilderConfigurator : AbstractBuilderConfigurator<FirTreeBuilder>(FirTree
         builder(propertyAccessor) {
             parents += functionBuilder
             defaultNull("body")
+            default("contractDescription", "FirEmptyContractDescription")
+            useTypes(emptyContractDescriptionType)
         }
 
         builder(whenExpression) {
@@ -250,6 +252,8 @@ object BuilderConfigurator : AbstractBuilderConfigurator<FirTreeBuilder>(FirTree
             parents += functionBuilder
             parents += typeParametersOwnerBuilder
             defaultNull("body")
+            default("contractDescription", "FirEmptyContractDescription")
+            useTypes(emptyContractDescriptionType)
             openBuilder()
         }
 

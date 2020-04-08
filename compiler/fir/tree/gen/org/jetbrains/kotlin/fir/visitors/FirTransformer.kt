@@ -120,6 +120,8 @@ import org.jetbrains.kotlin.fir.types.FirResolvedFunctionTypeRef
 import org.jetbrains.kotlin.fir.types.FirImplicitTypeRef
 import org.jetbrains.kotlin.fir.types.FirComposedSuperTypeRef
 import org.jetbrains.kotlin.fir.contracts.FirContractDescription
+import org.jetbrains.kotlin.fir.contracts.FirRawContractDescription
+import org.jetbrains.kotlin.fir.contracts.FirResolvedContractDescription
 import org.jetbrains.kotlin.fir.visitors.CompositeTransformResult
 
 /*
@@ -587,6 +589,14 @@ abstract class FirTransformer<in D> : FirVisitor<CompositeTransformResult<FirEle
         return transformElement(contractDescription, data)
     }
 
+    open fun transformRawContractDescription(rawContractDescription: FirRawContractDescription, data: D): CompositeTransformResult<FirContractDescription> {
+        return transformElement(rawContractDescription, data)
+    }
+
+    open fun transformResolvedContractDescription(resolvedContractDescription: FirResolvedContractDescription, data: D): CompositeTransformResult<FirContractDescription> {
+        return transformElement(resolvedContractDescription, data)
+    }
+
     final override fun visitElement(element: FirElement, data: D): CompositeTransformResult<FirElement> {
         return transformElement(element, data)
     }
@@ -1045,6 +1055,14 @@ abstract class FirTransformer<in D> : FirVisitor<CompositeTransformResult<FirEle
 
     final override fun visitContractDescription(contractDescription: FirContractDescription, data: D): CompositeTransformResult<FirContractDescription> {
         return transformContractDescription(contractDescription, data)
+    }
+
+    final override fun visitRawContractDescription(rawContractDescription: FirRawContractDescription, data: D): CompositeTransformResult<FirContractDescription> {
+        return transformRawContractDescription(rawContractDescription, data)
+    }
+
+    final override fun visitResolvedContractDescription(resolvedContractDescription: FirResolvedContractDescription, data: D): CompositeTransformResult<FirContractDescription> {
+        return transformResolvedContractDescription(resolvedContractDescription, data)
     }
 
 }

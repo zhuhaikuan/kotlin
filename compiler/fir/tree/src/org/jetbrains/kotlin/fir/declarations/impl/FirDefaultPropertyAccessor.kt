@@ -10,6 +10,7 @@ import org.jetbrains.kotlin.descriptors.Visibility
 import org.jetbrains.kotlin.fir.FirImplementationDetail
 import org.jetbrains.kotlin.fir.FirSession
 import org.jetbrains.kotlin.fir.FirSourceElement
+import org.jetbrains.kotlin.fir.contracts.impl.FirEmptyContractDescription
 import org.jetbrains.kotlin.fir.declarations.FirResolvePhase
 import org.jetbrains.kotlin.fir.declarations.FirValueParameter
 import org.jetbrains.kotlin.fir.declarations.builder.buildDefaultSetterValueParameter
@@ -39,6 +40,7 @@ abstract class FirDefaultPropertyAccessor(
     typeParameters = mutableListOf(),
     valueParameters,
     body = null,
+    contractDescription = FirEmptyContractDescription,
     symbol,
     isGetter,
     FirDeclarationStatusImpl(visibility, Modality.FINAL),

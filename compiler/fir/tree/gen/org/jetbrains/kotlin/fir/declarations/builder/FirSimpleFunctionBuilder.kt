@@ -48,6 +48,7 @@ open class FirSimpleFunctionBuilder : FirFunctionBuilder, FirTypeParametersOwner
     override var body: FirBlock? = null
     open lateinit var status: FirDeclarationStatus
     open var containerSource: DeserializedContainerSource? = null
+    open var contractDescription: FirContractDescription = FirEmptyContractDescription
     open lateinit var name: Name
     open lateinit var symbol: FirFunctionSymbol<FirSimpleFunction>
     override val annotations: MutableList<FirAnnotationCall> = mutableListOf()
@@ -65,6 +66,7 @@ open class FirSimpleFunctionBuilder : FirFunctionBuilder, FirTypeParametersOwner
             body,
             status,
             containerSource,
+            contractDescription,
             name,
             symbol,
             annotations,
