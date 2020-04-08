@@ -15,7 +15,9 @@ import org.jetbrains.kotlin.descriptors.Visibilities
 import org.jetbrains.kotlin.descriptors.annotations.AnnotationUseSiteTarget
 import org.jetbrains.kotlin.fir.*
 import org.jetbrains.kotlin.fir.builder.Context
+import org.jetbrains.kotlin.fir.builder.extractContractDescriptionIfPossible
 import org.jetbrains.kotlin.fir.builder.generateAccessorsByDelegate
+import org.jetbrains.kotlin.fir.contracts.FirContractDescription
 import org.jetbrains.kotlin.fir.declarations.*
 import org.jetbrains.kotlin.fir.declarations.builder.*
 import org.jetbrains.kotlin.fir.declarations.impl.FirDeclarationStatusImpl
@@ -745,7 +747,8 @@ class DeclarationsConverter(
             annotations += modifiers.annotations
             typeParameters += typeParametersFromSelfType(delegatedSelfTypeRef)
             valueParameters += firValueParameters.map { it.firValueParameter }
-            body = convertFunctionBody(block, null)
+            val (body, _) = convertFunctionBody(block, null)
+            this.body = body
             context.firFunctionTargets.removeLast()
         }.also {
             target.bind(it)
@@ -1031,7 +1034,11 @@ class DeclarationsConverter(
                 valueParameters += firValueParameters
             }
 
-            body = convertFunctionBody(block, expression)
+            val (body, contractDescription) = convertFunctionBody(block, expression)
+            this.body = body
+            contractDescription?.let {
+                this.contractDescription = contractDescription
+            }
             context.firFunctionTargets.removeLast()
         }.also {
             target.bind(it)
@@ -1155,7 +1162,12 @@ class DeclarationsConverter(
             }
 
             valueParametersList?.let { list -> valueParameters += convertValueParameters(list).map { it.firValueParameter } }
-            body = convertFunctionBody(block, expression)
+            val (body, contractDescription) = convertFunctionBody(block, expression)
+            this.body = body
+            contractDescription?.let {
+                require(this is FirSimpleFunctionBuilder)
+                this.contractDescription = it
+            }
             context.firFunctionTargets.removeLast()
         }.build().also {
             target.bind(it)
@@ -1166,13 +1178,13 @@ class DeclarationsConverter(
      * @see org.jetbrains.kotlin.parsing.KotlinParsing.parseFunctionBody
      * @see org.jetbrains.kotlin.fir.builder.RawFirBuilder.Visitor.buildFirBody
      */
-    private fun convertFunctionBody(blockNode: LighterASTNode?, expression: LighterASTNode?): FirBlock? {
+    private fun convertFunctionBody(blockNode: LighterASTNode?, expression: LighterASTNode?): Pair<FirBlock?, FirContractDescription?> {
         return when {
-            blockNode != null -> return convertBlock(blockNode)
+            blockNode != null -> convertBlock(blockNode).extractContractDescriptionIfPossible()
             expression != null -> FirSingleExpressionBlock(
                 expressionConverter.getAsFirExpression<FirExpression>(expression, "Function has no body (but should)").toReturn()
-            )
-            else -> null
+            ) to null
+            else -> null to null
         }
     }
 
