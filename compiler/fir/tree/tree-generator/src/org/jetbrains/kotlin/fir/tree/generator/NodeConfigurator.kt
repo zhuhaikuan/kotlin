@@ -568,6 +568,7 @@ object NodeConfigurator : AbstractFieldConfigurator<FirTreeBuilder>(FirTreeBuild
 
         resolvedContractDescription.configure {
             +fieldList("effects", effectDeclarationType)
+            +fieldList("unresolvedEffects", statement)
         }
     }
 }
