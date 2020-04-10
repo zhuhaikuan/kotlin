@@ -345,6 +345,7 @@ object NodeConfigurator : AbstractFieldConfigurator<FirTreeBuilder>(FirTreeBuild
 
         delegatedConstructorCall.configure {
             +field("constructedTypeRef", typeRef)
+            +field("dispatchReceiver", expression).withTransform()
             generateBooleanFields("this", "super")
         }
 

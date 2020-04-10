@@ -65,6 +65,10 @@ class FirTowerResolverSession internal constructor(
         else
             components.typeParametersScopes.asReversed() + components.fileImportsScope.asReversed()
 
+    fun runResolutionForDelegatingConstructor(info: CallInfo, constructorScope: FirScope) {
+        manager.enqueueResolverTask { runResolverForDelegatingConstructorCall(info, constructorScope) }
+    }
+
     fun runResolution(info: CallInfo) {
         when (val receiver = info.explicitReceiver) {
             is FirResolvedQualifier -> manager.enqueueResolverTask { runResolverForQualifierReceiver(info, receiver) }
@@ -195,6 +199,18 @@ class FirTowerResolverSession internal constructor(
                     runResolverForExpressionReceiver(info, resolvedQualifier)
                 }
             }
+        }
+    }
+
+    private suspend fun runResolverForDelegatingConstructorCall(info: CallInfo, constructorScope: FirScope) {
+        val parentGroup = TowerGroup.Implicit(0)
+        processLevel(constructorScope.toScopeTowerLevel(), info, parentGroup)
+        for ((implicitReceiverValue, depth, usableAsValue) in implicitReceivers) {
+            if (!usableAsValue) continue
+            processLevel(
+                constructorScope.toScopeTowerLevel(extensionReceiver = implicitReceiverValue),
+                info, parentGroup.Implicit(depth)
+            )
         }
     }
 

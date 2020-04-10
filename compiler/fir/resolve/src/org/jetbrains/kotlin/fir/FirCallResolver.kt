@@ -20,7 +20,6 @@ import org.jetbrains.kotlin.fir.references.impl.FirSimpleNamedReference
 import org.jetbrains.kotlin.fir.resolve.*
 import org.jetbrains.kotlin.fir.resolve.calls.*
 import org.jetbrains.kotlin.fir.resolve.calls.tower.FirTowerResolver
-import org.jetbrains.kotlin.fir.resolve.calls.tower.TowerGroup
 import org.jetbrains.kotlin.fir.resolve.calls.tower.TowerResolveManager
 import org.jetbrains.kotlin.fir.resolve.diagnostics.ConeAmbiguityError
 import org.jetbrains.kotlin.fir.resolve.diagnostics.ConeInapplicableCandidateError
@@ -39,7 +38,6 @@ import org.jetbrains.kotlin.fir.types.builder.buildResolvedTypeRef
 import org.jetbrains.kotlin.name.Name
 import org.jetbrains.kotlin.resolve.calls.inference.ConstraintSystemBuilder
 import org.jetbrains.kotlin.resolve.calls.results.TypeSpecificityComparator
-import org.jetbrains.kotlin.resolve.calls.tasks.ExplicitReceiverKind
 
 class FirCallResolver(
     private val components: BodyResolveComponents,
@@ -305,22 +303,19 @@ class FirCallResolver(
             file,
             implicitReceiverStack,
         )
-        val candidateFactory = CandidateFactory(this, callInfo)
-        val candidates = mutableListOf<Candidate>()
+        towerResolver.reset()
+        val result = towerResolver.runResolverForDelegatingConstructor(
+            implicitReceiverStack.receiversAsReversed(),
+            callInfo,
+            constructorScope = scope,
+        )
 
-        scope.processDeclaredConstructors {
-            val candidate = candidateFactory.createCandidate(it, ExplicitReceiverKind.NO_EXPLICIT_RECEIVER)
-            candidate.typeArgumentMapping = TypeArgumentMapping.Mapped(typeArguments)
-            candidates += candidate
-        }
-        return callResolver.selectCandidateFromGivenCandidates(delegatedConstructorCall, className, candidates)
+        return callResolver.selectDelegatingConstructorCall(delegatedConstructorCall, className, result)
     }
 
-    private fun <T> selectCandidateFromGivenCandidates(
-        call: T, name: Name, candidates: Collection<Candidate>,
-    ): T where T : FirResolvable, T : FirCall {
-        val result = CandidateCollector(this, resolutionStageRunner)
-        candidates.forEach { result.consumeCandidate(TowerGroup.Start, it) }
+    private fun selectDelegatingConstructorCall(
+        call: FirDelegatedConstructorCall, name: Name, result: CandidateCollector,
+    ): FirDelegatedConstructorCall {
         val bestCandidates = result.bestCandidates()
         val reducedCandidates = if (result.currentApplicability < CandidateApplicability.SYNTHETIC_RESOLVED) {
             bestCandidates.toSet()
@@ -335,7 +330,14 @@ class FirCallResolver(
             result.currentApplicability,
         )
 
-        return call.transformCalleeReference(StoreNameReference, nameReference) as T
+        return call.transformCalleeReference(StoreNameReference, nameReference).apply {
+            val singleCandidate = reducedCandidates.singleOrNull()
+            if (singleCandidate != null) {
+                // It's a bit hacky because tower resolve has to consider outer class receiver
+                // as 'extension' receiver of delegating constructor
+                transformDispatchReceiver(StoreReceiver, singleCandidate.extensionReceiverExpression())
+            }
+        }
     }
 
     private fun createCallableReferencesInfoForLHS(

@@ -37,8 +37,8 @@ interface TowerScopeLevel {
 
     sealed class Token<out T : AbstractFirBasedSymbol<*>> {
         object Properties : Token<FirVariableSymbol<*>>()
-
         object Functions : Token<FirFunctionSymbol<*>>()
+        object Constructors : Token<FirConstructorSymbol>()
         object Objects : Token<AbstractFirBasedSymbol<*>>()
     }
 
@@ -157,6 +157,7 @@ class MemberScopeTowerLevel(
                     consumer(it as T)
                 }
             }
+            TowerScopeLevel.Token.Constructors -> throw AssertionError("Normally should not be here")
         }
     }
 
@@ -260,6 +261,14 @@ class ScopeTowerLevel(
                     it as T, dispatchReceiverValue = null,
                     implicitExtensionReceiverValue = null
                 )
+            }
+            TowerScopeLevel.Token.Constructors -> scope.processDeclaredConstructors { candidate ->
+                if (candidate.hasConsistentReceivers(extensionReceiver)) {
+                    processor.consumeCandidate(
+                        candidate as T, dispatchReceiverValue(scope, candidate),
+                        implicitExtensionReceiverValue = extensionReceiver as? ImplicitReceiverValue<*>
+                    )
+                }
             }
         }
         return if (empty) ProcessorAction.NONE else ProcessorAction.NEXT
