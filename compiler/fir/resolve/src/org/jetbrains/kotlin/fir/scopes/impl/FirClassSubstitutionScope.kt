@@ -228,7 +228,10 @@ class FirClassSubstitutionScope(
             return original
         }
 
-        return createFakeOverrideProperty(session, member, original, newReceiverType, newReturnType, newTypeParameters, derivedClassId)
+        return createFakeOverrideProperty(
+            session, member, original, newReceiverType, newReturnType,
+            newTypeParameters as List<FirTypeParameter>, derivedClassId
+        )
     }
 
     private fun createFakeOverrideField(original: FirFieldSymbol): FirFieldSymbol {
