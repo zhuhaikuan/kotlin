@@ -6,15 +6,21 @@
 package org.jetbrains.kotlin.scripting.ide_services.compiler
 
 import org.jetbrains.kotlin.cli.common.messages.AnalyzerWithCompilerReport
-import org.jetbrains.kotlin.scripting.compiler.plugin.impl.*
+import org.jetbrains.kotlin.scripting.compiler.plugin.impl.KJvmReplCompilerBase
+import org.jetbrains.kotlin.scripting.compiler.plugin.impl.failure
+import org.jetbrains.kotlin.scripting.compiler.plugin.impl.withMessageCollector
+import org.jetbrains.kotlin.scripting.ide_services.compiler.impl.IdeLikeReplCodeAnalyzer
+import org.jetbrains.kotlin.scripting.ide_services.compiler.impl.getKJvmCompletion
+import org.jetbrains.kotlin.scripting.ide_services.compiler.impl.prepareCodeForCompletion
 import kotlin.script.experimental.api.*
 import kotlin.script.experimental.host.ScriptingHostConfiguration
-import kotlin.script.experimental.api.ReplCompletionResult
 import kotlin.script.experimental.jvm.defaultJvmScriptingHostConfiguration
 import kotlin.script.experimental.util.calcAbsolute
 
-class KJvmReplIdeCompilerImpl(hostConfiguration: ScriptingHostConfiguration = defaultJvmScriptingHostConfiguration) :
-    KJvmReplCompilerBase<IdeLikeReplCodeAnalyzer>(hostConfiguration, { IdeLikeReplCodeAnalyzer(it.environment) }),
+class KJvmReplCompilerWithIdeServices(hostConfiguration: ScriptingHostConfiguration = defaultJvmScriptingHostConfiguration) :
+    KJvmReplCompilerBase<IdeLikeReplCodeAnalyzer>(hostConfiguration, {
+        IdeLikeReplCodeAnalyzer(it.environment)
+    }),
     ReplCompleter, ReplCodeAnalyzer {
 
     override suspend fun complete(

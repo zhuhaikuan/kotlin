@@ -6,11 +6,14 @@
 package org.jetbrains.kotlin.scripting.ide_services.test_util
 
 import kotlinx.coroutines.runBlocking
-import org.jetbrains.kotlin.scripting.ide_services.compiler.KJvmReplIdeCompilerImpl
+import org.jetbrains.kotlin.scripting.ide_services.compiler.KJvmReplCompilerWithIdeServices
 import java.io.Closeable
 import java.util.concurrent.atomic.AtomicInteger
-import kotlin.script.experimental.api.*
-import kotlin.script.experimental.jvm.KJvmReplEvaluatorImpl
+import kotlin.script.experimental.api.CompiledSnippet
+import kotlin.script.experimental.api.ResultWithDiagnostics
+import kotlin.script.experimental.api.SourceCode
+import kotlin.script.experimental.api.valueOrNull
+import kotlin.script.experimental.jvm.BasicJvmReplEvaluator
 import kotlin.script.experimental.util.LinkedSnippet
 import kotlin.script.experimental.util.toSourceCodePosition
 
@@ -26,12 +29,12 @@ internal class JvmTestRepl : Closeable {
             code
         )
 
-    private val replCompiler: KJvmReplIdeCompilerImpl by lazy {
-        KJvmReplIdeCompilerImpl()
+    private val replCompiler: KJvmReplCompilerWithIdeServices by lazy {
+        KJvmReplCompilerWithIdeServices()
     }
 
-    private val compiledEvaluator: KJvmReplEvaluatorImpl by lazy {
-        KJvmReplEvaluatorImpl()
+    private val compiledEvaluator: BasicJvmReplEvaluator by lazy {
+        BasicJvmReplEvaluator()
     }
 
     fun compile(code: SourceCode) = runBlocking { replCompiler.compile(code, compileConfiguration) }

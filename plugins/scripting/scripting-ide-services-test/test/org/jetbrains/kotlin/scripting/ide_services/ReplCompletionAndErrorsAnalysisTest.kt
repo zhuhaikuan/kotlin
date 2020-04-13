@@ -8,7 +8,7 @@ package org.jetbrains.kotlin.scripting.ide_services
 import junit.framework.TestCase
 import kotlinx.coroutines.runBlocking
 import org.jetbrains.kotlin.backend.common.push
-import org.jetbrains.kotlin.scripting.ide_services.compiler.KJvmReplIdeCompilerImpl
+import org.jetbrains.kotlin.scripting.ide_services.compiler.KJvmReplCompilerWithIdeServices
 import org.jetbrains.kotlin.scripting.ide_services.test_util.SourceCodeTestImpl
 import org.jetbrains.kotlin.scripting.ide_services.test_util.simpleScriptCompilationConfiguration
 import org.jetbrains.kotlin.scripting.ide_services.test_util.toList
@@ -16,7 +16,6 @@ import org.junit.Assert
 import org.junit.Test
 import java.util.concurrent.atomic.AtomicInteger
 import kotlin.script.experimental.api.*
-import kotlin.script.experimental.api.SourceCodeCompletionVariant
 
 class ReplCompletionAndErrorsAnalysisTest : TestCase() {
     @Test
@@ -311,7 +310,7 @@ class ReplCompletionAndErrorsAnalysisTest : TestCase() {
         compilationConfiguration: ScriptCompilationConfiguration,
         snippets: List<RunRequest>
     ): List<ResultWithDiagnostics<Pair<List<SourceCodeCompletionVariant>, List<ScriptDiagnostic>>>> {
-        val compiler = KJvmReplIdeCompilerImpl()
+        val compiler = KJvmReplCompilerWithIdeServices()
         return snippets.map { (cursor, snippetText, doComplile, doComplete, doErrorCheck) ->
             val pos = SourceCode.Position(0, 0, cursor)
             val codeLine = nextCodeLine(snippetText)

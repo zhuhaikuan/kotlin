@@ -12,11 +12,8 @@ import org.junit.Assert
 import org.junit.Test
 import kotlin.script.experimental.api.*
 import kotlin.script.experimental.host.toScriptSource
-import kotlin.script.experimental.jvm.KJvmReplEvaluatorImpl
+import kotlin.script.experimental.jvm.BasicJvmReplEvaluator
 import kotlin.script.experimental.jvm.defaultJvmScriptingHostConfiguration
-import kotlin.script.experimental.util.isErrorResult
-import kotlin.script.experimental.util.isUnitResult
-import kotlin.script.experimental.util.isValueResult
 
 class ReplTest : TestCase() {
 
@@ -160,7 +157,7 @@ class ReplTest : TestCase() {
             limit: Int = 0
         ): Sequence<ResultWithDiagnostics<EvaluatedSnippet>> {
             val replCompiler = KJvmReplCompilerBase.create(defaultJvmScriptingHostConfiguration)
-            val replEvaluator = KJvmReplEvaluatorImpl()
+            val replEvaluator = BasicJvmReplEvaluator()
             val currentEvalConfig = evaluationConfiguration ?: ScriptEvaluationConfiguration()
             val snipetsLimited = if (limit == 0) snippets else snippets.take(limit)
             return snipetsLimited.mapIndexed { snippetNo, snippetText ->
@@ -205,15 +202,15 @@ class ReplTest : TestCase() {
                     }
                     res is ResultWithDiagnostics.Success && expectedRes is ResultWithDiagnostics.Success -> {
                         val expectedVal = expectedRes.value
-                        val resVal = res.value
-                        when {
-                            resVal.isValueResult -> Assert.assertEquals(
+                        val resVal = res.value.result
+                        when (resVal) {
+                            is ResultValue.Value -> Assert.assertEquals(
                                 "#$index: Expected $expectedVal, got $resVal",
                                 expectedVal,
-                                resVal.result
+                                resVal.value
                             )
-                            resVal.isUnitResult -> Assert.assertNull("#$index: Expected $expectedVal, got Unit", expectedVal)
-                            resVal.isErrorResult -> Assert.assertTrue(
+                            is ResultValue.Unit -> Assert.assertNull("#$index: Expected $expectedVal, got Unit", expectedVal)
+                            is ResultValue.Error -> Assert.assertTrue(
                                 "#$index: Expected $expectedVal, got Error: ${resVal.error}",
                                 expectedVal is Throwable && expectedVal.message == resVal.error?.message
                             )

@@ -3,7 +3,7 @@
  * Use of this source code is governed by the Apache 2.0 license that can be found in the license/LICENSE.txt file.
  */
 
-package org.jetbrains.kotlin.scripting.compiler.plugin.impl
+package org.jetbrains.kotlin.scripting.ide_services.compiler.impl
 
 import com.intellij.openapi.project.Project
 import com.intellij.psi.PsiElement
@@ -18,7 +18,7 @@ import org.jetbrains.kotlin.psi.KtElement
 import org.jetbrains.kotlin.resolve.BindingContext
 import org.jetbrains.kotlin.resolve.lazy.BodyResolveMode
 
-class KotlinResolutionFacade(
+class KotlinResolutionFacadeForRepl(
     private val environment: KotlinCoreEnvironment,
     private val provider: ComponentProvider
 ) :

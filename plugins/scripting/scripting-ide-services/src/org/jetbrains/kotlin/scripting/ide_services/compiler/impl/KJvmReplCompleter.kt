@@ -3,7 +3,7 @@
  * Use of this source code is governed by the Apache 2.0 license that can be found in the license/LICENSE.txt file.
  */
 
-package org.jetbrains.kotlin.scripting.ide_services.compiler
+package org.jetbrains.kotlin.scripting.ide_services.compiler.impl
 
 import com.intellij.psi.PsiElement
 import com.intellij.psi.tree.TokenSet
@@ -13,7 +13,9 @@ import org.jetbrains.kotlin.descriptors.*
 import org.jetbrains.kotlin.descriptors.impl.LocalVariableDescriptor
 import org.jetbrains.kotlin.descriptors.impl.TypeParameterDescriptorImpl
 import org.jetbrains.kotlin.idea.codeInsight.ReferenceVariantsHelper
-import org.jetbrains.kotlin.idea.util.*
+import org.jetbrains.kotlin.idea.util.CallTypeAndReceiver
+import org.jetbrains.kotlin.idea.util.IdeDescriptorRenderers
+import org.jetbrains.kotlin.idea.util.getResolutionScope
 import org.jetbrains.kotlin.lexer.KtKeywordToken
 import org.jetbrains.kotlin.lexer.KtTokens
 import org.jetbrains.kotlin.name.Name
@@ -28,19 +30,17 @@ import org.jetbrains.kotlin.resolve.DescriptorUtils
 import org.jetbrains.kotlin.resolve.scopes.DescriptorKindFilter
 import org.jetbrains.kotlin.resolve.scopes.LexicalScope
 import org.jetbrains.kotlin.resolve.scopes.MemberScope.Companion.ALL_NAME_FILTER
-import org.jetbrains.kotlin.scripting.compiler.plugin.impl.KotlinResolutionFacade
 import org.jetbrains.kotlin.types.KotlinType
 import org.jetbrains.kotlin.types.asFlexibleType
 import org.jetbrains.kotlin.types.isFlexible
 import java.io.File
-import java.lang.IllegalStateException
 import java.util.*
 import kotlin.script.experimental.api.SourceCodeCompletionVariant
 
 fun getKJvmCompletion(
     ktScript: KtFile,
     bindingContext: BindingContext,
-    resolutionFacade: KotlinResolutionFacade,
+    resolutionFacade: KotlinResolutionFacadeForRepl,
     moduleDescriptor: ModuleDescriptor,
     cursor: Int
 ) = KJvmReplCompleter(ktScript, bindingContext, resolutionFacade, moduleDescriptor, cursor).getCompletion()
@@ -58,7 +58,7 @@ fun prepareCodeForCompletion(code: String, cursor: Int) =
 private class KJvmReplCompleter(
     private val ktScript: KtFile,
     private val bindingContext: BindingContext,
-    private val resolutionFacade: KotlinResolutionFacade,
+    private val resolutionFacade: KotlinResolutionFacadeForRepl,
     private val moduleDescriptor: ModuleDescriptor,
     private val cursor: Int
 ) {

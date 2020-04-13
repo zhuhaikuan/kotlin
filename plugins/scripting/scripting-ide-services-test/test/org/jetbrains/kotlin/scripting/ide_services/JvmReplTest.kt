@@ -6,14 +6,16 @@
 package org.jetbrains.kotlin.scripting.ide_services
 
 import junit.framework.TestCase
+import org.jetbrains.kotlin.cli.common.messages.CompilerMessageLocation
 import org.jetbrains.kotlin.scripting.ide_services.test_util.JvmTestRepl
 import org.jetbrains.kotlin.scripting.ide_services.test_util.SourceCodeTestImpl
-import org.jetbrains.kotlin.scripting.ide_services.util.getErrors
 import java.io.File
 import kotlin.script.experimental.api.*
 import kotlin.script.experimental.jvm.impl.KJvmCompiledScript
-import kotlin.script.experimental.api.SourceCodeCompletionVariant
-import kotlin.script.experimental.util.*
+import kotlin.script.experimental.util.LinkedSnippet
+import kotlin.script.experimental.util.get
+import kotlin.script.experimental.util.isError
+import kotlin.script.experimental.util.isIncomplete
 
 // Adapted form GenericReplTest
 
@@ -55,10 +57,10 @@ class JvmIdeServicesTest : TestCase() {
                 repl.compileAndEval(repl.nextCodeLine("val x = 10"))
 
                 val res = repl.compileAndEval(repl.nextCodeLine("java.util.fish"))
-                assertTrue("Expected compile error", res.first.hasErrors())
+                assertTrue("Expected compile error", res.first.isError())
 
                 val result = repl.compileAndEval(repl.nextCodeLine("x"))
-                assertEquals(res.second.toString(), 10, result.second?.result)
+                assertEquals(res.second.toString(), 10, (result.second?.result as ResultValue.Value?)?.value)
             }
     }
 
@@ -76,7 +78,7 @@ class JvmIdeServicesTest : TestCase() {
                     )
                 )
 
-                if (compileResult.hasErrors() && evalResult == null) {
+                if (compileResult.isError() && evalResult == null) {
                     val errors = compileResult.getErrors()
                     val loc = errors.location
                     if (loc == null) {
@@ -107,7 +109,7 @@ class JvmIdeServicesTest : TestCase() {
                     """.trimIndent()
                     )
                 )
-                if (compileResult.hasErrors() && evalResult == null) {
+                if (compileResult.isError() && evalResult == null) {
                     val errors = compileResult.getErrors()
                     val loc = errors.location
                     if (loc == null) {
@@ -128,7 +130,7 @@ class JvmIdeServicesTest : TestCase() {
         JvmTestRepl()
             .use { repl ->
                 val res = repl.compileAndEval(repl.nextCodeLine("data class Q(val x: Int, val: String)"))
-                assertTrue("Expected compile error", res.first.hasErrors())
+                assertTrue("Expected compile error", res.first.isError())
             }
     }
 
@@ -297,7 +299,7 @@ class LegacyReplTestLong1 : TestCase() {
                         "x$evals"
                     )
                 )
-                assertEquals(evaluated.toString(), evals, evaluated?.result)
+                assertEquals(evaluated.toString(), evals, (evaluated?.result as ResultValue.Value?)?.value)
             }
     }
 }
@@ -350,7 +352,7 @@ private fun assertEvalUnit(
     val valueResult = evalResult.valueOrNull().get()
 
     TestCase.assertNotNull("Unexpected eval result: $evalResult", valueResult)
-    TestCase.assertTrue(valueResult!!.isUnitResult)
+    TestCase.assertTrue(valueResult!!.result is ResultValue.Unit)
 }
 
 private fun <R> assertEvalResult(repl: JvmTestRepl, line: String, expectedResult: R) {
@@ -361,8 +363,8 @@ private fun <R> assertEvalResult(repl: JvmTestRepl, line: String, expectedResult
     val valueResult = evalResult.valueOrNull().get()
 
     TestCase.assertNotNull("Unexpected eval result: $evalResult", valueResult)
-    TestCase.assertTrue(valueResult!!.isValueResult)
-    TestCase.assertEquals(expectedResult, valueResult.result)
+    TestCase.assertTrue(valueResult!!.result is ResultValue.Value)
+    TestCase.assertEquals(expectedResult, (valueResult.result as ResultValue.Value).value)
 }
 
 private inline fun <reified R> assertEvalResultIs(repl: JvmTestRepl, line: String) {
@@ -373,8 +375,8 @@ private inline fun <reified R> assertEvalResultIs(repl: JvmTestRepl, line: Strin
     val valueResult = evalResult.valueOrNull().get()
 
     TestCase.assertNotNull("Unexpected eval result: $evalResult", valueResult)
-    TestCase.assertTrue(valueResult!!.isValueResult)
-    TestCase.assertTrue(valueResult.result is R)
+    TestCase.assertTrue(valueResult!!.result is ResultValue.Value)
+    TestCase.assertTrue((valueResult.result as ResultValue.Value).value is R)
 }
 
 private fun checkCompile(repl: JvmTestRepl, line: String): LinkedSnippet<KJvmCompiledScript>? {
@@ -382,3 +384,43 @@ private fun checkCompile(repl: JvmTestRepl, line: String): LinkedSnippet<KJvmCom
     val compileResult = repl.compile(codeLine)
     return compileResult.valueOrNull()
 }
+
+private data class CompilationErrors(
+    val message: String,
+    val location: CompilerMessageLocation?
+)
+
+private fun <T> ResultWithDiagnostics<T>.getErrors(): CompilationErrors =
+    CompilationErrors(
+        reports.joinToString("\n") { report ->
+            report.location?.let { loc ->
+                CompilerMessageLocation.create(
+                    report.sourcePath,
+                    loc.start.line,
+                    loc.start.col,
+                    loc.end?.line,
+                    loc.end?.col,
+                    null
+                )?.toString()?.let {
+                    "$it "
+                }
+            }.orEmpty() + report.message
+        },
+        reports.firstOrNull {
+            when (it.severity) {
+                ScriptDiagnostic.Severity.ERROR -> true
+                ScriptDiagnostic.Severity.FATAL -> true
+                else -> false
+            }
+        }?.let {
+            val loc = it.location ?: return@let null
+            CompilerMessageLocation.create(
+                it.sourcePath,
+                loc.start.line,
+                loc.start.col,
+                loc.end?.line,
+                loc.end?.col,
+                null
+            )
+        }
+    )
