@@ -6,6 +6,8 @@
 package org.jetbrains.kotlin.fir.resolve.transformers.contracts
 
 import org.jetbrains.kotlin.fir.FirElement
+import org.jetbrains.kotlin.fir.FirSession
+import org.jetbrains.kotlin.fir.declarations.FirClass
 import org.jetbrains.kotlin.fir.declarations.FirDeclaration
 import org.jetbrains.kotlin.fir.declarations.FirFile
 import org.jetbrains.kotlin.fir.resolve.ResolutionMode
@@ -14,6 +16,7 @@ import org.jetbrains.kotlin.fir.resolve.transformers.AdapterForResolvePhase
 import org.jetbrains.kotlin.fir.visitors.CompositeTransformResult
 import org.jetbrains.kotlin.fir.visitors.FirTransformer
 import org.jetbrains.kotlin.fir.visitors.compose
+import org.jetbrains.kotlin.fir.visitors.transformSingle
 
 @AdapterForResolvePhase
 class FirContractResolveTransformerAdapter(private val scopeSession: ScopeSession) : FirTransformer<Nothing?>() {
@@ -28,4 +31,10 @@ class FirContractResolveTransformerAdapter(private val scopeSession: ScopeSessio
         )
         return file.transform(transformer, ResolutionMode.ContextIndependent)
     }
+}
+
+fun <F : FirClass<F>> F.runContractResolveForLocalClass(session: FirSession, scopeSession: ScopeSession): F {
+    val transformer = FirContractResolveTransformer(session, scopeSession)
+
+    return this.transformSingle(transformer, ResolutionMode.ContextIndependent)
 }
