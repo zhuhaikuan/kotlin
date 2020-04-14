@@ -3,7 +3,7 @@
  * Use of this source code is governed by the Apache 2.0 license that can be found in the license/LICENSE.txt file.
  */
 
-package kotlin.script.experimental.util
+package kotlin.script.experimental.jvm.util
 
 import kotlin.script.experimental.api.SourceCode
 
@@ -33,7 +33,7 @@ fun String.determineSep() = if (indexOf("\r\n") == -1) "\n" else "\r\n"
 
 fun SourceCode.Position.calcAbsolute(code: SourceCode): Int {
     if (absolutePos != null)
-        return absolutePos
+        return absolutePos!!
 
     if (line == 1)
         return col - 1

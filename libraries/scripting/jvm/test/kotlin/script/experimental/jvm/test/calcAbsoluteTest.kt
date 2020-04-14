@@ -3,13 +3,13 @@
  * Use of this source code is governed by the Apache 2.0 license that can be found in the license/LICENSE.txt file.
  */
 
-package kotlin.script.experimental.test
+package kotlin.script.experimental.jvm.test
 
 import org.junit.Assert
 import org.junit.Test
 import kotlin.script.experimental.api.SourceCode
-import kotlin.script.experimental.util.calcAbsolute
-import kotlin.script.experimental.util.toSourceCodePosition
+import kotlin.script.experimental.jvm.util.calcAbsolute
+import kotlin.script.experimental.jvm.util.toSourceCodePosition
 
 class CalcAbsoluteTest {
 

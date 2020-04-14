@@ -15,7 +15,7 @@ import org.jetbrains.kotlin.scripting.ide_services.compiler.impl.prepareCodeForC
 import kotlin.script.experimental.api.*
 import kotlin.script.experimental.host.ScriptingHostConfiguration
 import kotlin.script.experimental.jvm.defaultJvmScriptingHostConfiguration
-import kotlin.script.experimental.util.calcAbsolute
+import kotlin.script.experimental.jvm.util.calcAbsolute
 
 class KJvmReplCompilerWithIdeServices(hostConfiguration: ScriptingHostConfiguration = defaultJvmScriptingHostConfiguration) :
     KJvmReplCompilerBase<IdeLikeReplCodeAnalyzer>(hostConfiguration, {

@@ -15,7 +15,7 @@ import kotlin.script.experimental.api.SourceCode
 import kotlin.script.experimental.api.valueOrNull
 import kotlin.script.experimental.jvm.BasicJvmReplEvaluator
 import kotlin.script.experimental.util.LinkedSnippet
-import kotlin.script.experimental.util.toSourceCodePosition
+import kotlin.script.experimental.jvm.util.toSourceCodePosition
 
 internal class JvmTestRepl : Closeable {
     private val currentLineCounter = AtomicInteger(0)

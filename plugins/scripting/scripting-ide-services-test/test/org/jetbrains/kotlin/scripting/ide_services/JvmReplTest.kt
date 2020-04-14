@@ -14,8 +14,8 @@ import kotlin.script.experimental.api.*
 import kotlin.script.experimental.jvm.impl.KJvmCompiledScript
 import kotlin.script.experimental.util.LinkedSnippet
 import kotlin.script.experimental.util.get
-import kotlin.script.experimental.util.isError
-import kotlin.script.experimental.util.isIncomplete
+import kotlin.script.experimental.jvm.util.isError
+import kotlin.script.experimental.jvm.util.isIncomplete
 
 // Adapted form GenericReplTest
 
