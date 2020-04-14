@@ -7,7 +7,6 @@ package org.jetbrains.kotlin.scripting.ide_services
 
 import junit.framework.TestCase
 import kotlinx.coroutines.runBlocking
-import org.jetbrains.kotlin.backend.common.push
 import org.jetbrains.kotlin.scripting.ide_services.compiler.KJvmReplCompilerWithIdeServices
 import org.jetbrains.kotlin.scripting.ide_services.test_util.SourceCodeTestImpl
 import org.jetbrains.kotlin.scripting.ide_services.test_util.simpleScriptCompilationConfiguration
@@ -193,7 +192,7 @@ class ReplCompletionAndErrorsAnalysisTest : TestCase() {
         fun run(setup: (Run).() -> Unit) {
             val r = Run()
             r.setup()
-            runs.push(r)
+            runs.add(r)
         }
 
         fun collect() = runs.map { it.collect() }
@@ -241,7 +240,7 @@ class ReplCompletionAndErrorsAnalysisTest : TestCase() {
                     if (_completionsMode == ComparisonType.DONT_CHECK)
                         _completionsMode = ComparisonType.EQUALS
                     run.doComplete
-                    variants.push(SourceCodeCompletionVariant(text, displayText, tail, icon))
+                    variants.add(SourceCodeCompletionVariant(text, displayText, tail, icon))
                 }
 
                 private val errors = mutableListOf<ScriptDiagnostic>()
@@ -254,7 +253,7 @@ class ReplCompletionAndErrorsAnalysisTest : TestCase() {
                     if (_errorsMode == ComparisonType.DONT_CHECK)
                         _errorsMode = ComparisonType.EQUALS
                     run.doErrorCheck
-                    errors.push(
+                    errors.add(
                         ScriptDiagnostic(
                             ScriptDiagnostic.unspecifiedError,
                             message,

@@ -13,7 +13,7 @@ publish()
 dependencies {
     compile(project(":kotlin-script-runtime"))
     compile(kotlinStdlib())
-    compile(project(":idea:ide-common"))
+    compileOnly(project(":idea:ide-common"))
     compile(project(":kotlin-scripting-common"))
     compile(project(":kotlin-scripting-jvm"))
     compileOnly(project(":kotlin-scripting-compiler"))

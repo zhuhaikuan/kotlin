@@ -14,24 +14,16 @@ val embeddableTestRuntime by configurations.creating {
 
 dependencies {
     allTestsRuntime(commonDep("junit"))
-    allTestsRuntime(intellijCoreDep()) { includeJars("intellij-core") }
-    Platform[193].orLower {
-        allTestsRuntime(intellijDep()) { includeJars("openapi") }
-    }
-    allTestsRuntime(intellijDep()) { includeJars("idea", "idea_rt", "log4j", "jna") }
     testCompile(project(":kotlin-scripting-ide-services"))
-    testCompile(projectTests(":compiler:tests-common"))
     testCompile(project(":kotlin-scripting-compiler"))
-    testCompile(project(":daemon-common")) // TODO: fix import (workaround for jps build)
+    testCompile(project(":compiler:cli-common"))
 
     testRuntimeOnly(project(":kotlin-compiler"))
-    testRuntimeOnly(project(":kotlin-reflect"))
     testRuntimeOnly(commonDep("org.jetbrains.intellij.deps", "trove4j"))
+    testRuntimeOnly(project(":idea:ide-common")) { isTransitive = false }
 
     embeddableTestRuntime(project(":kotlin-scripting-ide-services-embeddable"))
-    embeddableTestRuntime(project(":kotlin-test:kotlin-test-jvm"))
-    embeddableTestRuntime(project(":kotlin-test:kotlin-test-junit"))
-    embeddableTestRuntime(projectTests(":compiler:tests-common")) { isTransitive = false }
+    embeddableTestRuntime(project(":kotlin-compiler-embeddable"))
     embeddableTestRuntime(testSourceSet.output)
 }
 
@@ -51,8 +43,8 @@ projectTest(parallel = true) {
 
 // This doesn;t work now due to conflicts between embeddable compiler contents and intellij sdk modules
 // To make it work, the dependencies to the intellij sdk should be eliminated
-//projectTest(taskName = "embeddableTest", parallel = true) {
-//    workingDir = rootDir
-//    dependsOn(embeddableTestRuntime)
-//    classpath = embeddableTestRuntime
-//}
+projectTest(taskName = "embeddableTest", parallel = true) {
+    workingDir = rootDir
+    dependsOn(embeddableTestRuntime)
+    classpath = embeddableTestRuntime
+}
