@@ -14,7 +14,6 @@ import org.jetbrains.kotlin.codegen.*
 import org.jetbrains.kotlin.codegen.binding.CodegenBinding
 import org.jetbrains.kotlin.codegen.inline.*
 import org.jetbrains.kotlin.codegen.serialization.JvmSerializationBindings
-import org.jetbrains.kotlin.codegen.serialization.JvmSerializerExtension
 import org.jetbrains.kotlin.config.LanguageFeature
 import org.jetbrains.kotlin.descriptors.Modality
 import org.jetbrains.kotlin.descriptors.Visibility
@@ -40,7 +39,6 @@ import org.jetbrains.kotlin.resolve.jvm.annotations.VOLATILE_ANNOTATION_FQ_NAME
 import org.jetbrains.kotlin.resolve.jvm.checkers.JvmSimpleNameBacktickChecker
 import org.jetbrains.kotlin.resolve.jvm.diagnostics.*
 import org.jetbrains.kotlin.resolve.jvm.jvmSignature.JvmClassSignature
-import org.jetbrains.kotlin.serialization.DescriptorSerializer
 import org.jetbrains.kotlin.utils.addToStdlib.safeAs
 import org.jetbrains.org.objectweb.asm.*
 import org.jetbrains.org.objectweb.asm.commons.Method
@@ -98,14 +96,10 @@ class ClassCodegen private constructor(
 
     internal var writeSourceMap: Boolean = withinInline
 
-    private val serializerExtension = JvmSerializerExtension(visitor.serializationBindings, state, typeMapper)
-    private val serializer: DescriptorSerializer? =
-        when (val metadata = irClass.metadata) {
-            is MetadataSource.Class -> DescriptorSerializer.create(metadata.descriptor, serializerExtension, parentClassCodegen?.serializer)
-            is MetadataSource.File -> DescriptorSerializer.createTopLevel(serializerExtension)
-            is MetadataSource.Function -> DescriptorSerializer.createForLambda(serializerExtension)
-            else -> null
-        }
+    internal val serializerWrapper = ClassCodegenSerializerWrapper.create(
+        visitor.serializationBindings, state, typeMapper,
+        irClass, parentClassCodegen
+    )
 
     private var regeneratedObjectNameGenerators = mutableMapOf<String, NameGenerator>()
 
@@ -219,9 +213,9 @@ class ClassCodegen private constructor(
 
         when (val metadata = irClass.metadata) {
             is MetadataSource.Class -> {
-                val classProto = serializer!!.classProto(metadata.descriptor).build()
+                val classProto = serializerWrapper!!.classProto(metadata).build()
                 writeKotlinMetadata(visitor, state, KotlinClassHeader.Kind.CLASS, extraFlags) {
-                    AsmUtil.writeAnnotationData(it, serializer, classProto)
+                    serializerWrapper.writeAnnotationData(it, classProto)
                 }
 
                 assert(irClass !in context.classNameOverride) {
@@ -230,14 +224,14 @@ class ClassCodegen private constructor(
             }
             is MetadataSource.File -> {
                 val packageFqName = irClass.getPackageFragment()!!.fqName
-                val packageProto = serializer!!.packagePartProto(packageFqName, metadata.descriptors)
+                val packageProto = serializerWrapper!!.packagePartProto(packageFqName, metadata)
 
-                serializerExtension.serializeJvmPackage(packageProto, type)
+                serializerWrapper.serializeJvmPackage(packageProto, type)
 
                 val facadeClassName = context.multifileFacadeForPart[irClass.attributeOwnerId]
                 val kind = if (facadeClassName != null) KotlinClassHeader.Kind.MULTIFILE_CLASS_PART else KotlinClassHeader.Kind.FILE_FACADE
                 writeKotlinMetadata(visitor, state, kind, extraFlags) { av ->
-                    AsmUtil.writeAnnotationData(av, serializer, packageProto.build())
+                    serializerWrapper.writeAnnotationData(av, packageProto.build())
 
                     if (facadeClassName != null) {
                         av.visit(JvmAnnotationNames.METADATA_MULTIFILE_CLASS_NAME_FIELD_NAME, facadeClassName.internalName)
@@ -249,11 +243,10 @@ class ClassCodegen private constructor(
                 }
             }
             is MetadataSource.Function -> {
-                val fakeDescriptor = createFreeFakeLambdaDescriptor(metadata.descriptor)
-                val functionProto = serializer!!.functionProto(fakeDescriptor)?.build()
+                val functionProto = serializerWrapper!!.functionProto(metadata)?.build()
                 writeKotlinMetadata(visitor, state, KotlinClassHeader.Kind.SYNTHETIC_CLASS, extraFlags) {
                     if (functionProto != null) {
-                        AsmUtil.writeAnnotationData(it, serializer, functionProto)
+                        serializerWrapper.writeAnnotationData(it, functionProto)
                     }
                 }
             }

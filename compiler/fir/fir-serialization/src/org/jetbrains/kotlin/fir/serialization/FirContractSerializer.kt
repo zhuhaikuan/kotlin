@@ -9,6 +9,7 @@ import org.jetbrains.kotlin.contracts.description.*
 import org.jetbrains.kotlin.contracts.description.expressions.*
 import org.jetbrains.kotlin.fir.contracts.FirContractDescription
 import org.jetbrains.kotlin.fir.contracts.description.*
+import org.jetbrains.kotlin.fir.declarations.FirFunction
 import org.jetbrains.kotlin.fir.declarations.FirSimpleFunction
 import org.jetbrains.kotlin.fir.expressions.LogicOperationKind
 import org.jetbrains.kotlin.metadata.ProtoBuf
@@ -16,11 +17,11 @@ import org.jetbrains.kotlin.metadata.deserialization.Flags
 
 class FirContractSerializer {
     fun serializeContractOfFunctionIfAny(
-        function: FirSimpleFunction,
+        function: FirFunction<*>,
         proto: ProtoBuf.Function.Builder,
         parentSerializer: FirElementSerializer
     ) {
-        val contractDescription = function.contractDescription
+        val contractDescription = (function as? FirSimpleFunction)?.contractDescription ?: return
         val worker = ContractSerializerWorker(parentSerializer)
         proto.setContract(worker.contractProto(contractDescription))
     }

@@ -42,7 +42,7 @@ import java.util.*
 class DescriptorSerializer private constructor(
     private val containingDeclaration: DeclarationDescriptor?,
     private val typeParameters: Interner<TypeParameterDescriptor>,
-    private val extension: SerializerExtension,
+    val extension: SerializerExtension,
     val typeTable: MutableTypeTable,
     private val versionRequirementTable: MutableVersionRequirementTable?,
     private val serializeTypeTableToFunction: Boolean

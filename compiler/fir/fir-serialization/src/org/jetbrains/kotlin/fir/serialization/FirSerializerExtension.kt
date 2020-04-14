@@ -28,7 +28,7 @@ abstract class FirSerializerExtension {
     open fun shouldSerializeTypeAlias(typeAlias: FirTypeAlias): Boolean = true
     open fun shouldUseTypeTable(): Boolean = false
     open fun shouldUseNormalizedVisibility(): Boolean = false
-    open fun shouldSerializeFunction(function: FirSimpleFunction): Boolean = false
+    open fun shouldSerializeFunction(function: FirFunction<*>): Boolean = false
     open fun shouldSerializeProperty(property: FirProperty): Boolean = false
 
     open fun serializePackage(packageFqName: FqName, proto: ProtoBuf.Package.Builder) {
@@ -50,7 +50,7 @@ abstract class FirSerializerExtension {
     }
 
     open fun serializeFunction(
-        function: FirSimpleFunction,
+        function: FirFunction<*>,
         proto: ProtoBuf.Function.Builder,
         versionRequirementTable: MutableVersionRequirementTable?,
         childSerializer: FirElementSerializer

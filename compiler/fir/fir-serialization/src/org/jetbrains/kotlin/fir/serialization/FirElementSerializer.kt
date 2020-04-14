@@ -16,6 +16,7 @@ import org.jetbrains.kotlin.fir.expressions.FirConstExpression
 import org.jetbrains.kotlin.fir.expressions.FirNamedArgumentExpression
 import org.jetbrains.kotlin.fir.render
 import org.jetbrains.kotlin.fir.resolve.calls.varargElementType
+import org.jetbrains.kotlin.fir.resolve.firSymbolProvider
 import org.jetbrains.kotlin.fir.resolve.inference.isSuspendFunctionType
 import org.jetbrains.kotlin.fir.resolve.toSymbol
 import org.jetbrains.kotlin.fir.symbols.StandardClassIds
@@ -24,6 +25,7 @@ import org.jetbrains.kotlin.fir.types.impl.FirImplicitNullableAnyTypeRef
 import org.jetbrains.kotlin.metadata.ProtoBuf
 import org.jetbrains.kotlin.metadata.deserialization.Flags
 import org.jetbrains.kotlin.metadata.deserialization.VersionRequirement
+import org.jetbrains.kotlin.metadata.deserialization.isKotlin1Dot4OrLater
 import org.jetbrains.kotlin.metadata.serialization.Interner
 import org.jetbrains.kotlin.metadata.serialization.MutableTypeTable
 import org.jetbrains.kotlin.metadata.serialization.MutableVersionRequirementTable
@@ -247,26 +249,34 @@ class FirElementSerializer private constructor(
         return builder
     }
 
-    fun functionProto(function: FirSimpleFunction): ProtoBuf.Function.Builder? {
+    fun functionProto(function: FirFunction<*>): ProtoBuf.Function.Builder? {
         if (!extension.shouldSerializeFunction(function)) return null
 
         val builder = ProtoBuf.Function.newBuilder()
+        val simpleFunction = function as? FirSimpleFunction
 
         val local = createChildSerializer(function)
 
         val flags = Flags.getFunctionFlags(
             function.annotations.isNotEmpty(),
-            ProtoEnumFlags.visibility(normalizeVisibility(function)),
-            ProtoEnumFlags.modality(function.modality ?: Modality.FINAL),
+            ProtoEnumFlags.visibility(simpleFunction?.let { normalizeVisibility(it) } ?: Visibilities.LOCAL),
+            ProtoEnumFlags.modality(simpleFunction?.modality ?: Modality.FINAL),
             ProtoEnumFlags.memberKind(CallableMemberDescriptor.Kind.DECLARATION),
-            function.isOperator, function.isInfix, function.isInline, function.isTailRec,
-            function.isExternal, function.isSuspend, function.isExpect
+            simpleFunction?.isOperator == true,
+            simpleFunction?.isInfix == true,
+            simpleFunction?.isInline == true,
+            simpleFunction?.isTailRec == true,
+            simpleFunction?.isExternal == true,
+            simpleFunction?.isSuspend == true,
+            simpleFunction?.isExpect == true
         )
         if (flags != builder.flags) {
             builder.flags = flags
         }
 
-        builder.name = getSimpleNameIndex(function.name)
+        if (simpleFunction != null) {
+            builder.name = getSimpleNameIndex(simpleFunction.name)
+        }
 
         if (useTypeTable()) {
             builder.returnTypeId = local.typeId(function.returnTypeRef)
@@ -275,6 +285,7 @@ class FirElementSerializer private constructor(
         }
 
         for (typeParameter in function.typeParameters) {
+            if (typeParameter !is FirTypeParameter) continue
             builder.addTypeParameter(local.typeParameterProto(typeParameter))
         }
 
@@ -616,12 +627,12 @@ class FirElementSerializer private constructor(
 
     private fun useTypeTable(): Boolean = extension.shouldUseTypeTable()
 
-    private fun FirMemberDeclaration.hasInlineClassTypesInSignature(): Boolean {
+    private fun FirDeclaration.hasInlineClassTypesInSignature(): Boolean {
         // TODO
         return false
     }
 
-    private fun FirCallableMemberDeclaration<*>.isSuspendOrHasSuspendTypesInSignature(): Boolean {
+    private fun FirCallableDeclaration<*>.isSuspendOrHasSuspendTypesInSignature(): Boolean {
         // TODO
         return false
     }
@@ -643,6 +654,12 @@ class FirElementSerializer private constructor(
 
     private fun MutableVersionRequirementTable.serializeVersionRequirements(klass: FirClass<*>): List<Int> =
         serializeVersionRequirements(klass.annotations)
+
+    private fun MutableVersionRequirementTable.serializeVersionRequirements(function: FirFunction<*>): List<Int> =
+        serializeVersionRequirements(function.annotations)
+
+    private fun MutableVersionRequirementTable.serializeVersionRequirements(function: FirConstructor): List<Int> =
+        serializeVersionRequirements(function.annotations)
 
     private fun MutableVersionRequirementTable.serializeVersionRequirements(annotations: List<FirAnnotationCall>): List<Int> =
         annotations
@@ -741,17 +758,57 @@ class FirElementSerializer private constructor(
         typeParameters.intern(typeParameter)
 
     companion object {
-        private fun variance(variance: Variance): ProtoBuf.TypeParameter.Variance = when (variance) {
-            Variance.INVARIANT -> ProtoBuf.TypeParameter.Variance.INV
-            Variance.IN_VARIANCE -> ProtoBuf.TypeParameter.Variance.IN
-            Variance.OUT_VARIANCE -> ProtoBuf.TypeParameter.Variance.OUT
-        }
+        @JvmStatic
+        fun createTopLevel(session: FirSession, extension: FirSerializerExtension): FirElementSerializer =
+            FirElementSerializer(
+                session, null,
+                Interner(), extension, MutableTypeTable(), MutableVersionRequirementTable(),
+                serializeTypeTableToFunction = false
+            )
 
-        private fun projection(projectionKind: ProjectionKind): ProtoBuf.Type.Argument.Projection = when (projectionKind) {
-            ProjectionKind.INVARIANT -> ProtoBuf.Type.Argument.Projection.INV
-            ProjectionKind.IN -> ProtoBuf.Type.Argument.Projection.IN
-            ProjectionKind.OUT -> ProtoBuf.Type.Argument.Projection.OUT
-            ProjectionKind.STAR -> throw AssertionError("Should not be here")
+        @JvmStatic
+        fun createForLambda(session: FirSession, extension: FirSerializerExtension): FirElementSerializer =
+            FirElementSerializer(
+                session, null,
+                Interner(), extension, MutableTypeTable(),
+                versionRequirementTable = null, serializeTypeTableToFunction = true
+            )
+
+        @JvmStatic
+        fun create(
+            klass: FirClass<*>,
+            extension: FirSerializerExtension,
+            parentSerializer: FirElementSerializer?
+        ): FirElementSerializer {
+            val parentClassId = klass.symbol.classId.outerClassId
+            val parent = if (parentClassId != null && !parentClassId.isLocal) {
+                val parentClass = klass.session.firSymbolProvider.getClassLikeSymbolByFqName(parentClassId)!!.fir as FirRegularClass
+                parentSerializer ?: create(parentClass, extension, null)
+            } else {
+                createTopLevel(klass.session, extension)
+            }
+
+            // Calculate type parameter ids for the outer class beforehand, as it would've had happened if we were always
+            // serializing outer classes before nested classes.
+            // Otherwise our interner can get wrong ids because we may serialize classes in any order.
+            val serializer = FirElementSerializer(
+                klass.session,
+                klass,
+                Interner(parent.typeParameters),
+                extension,
+                MutableTypeTable(),
+                if (parentClassId != null && !isKotlin1Dot4OrLater(extension.metadataVersion)) {
+                    parent.versionRequirementTable
+                } else {
+                    MutableVersionRequirementTable()
+                },
+                serializeTypeTableToFunction = false
+            )
+            for (typeParameter in klass.typeParameters) {
+                if (typeParameter !is FirTypeParameter) continue
+                serializer.typeParameters.intern(typeParameter)
+            }
+            return serializer
         }
 
         fun writeLanguageVersionRequirement(
@@ -783,6 +840,19 @@ class FirElementSerializer private constructor(
                 }
             }
             return versionRequirementTable[requirement]
+        }
+
+        private fun variance(variance: Variance): ProtoBuf.TypeParameter.Variance = when (variance) {
+            Variance.INVARIANT -> ProtoBuf.TypeParameter.Variance.INV
+            Variance.IN_VARIANCE -> ProtoBuf.TypeParameter.Variance.IN
+            Variance.OUT_VARIANCE -> ProtoBuf.TypeParameter.Variance.OUT
+        }
+
+        private fun projection(projectionKind: ProjectionKind): ProtoBuf.Type.Argument.Projection = when (projectionKind) {
+            ProjectionKind.INVARIANT -> ProtoBuf.Type.Argument.Projection.INV
+            ProjectionKind.IN -> ProtoBuf.Type.Argument.Projection.IN
+            ProjectionKind.OUT -> ProtoBuf.Type.Argument.Projection.OUT
+            ProjectionKind.STAR -> throw AssertionError("Should not be here")
         }
     }
 }
