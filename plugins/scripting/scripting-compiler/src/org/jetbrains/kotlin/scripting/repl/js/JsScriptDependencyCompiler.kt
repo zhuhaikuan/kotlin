@@ -7,7 +7,9 @@ package org.jetbrains.kotlin.scripting.repl.js
 
 import org.jetbrains.kotlin.backend.common.serialization.signature.IdSignatureDescriptor
 import org.jetbrains.kotlin.builtins.KotlinBuiltIns
+import org.jetbrains.kotlin.config.CommonConfigurationKeys
 import org.jetbrains.kotlin.config.CompilerConfiguration
+import org.jetbrains.kotlin.config.CompilerConfigurationKey
 import org.jetbrains.kotlin.config.LanguageVersionSettingsImpl
 import org.jetbrains.kotlin.config.languageVersionSettings
 import org.jetbrains.kotlin.descriptors.ModuleDescriptor
@@ -50,7 +52,9 @@ class JsScriptDependencyCompiler(
 
         val signaturer = IdSignatureDescriptor(JsManglerDesc)
         val irBuiltIns = IrBuiltIns(builtIns, typeTranslator, signaturer, symbolTable)
-        val jsLinker = JsIrLinker(null, emptyLoggingContext, irBuiltIns, symbolTable, null)
+        val jsLinker = JsIrLinker(null, emptyLoggingContext, irBuiltIns, symbolTable, deserializeFakeOverrides = true,
+            /*configuration.get(CommonConfigurationKeys.DESERIALIZE_FAKE_OVERRIDES) ?: false*/
+            null)
 
         val moduleFragment = IrModuleFragmentImpl(moduleDescriptor, irBuiltIns)
         val irDependencies = dependencies.map { jsLinker.deserializeFullModule(it, it.kotlinLibrary) }
