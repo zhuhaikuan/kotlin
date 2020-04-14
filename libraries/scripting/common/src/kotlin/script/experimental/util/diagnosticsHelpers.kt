@@ -10,14 +10,5 @@ import kotlin.script.experimental.api.ScriptDiagnostic
 
 fun <T> ResultWithDiagnostics<T>.isIncomplete() = this.reports.any { it.code == ScriptDiagnostic.incompleteCode }
 
-fun <T> ResultWithDiagnostics<T>.hasErrors() = this is ResultWithDiagnostics.Failure
+fun <T> ResultWithDiagnostics<T>.isError() = this is ResultWithDiagnostics.Failure
 
-fun <T> ResultWithDiagnostics<T>.renderError(
-    withSeverity: Boolean = true,
-    withLocation: Boolean = true,
-    withException: Boolean = true,
-    withStackTrace: Boolean = false
-) =
-    this.reports.joinToString("\n") {
-        it.render(withSeverity, withLocation, withException, withStackTrace)
-    }

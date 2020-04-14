@@ -115,21 +115,9 @@ interface EvaluatedSnippet {
     val configuration: ScriptEvaluationConfiguration
 
     /**
-     * In case of runtime error, represents this error. Otherwise it's <i>null</i>.
+     * Result of the script evaluation.
      */
-    val error: Throwable?
-
-    /**
-     * Result of the script evaluation. Note that <i>null</i> is also a possible result.
-     * To distinct "null result" and "no result" situations, check [hasResult] property
-     */
-    val result: Any?
-
-    /**
-     * Should be <b>false</b> in case if this snippet evaluation has [Unit] result or
-     * finished with a runtime error. Otherwise <b>true</b>.
-     */
-    val hasResult: Boolean
+    val result: ResultValue
 }
 
 /**

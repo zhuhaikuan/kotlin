@@ -5,10 +5,7 @@
 
 package kotlin.script.experimental.util
 
-import java.io.Serializable
 import kotlin.script.experimental.api.SourceCode
-
-data class AbsSourceCodePosition(val line: Int, val col: Int, val absolutePos: Int) : Serializable
 
 internal fun String.findNth(s: String, n: Int, start: Int = 0): Int {
     if (n < 1) return -1
