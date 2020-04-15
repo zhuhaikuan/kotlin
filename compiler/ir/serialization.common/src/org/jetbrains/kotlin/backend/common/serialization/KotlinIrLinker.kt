@@ -53,6 +53,7 @@ abstract class KotlinIrLinker(
     val builtIns: IrBuiltIns,
     val symbolTable: SymbolTable,
     private val calculateFakeOverrides: Boolean,
+    protected val signaturer: IdSignatureSerializer,
     private val exportedDependencies: List<ModuleDescriptor>
 ) : IrDeserializer {
 
@@ -562,6 +563,21 @@ abstract class KotlinIrLinker(
     fun postProcess() {
         deserializersForModules.values.forEach { it.postProcess() }
         finalizeExpectActualLinker()
+
+        val fakeOverrideBuilder = FakeOverrideBuilder(symbolTable, signaturer, builtIns)
+        // includes the current module
+        deserializersForModules.values.forEach { irModule ->
+            fakeOverrideBuilder.provideFakeOverrides(irModule.moduleFragment, {true})
+        }
+        // fakeOverrideBuilder.provideFakeOverrides(moduleFragment, {true})
+
+        val unbound = symbolTable.allUnbound
+        assert(unbound.isEmpty()) {
+            "unbound after fake overrides:\n" +
+                    unbound.map {
+                        "$it ${if (it.isPublicApi) it.signature.toString() else "NON-PUBLIC API $it"}"
+                    }.joinToString("\n")
+        }
     }
 
     // The issue here is that an expect can not trigger its actual deserialization by reachability

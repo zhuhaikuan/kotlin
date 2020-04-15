@@ -32,7 +32,7 @@ import org.jetbrains.kotlin.load.java.lazy.descriptors.LazyJavaPackageFragment
 import org.jetbrains.kotlin.name.Name
 
 class JvmIrLinker(currentModule: ModuleDescriptor?, logger: LoggingContext, builtIns: IrBuiltIns, symbolTable: SymbolTable, calculateFakeOverrides: Boolean, private val stubGenerator: DeclarationStubGenerator, private val manglerDesc: JvmManglerDesc) :
-    KotlinIrLinker(currentModule, logger, builtIns, symbolTable, calculateFakeOverrides, emptyList()) {
+    KotlinIrLinker(currentModule, logger, builtIns, symbolTable, calculateFakeOverrides, IdSignatureSerializer(JvmManglerIr), emptyList()) {
 
     override val functionalInteraceFactory: IrAbstractFunctionFactory = IrFunctionFactory(builtIns, symbolTable)
 

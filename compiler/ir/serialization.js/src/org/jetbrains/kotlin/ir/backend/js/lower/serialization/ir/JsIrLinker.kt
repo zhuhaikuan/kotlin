@@ -24,7 +24,7 @@ import org.jetbrains.kotlin.library.IrLibrary
 import org.jetbrains.kotlin.library.SerializedIrFile
 
 class JsIrLinker(currentModule: ModuleDescriptor?, logger: LoggingContext, builtIns: IrBuiltIns, symbolTable: SymbolTable, calculateFakeOverrides: Boolean, private val icData: List<SerializedIrFile>? = null) :
-    KotlinIrLinker(currentModule, logger, builtIns, symbolTable, calculateFakeOverrides, emptyList()) {
+    KotlinIrLinker(currentModule, logger, builtIns, symbolTable, calculateFakeOverrides, IdSignatureSerializer(JsManglerIr), emptyList()) {
 
     override val functionalInteraceFactory: IrAbstractFunctionFactory = IrFunctionFactory(builtIns, symbolTable)
 

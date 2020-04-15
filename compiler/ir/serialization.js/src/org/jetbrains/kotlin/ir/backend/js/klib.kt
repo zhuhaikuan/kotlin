@@ -155,22 +155,7 @@ fun generateKLib(
 
     val moduleFragment = psi2IrContext.generateModuleFragmentWithPlugins(project, files, irLinker, expectDescriptorToSymbol)
 
-    // Move to irLinker.postProcess()?
-    val fakeOverrideBuilder = FakeOverrideBuilder(psi2IrContext.symbolTable, IdSignatureSerializer(JsManglerIr), psi2IrContext.irBuiltIns)
-    deserializedModuleFragments.forEach { irModule ->
-        fakeOverrideBuilder.provideFakeOverrides(irModule, {true})
-    }
-    fakeOverrideBuilder.provideFakeOverrides(moduleFragment, {true})
-
-    // TODO: move to postProcess().
-    val unbound = psi2IrContext.symbolTable.allUnbound
-    assert(unbound.isEmpty()) {
-        "unbound after fake overrides:\n" +
-                unbound.map {
-                    "$it ${if (it.isPublicApi) it.signature.toString() else "NON-PUBLIC API $it"}"
-                }.joinToString("\n")
-    }
-
+    irLinker.postProcess()
 
     moduleFragment.acceptVoid(ManglerChecker(JsManglerIr, Ir2DescriptorManglerAdapter(JsManglerDesc)))
 
