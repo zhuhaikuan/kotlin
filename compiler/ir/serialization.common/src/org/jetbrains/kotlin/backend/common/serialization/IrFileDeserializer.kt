@@ -104,7 +104,7 @@ import org.jetbrains.kotlin.backend.common.serialization.proto.PublicIdSignature
 import org.jetbrains.kotlin.backend.common.serialization.proto.AccessorIdSignature as ProtoAccessorIdSignature
 import org.jetbrains.kotlin.backend.common.serialization.proto.FileLocalIdSignature as ProtoFileLocalIdSignature
 
-abstract class IrFileDeserializer(val logger: LoggingContext, val builtIns: IrBuiltIns, val symbolTable: SymbolTable, protected var deserializeBodies: Boolean, protected var deserializeBodies: Boolean) {
+abstract class IrFileDeserializer(val logger: LoggingContext, val builtIns: IrBuiltIns, val symbolTable: SymbolTable, var calculateFakeOverrides: Boolean, protected var deserializeBodies: Boolean) {
 
     abstract fun deserializeIrSymbolToDeclare(code: Long): Pair<IrSymbol, IdSignature>
     abstract fun deserializeIrSymbol(code: Long): IrSymbol

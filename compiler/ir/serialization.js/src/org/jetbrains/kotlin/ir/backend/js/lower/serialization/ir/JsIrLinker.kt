@@ -14,13 +14,17 @@ import org.jetbrains.kotlin.descriptors.DeclarationDescriptor
 import org.jetbrains.kotlin.descriptors.DeclarationDescriptorWithVisibility
 import org.jetbrains.kotlin.descriptors.ModuleDescriptor
 import org.jetbrains.kotlin.descriptors.konan.kotlinLibrary
+import org.jetbrains.kotlin.ir.declarations.IrModuleFragment
+import org.jetbrains.kotlin.ir.descriptors.IrAbstractFunctionFactory
 import org.jetbrains.kotlin.ir.descriptors.IrBuiltIns
+import org.jetbrains.kotlin.ir.descriptors.IrFunctionFactory
+import org.jetbrains.kotlin.ir.util.IrExtensionGenerator
 import org.jetbrains.kotlin.ir.util.SymbolTable
 import org.jetbrains.kotlin.library.IrLibrary
 import org.jetbrains.kotlin.library.SerializedIrFile
 
-class JsIrLinker(currentModule: ModuleDescriptor?, logger: LoggingContext, builtIns: IrBuiltIns, symbolTable: SymbolTable, deserializeFakeOverrides: Boolean, private val icData: List<SerializedIrFile>? = null) :
-    KotlinIrLinker(currentModule, logger, builtIns, symbolTable, deserializeFakeOverrides, emptyList()) {
+class JsIrLinker(currentModule: ModuleDescriptor?, logger: LoggingContext, builtIns: IrBuiltIns, symbolTable: SymbolTable, calculateFakeOverrides: Boolean, private val icData: List<SerializedIrFile>? = null) :
+    KotlinIrLinker(currentModule, logger, builtIns, symbolTable, calculateFakeOverrides, emptyList()) {
 
     override val functionalInteraceFactory: IrAbstractFunctionFactory = IrFunctionFactory(builtIns, symbolTable)
 

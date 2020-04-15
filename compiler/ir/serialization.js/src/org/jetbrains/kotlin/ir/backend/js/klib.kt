@@ -14,6 +14,7 @@ import org.jetbrains.kotlin.backend.common.LoggingContext
 import org.jetbrains.kotlin.backend.common.extensions.IrGenerationExtension
 import org.jetbrains.kotlin.backend.common.extensions.IrPluginContext
 import org.jetbrains.kotlin.backend.common.serialization.DeserializationStrategy
+import org.jetbrains.kotlin.backend.common.serialization.FakeOverrideBuilder
 import org.jetbrains.kotlin.backend.common.serialization.KlibIrVersion
 import org.jetbrains.kotlin.backend.common.serialization.knownBuiltins
 import org.jetbrains.kotlin.backend.common.serialization.mangle.ManglerChecker
@@ -21,6 +22,7 @@ import org.jetbrains.kotlin.backend.common.serialization.mangle.descriptor.Ir2De
 import org.jetbrains.kotlin.backend.common.serialization.metadata.DynamicTypeDeserializer
 import org.jetbrains.kotlin.backend.common.serialization.metadata.KlibMetadataVersion
 import org.jetbrains.kotlin.backend.common.serialization.signature.IdSignatureDescriptor
+import org.jetbrains.kotlin.backend.common.serialization.signature.IdSignatureSerializer
 import org.jetbrains.kotlin.builtins.KotlinBuiltIns
 import org.jetbrains.kotlin.builtins.functions.FunctionClassDescriptor
 import org.jetbrains.kotlin.config.*
@@ -145,13 +147,30 @@ fun generateKLib(
 
     val expectDescriptorToSymbol = mutableMapOf<DeclarationDescriptor, IrSymbol>()
 
-    val irLinker = JsIrLinker(psi2IrContext.moduleDescriptor, emptyLoggingContext, psi2IrContext.irBuiltIns, psi2IrContext.symbolTable, serializedIrFiles)
+    val irLinker = JsIrLinker(psi2IrContext.moduleDescriptor, emptyLoggingContext, psi2IrContext.irBuiltIns, psi2IrContext.symbolTable, configuration.calculateFakeOverrides, serializedIrFiles)
 
     val deserializedModuleFragments = sortDependencies(allDependencies.getFullList(), depsDescriptors.descriptors).map {
         irLinker.deserializeOnlyHeaderModule(depsDescriptors.getModuleDescriptor(it), it)
     }
 
     val moduleFragment = psi2IrContext.generateModuleFragmentWithPlugins(project, files, irLinker, expectDescriptorToSymbol)
+
+    // Move to irLinker.postProcess()?
+    val fakeOverrideBuilder = FakeOverrideBuilder(psi2IrContext.symbolTable, IdSignatureSerializer(JsManglerIr), psi2IrContext.irBuiltIns)
+    deserializedModuleFragments.forEach { irModule ->
+        fakeOverrideBuilder.provideFakeOverrides(irModule, {true})
+    }
+    fakeOverrideBuilder.provideFakeOverrides(moduleFragment, {true})
+
+    // TODO: move to postProcess().
+    val unbound = psi2IrContext.symbolTable.allUnbound
+    assert(unbound.isEmpty()) {
+        "unbound after fake overrides:\n" +
+                unbound.map {
+                    "$it ${if (it.isPublicApi) it.signature.toString() else "NON-PUBLIC API $it"}"
+                }.joinToString("\n")
+    }
+
 
     moduleFragment.acceptVoid(ManglerChecker(JsManglerIr, Ir2DescriptorManglerAdapter(JsManglerDesc)))
 

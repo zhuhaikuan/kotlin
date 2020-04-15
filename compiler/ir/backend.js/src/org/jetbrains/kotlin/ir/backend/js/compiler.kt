@@ -79,24 +79,27 @@ fun compile(
 
     deserializer.postProcess()
 
-    moduleFragment.files.clear()
-    moduleFragment.files += irFiles
-
-    symbolTable.lazyWrapper.stubGenerator = DeclarationStubGenerator(moduleDescriptor, symbolTable, irBuiltIns.languageVersionSettings)
-
+    // TODO: move to postProcess().
     val fakeOverrideBuilder = FakeOverrideBuilder(symbolTable, IdSignatureSerializer(JsManglerIr), context.irBuiltIns)
     dependencyModules.forEach { irModule ->
         fakeOverrideBuilder.provideFakeOverrides(irModule, {true})
     }
     fakeOverrideBuilder.provideFakeOverrides(moduleFragment, {true})
 
+    // TODO: move to postProcess().
     val unbound = symbolTable.allUnbound
     assert(unbound.isEmpty()) {
         "unbound after fake overrides:\n" +
-        unbound.map {
-            "$it ${if (it.isPublicApi) it.signature.toString() else "NON-PUBLIC API $it"}"
-        }.jointToString("\n")
+                unbound.map {
+                    "$it ${if (it.isPublicApi) it.signature.toString() else "NON-PUBLIC API $it"}"
+                }.joinToString("\n")
     }
+
+
+    moduleFragment.files.clear()
+    moduleFragment.files += irFiles
+
+    symbolTable.lazyWrapper.stubGenerator = DeclarationStubGenerator(moduleDescriptor, symbolTable, irBuiltIns.languageVersionSettings)
 
     moveBodilessDeclarationsToSeparatePlace(context, moduleFragment)
 

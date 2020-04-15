@@ -52,8 +52,8 @@ abstract class KotlinIrLinker(
     val logger: LoggingContext,
     val builtIns: IrBuiltIns,
     val symbolTable: SymbolTable,
-    private val exportedDependencies: List<ModuleDescriptor>,
-    private val calculateFakeOverrides: Boolean
+    private val calculateFakeOverrides: Boolean,
+    private val exportedDependencies: List<ModuleDescriptor>
 ) : IrDeserializer {
 
     // Kotlin-MPP related data. Consider some refactoring
@@ -65,6 +65,8 @@ abstract class KotlinIrLinker(
     private val modulesWithReachableTopLevels = mutableSetOf<IrModuleDeserializer>()
 
     protected val deserializersForModules = mutableMapOf<ModuleDescriptor, IrModuleDeserializer>()
+
+    private val haveSeen = mutableSetOf<IrSymbol>()
 
     abstract inner class BasicIrModuleDeserializer(moduleDescriptor: ModuleDescriptor, override val klib: IrLibrary, override val strategy: DeserializationStrategy) :
         IrModuleDeserializer(moduleDescriptor) {
@@ -153,7 +155,7 @@ abstract class KotlinIrLinker(
             val fileEntry = NaiveSourceBasedFileEntryImpl(fileName, fileProto.fileEntry.lineStartOffsetsList.toIntArray())
 
             val fileDeserializer =
-                IrDeserializerForFile(fileProto.annotationList, fileProto.actualsList, fileIndex, !strategy.needBodies, strategy.inlineBodies, moduleDeserializer).apply {
+                IrDeserializerForFile(fileProto.annotationList, fileProto.actualsList, fileIndex, !strategy.needBodies, strategy.inlineBodies, moduleDeserializer, calculateFakeOverrides).apply {
 
                     // Explicitly exported declarations (e.g. top-level initializers) must be deserialized before all other declarations.
                     // Thus we schedule their deserialization in deserializer's constructor.
@@ -214,7 +216,7 @@ abstract class KotlinIrLinker(
         private val fileIndex: Int,
         onlyHeaders: Boolean,
         inlineBodies: Boolean,
-        private val moduleDeserializer: IrModuleDeserializer
+        private val moduleDeserializer: IrModuleDeserializer,
         calculateFakeOverrides: Boolean
     ) : IrFileDeserializer(logger, builtIns, symbolTable, calculateFakeOverrides, !onlyHeaders) {
 
@@ -348,7 +350,9 @@ abstract class KotlinIrLinker(
         private fun deserializeIrSymbolData(idSignature: IdSignature, symbolKind: BinarySymbolData.SymbolKind): IrSymbol {
             if (idSignature.isLocal) return deserializeIrLocalSymbolData(idSignature, symbolKind)
 
-            return findModuleDeserializer(idSignature).deserializeIrSymbol(idSignature, symbolKind)
+            return findModuleDeserializer(idSignature).deserializeIrSymbol(idSignature, symbolKind).also {
+                haveSeen.add(it)
+            }
         }
 
         override fun deserializeIrSymbolToDeclare(code: Long): Pair<IrSymbol, IdSignature> {
@@ -492,15 +496,15 @@ abstract class KotlinIrLinker(
     private fun findDeserializedDeclarationForSymbol(symbol: IrSymbol): DeclarationDescriptor? {
         assert(symbol.isPublicApi || symbol.descriptor.module === currentModule || platformSpecificSymbol(symbol))
 
-        val descriptor = symbol.descriptor
-
-        val moduleDeserializer = resolveModuleDeserializer(descriptor.module)
-
         // TODO: check if we still need it in the rebased version.
         if (haveSeen.contains(symbol)) {
             return null
         }
         haveSeen.add(symbol)
+
+        val descriptor = symbol.descriptor
+
+        val moduleDeserializer = resolveModuleDeserializer(descriptor.module)
 
 //        moduleDeserializer.deserializeIrSymbol(signature, symbol.kind())
         moduleDeserializer.declareIrSymbol(symbol)
@@ -520,6 +524,8 @@ abstract class KotlinIrLinker(
                 if (descriptor.module !== currentModule) return null
             }
         }
+
+        println("getDeclaration: ${symbol.signature} ${symbol.descriptor}")
 
         if (!symbol.isBound) {
             findDeserializedDeclarationForSymbol(symbol) ?: return null
