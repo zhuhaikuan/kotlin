@@ -1,20 +1,20 @@
 // !DIAGNOSTICS: -UNUSED_VARIABLE
 
 fun foo() {
-    enum class A {
+    <!EXPOSED_FUNCTION_RETURN_TYPE, EXPOSED_FUNCTION_RETURN_TYPE!>enum class A {
         FOO,
         BAR
-    }
+    }<!>
     val foo = A.FOO
     val b = object {
-        enum class B {}
+        <!EXPOSED_FUNCTION_RETURN_TYPE, EXPOSED_FUNCTION_RETURN_TYPE!>enum class B {}<!>
     }
     class C {
-        enum class D {}
+        <!EXPOSED_FUNCTION_RETURN_TYPE, EXPOSED_FUNCTION_RETURN_TYPE!>enum class D {}<!>
     }
     val f = {
-        enum class E {}
+        <!EXPOSED_FUNCTION_RETURN_TYPE, EXPOSED_FUNCTION_RETURN_TYPE!>enum class E {}<!>
     }
 
-    enum class<!SYNTAX!><!> {}
+    <!EXPOSED_FUNCTION_RETURN_TYPE, EXPOSED_FUNCTION_RETURN_TYPE!>enum class<!SYNTAX!><!> {}<!>
 }
