@@ -461,7 +461,7 @@ class KotlinMPPGradleModelBuilder : ModelBuilderService {
                         }
                     }) ?: listOf(it)
                 }
-                return testTasks.mapNotNull {
+                return testTasks.filter { it.enabled }.mapNotNull {
                     val name = it.name
                     val compilation = it.javaClass.getMethodOrNull("getCompilation")?.invoke(it)
                     val compilationName = compilation?.javaClass?.getMethodOrNull("getCompilationName")?.invoke(compilation)?.toString()
