@@ -1,4 +1,5 @@
 // IGNORE_BACKEND: JS, JS_IR, NATIVE
+// IGNORE_BACKEND_FIR: JVM_IR
 // FILE: test.kt
 
 fun checkEqual(x: Any, y: Any) {
