@@ -6,6 +6,8 @@
 package org.jetbrains.kotlin.compilerRunner
 
 import org.gradle.api.Project
+import org.gradle.api.model.ObjectFactory
+import org.gradle.process.ExecOperations
 import org.jetbrains.kotlin.cli.common.ExitCode
 import org.jetbrains.kotlin.cli.common.messages.MessageCollector
 import org.jetbrains.kotlin.config.Services
@@ -34,13 +36,13 @@ internal class ProjectFilesForCompilation(
     val projectRootFile: File,
     val clientIsAliveFlagFile: File,
     val sessionFlagFile: File,
-    val project: Project
+    val buildDir: File
 ) : Serializable {
     constructor(project: Project) : this(
         projectRootFile = project.rootProject.projectDir,
         clientIsAliveFlagFile = GradleCompilerRunner.getOrCreateClientFlagFile(project),
         sessionFlagFile = GradleCompilerRunner.getOrCreateSessionFlagFile(project),
-        project = project
+        buildDir = project.buildDir
     )
 
     companion object {
@@ -67,7 +69,48 @@ internal class GradleKotlinCompilerWorkArguments(
     }
 }
 
-internal class GradleKotlinCompilerWork @Inject constructor(
+internal class GradleKotlinCompilerWorkGradle6 @Inject constructor(
+    config: GradleKotlinCompilerWorkArguments,
+    private val executionOperation: ExecOperations,
+    private val objectFactory: ObjectFactory
+) : GradleKotlinCompilerWork(config) {
+
+    companion object {
+        init {
+            if (System.getProperty("org.jetbrains.kotlin.compilerRunner.GradleKotlinCompilerWork.trace.loading") == "true") {
+                println("Loaded GradleKotlinCompilerWorkGradle6")
+            }
+        }
+    }
+
+    override fun compileOutOfProcess(): ExitCode {
+        clearLocalState(outputFiles, log, reason = "out-of-process execution strategy is non-incremental")
+
+        val fileCollection = objectFactory.fileCollection()
+        fileCollection.setFrom(compilerFullClasspath)
+        return try {
+            val execResult = runToolInSeparateProcessForGradle6AndMore(
+                compilerArgs,
+                compilerClassName,
+                fileCollection,
+                buildDir,
+                executionOperation
+            )
+            exitCodeFromProcessExitCode(log, execResult.exitValue)
+
+        } finally {
+            reportExecutionResultIfNeeded {
+                TaskExecutionResult(
+                    executionStrategy = OUT_OF_PROCESS_EXECUTION_STRATEGY,
+                    icLogLines = nonIcBuildLog("$OUT_OF_PROCESS_EXECUTION_STRATEGY execution strategy does not support incremental compilation")
+                )
+            }
+
+        }
+    }
+}
+
+internal open class GradleKotlinCompilerWork @Inject constructor(
     /**
      * Arguments are passed through [GradleKotlinCompilerWorkArguments],
      * because Gradle Workers API does not support nullable arguments (https://github.com/gradle/gradle/issues/2405),
@@ -84,25 +127,27 @@ internal class GradleKotlinCompilerWork @Inject constructor(
                 println("Loaded GradleKotlinCompilerWork")
             }
         }
+
     }
 
     private val projectRootFile = config.projectFiles.projectRootFile
     private val clientIsAliveFlagFile = config.projectFiles.clientIsAliveFlagFile
     private val sessionFlagFile = config.projectFiles.sessionFlagFile
-    private val compilerFullClasspath = config.compilerFullClasspath
-    private val compilerClassName = config.compilerClassName
-    private val compilerArgs = config.compilerArgs
     private val isVerbose = config.isVerbose
     private val incrementalCompilationEnvironment = config.incrementalCompilationEnvironment
     private val incrementalModuleInfo = config.incrementalModuleInfo
-    private val outputFiles = config.outputFiles
     private val taskPath = config.taskPath
     private val buildReportMode = config.buildReportMode
     private val kotlinScriptExtensions = config.kotlinScriptExtensions
     private val allWarningsAsErrors = config.allWarningsAsErrors
-    private val project = config.projectFiles.project
 
-    private val log: KotlinLogger =
+    protected val compilerArgs = config.compilerArgs
+    protected val compilerClassName = config.compilerClassName
+    protected val compilerFullClasspath = config.compilerFullClasspath
+    protected val buildDir = config.projectFiles.buildDir
+    protected val outputFiles = config.outputFiles
+
+    protected val log: KotlinLogger =
         TaskLoggers.get(taskPath)?.let { GradleKotlinLogger(it).apply { debug("Using '$taskPath' logger") } }
             ?: run {
                 val logger = LoggerFactory.getLogger("GradleKotlinCompilerWork")
@@ -297,17 +342,11 @@ internal class GradleKotlinCompilerWork @Inject constructor(
         return result
     }
 
-    private fun compileOutOfProcess(): ExitCode {
+    open fun compileOutOfProcess(): ExitCode {
         clearLocalState(outputFiles, log, reason = "out-of-process execution strategy is non-incremental")
 
         return try {
-            if (isGradleVersionAtLeast(6, 0)) {
-                val execResult =
-                    runToolInSeparateProcessForGradle6AndMore(compilerArgs, compilerClassName, compilerFullClasspath, project)
-                exitCodeFromProcessExitCode(log, execResult.exitValue)
-            } else {
-                runToolInSeparateProcess(compilerArgs, compilerClassName, compilerFullClasspath, log, project.buildDir)
-            }
+            runToolInSeparateProcess(compilerArgs, compilerClassName, compilerFullClasspath, log, buildDir)
         } finally {
             reportExecutionResultIfNeeded {
                 TaskExecutionResult(
@@ -385,13 +424,13 @@ internal class GradleKotlinCompilerWork @Inject constructor(
             ReportSeverity.DEBUG.code
         }
 
-    private inline fun reportExecutionResultIfNeeded(fn: () -> TaskExecutionResult) {
+    protected inline fun reportExecutionResultIfNeeded(fn: () -> TaskExecutionResult) {
         if (buildReportMode != null) {
             val result = fn()
             TaskExecutionResults[taskPath] = result
         }
     }
 
-    private fun nonIcBuildLog(reason: String): List<String> =
+    protected fun nonIcBuildLog(reason: String): List<String> =
         listOf("Performing non-incremental build: $reason")
 }
