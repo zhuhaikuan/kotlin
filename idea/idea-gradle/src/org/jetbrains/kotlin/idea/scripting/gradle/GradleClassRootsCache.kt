@@ -17,7 +17,7 @@ internal class GradleClassRootsCache(
     project: Project,
     configuration: Configuration?,
     override val fileToConfiguration: (VirtualFile) -> ScriptCompilationConfigurationWrapper?
-) : ScriptClassRootsCache(project, extractRoots(configuration)) {
+) : ScriptClassRootsCache(project, extractRoots(configuration, project)) {
 
     override val rootsCacheKey = ScriptClassRootsStorage.Companion.Key("gradle")
 
@@ -25,20 +25,25 @@ internal class GradleClassRootsCache(
         return firstScriptSdk
     }
 
-    override val firstScriptSdk: Sdk? = configuration?.let { getScriptSdk(configuration.context.javaHome) }
+    override val firstScriptSdk: Sdk? = configuration?.let {
+        getScriptSdkOrDefault(
+            configuration.context.javaHome,
+            project
+        )
+    }
 
     // TODO what should we do if no configuration is loaded yet
     override fun contains(file: VirtualFile): Boolean = true
 
     companion object {
-        fun extractRoots(configuration: Configuration?): ScriptClassRoots {
+        fun extractRoots(configuration: Configuration?, project: Project): ScriptClassRoots {
             if (configuration == null) {
                 return ScriptClassRootsStorage.EMPTY
             }
             return ScriptClassRoots(
                 configuration.classFilePath,
                 configuration.sourcePath,
-                getScriptSdk(configuration.context.javaHome)?.let { setOf(it) } ?: setOf()
+                getScriptSdkOrDefault(configuration.context.javaHome, project)?.let { setOf(it) } ?: setOf()
             )
         }
     }

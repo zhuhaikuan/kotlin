@@ -9,7 +9,6 @@ import com.intellij.openapi.project.Project
 import com.intellij.openapi.projectRoots.Sdk
 import com.intellij.openapi.vfs.VirtualFile
 import com.intellij.util.containers.ConcurrentFactoryMap
-import org.jetbrains.kotlin.idea.core.script.ScriptConfigurationManager
 import org.jetbrains.kotlin.scripting.resolve.ScriptCompilationConfigurationWrapper
 import java.io.File
 
@@ -27,9 +26,10 @@ internal class DefaultClassRootsCache(
 
     private val scriptsSdksCache: Map<VirtualFile, Sdk?> =
         ConcurrentFactoryMap.createWeakMap { file ->
-            return@createWeakMap getScriptSdk(
-                all[file]?.javaHome
-            ) ?: ScriptConfigurationManager.getScriptDefaultSdk(project)
+            return@createWeakMap getScriptSdkOrDefault(
+                all[file]?.javaHome,
+                project
+            )
         }
 
     override fun getScriptSdk(file: VirtualFile): Sdk? = scriptsSdksCache[file]
@@ -45,7 +45,7 @@ internal class DefaultClassRootsCache(
             configuration: ScriptCompilationConfigurationWrapper
         ): ScriptClassRootsStorage.Companion.ScriptClassRoots {
             val scriptSdk =
-                getScriptSdkOfDefault(
+                getScriptSdkOrDefault(
                     configuration.javaHome,
                     project
                 )
@@ -81,8 +81,7 @@ internal class DefaultClassRootsCache(
             val sdks = mutableSetOf<Sdk>()
 
             for ((_, configuration) in all) {
-                val scriptSdk =
-                    getScriptSdk(configuration.javaHome)
+                val scriptSdk = getScriptSdkOrDefault(configuration.javaHome, project)
                 if (scriptSdk != null && !scriptSdk.isAlreadyIndexed(project)) {
                     sdks.add(scriptSdk)
                 }

@@ -102,11 +102,11 @@ abstract class ScriptClassRootsCache(
             return prop.mapNotNull { it.absolutePath }.toSet()
         }
 
-        fun getScriptSdkOfDefault(javaHomeStr: File?, project: Project): Sdk? {
+        fun getScriptSdkOrDefault(javaHomeStr: File?, project: Project): Sdk? {
             return getScriptSdk(javaHomeStr) ?: ScriptConfigurationManager.getScriptDefaultSdk(project)
         }
 
-        fun getScriptSdk(javaHomeStr: File?): Sdk? {
+        private fun getScriptSdk(javaHomeStr: File?): Sdk? {
             // workaround for mismatched gradle wrapper and plugin version
             val javaHome = try {
                 javaHomeStr?.let { VfsUtil.findFileByIoFile(it, true) }

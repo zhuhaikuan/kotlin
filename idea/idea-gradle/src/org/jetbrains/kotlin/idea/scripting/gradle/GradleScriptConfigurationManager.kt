@@ -121,7 +121,7 @@ class GradleScriptingSupport(val project: Project) : ScriptingSupport() {
 
     private fun configurationChangedCallback(newConfiguration: Configuration) {
         rootsIndexer.transaction {
-            if (classpathRoots.hasNotCachedRoots(GradleClassRootsCache.extractRoots(newConfiguration))) {
+            if (classpathRoots.hasNotCachedRoots(GradleClassRootsCache.extractRoots(newConfiguration, project))) {
                 rootsIndexer.markNewRoot()
             }
 
