@@ -1,0 +1,79 @@
+FILE fqName:<root> fileName:/complexReturn.kt
+  FUN name:firstNotNull visibility:public modality:FINAL <T> (list:kotlin.collections.List<T of <root>.firstNotNull?>) returnType:T of <root>.firstNotNull
+    annotations:
+      CompileTimeCalculation
+    TYPE_PARAMETER name:T index:0 variance: superTypes:[kotlin.Any?]
+    VALUE_PARAMETER name:list index:0 type:kotlin.collections.List<T of <root>.firstNotNull?>
+    BLOCK_BODY
+      VAR FOR_LOOP_ITERATOR name:tmp0_iterator type:kotlin.collections.Iterator<T of <root>.firstNotNull?> [val]
+        CALL 'public abstract fun iterator (): kotlin.collections.Iterator<E of kotlin.collections.List> [operator] declared in kotlin.collections.List' type=kotlin.collections.Iterator<T of <root>.firstNotNull?> origin=FOR_LOOP_ITERATOR
+          $this: GET_VAR 'list: kotlin.collections.List<T of <root>.firstNotNull?> declared in <root>.firstNotNull' type=kotlin.collections.List<T of <root>.firstNotNull?> origin=null
+      WHILE label=null origin=FOR_LOOP_INNER_WHILE
+        condition: CALL 'public abstract fun hasNext (): kotlin.Boolean [operator] declared in kotlin.collections.Iterator' type=kotlin.Boolean origin=FOR_LOOP_HAS_NEXT
+          $this: GET_VAR 'val tmp0_iterator: kotlin.collections.Iterator<T of <root>.firstNotNull?> [val] declared in <root>.firstNotNull' type=kotlin.collections.Iterator<T of <root>.firstNotNull?> origin=null
+        body: BLOCK type=kotlin.Unit origin=FOR_LOOP_INNER_WHILE
+          VAR FOR_LOOP_VARIABLE name:elem type:T of <root>.firstNotNull? [val]
+            CALL 'public abstract fun next (): T of kotlin.collections.Iterator [operator] declared in kotlin.collections.Iterator' type=T of <root>.firstNotNull? origin=FOR_LOOP_NEXT
+              $this: GET_VAR 'val tmp0_iterator: kotlin.collections.Iterator<T of <root>.firstNotNull?> [val] declared in <root>.firstNotNull' type=kotlin.collections.Iterator<T of <root>.firstNotNull?> origin=null
+          VAR IR_TEMPORARY_VARIABLE name:tmp1_elvis_lhs type:T of <root>.firstNotNull? [val]
+            GET_VAR 'val elem: T of <root>.firstNotNull? [val] declared in <root>.firstNotNull' type=T of <root>.firstNotNull? origin=null
+          VAR SYNTHESIZED_DECLARATION name:tmp type:T of <root>.firstNotNull [var]
+          WHEN type=kotlin.Unit origin=null
+            BRANCH
+              if: CALL 'public final fun jsEqeq (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=EQEQ
+                arg0: GET_VAR 'val tmp1_elvis_lhs: T of <root>.firstNotNull? [val] declared in <root>.firstNotNull' type=T of <root>.firstNotNull? origin=null
+                arg1: CONST Null type=kotlin.Nothing? value=null
+              then: BLOCK type=kotlin.Unit origin=null
+                CONTINUE label=null loop.label=null
+            BRANCH
+              if: CONST Boolean type=kotlin.Boolean value=true
+              then: BLOCK type=kotlin.Unit origin=null
+                SET_VAR 'var tmp: T of <root>.firstNotNull [var] declared in <root>.firstNotNull' type=kotlin.Unit origin=SYNTHESIZED_STATEMENT
+                  GET_VAR 'val tmp1_elvis_lhs: T of <root>.firstNotNull? [val] declared in <root>.firstNotNull' type=T of <root>.firstNotNull? origin=null
+          RETURN type=kotlin.Nothing from='public final fun firstNotNull <T> (list: kotlin.collections.List<T of <root>.firstNotNull?>): T of <root>.firstNotNull declared in <root>'
+            GET_VAR 'var tmp: T of <root>.firstNotNull [var] declared in <root>.firstNotNull' type=T of <root>.firstNotNull origin=SYNTHESIZED_STATEMENT
+      THROW type=kotlin.Nothing
+        CALL 'public final fun NoSuchElementException_init_$Create$ (message: kotlin.String?): kotlin.NoSuchElementException declared in kotlin.NoSuchElementException' type=kotlin.NoSuchElementException origin=null
+          message: CONST String type=kotlin.String value="All elements are null"
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-a> visibility:public modality:FINAL <> () returnType:kotlin.Int
+    correspondingProperty: PROPERTY name:a visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-a> (): kotlin.Int declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:a type:kotlin.Int visibility:public [final,static]' type=kotlin.Int origin=null
+  FIELD PROPERTY_BACKING_FIELD name:a type:kotlin.Int visibility:public [final,static]
+    EXPRESSION_BODY
+      CONST Int type=kotlin.Int value=1
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-b> visibility:public modality:FINAL <> () returnType:kotlin.Int
+    correspondingProperty: PROPERTY name:b visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-b> (): kotlin.Int declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:b type:kotlin.Int visibility:public [final,static]' type=kotlin.Int origin=null
+  FIELD PROPERTY_BACKING_FIELD name:b type:kotlin.Int visibility:public [final,static]
+    EXPRESSION_BODY
+      CONST Int type=kotlin.Int value=1
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-c> visibility:public modality:FINAL <> () returnType:kotlin.Int
+    correspondingProperty: PROPERTY name:c visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-c> (): kotlin.Int declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:c type:kotlin.Int visibility:public [final,static]' type=kotlin.Int origin=null
+  FIELD PROPERTY_BACKING_FIELD name:c type:kotlin.Int visibility:public [final,static]
+    EXPRESSION_BODY
+      CONST Int type=kotlin.Int value=2
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-d> visibility:public modality:FINAL <> () returnType:kotlin.Int
+    correspondingProperty: PROPERTY name:d visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-d> (): kotlin.Int declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:d type:kotlin.Int visibility:public [final,static]' type=kotlin.Int origin=null
+  FIELD PROPERTY_BACKING_FIELD name:d type:kotlin.Int visibility:public [final,static]
+    EXPRESSION_BODY
+      CONST Int type=kotlin.Int value=3
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-e> visibility:public modality:FINAL <> () returnType:kotlin.Int
+    correspondingProperty: PROPERTY name:e visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-e> (): kotlin.Int declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:e type:kotlin.Int visibility:public [final,static]' type=kotlin.Int origin=null
+  FIELD PROPERTY_BACKING_FIELD name:e type:kotlin.Int visibility:public [final,static]
+    EXPRESSION_BODY
+      ERROR_EXPR '
+Exception kotlin.NoSuchElementException: All elements are null
+	at ComplexReturnKt.firstNotNull(complexReturn.kt:4)' type=kotlin.Int

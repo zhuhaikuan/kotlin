@@ -1,0 +1,137 @@
+FILE fqName:<root> fileName:/stringBuilder.kt
+  FUN name:appendVararg visibility:public modality:FINAL <> (strings:kotlin.Array<out kotlin.String>) returnType:kotlin.String
+    annotations:
+      CompileTimeCalculation
+    VALUE_PARAMETER name:strings index:0 type:kotlin.Array<out kotlin.String> varargElementType:kotlin.String [vararg]
+    BLOCK_BODY
+      VAR name:sb type:kotlin.text.StringBuilder [val]
+        CALL 'public final fun StringBuilder_init_$Create$ (): kotlin.text.StringBuilder declared in kotlin.text.StringBuilder' type=kotlin.text.StringBuilder origin=null
+      VAR IR_TEMPORARY_VARIABLE name:indexedObject type:kotlin.Array<out kotlin.String> [val]
+        GET_VAR 'strings: kotlin.Array<out kotlin.String> [vararg] declared in <root>.appendVararg' type=kotlin.Array<out kotlin.String> origin=null
+      VAR IR_TEMPORARY_VARIABLE name:tmp0_inductionVariable type:kotlin.Int [var]
+        CONST Int type=kotlin.Int value=0
+      VAR IR_TEMPORARY_VARIABLE name:tmp1_last type:kotlin.Int [val]
+        CALL 'public final fun jsArrayLength (arg0: kotlin.Any?): kotlin.Any? declared in kotlin.internal.ir' type=kotlin.Int origin=null
+          arg0: GET_VAR 'val indexedObject: kotlin.Array<out kotlin.String> [val] declared in <root>.appendVararg' type=kotlin.Array<out kotlin.String> origin=null
+      VAR IR_TEMPORARY_VARIABLE name:tmp2_step type:kotlin.Int [val]
+        CONST Int type=kotlin.Int value=1
+      WHILE label=null origin=FOR_LOOP_INNER_WHILE
+        condition: CALL 'public final fun jsLt (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=null
+          arg0: GET_VAR 'var tmp0_inductionVariable: kotlin.Int [var] declared in <root>.appendVararg' type=kotlin.Int origin=null
+          arg1: GET_VAR 'val tmp1_last: kotlin.Int [val] declared in <root>.appendVararg' type=kotlin.Int origin=null
+        body: COMPOSITE type=kotlin.Unit origin=FOR_LOOP_INNER_WHILE
+          VAR FOR_LOOP_VARIABLE name:string type:kotlin.String [val]
+            CALL 'public final fun jsArrayGet (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Any? declared in kotlin.internal.ir' type=T of kotlin.Array origin=null
+              arg0: GET_VAR 'val indexedObject: kotlin.Array<out kotlin.String> [val] declared in <root>.appendVararg' type=kotlin.Array<out kotlin.String> origin=null
+              arg1: GET_VAR 'var tmp0_inductionVariable: kotlin.Int [var] declared in <root>.appendVararg' type=kotlin.Int origin=null
+          SET_VAR 'var tmp0_inductionVariable: kotlin.Int [var] declared in <root>.appendVararg' type=kotlin.Unit origin=EQ
+            CALL 'public final fun jsBitOr (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Int declared in kotlin.internal.ir' type=kotlin.Int origin=SYNTHESIZED_STATEMENT
+              arg0: CALL 'public final fun jsPlus (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Any? declared in kotlin.internal.ir' type=kotlin.Int origin=null
+                arg0: GET_VAR 'var tmp0_inductionVariable: kotlin.Int [var] declared in <root>.appendVararg' type=kotlin.Int origin=null
+                arg1: GET_VAR 'val tmp2_step: kotlin.Int [val] declared in <root>.appendVararg' type=kotlin.Int origin=null
+              arg1: CONST Int type=kotlin.Int value=0
+          CALL 'public final fun append (value: kotlin.String): kotlin.text.StringBuilder declared in kotlin.text.StringBuilder' type=kotlin.text.StringBuilder origin=null
+            $this: GET_VAR 'val sb: kotlin.text.StringBuilder [val] declared in <root>.appendVararg' type=kotlin.text.StringBuilder origin=null
+            value: GET_VAR 'val string: kotlin.String [val] declared in <root>.appendVararg' type=kotlin.String origin=null
+          CALL 'public final fun Unit_getInstance (): kotlin.Unit declared in kotlin' type=kotlin.Unit origin=SYNTHESIZED_STATEMENT
+      RETURN type=kotlin.Nothing from='public final fun appendVararg (vararg strings: kotlin.String): kotlin.String declared in <root>'
+        CALL 'public open fun toString (): kotlin.String declared in kotlin.text.StringBuilder' type=kotlin.String origin=null
+          $this: GET_VAR 'val sb: kotlin.text.StringBuilder [val] declared in <root>.appendVararg' type=kotlin.text.StringBuilder origin=null
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-simpleAppend> visibility:public modality:FINAL <> () returnType:kotlin.String
+    correspondingProperty: PROPERTY name:simpleAppend visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-simpleAppend> (): kotlin.String declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:simpleAppend type:kotlin.String visibility:public [final,static]' type=kotlin.String origin=null
+  FIELD PROPERTY_BACKING_FIELD name:simpleAppend type:kotlin.String visibility:public [final,static]
+    EXPRESSION_BODY
+      CONST String type=kotlin.String value="str"
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-withCapacity> visibility:public modality:FINAL <> () returnType:kotlin.String
+    correspondingProperty: PROPERTY name:withCapacity visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-withCapacity> (): kotlin.String declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:withCapacity type:kotlin.String visibility:public [final,static]' type=kotlin.String origin=null
+  FIELD PROPERTY_BACKING_FIELD name:withCapacity type:kotlin.String visibility:public [final,static]
+    EXPRESSION_BODY
+      CONST String type=kotlin.String value="example"
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-withContent> visibility:public modality:FINAL <> () returnType:kotlin.String
+    correspondingProperty: PROPERTY name:withContent visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-withContent> (): kotlin.String declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:withContent type:kotlin.String visibility:public [final,static]' type=kotlin.String origin=null
+  FIELD PROPERTY_BACKING_FIELD name:withContent type:kotlin.String visibility:public [final,static]
+    EXPRESSION_BODY
+      CONST String type=kotlin.String value="first second"
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-appendInFun> visibility:public modality:FINAL <> () returnType:kotlin.String
+    correspondingProperty: PROPERTY name:appendInFun visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-appendInFun> (): kotlin.String declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:appendInFun type:kotlin.String visibility:public [final,static]' type=kotlin.String origin=null
+  FIELD PROPERTY_BACKING_FIELD name:appendInFun type:kotlin.String visibility:public [final,static]
+    EXPRESSION_BODY
+      CONST String type=kotlin.String value="1 2 3"
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-length1> visibility:public modality:FINAL <> () returnType:kotlin.Int
+    correspondingProperty: PROPERTY name:length1 visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-length1> (): kotlin.Int declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:length1 type:kotlin.Int visibility:public [final,static]' type=kotlin.Int origin=null
+  FIELD PROPERTY_BACKING_FIELD name:length1 type:kotlin.Int visibility:public [final,static]
+    EXPRESSION_BODY
+      CONST Int type=kotlin.Int value=1
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-length2> visibility:public modality:FINAL <> () returnType:kotlin.Int
+    correspondingProperty: PROPERTY name:length2 visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-length2> (): kotlin.Int declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:length2 type:kotlin.Int visibility:public [final,static]' type=kotlin.Int origin=null
+  FIELD PROPERTY_BACKING_FIELD name:length2 type:kotlin.Int visibility:public [final,static]
+    EXPRESSION_BODY
+      CONST Int type=kotlin.Int value=9
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-get0> visibility:public modality:FINAL <> () returnType:kotlin.Char
+    correspondingProperty: PROPERTY name:get0 visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-get0> (): kotlin.Char declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:get0 type:kotlin.Char visibility:public [final,static]' type=kotlin.Char origin=null
+  FIELD PROPERTY_BACKING_FIELD name:get0 type:kotlin.Char visibility:public [final,static]
+    EXPRESSION_BODY
+      CONSTRUCTOR_CALL 'internal constructor <init> (value: kotlin.Int) [primary] declared in kotlin.Char' type=kotlin.Char origin=null
+        value: CONST Int type=kotlin.Int value=49
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-get1> visibility:public modality:FINAL <> () returnType:kotlin.Char
+    correspondingProperty: PROPERTY name:get1 visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-get1> (): kotlin.Char declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:get1 type:kotlin.Char visibility:public [final,static]' type=kotlin.Char origin=null
+  FIELD PROPERTY_BACKING_FIELD name:get1 type:kotlin.Char visibility:public [final,static]
+    EXPRESSION_BODY
+      CONSTRUCTOR_CALL 'internal constructor <init> (value: kotlin.Int) [primary] declared in kotlin.Char' type=kotlin.Char origin=null
+        value: CONST Int type=kotlin.Int value=50
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-subSequence1> visibility:public modality:FINAL <> () returnType:kotlin.String
+    correspondingProperty: PROPERTY name:subSequence1 visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-subSequence1> (): kotlin.String declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:subSequence1 type:kotlin.String visibility:public [final,static]' type=kotlin.String origin=null
+  FIELD PROPERTY_BACKING_FIELD name:subSequence1 type:kotlin.String visibility:public [final,static]
+    EXPRESSION_BODY
+      CONST String type=kotlin.String value="12"
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-subSequence2> visibility:public modality:FINAL <> () returnType:kotlin.String
+    correspondingProperty: PROPERTY name:subSequence2 visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-subSequence2> (): kotlin.String declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:subSequence2 type:kotlin.String visibility:public [final,static]' type=kotlin.String origin=null
+  FIELD PROPERTY_BACKING_FIELD name:subSequence2 type:kotlin.String visibility:public [final,static]
+    EXPRESSION_BODY
+      CONST String type=kotlin.String value="345678"
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-appendPart> visibility:public modality:FINAL <> () returnType:kotlin.String
+    correspondingProperty: PROPERTY name:appendPart visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-appendPart> (): kotlin.String declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:appendPart type:kotlin.String visibility:public [final,static]' type=kotlin.String origin=null
+  FIELD PROPERTY_BACKING_FIELD name:appendPart type:kotlin.String visibility:public [final,static]
+    EXPRESSION_BODY
+      CONST String type=kotlin.String value="23"
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-appendNull> visibility:public modality:FINAL <> () returnType:kotlin.String
+    correspondingProperty: PROPERTY name:appendNull visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-appendNull> (): kotlin.String declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:appendNull type:kotlin.String visibility:public [final,static]' type=kotlin.String origin=null
+  FIELD PROPERTY_BACKING_FIELD name:appendNull type:kotlin.String visibility:public [final,static]
+    EXPRESSION_BODY
+      CONST String type=kotlin.String value="null"

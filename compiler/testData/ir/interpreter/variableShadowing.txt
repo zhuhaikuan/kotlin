@@ -1,0 +1,19 @@
+FILE fqName:<root> fileName:/variableShadowing.kt
+  FUN name:returnValueFromA visibility:public modality:FINAL <> (a:kotlin.Int, b:kotlin.Int) returnType:kotlin.Int
+    annotations:
+      CompileTimeCalculation
+    VALUE_PARAMETER name:a index:0 type:kotlin.Int
+    VALUE_PARAMETER name:b index:1 type:kotlin.Int
+    BLOCK_BODY
+      VAR name:a type:kotlin.Int [val]
+        GET_VAR 'b: kotlin.Int declared in <root>.returnValueFromA' type=kotlin.Int origin=null
+      RETURN type=kotlin.Nothing from='public final fun returnValueFromA (a: kotlin.Int, b: kotlin.Int): kotlin.Int declared in <root>'
+        GET_VAR 'val a: kotlin.Int [val] declared in <root>.returnValueFromA' type=kotlin.Int origin=null
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-num> visibility:public modality:FINAL <> () returnType:kotlin.Int
+    correspondingProperty: PROPERTY name:num visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-num> (): kotlin.Int declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:num type:kotlin.Int visibility:public [final,static]' type=kotlin.Int origin=null
+  FIELD PROPERTY_BACKING_FIELD name:num type:kotlin.Int visibility:public [final,static]
+    EXPRESSION_BODY
+      CONST Int type=kotlin.Int value=2

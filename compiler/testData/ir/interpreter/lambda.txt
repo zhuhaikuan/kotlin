@@ -1,0 +1,89 @@
+FILE fqName:<root> fileName:/lambda.kt
+  FUN name:withLambda visibility:public modality:FINAL <> (arg:kotlin.Int, function:kotlin.Function1<kotlin.Int, kotlin.Int>) returnType:kotlin.Int
+    annotations:
+      CompileTimeCalculation
+    VALUE_PARAMETER name:arg index:0 type:kotlin.Int
+    VALUE_PARAMETER name:function index:1 type:kotlin.Function1<kotlin.Int, kotlin.Int>
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun withLambda (arg: kotlin.Int, function: kotlin.Function1<kotlin.Int, kotlin.Int>): kotlin.Int declared in <root>'
+        CALL 'public abstract fun invoke (p1: P1 of kotlin.Function1): R of kotlin.Function1 [operator] declared in kotlin.Function1' type=kotlin.Int origin=INVOKE
+          $this: GET_VAR 'function: kotlin.Function1<kotlin.Int, kotlin.Int> declared in <root>.withLambda' type=kotlin.Function1<kotlin.Int, kotlin.Int> origin=VARIABLE_AS_FUNCTION
+          p1: GET_VAR 'arg: kotlin.Int declared in <root>.withLambda' type=kotlin.Int origin=null
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-a1> visibility:public modality:FINAL <> () returnType:kotlin.Int
+    correspondingProperty: PROPERTY name:a1 visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-a1> (): kotlin.Int declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:a1 type:kotlin.Int visibility:public [final,static]' type=kotlin.Int origin=null
+  FIELD PROPERTY_BACKING_FIELD name:a1 type:kotlin.Int visibility:public [final,static]
+    EXPRESSION_BODY
+      CONST Int type=kotlin.Int value=20
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-a2> visibility:public modality:FINAL <> () returnType:kotlin.Int
+    correspondingProperty: PROPERTY name:a2 visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-a2> (): kotlin.Int declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:a2 type:kotlin.Int visibility:public [final,static]' type=kotlin.Int origin=null
+  FIELD PROPERTY_BACKING_FIELD name:a2 type:kotlin.Int visibility:public [final,static]
+    EXPRESSION_BODY
+      CONST Int type=kotlin.Int value=40
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-a3> visibility:public modality:FINAL <> () returnType:kotlin.Int
+    correspondingProperty: PROPERTY name:a3 visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-a3> (): kotlin.Int declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:a3 type:kotlin.Int visibility:public [final,static]' type=kotlin.Int origin=null
+  FIELD PROPERTY_BACKING_FIELD name:a3 type:kotlin.Int visibility:public [final,static]
+    EXPRESSION_BODY
+      CONST Int type=kotlin.Int value=60
+  FUN name:withLambda2 visibility:public modality:FINAL <T, E, R> (arg1:T of <root>.withLambda2, arg2:E of <root>.withLambda2, function:kotlin.Function2<T of <root>.withLambda2, E of <root>.withLambda2, R of <root>.withLambda2>) returnType:R of <root>.withLambda2
+    annotations:
+      CompileTimeCalculation
+    TYPE_PARAMETER name:T index:0 variance: superTypes:[kotlin.Any?]
+    TYPE_PARAMETER name:E index:1 variance: superTypes:[kotlin.Any?]
+    TYPE_PARAMETER name:R index:2 variance: superTypes:[kotlin.Any?]
+    VALUE_PARAMETER name:arg1 index:0 type:T of <root>.withLambda2
+    VALUE_PARAMETER name:arg2 index:1 type:E of <root>.withLambda2
+    VALUE_PARAMETER name:function index:2 type:kotlin.Function2<T of <root>.withLambda2, E of <root>.withLambda2, R of <root>.withLambda2>
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun withLambda2 <T, E, R> (arg1: T of <root>.withLambda2, arg2: E of <root>.withLambda2, function: kotlin.Function2<T of <root>.withLambda2, E of <root>.withLambda2, R of <root>.withLambda2>): R of <root>.withLambda2 declared in <root>'
+        CALL 'public abstract fun invoke (p1: P1 of kotlin.Function2, p2: P2 of kotlin.Function2): R of kotlin.Function2 [operator] declared in kotlin.Function2' type=R of <root>.withLambda2 origin=null
+          $this: GET_VAR 'function: kotlin.Function2<T of <root>.withLambda2, E of <root>.withLambda2, R of <root>.withLambda2> declared in <root>.withLambda2' type=kotlin.Function2<T of <root>.withLambda2, E of <root>.withLambda2, R of <root>.withLambda2> origin=null
+          p1: GET_VAR 'arg1: T of <root>.withLambda2 declared in <root>.withLambda2' type=T of <root>.withLambda2 origin=null
+          p2: GET_VAR 'arg2: E of <root>.withLambda2 declared in <root>.withLambda2' type=E of <root>.withLambda2 origin=null
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-b1> visibility:public modality:FINAL <> () returnType:kotlin.Double
+    correspondingProperty: PROPERTY name:b1 visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-b1> (): kotlin.Double declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:b1 type:kotlin.Double visibility:public [final,static]' type=kotlin.Double origin=null
+  FIELD PROPERTY_BACKING_FIELD name:b1 type:kotlin.Double visibility:public [final,static]
+    EXPRESSION_BODY
+      CONST Double type=kotlin.Double value=13.75
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-b2> visibility:public modality:FINAL <> () returnType:kotlin.Int
+    correspondingProperty: PROPERTY name:b2 visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-b2> (): kotlin.Int declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:b2 type:kotlin.Int visibility:public [final,static]' type=kotlin.Int origin=null
+  FIELD PROPERTY_BACKING_FIELD name:b2 type:kotlin.Int visibility:public [final,static]
+    EXPRESSION_BODY
+      CONST Int type=kotlin.Int value=25
+  FUN name:withLambdaAndReceiver visibility:public modality:FINAL <T, E, R> (arg1:T of <root>.withLambdaAndReceiver, arg2:E of <root>.withLambdaAndReceiver, function:@[ExtensionFunctionType] kotlin.Function2<T of <root>.withLambdaAndReceiver, E of <root>.withLambdaAndReceiver, R of <root>.withLambdaAndReceiver>) returnType:R of <root>.withLambdaAndReceiver
+    annotations:
+      CompileTimeCalculation
+    TYPE_PARAMETER name:T index:0 variance: superTypes:[kotlin.Any?]
+    TYPE_PARAMETER name:E index:1 variance: superTypes:[kotlin.Any?]
+    TYPE_PARAMETER name:R index:2 variance: superTypes:[kotlin.Any?]
+    VALUE_PARAMETER name:arg1 index:0 type:T of <root>.withLambdaAndReceiver
+    VALUE_PARAMETER name:arg2 index:1 type:E of <root>.withLambdaAndReceiver
+    VALUE_PARAMETER name:function index:2 type:@[ExtensionFunctionType] kotlin.Function2<T of <root>.withLambdaAndReceiver, E of <root>.withLambdaAndReceiver, R of <root>.withLambdaAndReceiver>
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun withLambdaAndReceiver <T, E, R> (arg1: T of <root>.withLambdaAndReceiver, arg2: E of <root>.withLambdaAndReceiver, function: @[ExtensionFunctionType] kotlin.Function2<T of <root>.withLambdaAndReceiver, E of <root>.withLambdaAndReceiver, R of <root>.withLambdaAndReceiver>): R of <root>.withLambdaAndReceiver declared in <root>'
+        CALL 'public abstract fun invoke (p1: P1 of kotlin.Function2, p2: P2 of kotlin.Function2): R of kotlin.Function2 [operator] declared in kotlin.Function2' type=R of <root>.withLambdaAndReceiver origin=null
+          $this: GET_VAR 'function: @[ExtensionFunctionType] kotlin.Function2<T of <root>.withLambdaAndReceiver, E of <root>.withLambdaAndReceiver, R of <root>.withLambdaAndReceiver> declared in <root>.withLambdaAndReceiver' type=@[ExtensionFunctionType] kotlin.Function2<T of <root>.withLambdaAndReceiver, E of <root>.withLambdaAndReceiver, R of <root>.withLambdaAndReceiver> origin=null
+          p1: GET_VAR 'arg1: T of <root>.withLambdaAndReceiver declared in <root>.withLambdaAndReceiver' type=T of <root>.withLambdaAndReceiver origin=null
+          p2: GET_VAR 'arg2: E of <root>.withLambdaAndReceiver declared in <root>.withLambdaAndReceiver' type=E of <root>.withLambdaAndReceiver origin=null
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-c1> visibility:public modality:FINAL <> () returnType:kotlin.Double
+    correspondingProperty: PROPERTY name:c1 visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-c1> (): kotlin.Double declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:c1 type:kotlin.Double visibility:public [final,static]' type=kotlin.Double origin=null
+  FIELD PROPERTY_BACKING_FIELD name:c1 type:kotlin.Double visibility:public [final,static]
+    EXPRESSION_BODY
+      CONST Double type=kotlin.Double value=7.75

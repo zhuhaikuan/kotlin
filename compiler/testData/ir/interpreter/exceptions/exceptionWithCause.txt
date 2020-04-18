@@ -1,0 +1,213 @@
+FILE fqName:<root> fileName:/exceptionWithCause.kt
+  CLASS CLASS name:HighLevelException modality:FINAL visibility:public superTypes:[kotlin.Exception]
+    annotations:
+      CompileTimeCalculation
+    $this: VALUE_PARAMETER INSTANCE_RECEIVER name:<this> type:<root>.HighLevelException
+    CONSTRUCTOR visibility:public <> (cause:kotlin.Throwable?) returnType:<root>.HighLevelException [primary]
+      VALUE_PARAMETER name:cause index:0 type:kotlin.Throwable?
+      BLOCK_BODY
+        CALL 'internal final fun Exception_init_$Init$ (cause: kotlin.Throwable?, $this: kotlin.Exception): kotlin.Exception declared in kotlin.Exception' type=kotlin.Unit origin=null
+          cause: GET_VAR 'cause: kotlin.Throwable? declared in <root>.HighLevelException.<init>' type=kotlin.Throwable? origin=null
+          $this: GET_VAR '<this>: kotlin.Exception declared in kotlin.Exception' type=kotlin.Exception origin=null
+    FUN FAKE_OVERRIDE name:equals visibility:public modality:OPEN <> ($this:kotlin.Any, other:kotlin.Any?) returnType:kotlin.Boolean [fake_override,operator]
+      overridden:
+        public open fun equals (other: kotlin.Any?): kotlin.Boolean [fake_override,operator] declared in kotlin.Exception
+      $this: VALUE_PARAMETER name:<this> type:kotlin.Any
+      VALUE_PARAMETER name:other index:0 type:kotlin.Any?
+    FUN FAKE_OVERRIDE name:hashCode visibility:public modality:OPEN <> ($this:kotlin.Any) returnType:kotlin.Int [fake_override]
+      overridden:
+        public open fun hashCode (): kotlin.Int [fake_override] declared in kotlin.Exception
+      $this: VALUE_PARAMETER name:<this> type:kotlin.Any
+    FUN FAKE_OVERRIDE name:toString visibility:public modality:OPEN <> ($this:kotlin.Throwable) returnType:kotlin.String [fake_override]
+      overridden:
+        public open fun toString (): kotlin.String [fake_override] declared in kotlin.Exception
+      $this: VALUE_PARAMETER name:<this> type:kotlin.Throwable
+    FUN FAKE_OVERRIDE name:<get-cause> visibility:public modality:OPEN <> ($this:kotlin.Throwable) returnType:kotlin.Throwable? [fake_override]
+      correspondingProperty: PROPERTY FAKE_OVERRIDE name:cause visibility:public modality:OPEN [fake_override,val]
+      overridden:
+        public open fun <get-cause> (): kotlin.Throwable? [fake_override] declared in kotlin.Exception
+      $this: VALUE_PARAMETER name:<this> type:kotlin.Throwable
+    FUN FAKE_OVERRIDE name:<get-message> visibility:public modality:OPEN <> ($this:kotlin.Throwable) returnType:kotlin.String? [fake_override]
+      correspondingProperty: PROPERTY FAKE_OVERRIDE name:message visibility:public modality:OPEN [fake_override,val]
+      overridden:
+        public open fun <get-message> (): kotlin.String? [fake_override] declared in kotlin.Exception
+      $this: VALUE_PARAMETER name:<this> type:kotlin.Throwable
+  CLASS CLASS name:MidLevelException modality:FINAL visibility:public superTypes:[kotlin.Exception]
+    annotations:
+      CompileTimeCalculation
+    $this: VALUE_PARAMETER INSTANCE_RECEIVER name:<this> type:<root>.MidLevelException
+    CONSTRUCTOR visibility:public <> (cause:kotlin.Throwable?) returnType:<root>.MidLevelException [primary]
+      VALUE_PARAMETER name:cause index:0 type:kotlin.Throwable?
+      BLOCK_BODY
+        CALL 'internal final fun Exception_init_$Init$ (cause: kotlin.Throwable?, $this: kotlin.Exception): kotlin.Exception declared in kotlin.Exception' type=kotlin.Unit origin=null
+          cause: GET_VAR 'cause: kotlin.Throwable? declared in <root>.MidLevelException.<init>' type=kotlin.Throwable? origin=null
+          $this: GET_VAR '<this>: kotlin.Exception declared in kotlin.Exception' type=kotlin.Exception origin=null
+    FUN FAKE_OVERRIDE name:equals visibility:public modality:OPEN <> ($this:kotlin.Any, other:kotlin.Any?) returnType:kotlin.Boolean [fake_override,operator]
+      overridden:
+        public open fun equals (other: kotlin.Any?): kotlin.Boolean [fake_override,operator] declared in kotlin.Exception
+      $this: VALUE_PARAMETER name:<this> type:kotlin.Any
+      VALUE_PARAMETER name:other index:0 type:kotlin.Any?
+    FUN FAKE_OVERRIDE name:hashCode visibility:public modality:OPEN <> ($this:kotlin.Any) returnType:kotlin.Int [fake_override]
+      overridden:
+        public open fun hashCode (): kotlin.Int [fake_override] declared in kotlin.Exception
+      $this: VALUE_PARAMETER name:<this> type:kotlin.Any
+    FUN FAKE_OVERRIDE name:toString visibility:public modality:OPEN <> ($this:kotlin.Throwable) returnType:kotlin.String [fake_override]
+      overridden:
+        public open fun toString (): kotlin.String [fake_override] declared in kotlin.Exception
+      $this: VALUE_PARAMETER name:<this> type:kotlin.Throwable
+    FUN FAKE_OVERRIDE name:<get-cause> visibility:public modality:OPEN <> ($this:kotlin.Throwable) returnType:kotlin.Throwable? [fake_override]
+      correspondingProperty: PROPERTY FAKE_OVERRIDE name:cause visibility:public modality:OPEN [fake_override,val]
+      overridden:
+        public open fun <get-cause> (): kotlin.Throwable? [fake_override] declared in kotlin.Exception
+      $this: VALUE_PARAMETER name:<this> type:kotlin.Throwable
+    FUN FAKE_OVERRIDE name:<get-message> visibility:public modality:OPEN <> ($this:kotlin.Throwable) returnType:kotlin.String? [fake_override]
+      correspondingProperty: PROPERTY FAKE_OVERRIDE name:message visibility:public modality:OPEN [fake_override,val]
+      overridden:
+        public open fun <get-message> (): kotlin.String? [fake_override] declared in kotlin.Exception
+      $this: VALUE_PARAMETER name:<this> type:kotlin.Throwable
+  CLASS CLASS name:LowLevelException modality:FINAL visibility:public superTypes:[kotlin.Exception]
+    annotations:
+      CompileTimeCalculation
+    $this: VALUE_PARAMETER INSTANCE_RECEIVER name:<this> type:<root>.LowLevelException
+    CONSTRUCTOR visibility:public <> () returnType:<root>.LowLevelException [primary]
+      BLOCK_BODY
+        CALL 'internal final fun Exception_init_$Init$ ($this: kotlin.Exception): kotlin.Exception declared in kotlin.Exception' type=kotlin.Unit origin=null
+          $this: GET_VAR '<this>: kotlin.Exception declared in kotlin.Exception' type=kotlin.Exception origin=null
+    FUN FAKE_OVERRIDE name:equals visibility:public modality:OPEN <> ($this:kotlin.Any, other:kotlin.Any?) returnType:kotlin.Boolean [fake_override,operator]
+      overridden:
+        public open fun equals (other: kotlin.Any?): kotlin.Boolean [fake_override,operator] declared in kotlin.Exception
+      $this: VALUE_PARAMETER name:<this> type:kotlin.Any
+      VALUE_PARAMETER name:other index:0 type:kotlin.Any?
+    FUN FAKE_OVERRIDE name:hashCode visibility:public modality:OPEN <> ($this:kotlin.Any) returnType:kotlin.Int [fake_override]
+      overridden:
+        public open fun hashCode (): kotlin.Int [fake_override] declared in kotlin.Exception
+      $this: VALUE_PARAMETER name:<this> type:kotlin.Any
+    FUN FAKE_OVERRIDE name:toString visibility:public modality:OPEN <> ($this:kotlin.Throwable) returnType:kotlin.String [fake_override]
+      overridden:
+        public open fun toString (): kotlin.String [fake_override] declared in kotlin.Exception
+      $this: VALUE_PARAMETER name:<this> type:kotlin.Throwable
+    FUN FAKE_OVERRIDE name:<get-cause> visibility:public modality:OPEN <> ($this:kotlin.Throwable) returnType:kotlin.Throwable? [fake_override]
+      correspondingProperty: PROPERTY FAKE_OVERRIDE name:cause visibility:public modality:OPEN [fake_override,val]
+      overridden:
+        public open fun <get-cause> (): kotlin.Throwable? [fake_override] declared in kotlin.Exception
+      $this: VALUE_PARAMETER name:<this> type:kotlin.Throwable
+    FUN FAKE_OVERRIDE name:<get-message> visibility:public modality:OPEN <> ($this:kotlin.Throwable) returnType:kotlin.String? [fake_override]
+      correspondingProperty: PROPERTY FAKE_OVERRIDE name:message visibility:public modality:OPEN [fake_override,val]
+      overridden:
+        public open fun <get-message> (): kotlin.String? [fake_override] declared in kotlin.Exception
+      $this: VALUE_PARAMETER name:<this> type:kotlin.Throwable
+  CLASS CLASS name:Junk modality:FINAL visibility:public superTypes:[kotlin.Any]
+    annotations:
+      CompileTimeCalculation
+    $this: VALUE_PARAMETER INSTANCE_RECEIVER name:<this> type:<root>.Junk
+    CONSTRUCTOR visibility:public <> () returnType:<root>.Junk [primary]
+      BLOCK_BODY
+        DELEGATING_CONSTRUCTOR_CALL 'public constructor <init> () [primary] declared in kotlin.Any'
+    FUN name:a visibility:public modality:FINAL <> ($this:<root>.Junk) returnType:kotlin.Nothing
+      $this: VALUE_PARAMETER name:<this> type:<root>.Junk
+      BLOCK_BODY
+        TRY type=kotlin.Unit
+          try: BLOCK type=kotlin.Unit origin=null
+            CALL 'private final fun b ($this: <root>.Junk): kotlin.Nothing declared in <root>.Junk' type=kotlin.Nothing origin=null
+              $this: GET_VAR '<this>: <root>.Junk declared in <root>.Junk.a' type=<root>.Junk origin=null
+          CATCH parameter=val $p: dynamic [val] declared in <root>.Junk.a
+            VAR SYNTHESIZED_DECLARATION name:$p type:dynamic [val]
+            BLOCK type=kotlin.Unit origin=SYNTHESIZED_STATEMENT
+              WHEN type=kotlin.Unit origin=SYNTHESIZED_STATEMENT
+                BRANCH
+                  if: CALL 'public final fun jsInstanceOf (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=SYNTHESIZED_STATEMENT
+                    arg0: GET_VAR 'val $p: dynamic [val] declared in <root>.Junk.a' type=dynamic origin=SYNTHESIZED_STATEMENT
+                    arg1: CALL 'public final fun jsClass <T> (): kotlin.js.JsClass<T of kotlin.js.jsClass> [external] declared in kotlin.js' type=kotlin.js.JsClass<T of kotlin.js.jsClass> origin=SYNTHESIZED_STATEMENT
+                      <T>: <root>.MidLevelException
+                  then: BLOCK type=kotlin.Unit origin=null
+                    THROW type=kotlin.Nothing
+                      CONSTRUCTOR_CALL 'public constructor <init> (cause: kotlin.Throwable?) [primary] declared in <root>.HighLevelException' type=<root>.HighLevelException origin=null
+                        cause: TYPE_OP type=<root>.MidLevelException origin=REINTERPRET_CAST typeOperand=<root>.MidLevelException
+                          GET_VAR 'val $p: dynamic [val] declared in <root>.Junk.a' type=dynamic origin=SYNTHESIZED_STATEMENT
+                BRANCH
+                  if: CONST Boolean type=kotlin.Boolean value=true
+                  then: BLOCK type=kotlin.Unit origin=SYNTHESIZED_STATEMENT
+                    WHEN type=kotlin.Unit origin=SYNTHESIZED_STATEMENT
+                      BRANCH
+                        if: CONST Boolean type=kotlin.Boolean value=true
+                        then: BLOCK type=kotlin.Nothing origin=SYNTHESIZED_STATEMENT
+                          THROW type=kotlin.Nothing
+                            GET_VAR 'val $p: dynamic [val] declared in <root>.Junk.a' type=dynamic origin=SYNTHESIZED_STATEMENT
+    FUN name:b visibility:private modality:FINAL <> ($this:<root>.Junk) returnType:kotlin.Nothing
+      VALUE_PARAMETER STATIC_THIS_PARAMETER name:$this index:0 type:<root>.Junk
+      BLOCK_BODY
+        CALL 'private final fun c ($this: <root>.Junk): kotlin.Nothing declared in <root>.Junk' type=kotlin.Nothing origin=null
+          $this: GET_VAR '$this: <root>.Junk declared in <root>.Junk.b' type=<root>.Junk origin=null
+    FUN name:c visibility:private modality:FINAL <> ($this:<root>.Junk) returnType:kotlin.Nothing
+      VALUE_PARAMETER STATIC_THIS_PARAMETER name:$this index:0 type:<root>.Junk
+      BLOCK_BODY
+        TRY type=kotlin.Unit
+          try: BLOCK type=kotlin.Unit origin=null
+            CALL 'private final fun d ($this: <root>.Junk): kotlin.Nothing declared in <root>.Junk' type=kotlin.Nothing origin=null
+              $this: GET_VAR '$this: <root>.Junk declared in <root>.Junk.c' type=<root>.Junk origin=null
+          CATCH parameter=val $p: dynamic [val] declared in <root>.Junk.c
+            VAR SYNTHESIZED_DECLARATION name:$p type:dynamic [val]
+            BLOCK type=kotlin.Unit origin=SYNTHESIZED_STATEMENT
+              WHEN type=kotlin.Unit origin=SYNTHESIZED_STATEMENT
+                BRANCH
+                  if: CALL 'public final fun jsInstanceOf (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=SYNTHESIZED_STATEMENT
+                    arg0: GET_VAR 'val $p: dynamic [val] declared in <root>.Junk.c' type=dynamic origin=SYNTHESIZED_STATEMENT
+                    arg1: CALL 'public final fun jsClass <T> (): kotlin.js.JsClass<T of kotlin.js.jsClass> [external] declared in kotlin.js' type=kotlin.js.JsClass<T of kotlin.js.jsClass> origin=SYNTHESIZED_STATEMENT
+                      <T>: <root>.LowLevelException
+                  then: BLOCK type=kotlin.Unit origin=null
+                    THROW type=kotlin.Nothing
+                      CONSTRUCTOR_CALL 'public constructor <init> (cause: kotlin.Throwable?) [primary] declared in <root>.MidLevelException' type=<root>.MidLevelException origin=null
+                        cause: TYPE_OP type=<root>.LowLevelException origin=REINTERPRET_CAST typeOperand=<root>.LowLevelException
+                          GET_VAR 'val $p: dynamic [val] declared in <root>.Junk.c' type=dynamic origin=SYNTHESIZED_STATEMENT
+                BRANCH
+                  if: CONST Boolean type=kotlin.Boolean value=true
+                  then: BLOCK type=kotlin.Unit origin=SYNTHESIZED_STATEMENT
+                    WHEN type=kotlin.Unit origin=SYNTHESIZED_STATEMENT
+                      BRANCH
+                        if: CONST Boolean type=kotlin.Boolean value=true
+                        then: BLOCK type=kotlin.Nothing origin=SYNTHESIZED_STATEMENT
+                          THROW type=kotlin.Nothing
+                            GET_VAR 'val $p: dynamic [val] declared in <root>.Junk.c' type=dynamic origin=SYNTHESIZED_STATEMENT
+    FUN name:d visibility:private modality:FINAL <> ($this:<root>.Junk) returnType:kotlin.Nothing
+      VALUE_PARAMETER STATIC_THIS_PARAMETER name:$this index:0 type:<root>.Junk
+      BLOCK_BODY
+        CALL 'private final fun e ($this: <root>.Junk): kotlin.Nothing declared in <root>.Junk' type=kotlin.Nothing origin=null
+          $this: GET_VAR '$this: <root>.Junk declared in <root>.Junk.d' type=<root>.Junk origin=null
+    FUN name:e visibility:private modality:FINAL <> ($this:<root>.Junk) returnType:kotlin.Nothing
+      VALUE_PARAMETER STATIC_THIS_PARAMETER name:$this index:0 type:<root>.Junk
+      BLOCK_BODY
+        THROW type=kotlin.Nothing
+          CONSTRUCTOR_CALL 'public constructor <init> () [primary] declared in <root>.LowLevelException' type=<root>.LowLevelException origin=null
+    FUN FAKE_OVERRIDE name:equals visibility:public modality:OPEN <> ($this:kotlin.Any, other:kotlin.Any?) returnType:kotlin.Boolean [fake_override,operator]
+      overridden:
+        public open fun equals (other: kotlin.Any?): kotlin.Boolean [operator] declared in kotlin.Any
+      $this: VALUE_PARAMETER name:<this> type:kotlin.Any
+      VALUE_PARAMETER name:other index:0 type:kotlin.Any?
+    FUN FAKE_OVERRIDE name:hashCode visibility:public modality:OPEN <> ($this:kotlin.Any) returnType:kotlin.Int [fake_override]
+      overridden:
+        public open fun hashCode (): kotlin.Int declared in kotlin.Any
+      $this: VALUE_PARAMETER name:<this> type:kotlin.Any
+    FUN FAKE_OVERRIDE name:toString visibility:public modality:OPEN <> ($this:kotlin.Any) returnType:kotlin.String [fake_override]
+      overridden:
+        public open fun toString (): kotlin.String declared in kotlin.Any
+      $this: VALUE_PARAMETER name:<this> type:kotlin.Any
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-exceptionWithCause> visibility:public modality:FINAL <> () returnType:kotlin.Nothing
+    correspondingProperty: PROPERTY name:exceptionWithCause visibility:public modality:FINAL [val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-exceptionWithCause> (): kotlin.Nothing declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:exceptionWithCause type:kotlin.Nothing visibility:private [final,static]' type=kotlin.Nothing origin=null
+  FIELD PROPERTY_BACKING_FIELD name:exceptionWithCause type:kotlin.Nothing visibility:private [final,static]
+    EXPRESSION_BODY
+      ERROR_EXPR '
+Exception HighLevelException: MidLevelException: LowLevelException
+	at ExceptionWithCauseKt.Junk.a(exceptionWithCause.kt:13)
+Caused by: MidLevelException: LowLevelException
+	at ExceptionWithCauseKt.Junk.c(exceptionWithCause.kt:23)
+	at ExceptionWithCauseKt.Junk.b(exceptionWithCause.kt:21)
+	at ExceptionWithCauseKt.Junk.a(exceptionWithCause.kt:13)
+Caused by: LowLevelException
+	at ExceptionWithCauseKt.Junk.e(exceptionWithCause.kt:33)
+	at ExceptionWithCauseKt.Junk.d(exceptionWithCause.kt:31)
+	at ExceptionWithCauseKt.Junk.c(exceptionWithCause.kt:23)
+	at ExceptionWithCauseKt.Junk.b(exceptionWithCause.kt:21)
+	at ExceptionWithCauseKt.Junk.a(exceptionWithCause.kt:13)' type=kotlin.Nothing

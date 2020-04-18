@@ -1,0 +1,9 @@
+FILE fqName:<root> fileName:/trim.kt
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-trimmed> visibility:public modality:FINAL <> () returnType:kotlin.String
+    correspondingProperty: PROPERTY name:trimmed visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-trimmed> (): kotlin.String declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:trimmed type:kotlin.String visibility:public [final,static]' type=kotlin.String origin=null
+  FIELD PROPERTY_BACKING_FIELD name:trimmed type:kotlin.String visibility:public [final,static]
+    EXPRESSION_BODY
+      CONST String type=kotlin.String value="1"

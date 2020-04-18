@@ -1,0 +1,161 @@
+FILE fqName:<root> fileName:/regex.kt
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-regConstructor1> visibility:public modality:FINAL <> () returnType:kotlin.String
+    correspondingProperty: PROPERTY name:regConstructor1 visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-regConstructor1> (): kotlin.String declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:regConstructor1 type:kotlin.String visibility:public [final,static]' type=kotlin.String origin=null
+  FIELD PROPERTY_BACKING_FIELD name:regConstructor1 type:kotlin.String visibility:public [final,static]
+    EXPRESSION_BODY
+      CONST String type=kotlin.String value="pattern"
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-matchEntire1> visibility:public modality:FINAL <> () returnType:kotlin.String?
+    correspondingProperty: PROPERTY name:matchEntire1 visibility:public modality:FINAL [val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-matchEntire1> (): kotlin.String? declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:matchEntire1 type:kotlin.String? visibility:private [final,static]' type=kotlin.String? origin=null
+  FIELD PROPERTY_BACKING_FIELD name:matchEntire1 type:kotlin.String? visibility:private [final,static]
+    EXPRESSION_BODY
+      CONST String type=kotlin.String value="pat"
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-matchEntire2> visibility:public modality:FINAL <> () returnType:kotlin.Int?
+    correspondingProperty: PROPERTY name:matchEntire2 visibility:public modality:FINAL [val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-matchEntire2> (): kotlin.Int? declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:matchEntire2 type:kotlin.Int? visibility:private [final,static]' type=kotlin.Int? origin=null
+  FIELD PROPERTY_BACKING_FIELD name:matchEntire2 type:kotlin.Int? visibility:private [final,static]
+    EXPRESSION_BODY
+      CONST Int type=kotlin.Int value=0
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-matches1> visibility:public modality:FINAL <> () returnType:kotlin.Boolean
+    correspondingProperty: PROPERTY name:matches1 visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-matches1> (): kotlin.Boolean declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:matches1 type:kotlin.Boolean visibility:public [final,static]' type=kotlin.Boolean origin=null
+  FIELD PROPERTY_BACKING_FIELD name:matches1 type:kotlin.Boolean visibility:public [final,static]
+    EXPRESSION_BODY
+      CONST Boolean type=kotlin.Boolean value=true
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-matches2> visibility:public modality:FINAL <> () returnType:kotlin.Boolean
+    correspondingProperty: PROPERTY name:matches2 visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-matches2> (): kotlin.Boolean declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:matches2 type:kotlin.Boolean visibility:public [final,static]' type=kotlin.Boolean origin=null
+  FIELD PROPERTY_BACKING_FIELD name:matches2 type:kotlin.Boolean visibility:public [final,static]
+    EXPRESSION_BODY
+      CONST Boolean type=kotlin.Boolean value=false
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-containsMatchIn1> visibility:public modality:FINAL <> () returnType:kotlin.Boolean
+    correspondingProperty: PROPERTY name:containsMatchIn1 visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-containsMatchIn1> (): kotlin.Boolean declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:containsMatchIn1 type:kotlin.Boolean visibility:public [final,static]' type=kotlin.Boolean origin=null
+  FIELD PROPERTY_BACKING_FIELD name:containsMatchIn1 type:kotlin.Boolean visibility:public [final,static]
+    EXPRESSION_BODY
+      CONST Boolean type=kotlin.Boolean value=true
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-containsMatchIn2> visibility:public modality:FINAL <> () returnType:kotlin.Boolean
+    correspondingProperty: PROPERTY name:containsMatchIn2 visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-containsMatchIn2> (): kotlin.Boolean declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:containsMatchIn2 type:kotlin.Boolean visibility:public [final,static]' type=kotlin.Boolean origin=null
+  FIELD PROPERTY_BACKING_FIELD name:containsMatchIn2 type:kotlin.Boolean visibility:public [final,static]
+    EXPRESSION_BODY
+      CONST Boolean type=kotlin.Boolean value=true
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-containsMatchIn3> visibility:public modality:FINAL <> () returnType:kotlin.Boolean
+    correspondingProperty: PROPERTY name:containsMatchIn3 visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-containsMatchIn3> (): kotlin.Boolean declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:containsMatchIn3 type:kotlin.Boolean visibility:public [final,static]' type=kotlin.Boolean origin=null
+  FIELD PROPERTY_BACKING_FIELD name:containsMatchIn3 type:kotlin.Boolean visibility:public [final,static]
+    EXPRESSION_BODY
+      CONST Boolean type=kotlin.Boolean value=false
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-replace1> visibility:public modality:FINAL <> () returnType:kotlin.String
+    correspondingProperty: PROPERTY name:replace1 visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-replace1> (): kotlin.String declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:replace1 type:kotlin.String visibility:public [final,static]' type=kotlin.String origin=null
+  FIELD PROPERTY_BACKING_FIELD name:replace1 type:kotlin.String visibility:public [final,static]
+    EXPRESSION_BODY
+      CONST String type=kotlin.String value="There are n apples"
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-replace2> visibility:public modality:FINAL <> () returnType:kotlin.String
+    correspondingProperty: PROPERTY name:replace2 visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-replace2> (): kotlin.String declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:replace2 type:kotlin.String visibility:public [final,static]' type=kotlin.String origin=null
+  FIELD PROPERTY_BACKING_FIELD name:replace2 type:kotlin.String visibility:public [final,static]
+    EXPRESSION_BODY
+      CONST String type=kotlin.String value="Roses are red!, Violets are blue!"
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-replace3> visibility:public modality:FINAL <> () returnType:kotlin.String
+    correspondingProperty: PROPERTY name:replace3 visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-replace3> (): kotlin.String declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:replace3 type:kotlin.String visibility:public [final,static]' type=kotlin.String origin=null
+  FIELD PROPERTY_BACKING_FIELD name:replace3 type:kotlin.String visibility:public [final,static]
+    EXPRESSION_BODY
+      CONST String type=kotlin.String value="Roses are REPLACED, Violets are blue"
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-split> visibility:public modality:FINAL <> () returnType:kotlin.Int
+    correspondingProperty: PROPERTY name:split visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-split> (): kotlin.Int declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:split type:kotlin.Int visibility:public [final,static]' type=kotlin.Int origin=null
+  FIELD PROPERTY_BACKING_FIELD name:split type:kotlin.Int visibility:public [final,static]
+    EXPRESSION_BODY
+      CONST Int type=kotlin.Int value=6
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-find1> visibility:public modality:FINAL <> () returnType:kotlin.String?
+    correspondingProperty: PROPERTY name:find1 visibility:public modality:FINAL [val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-find1> (): kotlin.String? declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:find1 type:kotlin.String? visibility:private [final,static]' type=kotlin.String? origin=null
+  FIELD PROPERTY_BACKING_FIELD name:find1 type:kotlin.String? visibility:private [final,static]
+    EXPRESSION_BODY
+      CONST String type=kotlin.String value="p"
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-find2> visibility:public modality:FINAL <> () returnType:kotlin.Int?
+    correspondingProperty: PROPERTY name:find2 visibility:public modality:FINAL [val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-find2> (): kotlin.Int? declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:find2 type:kotlin.Int? visibility:private [final,static]' type=kotlin.Int? origin=null
+  FIELD PROPERTY_BACKING_FIELD name:find2 type:kotlin.Int? visibility:private [final,static]
+    EXPRESSION_BODY
+      CONST Int type=kotlin.Int value=2
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-find3> visibility:public modality:FINAL <> () returnType:kotlin.String?
+    correspondingProperty: PROPERTY name:find3 visibility:public modality:FINAL [val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-find3> (): kotlin.String? declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:find3 type:kotlin.String? visibility:private [final,static]' type=kotlin.String? origin=null
+  FIELD PROPERTY_BACKING_FIELD name:find3 type:kotlin.String? visibility:private [final,static]
+    EXPRESSION_BODY
+      CONST String type=kotlin.String value="red"
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-find4> visibility:public modality:FINAL <> () returnType:kotlin.String?
+    correspondingProperty: PROPERTY name:find4 visibility:public modality:FINAL [val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-find4> (): kotlin.String? declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:find4 type:kotlin.String? visibility:private [final,static]' type=kotlin.String? origin=null
+  FIELD PROPERTY_BACKING_FIELD name:find4 type:kotlin.String? visibility:private [final,static]
+    EXPRESSION_BODY
+      CONST String type=kotlin.String value="blue"
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-find5> visibility:public modality:FINAL <> () returnType:kotlin.String?
+    correspondingProperty: PROPERTY name:find5 visibility:public modality:FINAL [val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-find5> (): kotlin.String? declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:find5 type:kotlin.String? visibility:private [final,static]' type=kotlin.String? origin=null
+  FIELD PROPERTY_BACKING_FIELD name:find5 type:kotlin.String? visibility:private [final,static]
+    EXPRESSION_BODY
+      CONST String type=kotlin.String value="blue"
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-fromLiteral> visibility:public modality:FINAL <> () returnType:kotlin.String
+    correspondingProperty: PROPERTY name:fromLiteral visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-fromLiteral> (): kotlin.String declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:fromLiteral type:kotlin.String visibility:public [final,static]' type=kotlin.String origin=null
+  FIELD PROPERTY_BACKING_FIELD name:fromLiteral type:kotlin.String visibility:public [final,static]
+    EXPRESSION_BODY
+      CONST String type=kotlin.String value="[a-z0-9]+"
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-escape> visibility:public modality:FINAL <> () returnType:kotlin.String
+    correspondingProperty: PROPERTY name:escape visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-escape> (): kotlin.String declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:escape type:kotlin.String visibility:public [final,static]' type=kotlin.String origin=null
+  FIELD PROPERTY_BACKING_FIELD name:escape type:kotlin.String visibility:public [final,static]
+    EXPRESSION_BODY
+      CONST String type=kotlin.String value="\\Q[a-z0-9]+\\E"
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-escapeReplacement> visibility:public modality:FINAL <> () returnType:kotlin.String
+    correspondingProperty: PROPERTY name:escapeReplacement visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-escapeReplacement> (): kotlin.String declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:escapeReplacement type:kotlin.String visibility:public [final,static]' type=kotlin.String origin=null
+  FIELD PROPERTY_BACKING_FIELD name:escapeReplacement type:kotlin.String visibility:public [final,static]
+    EXPRESSION_BODY
+      CONST String type=kotlin.String value="[a-z0-9]+"

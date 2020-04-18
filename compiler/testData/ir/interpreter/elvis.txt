@@ -1,0 +1,45 @@
+FILE fqName:<root> fileName:/elvis.kt
+  FUN name:getLenght visibility:public modality:FINAL <> (value:kotlin.String?) returnType:kotlin.Int
+    annotations:
+      CompileTimeCalculation
+    VALUE_PARAMETER name:value index:0 type:kotlin.String?
+    BLOCK_BODY
+      VAR IR_TEMPORARY_VARIABLE name:tmp0_safe_receiver type:kotlin.String? [val]
+        GET_VAR 'value: kotlin.String? declared in <root>.getLenght' type=kotlin.String? origin=null
+      VAR IR_TEMPORARY_VARIABLE name:tmp1_elvis_lhs type:kotlin.Int? [val]
+        WHEN type=kotlin.Int? origin=null
+          BRANCH
+            if: CALL 'public final fun jsEqeq (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=EQEQ
+              arg0: GET_VAR 'val tmp0_safe_receiver: kotlin.String? [val] declared in <root>.getLenght' type=kotlin.String? origin=null
+              arg1: CONST Null type=kotlin.Nothing? value=null
+            then: CONST Null type=kotlin.Nothing? value=null
+          BRANCH
+            if: CONST Boolean type=kotlin.Boolean value=true
+            then: CALL 'public final fun jsArrayLength (arg0: kotlin.Any?): kotlin.Any? declared in kotlin.internal.ir' type=kotlin.Int origin=GET_PROPERTY
+              arg0: GET_VAR 'val tmp0_safe_receiver: kotlin.String? [val] declared in <root>.getLenght' type=kotlin.String? origin=null
+      RETURN type=kotlin.Nothing from='public final fun getLenght (value: kotlin.String?): kotlin.Int declared in <root>'
+        WHEN type=kotlin.Int origin=null
+          BRANCH
+            if: CALL 'public final fun jsEqeq (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=EQEQ
+              arg0: GET_VAR 'val tmp1_elvis_lhs: kotlin.Int? [val] declared in <root>.getLenght' type=kotlin.Int? origin=null
+              arg1: CONST Null type=kotlin.Nothing? value=null
+            then: CONST Int type=kotlin.Int value=-1
+          BRANCH
+            if: CONST Boolean type=kotlin.Boolean value=true
+            then: GET_VAR 'val tmp1_elvis_lhs: kotlin.Int? [val] declared in <root>.getLenght' type=kotlin.Int? origin=null
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-a1> visibility:public modality:FINAL <> () returnType:kotlin.Int
+    correspondingProperty: PROPERTY name:a1 visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-a1> (): kotlin.Int declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:a1 type:kotlin.Int visibility:public [final,static]' type=kotlin.Int origin=null
+  FIELD PROPERTY_BACKING_FIELD name:a1 type:kotlin.Int visibility:public [final,static]
+    EXPRESSION_BODY
+      CONST Int type=kotlin.Int value=5
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-a2> visibility:public modality:FINAL <> () returnType:kotlin.Int
+    correspondingProperty: PROPERTY name:a2 visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-a2> (): kotlin.Int declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:a2 type:kotlin.Int visibility:public [final,static]' type=kotlin.Int origin=null
+  FIELD PROPERTY_BACKING_FIELD name:a2 type:kotlin.Int visibility:public [final,static]
+    EXPRESSION_BODY
+      CONST Int type=kotlin.Int value=-1

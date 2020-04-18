@@ -1,0 +1,1185 @@
+FILE fqName:<root> fileName:/uInt.kt
+  FUN name:compareTo visibility:public modality:FINAL <> (value:kotlin.UInt, other:kotlin.UByte) returnType:kotlin.Int
+    annotations:
+      CompileTimeCalculation
+    VALUE_PARAMETER name:value index:0 type:kotlin.UInt
+    VALUE_PARAMETER name:other index:1 type:kotlin.UByte
+    BLOCK_BODY
+      VAR IR_TEMPORARY_VARIABLE name:tmp0_compareTo_0_1 type:kotlin.UInt [val]
+        CONSTRUCTOR_CALL 'internal constructor <init> (data: kotlin.Int) [primary] declared in kotlin.UInt' type=kotlin.UInt origin=null
+          data: CALL 'public final fun jsBitAnd (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Int declared in kotlin.internal.ir' type=kotlin.Int origin=null
+            arg0: TYPE_OP type=kotlin.Int origin=REINTERPRET_CAST typeOperand=kotlin.Int
+              CALL 'internal final fun <get-data>-impl (this: kotlin.UByte): kotlin.Byte declared in kotlin.UByte' type=kotlin.Byte origin=GET_PROPERTY
+                this: GET_VAR 'other: kotlin.UByte declared in <root>.compareTo' type=kotlin.UByte origin=null
+            arg1: CONST Int type=kotlin.Int value=255
+      RETURN type=kotlin.Nothing from='public final fun compareTo (value: kotlin.UInt, other: kotlin.UByte): kotlin.Int declared in <root>'
+        CALL 'internal final fun uintCompare (v1: kotlin.Int, v2: kotlin.Int): kotlin.Int declared in kotlin' type=kotlin.Int origin=null
+          v1: CALL 'internal final fun <get-data>-impl (this: kotlin.UInt): kotlin.Int declared in kotlin.UInt' type=kotlin.Int origin=GET_PROPERTY
+            this: GET_VAR 'value: kotlin.UInt declared in <root>.compareTo' type=kotlin.UInt origin=null
+          v2: CALL 'internal final fun <get-data>-impl (this: kotlin.UInt): kotlin.Int declared in kotlin.UInt' type=kotlin.Int origin=GET_PROPERTY
+            this: GET_VAR 'val tmp0_compareTo_0_1: kotlin.UInt [val] declared in <root>.compareTo' type=kotlin.UInt origin=null
+  FUN name:compareTo visibility:public modality:FINAL <> (value:kotlin.UInt, other:kotlin.UShort) returnType:kotlin.Int
+    annotations:
+      CompileTimeCalculation
+    VALUE_PARAMETER name:value index:0 type:kotlin.UInt
+    VALUE_PARAMETER name:other index:1 type:kotlin.UShort
+    BLOCK_BODY
+      VAR IR_TEMPORARY_VARIABLE name:tmp0_compareTo_0_1 type:kotlin.UInt [val]
+        CONSTRUCTOR_CALL 'internal constructor <init> (data: kotlin.Int) [primary] declared in kotlin.UInt' type=kotlin.UInt origin=null
+          data: CALL 'public final fun jsBitAnd (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Int declared in kotlin.internal.ir' type=kotlin.Int origin=null
+            arg0: TYPE_OP type=kotlin.Int origin=REINTERPRET_CAST typeOperand=kotlin.Int
+              CALL 'internal final fun <get-data>-impl (this: kotlin.UShort): kotlin.Short declared in kotlin.UShort' type=kotlin.Short origin=GET_PROPERTY
+                this: GET_VAR 'other: kotlin.UShort declared in <root>.compareTo' type=kotlin.UShort origin=null
+            arg1: CONST Int type=kotlin.Int value=65535
+      RETURN type=kotlin.Nothing from='public final fun compareTo (value: kotlin.UInt, other: kotlin.UShort): kotlin.Int declared in <root>'
+        CALL 'internal final fun uintCompare (v1: kotlin.Int, v2: kotlin.Int): kotlin.Int declared in kotlin' type=kotlin.Int origin=null
+          v1: CALL 'internal final fun <get-data>-impl (this: kotlin.UInt): kotlin.Int declared in kotlin.UInt' type=kotlin.Int origin=GET_PROPERTY
+            this: GET_VAR 'value: kotlin.UInt declared in <root>.compareTo' type=kotlin.UInt origin=null
+          v2: CALL 'internal final fun <get-data>-impl (this: kotlin.UInt): kotlin.Int declared in kotlin.UInt' type=kotlin.Int origin=GET_PROPERTY
+            this: GET_VAR 'val tmp0_compareTo_0_1: kotlin.UInt [val] declared in <root>.compareTo' type=kotlin.UInt origin=null
+  FUN name:compareTo visibility:public modality:FINAL <> (value:kotlin.UInt, other:kotlin.UInt) returnType:kotlin.Int
+    annotations:
+      CompileTimeCalculation
+    VALUE_PARAMETER name:value index:0 type:kotlin.UInt
+    VALUE_PARAMETER name:other index:1 type:kotlin.UInt
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun compareTo (value: kotlin.UInt, other: kotlin.UInt): kotlin.Int declared in <root>'
+        CALL 'internal final fun uintCompare (v1: kotlin.Int, v2: kotlin.Int): kotlin.Int declared in kotlin' type=kotlin.Int origin=null
+          v1: CALL 'internal final fun <get-data>-impl (this: kotlin.UInt): kotlin.Int declared in kotlin.UInt' type=kotlin.Int origin=GET_PROPERTY
+            this: GET_VAR 'value: kotlin.UInt declared in <root>.compareTo' type=kotlin.UInt origin=null
+          v2: CALL 'internal final fun <get-data>-impl (this: kotlin.UInt): kotlin.Int declared in kotlin.UInt' type=kotlin.Int origin=GET_PROPERTY
+            this: GET_VAR 'other: kotlin.UInt declared in <root>.compareTo' type=kotlin.UInt origin=null
+  FUN name:compareTo visibility:public modality:FINAL <> (value:kotlin.UInt, other:kotlin.ULong) returnType:kotlin.Int
+    annotations:
+      CompileTimeCalculation
+    VALUE_PARAMETER name:value index:0 type:kotlin.UInt
+    VALUE_PARAMETER name:other index:1 type:kotlin.ULong
+    BLOCK_BODY
+      VAR IR_TEMPORARY_VARIABLE name:tmp0_compareTo_0_1 type:kotlin.ULong [val]
+        CONSTRUCTOR_CALL 'internal constructor <init> (data: kotlin.Long) [primary] declared in kotlin.ULong' type=kotlin.ULong origin=null
+          data: CALL 'public final fun and (other: kotlin.Long): kotlin.Long declared in kotlin.Long' type=kotlin.Long origin=null
+            $this: CALL 'public final fun toLong (a: dynamic): kotlin.Long declared in kotlin.js' type=kotlin.Long origin=null
+              a: CALL 'internal final fun <get-data>-impl (this: kotlin.UInt): kotlin.Int declared in kotlin.UInt' type=kotlin.Int origin=GET_PROPERTY
+                this: GET_VAR 'value: kotlin.UInt declared in <root>.compareTo' type=kotlin.UInt origin=null
+            other: CONSTRUCTOR_CALL 'internal constructor <init> (low: kotlin.Int, high: kotlin.Int) [primary] declared in kotlin.Long' type=kotlin.Long origin=null
+              low: CONST Int type=kotlin.Int value=-1
+              high: CONST Int type=kotlin.Int value=0
+      RETURN type=kotlin.Nothing from='public final fun compareTo (value: kotlin.UInt, other: kotlin.ULong): kotlin.Int declared in <root>'
+        CALL 'internal final fun ulongCompare (v1: kotlin.Long, v2: kotlin.Long): kotlin.Int declared in kotlin' type=kotlin.Int origin=null
+          v1: CALL 'internal final fun <get-data>-impl (this: kotlin.ULong): kotlin.Long declared in kotlin.ULong' type=kotlin.Long origin=GET_PROPERTY
+            this: GET_VAR 'val tmp0_compareTo_0_1: kotlin.ULong [val] declared in <root>.compareTo' type=kotlin.ULong origin=null
+          v2: CALL 'internal final fun <get-data>-impl (this: kotlin.ULong): kotlin.Long declared in kotlin.ULong' type=kotlin.Long origin=GET_PROPERTY
+            this: GET_VAR 'other: kotlin.ULong declared in <root>.compareTo' type=kotlin.ULong origin=null
+  FUN name:plus visibility:public modality:FINAL <> (value:kotlin.UInt, other:kotlin.UByte) returnType:kotlin.UInt
+    annotations:
+      CompileTimeCalculation
+    VALUE_PARAMETER name:value index:0 type:kotlin.UInt
+    VALUE_PARAMETER name:other index:1 type:kotlin.UByte
+    BLOCK_BODY
+      VAR IR_TEMPORARY_VARIABLE name:tmp0_plus_0_1 type:kotlin.UInt [val]
+        CONSTRUCTOR_CALL 'internal constructor <init> (data: kotlin.Int) [primary] declared in kotlin.UInt' type=kotlin.UInt origin=null
+          data: CALL 'public final fun jsBitAnd (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Int declared in kotlin.internal.ir' type=kotlin.Int origin=null
+            arg0: TYPE_OP type=kotlin.Int origin=REINTERPRET_CAST typeOperand=kotlin.Int
+              CALL 'internal final fun <get-data>-impl (this: kotlin.UByte): kotlin.Byte declared in kotlin.UByte' type=kotlin.Byte origin=GET_PROPERTY
+                this: GET_VAR 'other: kotlin.UByte declared in <root>.plus' type=kotlin.UByte origin=null
+            arg1: CONST Int type=kotlin.Int value=255
+      RETURN type=kotlin.Nothing from='public final fun plus (value: kotlin.UInt, other: kotlin.UByte): kotlin.UInt declared in <root>'
+        CONSTRUCTOR_CALL 'internal constructor <init> (data: kotlin.Int) [primary] declared in kotlin.UInt' type=kotlin.UInt origin=null
+          data: CALL 'public final fun jsBitOr (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Int declared in kotlin.internal.ir' type=kotlin.Int origin=SYNTHESIZED_STATEMENT
+            arg0: CALL 'public final fun jsPlus (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Any? declared in kotlin.internal.ir' type=kotlin.Int origin=null
+              arg0: CALL 'internal final fun <get-data>-impl (this: kotlin.UInt): kotlin.Int declared in kotlin.UInt' type=kotlin.Int origin=GET_PROPERTY
+                this: GET_VAR 'value: kotlin.UInt declared in <root>.plus' type=kotlin.UInt origin=null
+              arg1: CALL 'internal final fun <get-data>-impl (this: kotlin.UInt): kotlin.Int declared in kotlin.UInt' type=kotlin.Int origin=GET_PROPERTY
+                this: GET_VAR 'val tmp0_plus_0_1: kotlin.UInt [val] declared in <root>.plus' type=kotlin.UInt origin=null
+            arg1: CONST Int type=kotlin.Int value=0
+  FUN name:plus visibility:public modality:FINAL <> (value:kotlin.UInt, other:kotlin.UShort) returnType:kotlin.UInt
+    annotations:
+      CompileTimeCalculation
+    VALUE_PARAMETER name:value index:0 type:kotlin.UInt
+    VALUE_PARAMETER name:other index:1 type:kotlin.UShort
+    BLOCK_BODY
+      VAR IR_TEMPORARY_VARIABLE name:tmp0_plus_0_1 type:kotlin.UInt [val]
+        CONSTRUCTOR_CALL 'internal constructor <init> (data: kotlin.Int) [primary] declared in kotlin.UInt' type=kotlin.UInt origin=null
+          data: CALL 'public final fun jsBitAnd (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Int declared in kotlin.internal.ir' type=kotlin.Int origin=null
+            arg0: TYPE_OP type=kotlin.Int origin=REINTERPRET_CAST typeOperand=kotlin.Int
+              CALL 'internal final fun <get-data>-impl (this: kotlin.UShort): kotlin.Short declared in kotlin.UShort' type=kotlin.Short origin=GET_PROPERTY
+                this: GET_VAR 'other: kotlin.UShort declared in <root>.plus' type=kotlin.UShort origin=null
+            arg1: CONST Int type=kotlin.Int value=65535
+      RETURN type=kotlin.Nothing from='public final fun plus (value: kotlin.UInt, other: kotlin.UShort): kotlin.UInt declared in <root>'
+        CONSTRUCTOR_CALL 'internal constructor <init> (data: kotlin.Int) [primary] declared in kotlin.UInt' type=kotlin.UInt origin=null
+          data: CALL 'public final fun jsBitOr (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Int declared in kotlin.internal.ir' type=kotlin.Int origin=SYNTHESIZED_STATEMENT
+            arg0: CALL 'public final fun jsPlus (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Any? declared in kotlin.internal.ir' type=kotlin.Int origin=null
+              arg0: CALL 'internal final fun <get-data>-impl (this: kotlin.UInt): kotlin.Int declared in kotlin.UInt' type=kotlin.Int origin=GET_PROPERTY
+                this: GET_VAR 'value: kotlin.UInt declared in <root>.plus' type=kotlin.UInt origin=null
+              arg1: CALL 'internal final fun <get-data>-impl (this: kotlin.UInt): kotlin.Int declared in kotlin.UInt' type=kotlin.Int origin=GET_PROPERTY
+                this: GET_VAR 'val tmp0_plus_0_1: kotlin.UInt [val] declared in <root>.plus' type=kotlin.UInt origin=null
+            arg1: CONST Int type=kotlin.Int value=0
+  FUN name:plus visibility:public modality:FINAL <> (value:kotlin.UInt, other:kotlin.UInt) returnType:kotlin.UInt
+    annotations:
+      CompileTimeCalculation
+    VALUE_PARAMETER name:value index:0 type:kotlin.UInt
+    VALUE_PARAMETER name:other index:1 type:kotlin.UInt
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun plus (value: kotlin.UInt, other: kotlin.UInt): kotlin.UInt declared in <root>'
+        CONSTRUCTOR_CALL 'internal constructor <init> (data: kotlin.Int) [primary] declared in kotlin.UInt' type=kotlin.UInt origin=null
+          data: CALL 'public final fun jsBitOr (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Int declared in kotlin.internal.ir' type=kotlin.Int origin=SYNTHESIZED_STATEMENT
+            arg0: CALL 'public final fun jsPlus (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Any? declared in kotlin.internal.ir' type=kotlin.Int origin=null
+              arg0: CALL 'internal final fun <get-data>-impl (this: kotlin.UInt): kotlin.Int declared in kotlin.UInt' type=kotlin.Int origin=GET_PROPERTY
+                this: GET_VAR 'value: kotlin.UInt declared in <root>.plus' type=kotlin.UInt origin=null
+              arg1: CALL 'internal final fun <get-data>-impl (this: kotlin.UInt): kotlin.Int declared in kotlin.UInt' type=kotlin.Int origin=GET_PROPERTY
+                this: GET_VAR 'other: kotlin.UInt declared in <root>.plus' type=kotlin.UInt origin=null
+            arg1: CONST Int type=kotlin.Int value=0
+  FUN name:plus visibility:public modality:FINAL <> (value:kotlin.UInt, other:kotlin.ULong) returnType:kotlin.ULong
+    annotations:
+      CompileTimeCalculation
+    VALUE_PARAMETER name:value index:0 type:kotlin.UInt
+    VALUE_PARAMETER name:other index:1 type:kotlin.ULong
+    BLOCK_BODY
+      VAR IR_TEMPORARY_VARIABLE name:tmp0_plus_0_1 type:kotlin.ULong [val]
+        CONSTRUCTOR_CALL 'internal constructor <init> (data: kotlin.Long) [primary] declared in kotlin.ULong' type=kotlin.ULong origin=null
+          data: CALL 'public final fun and (other: kotlin.Long): kotlin.Long declared in kotlin.Long' type=kotlin.Long origin=null
+            $this: CALL 'public final fun toLong (a: dynamic): kotlin.Long declared in kotlin.js' type=kotlin.Long origin=null
+              a: CALL 'internal final fun <get-data>-impl (this: kotlin.UInt): kotlin.Int declared in kotlin.UInt' type=kotlin.Int origin=GET_PROPERTY
+                this: GET_VAR 'value: kotlin.UInt declared in <root>.plus' type=kotlin.UInt origin=null
+            other: CONSTRUCTOR_CALL 'internal constructor <init> (low: kotlin.Int, high: kotlin.Int) [primary] declared in kotlin.Long' type=kotlin.Long origin=null
+              low: CONST Int type=kotlin.Int value=-1
+              high: CONST Int type=kotlin.Int value=0
+      RETURN type=kotlin.Nothing from='public final fun plus (value: kotlin.UInt, other: kotlin.ULong): kotlin.ULong declared in <root>'
+        CONSTRUCTOR_CALL 'internal constructor <init> (data: kotlin.Long) [primary] declared in kotlin.ULong' type=kotlin.ULong origin=null
+          data: CALL 'public final fun plus (other: kotlin.Long): kotlin.Long [operator] declared in kotlin.Long' type=kotlin.Long origin=null
+            $this: CALL 'internal final fun <get-data>-impl (this: kotlin.ULong): kotlin.Long declared in kotlin.ULong' type=kotlin.Long origin=GET_PROPERTY
+              this: GET_VAR 'val tmp0_plus_0_1: kotlin.ULong [val] declared in <root>.plus' type=kotlin.ULong origin=null
+            other: CALL 'internal final fun <get-data>-impl (this: kotlin.ULong): kotlin.Long declared in kotlin.ULong' type=kotlin.Long origin=GET_PROPERTY
+              this: GET_VAR 'other: kotlin.ULong declared in <root>.plus' type=kotlin.ULong origin=null
+  FUN name:minus visibility:public modality:FINAL <> (value:kotlin.UInt, other:kotlin.UByte) returnType:kotlin.UInt
+    annotations:
+      CompileTimeCalculation
+    VALUE_PARAMETER name:value index:0 type:kotlin.UInt
+    VALUE_PARAMETER name:other index:1 type:kotlin.UByte
+    BLOCK_BODY
+      VAR IR_TEMPORARY_VARIABLE name:tmp0_minus_0_1 type:kotlin.UInt [val]
+        CONSTRUCTOR_CALL 'internal constructor <init> (data: kotlin.Int) [primary] declared in kotlin.UInt' type=kotlin.UInt origin=null
+          data: CALL 'public final fun jsBitAnd (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Int declared in kotlin.internal.ir' type=kotlin.Int origin=null
+            arg0: TYPE_OP type=kotlin.Int origin=REINTERPRET_CAST typeOperand=kotlin.Int
+              CALL 'internal final fun <get-data>-impl (this: kotlin.UByte): kotlin.Byte declared in kotlin.UByte' type=kotlin.Byte origin=GET_PROPERTY
+                this: GET_VAR 'other: kotlin.UByte declared in <root>.minus' type=kotlin.UByte origin=null
+            arg1: CONST Int type=kotlin.Int value=255
+      RETURN type=kotlin.Nothing from='public final fun minus (value: kotlin.UInt, other: kotlin.UByte): kotlin.UInt declared in <root>'
+        CONSTRUCTOR_CALL 'internal constructor <init> (data: kotlin.Int) [primary] declared in kotlin.UInt' type=kotlin.UInt origin=null
+          data: CALL 'public final fun jsBitOr (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Int declared in kotlin.internal.ir' type=kotlin.Int origin=SYNTHESIZED_STATEMENT
+            arg0: CALL 'public final fun jsMinus (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Any? declared in kotlin.internal.ir' type=kotlin.Int origin=null
+              arg0: CALL 'internal final fun <get-data>-impl (this: kotlin.UInt): kotlin.Int declared in kotlin.UInt' type=kotlin.Int origin=GET_PROPERTY
+                this: GET_VAR 'value: kotlin.UInt declared in <root>.minus' type=kotlin.UInt origin=null
+              arg1: CALL 'internal final fun <get-data>-impl (this: kotlin.UInt): kotlin.Int declared in kotlin.UInt' type=kotlin.Int origin=GET_PROPERTY
+                this: GET_VAR 'val tmp0_minus_0_1: kotlin.UInt [val] declared in <root>.minus' type=kotlin.UInt origin=null
+            arg1: CONST Int type=kotlin.Int value=0
+  FUN name:minus visibility:public modality:FINAL <> (value:kotlin.UInt, other:kotlin.UShort) returnType:kotlin.UInt
+    annotations:
+      CompileTimeCalculation
+    VALUE_PARAMETER name:value index:0 type:kotlin.UInt
+    VALUE_PARAMETER name:other index:1 type:kotlin.UShort
+    BLOCK_BODY
+      VAR IR_TEMPORARY_VARIABLE name:tmp0_minus_0_1 type:kotlin.UInt [val]
+        CONSTRUCTOR_CALL 'internal constructor <init> (data: kotlin.Int) [primary] declared in kotlin.UInt' type=kotlin.UInt origin=null
+          data: CALL 'public final fun jsBitAnd (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Int declared in kotlin.internal.ir' type=kotlin.Int origin=null
+            arg0: TYPE_OP type=kotlin.Int origin=REINTERPRET_CAST typeOperand=kotlin.Int
+              CALL 'internal final fun <get-data>-impl (this: kotlin.UShort): kotlin.Short declared in kotlin.UShort' type=kotlin.Short origin=GET_PROPERTY
+                this: GET_VAR 'other: kotlin.UShort declared in <root>.minus' type=kotlin.UShort origin=null
+            arg1: CONST Int type=kotlin.Int value=65535
+      RETURN type=kotlin.Nothing from='public final fun minus (value: kotlin.UInt, other: kotlin.UShort): kotlin.UInt declared in <root>'
+        CONSTRUCTOR_CALL 'internal constructor <init> (data: kotlin.Int) [primary] declared in kotlin.UInt' type=kotlin.UInt origin=null
+          data: CALL 'public final fun jsBitOr (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Int declared in kotlin.internal.ir' type=kotlin.Int origin=SYNTHESIZED_STATEMENT
+            arg0: CALL 'public final fun jsMinus (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Any? declared in kotlin.internal.ir' type=kotlin.Int origin=null
+              arg0: CALL 'internal final fun <get-data>-impl (this: kotlin.UInt): kotlin.Int declared in kotlin.UInt' type=kotlin.Int origin=GET_PROPERTY
+                this: GET_VAR 'value: kotlin.UInt declared in <root>.minus' type=kotlin.UInt origin=null
+              arg1: CALL 'internal final fun <get-data>-impl (this: kotlin.UInt): kotlin.Int declared in kotlin.UInt' type=kotlin.Int origin=GET_PROPERTY
+                this: GET_VAR 'val tmp0_minus_0_1: kotlin.UInt [val] declared in <root>.minus' type=kotlin.UInt origin=null
+            arg1: CONST Int type=kotlin.Int value=0
+  FUN name:minus visibility:public modality:FINAL <> (value:kotlin.UInt, other:kotlin.UInt) returnType:kotlin.UInt
+    annotations:
+      CompileTimeCalculation
+    VALUE_PARAMETER name:value index:0 type:kotlin.UInt
+    VALUE_PARAMETER name:other index:1 type:kotlin.UInt
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun minus (value: kotlin.UInt, other: kotlin.UInt): kotlin.UInt declared in <root>'
+        CONSTRUCTOR_CALL 'internal constructor <init> (data: kotlin.Int) [primary] declared in kotlin.UInt' type=kotlin.UInt origin=null
+          data: CALL 'public final fun jsBitOr (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Int declared in kotlin.internal.ir' type=kotlin.Int origin=SYNTHESIZED_STATEMENT
+            arg0: CALL 'public final fun jsMinus (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Any? declared in kotlin.internal.ir' type=kotlin.Int origin=null
+              arg0: CALL 'internal final fun <get-data>-impl (this: kotlin.UInt): kotlin.Int declared in kotlin.UInt' type=kotlin.Int origin=GET_PROPERTY
+                this: GET_VAR 'value: kotlin.UInt declared in <root>.minus' type=kotlin.UInt origin=null
+              arg1: CALL 'internal final fun <get-data>-impl (this: kotlin.UInt): kotlin.Int declared in kotlin.UInt' type=kotlin.Int origin=GET_PROPERTY
+                this: GET_VAR 'other: kotlin.UInt declared in <root>.minus' type=kotlin.UInt origin=null
+            arg1: CONST Int type=kotlin.Int value=0
+  FUN name:minus visibility:public modality:FINAL <> (value:kotlin.UInt, other:kotlin.ULong) returnType:kotlin.ULong
+    annotations:
+      CompileTimeCalculation
+    VALUE_PARAMETER name:value index:0 type:kotlin.UInt
+    VALUE_PARAMETER name:other index:1 type:kotlin.ULong
+    BLOCK_BODY
+      VAR IR_TEMPORARY_VARIABLE name:tmp0_minus_0_1 type:kotlin.ULong [val]
+        CONSTRUCTOR_CALL 'internal constructor <init> (data: kotlin.Long) [primary] declared in kotlin.ULong' type=kotlin.ULong origin=null
+          data: CALL 'public final fun and (other: kotlin.Long): kotlin.Long declared in kotlin.Long' type=kotlin.Long origin=null
+            $this: CALL 'public final fun toLong (a: dynamic): kotlin.Long declared in kotlin.js' type=kotlin.Long origin=null
+              a: CALL 'internal final fun <get-data>-impl (this: kotlin.UInt): kotlin.Int declared in kotlin.UInt' type=kotlin.Int origin=GET_PROPERTY
+                this: GET_VAR 'value: kotlin.UInt declared in <root>.minus' type=kotlin.UInt origin=null
+            other: CONSTRUCTOR_CALL 'internal constructor <init> (low: kotlin.Int, high: kotlin.Int) [primary] declared in kotlin.Long' type=kotlin.Long origin=null
+              low: CONST Int type=kotlin.Int value=-1
+              high: CONST Int type=kotlin.Int value=0
+      RETURN type=kotlin.Nothing from='public final fun minus (value: kotlin.UInt, other: kotlin.ULong): kotlin.ULong declared in <root>'
+        CONSTRUCTOR_CALL 'internal constructor <init> (data: kotlin.Long) [primary] declared in kotlin.ULong' type=kotlin.ULong origin=null
+          data: CALL 'public final fun minus (other: kotlin.Long): kotlin.Long [operator] declared in kotlin.Long' type=kotlin.Long origin=null
+            $this: CALL 'internal final fun <get-data>-impl (this: kotlin.ULong): kotlin.Long declared in kotlin.ULong' type=kotlin.Long origin=GET_PROPERTY
+              this: GET_VAR 'val tmp0_minus_0_1: kotlin.ULong [val] declared in <root>.minus' type=kotlin.ULong origin=null
+            other: CALL 'internal final fun <get-data>-impl (this: kotlin.ULong): kotlin.Long declared in kotlin.ULong' type=kotlin.Long origin=GET_PROPERTY
+              this: GET_VAR 'other: kotlin.ULong declared in <root>.minus' type=kotlin.ULong origin=null
+  FUN name:times visibility:public modality:FINAL <> (value:kotlin.UInt, other:kotlin.UByte) returnType:kotlin.UInt
+    annotations:
+      CompileTimeCalculation
+    VALUE_PARAMETER name:value index:0 type:kotlin.UInt
+    VALUE_PARAMETER name:other index:1 type:kotlin.UByte
+    BLOCK_BODY
+      VAR IR_TEMPORARY_VARIABLE name:tmp0_times_0_1 type:kotlin.UInt [val]
+        CONSTRUCTOR_CALL 'internal constructor <init> (data: kotlin.Int) [primary] declared in kotlin.UInt' type=kotlin.UInt origin=null
+          data: CALL 'public final fun jsBitAnd (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Int declared in kotlin.internal.ir' type=kotlin.Int origin=null
+            arg0: TYPE_OP type=kotlin.Int origin=REINTERPRET_CAST typeOperand=kotlin.Int
+              CALL 'internal final fun <get-data>-impl (this: kotlin.UByte): kotlin.Byte declared in kotlin.UByte' type=kotlin.Byte origin=GET_PROPERTY
+                this: GET_VAR 'other: kotlin.UByte declared in <root>.times' type=kotlin.UByte origin=null
+            arg1: CONST Int type=kotlin.Int value=255
+      RETURN type=kotlin.Nothing from='public final fun times (value: kotlin.UInt, other: kotlin.UByte): kotlin.UInt declared in <root>'
+        CONSTRUCTOR_CALL 'internal constructor <init> (data: kotlin.Int) [primary] declared in kotlin.UInt' type=kotlin.UInt origin=null
+          data: CALL 'internal final fun imul (a_local: kotlin.Int, b_local: kotlin.Int): kotlin.Int declared in kotlin.js' type=kotlin.Int origin=null
+            a_local: CALL 'internal final fun <get-data>-impl (this: kotlin.UInt): kotlin.Int declared in kotlin.UInt' type=kotlin.Int origin=GET_PROPERTY
+              this: GET_VAR 'value: kotlin.UInt declared in <root>.times' type=kotlin.UInt origin=null
+            b_local: CALL 'internal final fun <get-data>-impl (this: kotlin.UInt): kotlin.Int declared in kotlin.UInt' type=kotlin.Int origin=GET_PROPERTY
+              this: GET_VAR 'val tmp0_times_0_1: kotlin.UInt [val] declared in <root>.times' type=kotlin.UInt origin=null
+  FUN name:times visibility:public modality:FINAL <> (value:kotlin.UInt, other:kotlin.UShort) returnType:kotlin.UInt
+    annotations:
+      CompileTimeCalculation
+    VALUE_PARAMETER name:value index:0 type:kotlin.UInt
+    VALUE_PARAMETER name:other index:1 type:kotlin.UShort
+    BLOCK_BODY
+      VAR IR_TEMPORARY_VARIABLE name:tmp0_times_0_1 type:kotlin.UInt [val]
+        CONSTRUCTOR_CALL 'internal constructor <init> (data: kotlin.Int) [primary] declared in kotlin.UInt' type=kotlin.UInt origin=null
+          data: CALL 'public final fun jsBitAnd (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Int declared in kotlin.internal.ir' type=kotlin.Int origin=null
+            arg0: TYPE_OP type=kotlin.Int origin=REINTERPRET_CAST typeOperand=kotlin.Int
+              CALL 'internal final fun <get-data>-impl (this: kotlin.UShort): kotlin.Short declared in kotlin.UShort' type=kotlin.Short origin=GET_PROPERTY
+                this: GET_VAR 'other: kotlin.UShort declared in <root>.times' type=kotlin.UShort origin=null
+            arg1: CONST Int type=kotlin.Int value=65535
+      RETURN type=kotlin.Nothing from='public final fun times (value: kotlin.UInt, other: kotlin.UShort): kotlin.UInt declared in <root>'
+        CONSTRUCTOR_CALL 'internal constructor <init> (data: kotlin.Int) [primary] declared in kotlin.UInt' type=kotlin.UInt origin=null
+          data: CALL 'internal final fun imul (a_local: kotlin.Int, b_local: kotlin.Int): kotlin.Int declared in kotlin.js' type=kotlin.Int origin=null
+            a_local: CALL 'internal final fun <get-data>-impl (this: kotlin.UInt): kotlin.Int declared in kotlin.UInt' type=kotlin.Int origin=GET_PROPERTY
+              this: GET_VAR 'value: kotlin.UInt declared in <root>.times' type=kotlin.UInt origin=null
+            b_local: CALL 'internal final fun <get-data>-impl (this: kotlin.UInt): kotlin.Int declared in kotlin.UInt' type=kotlin.Int origin=GET_PROPERTY
+              this: GET_VAR 'val tmp0_times_0_1: kotlin.UInt [val] declared in <root>.times' type=kotlin.UInt origin=null
+  FUN name:times visibility:public modality:FINAL <> (value:kotlin.UInt, other:kotlin.UInt) returnType:kotlin.UInt
+    annotations:
+      CompileTimeCalculation
+    VALUE_PARAMETER name:value index:0 type:kotlin.UInt
+    VALUE_PARAMETER name:other index:1 type:kotlin.UInt
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun times (value: kotlin.UInt, other: kotlin.UInt): kotlin.UInt declared in <root>'
+        CONSTRUCTOR_CALL 'internal constructor <init> (data: kotlin.Int) [primary] declared in kotlin.UInt' type=kotlin.UInt origin=null
+          data: CALL 'internal final fun imul (a_local: kotlin.Int, b_local: kotlin.Int): kotlin.Int declared in kotlin.js' type=kotlin.Int origin=null
+            a_local: CALL 'internal final fun <get-data>-impl (this: kotlin.UInt): kotlin.Int declared in kotlin.UInt' type=kotlin.Int origin=GET_PROPERTY
+              this: GET_VAR 'value: kotlin.UInt declared in <root>.times' type=kotlin.UInt origin=null
+            b_local: CALL 'internal final fun <get-data>-impl (this: kotlin.UInt): kotlin.Int declared in kotlin.UInt' type=kotlin.Int origin=GET_PROPERTY
+              this: GET_VAR 'other: kotlin.UInt declared in <root>.times' type=kotlin.UInt origin=null
+  FUN name:times visibility:public modality:FINAL <> (value:kotlin.UInt, other:kotlin.ULong) returnType:kotlin.ULong
+    annotations:
+      CompileTimeCalculation
+    VALUE_PARAMETER name:value index:0 type:kotlin.UInt
+    VALUE_PARAMETER name:other index:1 type:kotlin.ULong
+    BLOCK_BODY
+      VAR IR_TEMPORARY_VARIABLE name:tmp0_times_0_1 type:kotlin.ULong [val]
+        CONSTRUCTOR_CALL 'internal constructor <init> (data: kotlin.Long) [primary] declared in kotlin.ULong' type=kotlin.ULong origin=null
+          data: CALL 'public final fun and (other: kotlin.Long): kotlin.Long declared in kotlin.Long' type=kotlin.Long origin=null
+            $this: CALL 'public final fun toLong (a: dynamic): kotlin.Long declared in kotlin.js' type=kotlin.Long origin=null
+              a: CALL 'internal final fun <get-data>-impl (this: kotlin.UInt): kotlin.Int declared in kotlin.UInt' type=kotlin.Int origin=GET_PROPERTY
+                this: GET_VAR 'value: kotlin.UInt declared in <root>.times' type=kotlin.UInt origin=null
+            other: CONSTRUCTOR_CALL 'internal constructor <init> (low: kotlin.Int, high: kotlin.Int) [primary] declared in kotlin.Long' type=kotlin.Long origin=null
+              low: CONST Int type=kotlin.Int value=-1
+              high: CONST Int type=kotlin.Int value=0
+      RETURN type=kotlin.Nothing from='public final fun times (value: kotlin.UInt, other: kotlin.ULong): kotlin.ULong declared in <root>'
+        CONSTRUCTOR_CALL 'internal constructor <init> (data: kotlin.Long) [primary] declared in kotlin.ULong' type=kotlin.ULong origin=null
+          data: CALL 'public final fun times (other: kotlin.Long): kotlin.Long [operator] declared in kotlin.Long' type=kotlin.Long origin=null
+            $this: CALL 'internal final fun <get-data>-impl (this: kotlin.ULong): kotlin.Long declared in kotlin.ULong' type=kotlin.Long origin=GET_PROPERTY
+              this: GET_VAR 'val tmp0_times_0_1: kotlin.ULong [val] declared in <root>.times' type=kotlin.ULong origin=null
+            other: CALL 'internal final fun <get-data>-impl (this: kotlin.ULong): kotlin.Long declared in kotlin.ULong' type=kotlin.Long origin=GET_PROPERTY
+              this: GET_VAR 'other: kotlin.ULong declared in <root>.times' type=kotlin.ULong origin=null
+  FUN name:div visibility:public modality:FINAL <> (value:kotlin.UInt, other:kotlin.UByte) returnType:kotlin.UInt
+    annotations:
+      CompileTimeCalculation
+    VALUE_PARAMETER name:value index:0 type:kotlin.UInt
+    VALUE_PARAMETER name:other index:1 type:kotlin.UByte
+    BLOCK_BODY
+      VAR IR_TEMPORARY_VARIABLE name:tmp0_div_0_1 type:kotlin.UInt [val]
+        CONSTRUCTOR_CALL 'internal constructor <init> (data: kotlin.Int) [primary] declared in kotlin.UInt' type=kotlin.UInt origin=null
+          data: CALL 'public final fun jsBitAnd (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Int declared in kotlin.internal.ir' type=kotlin.Int origin=null
+            arg0: TYPE_OP type=kotlin.Int origin=REINTERPRET_CAST typeOperand=kotlin.Int
+              CALL 'internal final fun <get-data>-impl (this: kotlin.UByte): kotlin.Byte declared in kotlin.UByte' type=kotlin.Byte origin=GET_PROPERTY
+                this: GET_VAR 'other: kotlin.UByte declared in <root>.div' type=kotlin.UByte origin=null
+            arg1: CONST Int type=kotlin.Int value=255
+      RETURN type=kotlin.Nothing from='public final fun div (value: kotlin.UInt, other: kotlin.UByte): kotlin.UInt declared in <root>'
+        CALL 'internal final fun uintDivide (v1: kotlin.UInt, v2: kotlin.UInt): kotlin.UInt declared in kotlin' type=kotlin.UInt origin=null
+          v1: GET_VAR 'value: kotlin.UInt declared in <root>.div' type=kotlin.UInt origin=null
+          v2: GET_VAR 'val tmp0_div_0_1: kotlin.UInt [val] declared in <root>.div' type=kotlin.UInt origin=null
+  FUN name:div visibility:public modality:FINAL <> (value:kotlin.UInt, other:kotlin.UShort) returnType:kotlin.UInt
+    annotations:
+      CompileTimeCalculation
+    VALUE_PARAMETER name:value index:0 type:kotlin.UInt
+    VALUE_PARAMETER name:other index:1 type:kotlin.UShort
+    BLOCK_BODY
+      VAR IR_TEMPORARY_VARIABLE name:tmp0_div_0_1 type:kotlin.UInt [val]
+        CONSTRUCTOR_CALL 'internal constructor <init> (data: kotlin.Int) [primary] declared in kotlin.UInt' type=kotlin.UInt origin=null
+          data: CALL 'public final fun jsBitAnd (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Int declared in kotlin.internal.ir' type=kotlin.Int origin=null
+            arg0: TYPE_OP type=kotlin.Int origin=REINTERPRET_CAST typeOperand=kotlin.Int
+              CALL 'internal final fun <get-data>-impl (this: kotlin.UShort): kotlin.Short declared in kotlin.UShort' type=kotlin.Short origin=GET_PROPERTY
+                this: GET_VAR 'other: kotlin.UShort declared in <root>.div' type=kotlin.UShort origin=null
+            arg1: CONST Int type=kotlin.Int value=65535
+      RETURN type=kotlin.Nothing from='public final fun div (value: kotlin.UInt, other: kotlin.UShort): kotlin.UInt declared in <root>'
+        CALL 'internal final fun uintDivide (v1: kotlin.UInt, v2: kotlin.UInt): kotlin.UInt declared in kotlin' type=kotlin.UInt origin=null
+          v1: GET_VAR 'value: kotlin.UInt declared in <root>.div' type=kotlin.UInt origin=null
+          v2: GET_VAR 'val tmp0_div_0_1: kotlin.UInt [val] declared in <root>.div' type=kotlin.UInt origin=null
+  FUN name:div visibility:public modality:FINAL <> (value:kotlin.UInt, other:kotlin.UInt) returnType:kotlin.UInt
+    annotations:
+      CompileTimeCalculation
+    VALUE_PARAMETER name:value index:0 type:kotlin.UInt
+    VALUE_PARAMETER name:other index:1 type:kotlin.UInt
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun div (value: kotlin.UInt, other: kotlin.UInt): kotlin.UInt declared in <root>'
+        CALL 'internal final fun uintDivide (v1: kotlin.UInt, v2: kotlin.UInt): kotlin.UInt declared in kotlin' type=kotlin.UInt origin=null
+          v1: GET_VAR 'value: kotlin.UInt declared in <root>.div' type=kotlin.UInt origin=null
+          v2: GET_VAR 'other: kotlin.UInt declared in <root>.div' type=kotlin.UInt origin=null
+  FUN name:div visibility:public modality:FINAL <> (value:kotlin.UInt, other:kotlin.ULong) returnType:kotlin.ULong
+    annotations:
+      CompileTimeCalculation
+    VALUE_PARAMETER name:value index:0 type:kotlin.UInt
+    VALUE_PARAMETER name:other index:1 type:kotlin.ULong
+    BLOCK_BODY
+      VAR IR_TEMPORARY_VARIABLE name:tmp0_div_0_1 type:kotlin.ULong [val]
+        CONSTRUCTOR_CALL 'internal constructor <init> (data: kotlin.Long) [primary] declared in kotlin.ULong' type=kotlin.ULong origin=null
+          data: CALL 'public final fun and (other: kotlin.Long): kotlin.Long declared in kotlin.Long' type=kotlin.Long origin=null
+            $this: CALL 'public final fun toLong (a: dynamic): kotlin.Long declared in kotlin.js' type=kotlin.Long origin=null
+              a: CALL 'internal final fun <get-data>-impl (this: kotlin.UInt): kotlin.Int declared in kotlin.UInt' type=kotlin.Int origin=GET_PROPERTY
+                this: GET_VAR 'value: kotlin.UInt declared in <root>.div' type=kotlin.UInt origin=null
+            other: CONSTRUCTOR_CALL 'internal constructor <init> (low: kotlin.Int, high: kotlin.Int) [primary] declared in kotlin.Long' type=kotlin.Long origin=null
+              low: CONST Int type=kotlin.Int value=-1
+              high: CONST Int type=kotlin.Int value=0
+      RETURN type=kotlin.Nothing from='public final fun div (value: kotlin.UInt, other: kotlin.ULong): kotlin.ULong declared in <root>'
+        CALL 'internal final fun ulongDivide (v1: kotlin.ULong, v2: kotlin.ULong): kotlin.ULong declared in kotlin' type=kotlin.ULong origin=null
+          v1: GET_VAR 'val tmp0_div_0_1: kotlin.ULong [val] declared in <root>.div' type=kotlin.ULong origin=null
+          v2: GET_VAR 'other: kotlin.ULong declared in <root>.div' type=kotlin.ULong origin=null
+  FUN name:rem visibility:public modality:FINAL <> (value:kotlin.UInt, other:kotlin.UByte) returnType:kotlin.UInt
+    annotations:
+      CompileTimeCalculation
+    VALUE_PARAMETER name:value index:0 type:kotlin.UInt
+    VALUE_PARAMETER name:other index:1 type:kotlin.UByte
+    BLOCK_BODY
+      VAR IR_TEMPORARY_VARIABLE name:tmp0_rem_0_1 type:kotlin.UInt [val]
+        CONSTRUCTOR_CALL 'internal constructor <init> (data: kotlin.Int) [primary] declared in kotlin.UInt' type=kotlin.UInt origin=null
+          data: CALL 'public final fun jsBitAnd (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Int declared in kotlin.internal.ir' type=kotlin.Int origin=null
+            arg0: TYPE_OP type=kotlin.Int origin=REINTERPRET_CAST typeOperand=kotlin.Int
+              CALL 'internal final fun <get-data>-impl (this: kotlin.UByte): kotlin.Byte declared in kotlin.UByte' type=kotlin.Byte origin=GET_PROPERTY
+                this: GET_VAR 'other: kotlin.UByte declared in <root>.rem' type=kotlin.UByte origin=null
+            arg1: CONST Int type=kotlin.Int value=255
+      RETURN type=kotlin.Nothing from='public final fun rem (value: kotlin.UInt, other: kotlin.UByte): kotlin.UInt declared in <root>'
+        CALL 'internal final fun uintRemainder (v1: kotlin.UInt, v2: kotlin.UInt): kotlin.UInt declared in kotlin' type=kotlin.UInt origin=null
+          v1: GET_VAR 'value: kotlin.UInt declared in <root>.rem' type=kotlin.UInt origin=null
+          v2: GET_VAR 'val tmp0_rem_0_1: kotlin.UInt [val] declared in <root>.rem' type=kotlin.UInt origin=null
+  FUN name:rem visibility:public modality:FINAL <> (value:kotlin.UInt, other:kotlin.UShort) returnType:kotlin.UInt
+    annotations:
+      CompileTimeCalculation
+    VALUE_PARAMETER name:value index:0 type:kotlin.UInt
+    VALUE_PARAMETER name:other index:1 type:kotlin.UShort
+    BLOCK_BODY
+      VAR IR_TEMPORARY_VARIABLE name:tmp0_rem_0_1 type:kotlin.UInt [val]
+        CONSTRUCTOR_CALL 'internal constructor <init> (data: kotlin.Int) [primary] declared in kotlin.UInt' type=kotlin.UInt origin=null
+          data: CALL 'public final fun jsBitAnd (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Int declared in kotlin.internal.ir' type=kotlin.Int origin=null
+            arg0: TYPE_OP type=kotlin.Int origin=REINTERPRET_CAST typeOperand=kotlin.Int
+              CALL 'internal final fun <get-data>-impl (this: kotlin.UShort): kotlin.Short declared in kotlin.UShort' type=kotlin.Short origin=GET_PROPERTY
+                this: GET_VAR 'other: kotlin.UShort declared in <root>.rem' type=kotlin.UShort origin=null
+            arg1: CONST Int type=kotlin.Int value=65535
+      RETURN type=kotlin.Nothing from='public final fun rem (value: kotlin.UInt, other: kotlin.UShort): kotlin.UInt declared in <root>'
+        CALL 'internal final fun uintRemainder (v1: kotlin.UInt, v2: kotlin.UInt): kotlin.UInt declared in kotlin' type=kotlin.UInt origin=null
+          v1: GET_VAR 'value: kotlin.UInt declared in <root>.rem' type=kotlin.UInt origin=null
+          v2: GET_VAR 'val tmp0_rem_0_1: kotlin.UInt [val] declared in <root>.rem' type=kotlin.UInt origin=null
+  FUN name:rem visibility:public modality:FINAL <> (value:kotlin.UInt, other:kotlin.UInt) returnType:kotlin.UInt
+    annotations:
+      CompileTimeCalculation
+    VALUE_PARAMETER name:value index:0 type:kotlin.UInt
+    VALUE_PARAMETER name:other index:1 type:kotlin.UInt
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun rem (value: kotlin.UInt, other: kotlin.UInt): kotlin.UInt declared in <root>'
+        CALL 'internal final fun uintRemainder (v1: kotlin.UInt, v2: kotlin.UInt): kotlin.UInt declared in kotlin' type=kotlin.UInt origin=null
+          v1: GET_VAR 'value: kotlin.UInt declared in <root>.rem' type=kotlin.UInt origin=null
+          v2: GET_VAR 'other: kotlin.UInt declared in <root>.rem' type=kotlin.UInt origin=null
+  FUN name:rem visibility:public modality:FINAL <> (value:kotlin.UInt, other:kotlin.ULong) returnType:kotlin.ULong
+    annotations:
+      CompileTimeCalculation
+    VALUE_PARAMETER name:value index:0 type:kotlin.UInt
+    VALUE_PARAMETER name:other index:1 type:kotlin.ULong
+    BLOCK_BODY
+      VAR IR_TEMPORARY_VARIABLE name:tmp0_rem_0_1 type:kotlin.ULong [val]
+        CONSTRUCTOR_CALL 'internal constructor <init> (data: kotlin.Long) [primary] declared in kotlin.ULong' type=kotlin.ULong origin=null
+          data: CALL 'public final fun and (other: kotlin.Long): kotlin.Long declared in kotlin.Long' type=kotlin.Long origin=null
+            $this: CALL 'public final fun toLong (a: dynamic): kotlin.Long declared in kotlin.js' type=kotlin.Long origin=null
+              a: CALL 'internal final fun <get-data>-impl (this: kotlin.UInt): kotlin.Int declared in kotlin.UInt' type=kotlin.Int origin=GET_PROPERTY
+                this: GET_VAR 'value: kotlin.UInt declared in <root>.rem' type=kotlin.UInt origin=null
+            other: CONSTRUCTOR_CALL 'internal constructor <init> (low: kotlin.Int, high: kotlin.Int) [primary] declared in kotlin.Long' type=kotlin.Long origin=null
+              low: CONST Int type=kotlin.Int value=-1
+              high: CONST Int type=kotlin.Int value=0
+      RETURN type=kotlin.Nothing from='public final fun rem (value: kotlin.UInt, other: kotlin.ULong): kotlin.ULong declared in <root>'
+        CALL 'internal final fun ulongRemainder (v1: kotlin.ULong, v2: kotlin.ULong): kotlin.ULong declared in kotlin' type=kotlin.ULong origin=null
+          v1: GET_VAR 'val tmp0_rem_0_1: kotlin.ULong [val] declared in <root>.rem' type=kotlin.ULong origin=null
+          v2: GET_VAR 'other: kotlin.ULong declared in <root>.rem' type=kotlin.ULong origin=null
+  FUN name:inc visibility:public modality:FINAL <> (value:kotlin.UInt) returnType:kotlin.UInt
+    annotations:
+      CompileTimeCalculation
+    VALUE_PARAMETER name:value index:0 type:kotlin.UInt
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun inc (value: kotlin.UInt): kotlin.UInt declared in <root>'
+        CONSTRUCTOR_CALL 'internal constructor <init> (data: kotlin.Int) [primary] declared in kotlin.UInt' type=kotlin.UInt origin=null
+          data: CALL 'public final fun jsBitOr (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Int declared in kotlin.internal.ir' type=kotlin.Int origin=SYNTHESIZED_STATEMENT
+            arg0: CALL 'public final fun jsPlus (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Any? declared in kotlin.internal.ir' type=kotlin.Int origin=null
+              arg0: CALL 'internal final fun <get-data>-impl (this: kotlin.UInt): kotlin.Int declared in kotlin.UInt' type=kotlin.Int origin=GET_PROPERTY
+                this: GET_VAR 'value: kotlin.UInt declared in <root>.inc' type=kotlin.UInt origin=null
+              arg1: CONST Int type=kotlin.Int value=1
+            arg1: CONST Int type=kotlin.Int value=0
+  FUN name:dec visibility:public modality:FINAL <> (value:kotlin.UInt) returnType:kotlin.UInt
+    annotations:
+      CompileTimeCalculation
+    VALUE_PARAMETER name:value index:0 type:kotlin.UInt
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun dec (value: kotlin.UInt): kotlin.UInt declared in <root>'
+        CONSTRUCTOR_CALL 'internal constructor <init> (data: kotlin.Int) [primary] declared in kotlin.UInt' type=kotlin.UInt origin=null
+          data: CALL 'public final fun jsBitOr (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Int declared in kotlin.internal.ir' type=kotlin.Int origin=SYNTHESIZED_STATEMENT
+            arg0: CALL 'public final fun jsMinus (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Any? declared in kotlin.internal.ir' type=kotlin.Int origin=null
+              arg0: CALL 'internal final fun <get-data>-impl (this: kotlin.UInt): kotlin.Int declared in kotlin.UInt' type=kotlin.Int origin=GET_PROPERTY
+                this: GET_VAR 'value: kotlin.UInt declared in <root>.dec' type=kotlin.UInt origin=null
+              arg1: CONST Int type=kotlin.Int value=1
+            arg1: CONST Int type=kotlin.Int value=0
+  FUN name:rangeTo visibility:public modality:FINAL <> (value:kotlin.UInt, other:kotlin.UInt) returnType:kotlin.ranges.UIntRange
+    annotations:
+      CompileTimeCalculation
+    VALUE_PARAMETER name:value index:0 type:kotlin.UInt
+    VALUE_PARAMETER name:other index:1 type:kotlin.UInt
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun rangeTo (value: kotlin.UInt, other: kotlin.UInt): kotlin.ranges.UIntRange declared in <root>'
+        CONSTRUCTOR_CALL 'public constructor <init> (start: kotlin.UInt, endInclusive: kotlin.UInt) [primary] declared in kotlin.ranges.UIntRange' type=kotlin.ranges.UIntRange origin=null
+          start: GET_VAR 'value: kotlin.UInt declared in <root>.rangeTo' type=kotlin.UInt origin=null
+          endInclusive: GET_VAR 'other: kotlin.UInt declared in <root>.rangeTo' type=kotlin.UInt origin=null
+  FUN name:shl visibility:public modality:FINAL <> (value:kotlin.UInt, bitCount:kotlin.Int) returnType:kotlin.UInt
+    annotations:
+      CompileTimeCalculation
+    VALUE_PARAMETER name:value index:0 type:kotlin.UInt
+    VALUE_PARAMETER name:bitCount index:1 type:kotlin.Int
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun shl (value: kotlin.UInt, bitCount: kotlin.Int): kotlin.UInt declared in <root>'
+        CONSTRUCTOR_CALL 'internal constructor <init> (data: kotlin.Int) [primary] declared in kotlin.UInt' type=kotlin.UInt origin=null
+          data: CALL 'public final fun jsBitShiftL (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Int declared in kotlin.internal.ir' type=kotlin.Int origin=null
+            arg0: CALL 'internal final fun <get-data>-impl (this: kotlin.UInt): kotlin.Int declared in kotlin.UInt' type=kotlin.Int origin=GET_PROPERTY
+              this: GET_VAR 'value: kotlin.UInt declared in <root>.shl' type=kotlin.UInt origin=null
+            arg1: GET_VAR 'bitCount: kotlin.Int declared in <root>.shl' type=kotlin.Int origin=null
+  FUN name:shr visibility:public modality:FINAL <> (value:kotlin.UInt, bitCount:kotlin.Int) returnType:kotlin.UInt
+    annotations:
+      CompileTimeCalculation
+    VALUE_PARAMETER name:value index:0 type:kotlin.UInt
+    VALUE_PARAMETER name:bitCount index:1 type:kotlin.Int
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun shr (value: kotlin.UInt, bitCount: kotlin.Int): kotlin.UInt declared in <root>'
+        CONSTRUCTOR_CALL 'internal constructor <init> (data: kotlin.Int) [primary] declared in kotlin.UInt' type=kotlin.UInt origin=null
+          data: CALL 'public final fun jsBitShiftRU (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Int declared in kotlin.internal.ir' type=kotlin.Int origin=null
+            arg0: CALL 'internal final fun <get-data>-impl (this: kotlin.UInt): kotlin.Int declared in kotlin.UInt' type=kotlin.Int origin=GET_PROPERTY
+              this: GET_VAR 'value: kotlin.UInt declared in <root>.shr' type=kotlin.UInt origin=null
+            arg1: GET_VAR 'bitCount: kotlin.Int declared in <root>.shr' type=kotlin.Int origin=null
+  FUN name:and visibility:public modality:FINAL <> (value:kotlin.UInt, other:kotlin.UInt) returnType:kotlin.UInt
+    annotations:
+      CompileTimeCalculation
+    VALUE_PARAMETER name:value index:0 type:kotlin.UInt
+    VALUE_PARAMETER name:other index:1 type:kotlin.UInt
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun and (value: kotlin.UInt, other: kotlin.UInt): kotlin.UInt declared in <root>'
+        CONSTRUCTOR_CALL 'internal constructor <init> (data: kotlin.Int) [primary] declared in kotlin.UInt' type=kotlin.UInt origin=null
+          data: CALL 'public final fun jsBitAnd (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Int declared in kotlin.internal.ir' type=kotlin.Int origin=null
+            arg0: CALL 'internal final fun <get-data>-impl (this: kotlin.UInt): kotlin.Int declared in kotlin.UInt' type=kotlin.Int origin=GET_PROPERTY
+              this: GET_VAR 'value: kotlin.UInt declared in <root>.and' type=kotlin.UInt origin=null
+            arg1: CALL 'internal final fun <get-data>-impl (this: kotlin.UInt): kotlin.Int declared in kotlin.UInt' type=kotlin.Int origin=GET_PROPERTY
+              this: GET_VAR 'other: kotlin.UInt declared in <root>.and' type=kotlin.UInt origin=null
+  FUN name:or visibility:public modality:FINAL <> (value:kotlin.UInt, other:kotlin.UInt) returnType:kotlin.UInt
+    annotations:
+      CompileTimeCalculation
+    VALUE_PARAMETER name:value index:0 type:kotlin.UInt
+    VALUE_PARAMETER name:other index:1 type:kotlin.UInt
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun or (value: kotlin.UInt, other: kotlin.UInt): kotlin.UInt declared in <root>'
+        CONSTRUCTOR_CALL 'internal constructor <init> (data: kotlin.Int) [primary] declared in kotlin.UInt' type=kotlin.UInt origin=null
+          data: CALL 'public final fun jsBitOr (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Int declared in kotlin.internal.ir' type=kotlin.Int origin=null
+            arg0: CALL 'internal final fun <get-data>-impl (this: kotlin.UInt): kotlin.Int declared in kotlin.UInt' type=kotlin.Int origin=GET_PROPERTY
+              this: GET_VAR 'value: kotlin.UInt declared in <root>.or' type=kotlin.UInt origin=null
+            arg1: CALL 'internal final fun <get-data>-impl (this: kotlin.UInt): kotlin.Int declared in kotlin.UInt' type=kotlin.Int origin=GET_PROPERTY
+              this: GET_VAR 'other: kotlin.UInt declared in <root>.or' type=kotlin.UInt origin=null
+  FUN name:xor visibility:public modality:FINAL <> (value:kotlin.UInt, other:kotlin.UInt) returnType:kotlin.UInt
+    annotations:
+      CompileTimeCalculation
+    VALUE_PARAMETER name:value index:0 type:kotlin.UInt
+    VALUE_PARAMETER name:other index:1 type:kotlin.UInt
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun xor (value: kotlin.UInt, other: kotlin.UInt): kotlin.UInt declared in <root>'
+        CONSTRUCTOR_CALL 'internal constructor <init> (data: kotlin.Int) [primary] declared in kotlin.UInt' type=kotlin.UInt origin=null
+          data: CALL 'public final fun jsBitXor (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Int declared in kotlin.internal.ir' type=kotlin.Int origin=null
+            arg0: CALL 'internal final fun <get-data>-impl (this: kotlin.UInt): kotlin.Int declared in kotlin.UInt' type=kotlin.Int origin=GET_PROPERTY
+              this: GET_VAR 'value: kotlin.UInt declared in <root>.xor' type=kotlin.UInt origin=null
+            arg1: CALL 'internal final fun <get-data>-impl (this: kotlin.UInt): kotlin.Int declared in kotlin.UInt' type=kotlin.Int origin=GET_PROPERTY
+              this: GET_VAR 'other: kotlin.UInt declared in <root>.xor' type=kotlin.UInt origin=null
+  FUN name:inv visibility:public modality:FINAL <> (value:kotlin.UInt) returnType:kotlin.UInt
+    annotations:
+      CompileTimeCalculation
+    VALUE_PARAMETER name:value index:0 type:kotlin.UInt
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun inv (value: kotlin.UInt): kotlin.UInt declared in <root>'
+        CONSTRUCTOR_CALL 'internal constructor <init> (data: kotlin.Int) [primary] declared in kotlin.UInt' type=kotlin.UInt origin=null
+          data: CALL 'public final fun jsBitNot (arg0: kotlin.Any?): kotlin.Int declared in kotlin.internal.ir' type=kotlin.Int origin=null
+            arg0: CALL 'internal final fun <get-data>-impl (this: kotlin.UInt): kotlin.Int declared in kotlin.UInt' type=kotlin.Int origin=GET_PROPERTY
+              this: GET_VAR 'value: kotlin.UInt declared in <root>.inv' type=kotlin.UInt origin=null
+  FUN name:toByte visibility:public modality:FINAL <> (value:kotlin.UInt) returnType:kotlin.Byte
+    annotations:
+      CompileTimeCalculation
+    VALUE_PARAMETER name:value index:0 type:kotlin.UInt
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun toByte (value: kotlin.UInt): kotlin.Byte declared in <root>'
+        CALL 'public final fun toByte (a: dynamic): kotlin.Byte declared in kotlin.js' type=kotlin.Byte origin=null
+          a: CALL 'internal final fun <get-data>-impl (this: kotlin.UInt): kotlin.Int declared in kotlin.UInt' type=kotlin.Int origin=GET_PROPERTY
+            this: GET_VAR 'value: kotlin.UInt declared in <root>.toByte' type=kotlin.UInt origin=null
+  FUN name:toShort visibility:public modality:FINAL <> (value:kotlin.UInt) returnType:kotlin.Short
+    annotations:
+      CompileTimeCalculation
+    VALUE_PARAMETER name:value index:0 type:kotlin.UInt
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun toShort (value: kotlin.UInt): kotlin.Short declared in <root>'
+        CALL 'public final fun toShort (a: dynamic): kotlin.Short declared in kotlin.js' type=kotlin.Short origin=null
+          a: CALL 'internal final fun <get-data>-impl (this: kotlin.UInt): kotlin.Int declared in kotlin.UInt' type=kotlin.Int origin=GET_PROPERTY
+            this: GET_VAR 'value: kotlin.UInt declared in <root>.toShort' type=kotlin.UInt origin=null
+  FUN name:toInt visibility:public modality:FINAL <> (value:kotlin.UInt) returnType:kotlin.Int
+    annotations:
+      CompileTimeCalculation
+    VALUE_PARAMETER name:value index:0 type:kotlin.UInt
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun toInt (value: kotlin.UInt): kotlin.Int declared in <root>'
+        CALL 'internal final fun <get-data>-impl (this: kotlin.UInt): kotlin.Int declared in kotlin.UInt' type=kotlin.Int origin=GET_PROPERTY
+          this: GET_VAR 'value: kotlin.UInt declared in <root>.toInt' type=kotlin.UInt origin=null
+  FUN name:toLong visibility:public modality:FINAL <> (value:kotlin.UInt) returnType:kotlin.Long
+    annotations:
+      CompileTimeCalculation
+    VALUE_PARAMETER name:value index:0 type:kotlin.UInt
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun toLong (value: kotlin.UInt): kotlin.Long declared in <root>'
+        CALL 'public final fun and (other: kotlin.Long): kotlin.Long declared in kotlin.Long' type=kotlin.Long origin=null
+          $this: CALL 'public final fun toLong (a: dynamic): kotlin.Long declared in kotlin.js' type=kotlin.Long origin=null
+            a: CALL 'internal final fun <get-data>-impl (this: kotlin.UInt): kotlin.Int declared in kotlin.UInt' type=kotlin.Int origin=GET_PROPERTY
+              this: GET_VAR 'value: kotlin.UInt declared in <root>.toLong' type=kotlin.UInt origin=null
+          other: CONSTRUCTOR_CALL 'internal constructor <init> (low: kotlin.Int, high: kotlin.Int) [primary] declared in kotlin.Long' type=kotlin.Long origin=null
+            low: CONST Int type=kotlin.Int value=-1
+            high: CONST Int type=kotlin.Int value=0
+  FUN name:toUByte visibility:public modality:FINAL <> (value:kotlin.UInt) returnType:kotlin.UByte
+    annotations:
+      CompileTimeCalculation
+    VALUE_PARAMETER name:value index:0 type:kotlin.UInt
+    BLOCK_BODY
+      VAR IR_TEMPORARY_VARIABLE name:tmp0_toUByte_0_1 type:kotlin.Int [val]
+        CALL 'internal final fun <get-data>-impl (this: kotlin.UInt): kotlin.Int declared in kotlin.UInt' type=kotlin.Int origin=GET_PROPERTY
+          this: GET_VAR 'value: kotlin.UInt declared in <root>.toUByte' type=kotlin.UInt origin=null
+      RETURN type=kotlin.Nothing from='public final fun toUByte (value: kotlin.UInt): kotlin.UByte declared in <root>'
+        CONSTRUCTOR_CALL 'internal constructor <init> (data: kotlin.Byte) [primary] declared in kotlin.UByte' type=kotlin.UByte origin=null
+          data: CALL 'public final fun toByte (a: dynamic): kotlin.Byte declared in kotlin.js' type=kotlin.Byte origin=null
+            a: GET_VAR 'val tmp0_toUByte_0_1: kotlin.Int [val] declared in <root>.toUByte' type=kotlin.Int origin=null
+  FUN name:toUShort visibility:public modality:FINAL <> (value:kotlin.UInt) returnType:kotlin.UShort
+    annotations:
+      CompileTimeCalculation
+    VALUE_PARAMETER name:value index:0 type:kotlin.UInt
+    BLOCK_BODY
+      VAR IR_TEMPORARY_VARIABLE name:tmp0_toUShort_0_1 type:kotlin.Int [val]
+        CALL 'internal final fun <get-data>-impl (this: kotlin.UInt): kotlin.Int declared in kotlin.UInt' type=kotlin.Int origin=GET_PROPERTY
+          this: GET_VAR 'value: kotlin.UInt declared in <root>.toUShort' type=kotlin.UInt origin=null
+      RETURN type=kotlin.Nothing from='public final fun toUShort (value: kotlin.UInt): kotlin.UShort declared in <root>'
+        CONSTRUCTOR_CALL 'internal constructor <init> (data: kotlin.Short) [primary] declared in kotlin.UShort' type=kotlin.UShort origin=null
+          data: CALL 'public final fun toShort (a: dynamic): kotlin.Short declared in kotlin.js' type=kotlin.Short origin=null
+            a: GET_VAR 'val tmp0_toUShort_0_1: kotlin.Int [val] declared in <root>.toUShort' type=kotlin.Int origin=null
+  FUN name:toUInt visibility:public modality:FINAL <> (value:kotlin.UInt) returnType:kotlin.UInt
+    annotations:
+      CompileTimeCalculation
+    VALUE_PARAMETER name:value index:0 type:kotlin.UInt
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun toUInt (value: kotlin.UInt): kotlin.UInt declared in <root>'
+        GET_VAR 'value: kotlin.UInt declared in <root>.toUInt' type=kotlin.UInt origin=null
+  FUN name:toULong visibility:public modality:FINAL <> (value:kotlin.UInt) returnType:kotlin.ULong
+    annotations:
+      CompileTimeCalculation
+    VALUE_PARAMETER name:value index:0 type:kotlin.UInt
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun toULong (value: kotlin.UInt): kotlin.ULong declared in <root>'
+        CONSTRUCTOR_CALL 'internal constructor <init> (data: kotlin.Long) [primary] declared in kotlin.ULong' type=kotlin.ULong origin=null
+          data: CALL 'public final fun and (other: kotlin.Long): kotlin.Long declared in kotlin.Long' type=kotlin.Long origin=null
+            $this: CALL 'public final fun toLong (a: dynamic): kotlin.Long declared in kotlin.js' type=kotlin.Long origin=null
+              a: CALL 'internal final fun <get-data>-impl (this: kotlin.UInt): kotlin.Int declared in kotlin.UInt' type=kotlin.Int origin=GET_PROPERTY
+                this: GET_VAR 'value: kotlin.UInt declared in <root>.toULong' type=kotlin.UInt origin=null
+            other: CONSTRUCTOR_CALL 'internal constructor <init> (low: kotlin.Int, high: kotlin.Int) [primary] declared in kotlin.Long' type=kotlin.Long origin=null
+              low: CONST Int type=kotlin.Int value=-1
+              high: CONST Int type=kotlin.Int value=0
+  FUN name:toFloat visibility:public modality:FINAL <> (value:kotlin.UInt) returnType:kotlin.Float
+    annotations:
+      CompileTimeCalculation
+    VALUE_PARAMETER name:value index:0 type:kotlin.UInt
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun toFloat (value: kotlin.UInt): kotlin.Float declared in <root>'
+        TYPE_OP type=kotlin.Float origin=REINTERPRET_CAST typeOperand=kotlin.Float
+          CALL 'internal final fun uintToDouble (v: kotlin.Int): kotlin.Double declared in kotlin' type=kotlin.Double origin=null
+            v: CALL 'internal final fun <get-data>-impl (this: kotlin.UInt): kotlin.Int declared in kotlin.UInt' type=kotlin.Int origin=GET_PROPERTY
+              this: GET_VAR 'value: kotlin.UInt declared in <root>.toFloat' type=kotlin.UInt origin=null
+  FUN name:toDouble visibility:public modality:FINAL <> (value:kotlin.UInt) returnType:kotlin.Double
+    annotations:
+      CompileTimeCalculation
+    VALUE_PARAMETER name:value index:0 type:kotlin.UInt
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun toDouble (value: kotlin.UInt): kotlin.Double declared in <root>'
+        CALL 'internal final fun uintToDouble (v: kotlin.Int): kotlin.Double declared in kotlin' type=kotlin.Double origin=null
+          v: CALL 'internal final fun <get-data>-impl (this: kotlin.UInt): kotlin.Int declared in kotlin.UInt' type=kotlin.Int origin=GET_PROPERTY
+            this: GET_VAR 'value: kotlin.UInt declared in <root>.toDouble' type=kotlin.UInt origin=null
+  FUN name:toString visibility:public modality:FINAL <> (value:kotlin.UInt) returnType:kotlin.String
+    annotations:
+      CompileTimeCalculation
+    VALUE_PARAMETER name:value index:0 type:kotlin.UInt
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun toString (value: kotlin.UInt): kotlin.String declared in <root>'
+        CALL 'public final fun toString-impl (this: kotlin.UInt): kotlin.String declared in kotlin.UInt' type=kotlin.String origin=null
+          this: GET_VAR 'value: kotlin.UInt declared in <root>.toString' type=kotlin.UInt origin=null
+  FUN name:hashCode visibility:public modality:FINAL <> (value:kotlin.UInt) returnType:kotlin.Int
+    annotations:
+      CompileTimeCalculation
+    VALUE_PARAMETER name:value index:0 type:kotlin.UInt
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun hashCode (value: kotlin.UInt): kotlin.Int declared in <root>'
+        CALL 'public final fun hashCode-impl (this: kotlin.UInt): kotlin.Int declared in kotlin.UInt' type=kotlin.Int origin=null
+          this: GET_VAR 'value: kotlin.UInt declared in <root>.hashCode' type=kotlin.UInt origin=null
+  FUN name:equals visibility:public modality:FINAL <> (value:kotlin.UInt, other:kotlin.Any) returnType:kotlin.Boolean
+    annotations:
+      CompileTimeCalculation
+    VALUE_PARAMETER name:value index:0 type:kotlin.UInt
+    VALUE_PARAMETER name:other index:1 type:kotlin.Any
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun equals (value: kotlin.UInt, other: kotlin.Any): kotlin.Boolean declared in <root>'
+        CALL 'public final fun equals-impl (this: kotlin.UInt, other: kotlin.Any?): kotlin.Boolean [operator] declared in kotlin.UInt' type=kotlin.Boolean origin=null
+          this: GET_VAR 'value: kotlin.UInt declared in <root>.equals' type=kotlin.UInt origin=null
+          other: GET_VAR 'other: kotlin.Any declared in <root>.equals' type=kotlin.Any origin=null
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-min> visibility:public modality:FINAL <> () returnType:kotlin.UInt
+    correspondingProperty: PROPERTY name:min visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-min> (): kotlin.UInt declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:min type:kotlin.UInt visibility:public [final,static]' type=kotlin.UInt origin=null
+  FIELD PROPERTY_BACKING_FIELD name:min type:kotlin.UInt visibility:public [final,static]
+    EXPRESSION_BODY
+      CONSTRUCTOR_CALL 'internal constructor <init> (data: kotlin.Int) [primary] declared in kotlin.UInt' type=kotlin.UInt origin=null
+        data: CONST Int type=kotlin.Int value=0
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-max> visibility:public modality:FINAL <> () returnType:kotlin.UInt
+    correspondingProperty: PROPERTY name:max visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-max> (): kotlin.UInt declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:max type:kotlin.UInt visibility:public [final,static]' type=kotlin.UInt origin=null
+  FIELD PROPERTY_BACKING_FIELD name:max type:kotlin.UInt visibility:public [final,static]
+    EXPRESSION_BODY
+      CONSTRUCTOR_CALL 'internal constructor <init> (data: kotlin.Int) [primary] declared in kotlin.UInt' type=kotlin.UInt origin=null
+        data: CONST Int type=kotlin.Int value=-1
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-bytes> visibility:public modality:FINAL <> () returnType:kotlin.Int
+    correspondingProperty: PROPERTY name:bytes visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-bytes> (): kotlin.Int declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:bytes type:kotlin.Int visibility:public [final,static]' type=kotlin.Int origin=null
+  FIELD PROPERTY_BACKING_FIELD name:bytes type:kotlin.Int visibility:public [final,static]
+    EXPRESSION_BODY
+      CONST Int type=kotlin.Int value=4
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-bits> visibility:public modality:FINAL <> () returnType:kotlin.Int
+    correspondingProperty: PROPERTY name:bits visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-bits> (): kotlin.Int declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:bits type:kotlin.Int visibility:public [final,static]' type=kotlin.Int origin=null
+  FIELD PROPERTY_BACKING_FIELD name:bits type:kotlin.Int visibility:public [final,static]
+    EXPRESSION_BODY
+      CONST Int type=kotlin.Int value=32
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-uByte> visibility:public modality:FINAL <> () returnType:kotlin.UByte
+    correspondingProperty: PROPERTY name:uByte visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-uByte> (): kotlin.UByte declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:uByte type:kotlin.UByte visibility:public [final,static]' type=kotlin.UByte origin=null
+  FIELD PROPERTY_BACKING_FIELD name:uByte type:kotlin.UByte visibility:public [final,static]
+    EXPRESSION_BODY
+      CONSTRUCTOR_CALL 'internal constructor <init> (data: kotlin.Byte) [primary] declared in kotlin.UByte' type=kotlin.UByte origin=null
+        data: CONST Byte type=kotlin.Byte value=0
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-uByteNonZero> visibility:public modality:FINAL <> () returnType:kotlin.UByte
+    correspondingProperty: PROPERTY name:uByteNonZero visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-uByteNonZero> (): kotlin.UByte declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:uByteNonZero type:kotlin.UByte visibility:public [final,static]' type=kotlin.UByte origin=null
+  FIELD PROPERTY_BACKING_FIELD name:uByteNonZero type:kotlin.UByte visibility:public [final,static]
+    EXPRESSION_BODY
+      CONSTRUCTOR_CALL 'internal constructor <init> (data: kotlin.Byte) [primary] declared in kotlin.UByte' type=kotlin.UByte origin=null
+        data: CONST Byte type=kotlin.Byte value=1
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-uShort> visibility:public modality:FINAL <> () returnType:kotlin.UShort
+    correspondingProperty: PROPERTY name:uShort visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-uShort> (): kotlin.UShort declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:uShort type:kotlin.UShort visibility:public [final,static]' type=kotlin.UShort origin=null
+  FIELD PROPERTY_BACKING_FIELD name:uShort type:kotlin.UShort visibility:public [final,static]
+    EXPRESSION_BODY
+      CONSTRUCTOR_CALL 'internal constructor <init> (data: kotlin.Short) [primary] declared in kotlin.UShort' type=kotlin.UShort origin=null
+        data: CONST Short type=kotlin.Short value=1
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-uInt> visibility:public modality:FINAL <> () returnType:kotlin.UInt
+    correspondingProperty: PROPERTY name:uInt visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-uInt> (): kotlin.UInt declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:uInt type:kotlin.UInt visibility:public [final,static]' type=kotlin.UInt origin=null
+  FIELD PROPERTY_BACKING_FIELD name:uInt type:kotlin.UInt visibility:public [final,static]
+    EXPRESSION_BODY
+      CONSTRUCTOR_CALL 'internal constructor <init> (data: kotlin.Int) [primary] declared in kotlin.UInt' type=kotlin.UInt origin=null
+        data: CONST Int type=kotlin.Int value=2
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-uLong> visibility:public modality:FINAL <> () returnType:kotlin.ULong
+    correspondingProperty: PROPERTY name:uLong visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-uLong> (): kotlin.ULong declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:uLong type:kotlin.ULong visibility:public [final,static]' type=kotlin.ULong origin=null
+  FIELD PROPERTY_BACKING_FIELD name:uLong type:kotlin.ULong visibility:public [final,static]
+    EXPRESSION_BODY
+      CONSTRUCTOR_CALL 'internal constructor <init> (data: kotlin.Long) [primary] declared in kotlin.ULong' type=kotlin.ULong origin=null
+        data: CONSTRUCTOR_CALL 'internal constructor <init> (low: kotlin.Int, high: kotlin.Int) [primary] declared in kotlin.Long' type=kotlin.Long origin=null
+          low: CONST Int type=kotlin.Int value=3
+          high: CONST Int type=kotlin.Int value=0
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-compare1> visibility:public modality:FINAL <> () returnType:kotlin.Int
+    correspondingProperty: PROPERTY name:compare1 visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-compare1> (): kotlin.Int declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:compare1 type:kotlin.Int visibility:public [final,static]' type=kotlin.Int origin=null
+  FIELD PROPERTY_BACKING_FIELD name:compare1 type:kotlin.Int visibility:public [final,static]
+    EXPRESSION_BODY
+      CONST Int type=kotlin.Int value=1
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-compare2> visibility:public modality:FINAL <> () returnType:kotlin.Int
+    correspondingProperty: PROPERTY name:compare2 visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-compare2> (): kotlin.Int declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:compare2 type:kotlin.Int visibility:public [final,static]' type=kotlin.Int origin=null
+  FIELD PROPERTY_BACKING_FIELD name:compare2 type:kotlin.Int visibility:public [final,static]
+    EXPRESSION_BODY
+      CONST Int type=kotlin.Int value=1
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-compare3> visibility:public modality:FINAL <> () returnType:kotlin.Int
+    correspondingProperty: PROPERTY name:compare3 visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-compare3> (): kotlin.Int declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:compare3 type:kotlin.Int visibility:public [final,static]' type=kotlin.Int origin=null
+  FIELD PROPERTY_BACKING_FIELD name:compare3 type:kotlin.Int visibility:public [final,static]
+    EXPRESSION_BODY
+      CONST Int type=kotlin.Int value=0
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-compare4> visibility:public modality:FINAL <> () returnType:kotlin.Int
+    correspondingProperty: PROPERTY name:compare4 visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-compare4> (): kotlin.Int declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:compare4 type:kotlin.Int visibility:public [final,static]' type=kotlin.Int origin=null
+  FIELD PROPERTY_BACKING_FIELD name:compare4 type:kotlin.Int visibility:public [final,static]
+    EXPRESSION_BODY
+      CONST Int type=kotlin.Int value=-1
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-plus1> visibility:public modality:FINAL <> () returnType:kotlin.UInt
+    correspondingProperty: PROPERTY name:plus1 visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-plus1> (): kotlin.UInt declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:plus1 type:kotlin.UInt visibility:public [final,static]' type=kotlin.UInt origin=null
+  FIELD PROPERTY_BACKING_FIELD name:plus1 type:kotlin.UInt visibility:public [final,static]
+    EXPRESSION_BODY
+      CONSTRUCTOR_CALL 'internal constructor <init> (data: kotlin.Int) [primary] declared in kotlin.UInt' type=kotlin.UInt origin=null
+        data: CONST Int type=kotlin.Int value=2
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-plus2> visibility:public modality:FINAL <> () returnType:kotlin.UInt
+    correspondingProperty: PROPERTY name:plus2 visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-plus2> (): kotlin.UInt declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:plus2 type:kotlin.UInt visibility:public [final,static]' type=kotlin.UInt origin=null
+  FIELD PROPERTY_BACKING_FIELD name:plus2 type:kotlin.UInt visibility:public [final,static]
+    EXPRESSION_BODY
+      CONSTRUCTOR_CALL 'internal constructor <init> (data: kotlin.Int) [primary] declared in kotlin.UInt' type=kotlin.UInt origin=null
+        data: CONST Int type=kotlin.Int value=3
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-plus3> visibility:public modality:FINAL <> () returnType:kotlin.UInt
+    correspondingProperty: PROPERTY name:plus3 visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-plus3> (): kotlin.UInt declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:plus3 type:kotlin.UInt visibility:public [final,static]' type=kotlin.UInt origin=null
+  FIELD PROPERTY_BACKING_FIELD name:plus3 type:kotlin.UInt visibility:public [final,static]
+    EXPRESSION_BODY
+      CONSTRUCTOR_CALL 'internal constructor <init> (data: kotlin.Int) [primary] declared in kotlin.UInt' type=kotlin.UInt origin=null
+        data: CONST Int type=kotlin.Int value=4
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-plus4> visibility:public modality:FINAL <> () returnType:kotlin.ULong
+    correspondingProperty: PROPERTY name:plus4 visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-plus4> (): kotlin.ULong declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:plus4 type:kotlin.ULong visibility:public [final,static]' type=kotlin.ULong origin=null
+  FIELD PROPERTY_BACKING_FIELD name:plus4 type:kotlin.ULong visibility:public [final,static]
+    EXPRESSION_BODY
+      CONSTRUCTOR_CALL 'internal constructor <init> (data: kotlin.Long) [primary] declared in kotlin.ULong' type=kotlin.ULong origin=null
+        data: CONSTRUCTOR_CALL 'internal constructor <init> (low: kotlin.Int, high: kotlin.Int) [primary] declared in kotlin.Long' type=kotlin.Long origin=null
+          low: CONST Int type=kotlin.Int value=5
+          high: CONST Int type=kotlin.Int value=0
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-minus1> visibility:public modality:FINAL <> () returnType:kotlin.UInt
+    correspondingProperty: PROPERTY name:minus1 visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-minus1> (): kotlin.UInt declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:minus1 type:kotlin.UInt visibility:public [final,static]' type=kotlin.UInt origin=null
+  FIELD PROPERTY_BACKING_FIELD name:minus1 type:kotlin.UInt visibility:public [final,static]
+    EXPRESSION_BODY
+      CONSTRUCTOR_CALL 'internal constructor <init> (data: kotlin.Int) [primary] declared in kotlin.UInt' type=kotlin.UInt origin=null
+        data: CONST Int type=kotlin.Int value=2
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-minus2> visibility:public modality:FINAL <> () returnType:kotlin.UInt
+    correspondingProperty: PROPERTY name:minus2 visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-minus2> (): kotlin.UInt declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:minus2 type:kotlin.UInt visibility:public [final,static]' type=kotlin.UInt origin=null
+  FIELD PROPERTY_BACKING_FIELD name:minus2 type:kotlin.UInt visibility:public [final,static]
+    EXPRESSION_BODY
+      CONSTRUCTOR_CALL 'internal constructor <init> (data: kotlin.Int) [primary] declared in kotlin.UInt' type=kotlin.UInt origin=null
+        data: CONST Int type=kotlin.Int value=1
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-minus3> visibility:public modality:FINAL <> () returnType:kotlin.UInt
+    correspondingProperty: PROPERTY name:minus3 visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-minus3> (): kotlin.UInt declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:minus3 type:kotlin.UInt visibility:public [final,static]' type=kotlin.UInt origin=null
+  FIELD PROPERTY_BACKING_FIELD name:minus3 type:kotlin.UInt visibility:public [final,static]
+    EXPRESSION_BODY
+      CONSTRUCTOR_CALL 'internal constructor <init> (data: kotlin.Int) [primary] declared in kotlin.UInt' type=kotlin.UInt origin=null
+        data: CONST Int type=kotlin.Int value=0
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-minus4> visibility:public modality:FINAL <> () returnType:kotlin.ULong
+    correspondingProperty: PROPERTY name:minus4 visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-minus4> (): kotlin.ULong declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:minus4 type:kotlin.ULong visibility:public [final,static]' type=kotlin.ULong origin=null
+  FIELD PROPERTY_BACKING_FIELD name:minus4 type:kotlin.ULong visibility:public [final,static]
+    EXPRESSION_BODY
+      CONSTRUCTOR_CALL 'internal constructor <init> (data: kotlin.Long) [primary] declared in kotlin.ULong' type=kotlin.ULong origin=null
+        data: CONSTRUCTOR_CALL 'internal constructor <init> (low: kotlin.Int, high: kotlin.Int) [primary] declared in kotlin.Long' type=kotlin.Long origin=null
+          low: CONST Int type=kotlin.Int value=-1
+          high: CONST Int type=kotlin.Int value=-1
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-times1> visibility:public modality:FINAL <> () returnType:kotlin.UInt
+    correspondingProperty: PROPERTY name:times1 visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-times1> (): kotlin.UInt declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:times1 type:kotlin.UInt visibility:public [final,static]' type=kotlin.UInt origin=null
+  FIELD PROPERTY_BACKING_FIELD name:times1 type:kotlin.UInt visibility:public [final,static]
+    EXPRESSION_BODY
+      CONSTRUCTOR_CALL 'internal constructor <init> (data: kotlin.Int) [primary] declared in kotlin.UInt' type=kotlin.UInt origin=null
+        data: CONST Int type=kotlin.Int value=0
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-times2> visibility:public modality:FINAL <> () returnType:kotlin.UInt
+    correspondingProperty: PROPERTY name:times2 visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-times2> (): kotlin.UInt declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:times2 type:kotlin.UInt visibility:public [final,static]' type=kotlin.UInt origin=null
+  FIELD PROPERTY_BACKING_FIELD name:times2 type:kotlin.UInt visibility:public [final,static]
+    EXPRESSION_BODY
+      CONSTRUCTOR_CALL 'internal constructor <init> (data: kotlin.Int) [primary] declared in kotlin.UInt' type=kotlin.UInt origin=null
+        data: CONST Int type=kotlin.Int value=2
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-times3> visibility:public modality:FINAL <> () returnType:kotlin.UInt
+    correspondingProperty: PROPERTY name:times3 visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-times3> (): kotlin.UInt declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:times3 type:kotlin.UInt visibility:public [final,static]' type=kotlin.UInt origin=null
+  FIELD PROPERTY_BACKING_FIELD name:times3 type:kotlin.UInt visibility:public [final,static]
+    EXPRESSION_BODY
+      CONSTRUCTOR_CALL 'internal constructor <init> (data: kotlin.Int) [primary] declared in kotlin.UInt' type=kotlin.UInt origin=null
+        data: CONST Int type=kotlin.Int value=4
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-times4> visibility:public modality:FINAL <> () returnType:kotlin.ULong
+    correspondingProperty: PROPERTY name:times4 visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-times4> (): kotlin.ULong declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:times4 type:kotlin.ULong visibility:public [final,static]' type=kotlin.ULong origin=null
+  FIELD PROPERTY_BACKING_FIELD name:times4 type:kotlin.ULong visibility:public [final,static]
+    EXPRESSION_BODY
+      CONSTRUCTOR_CALL 'internal constructor <init> (data: kotlin.Long) [primary] declared in kotlin.ULong' type=kotlin.ULong origin=null
+        data: CONSTRUCTOR_CALL 'internal constructor <init> (low: kotlin.Int, high: kotlin.Int) [primary] declared in kotlin.Long' type=kotlin.Long origin=null
+          low: CONST Int type=kotlin.Int value=6
+          high: CONST Int type=kotlin.Int value=0
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-div1> visibility:public modality:FINAL <> () returnType:kotlin.UInt
+    correspondingProperty: PROPERTY name:div1 visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-div1> (): kotlin.UInt declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:div1 type:kotlin.UInt visibility:public [final,static]' type=kotlin.UInt origin=null
+  FIELD PROPERTY_BACKING_FIELD name:div1 type:kotlin.UInt visibility:public [final,static]
+    EXPRESSION_BODY
+      CONSTRUCTOR_CALL 'internal constructor <init> (data: kotlin.Int) [primary] declared in kotlin.UInt' type=kotlin.UInt origin=null
+        data: CONST Int type=kotlin.Int value=2
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-div2> visibility:public modality:FINAL <> () returnType:kotlin.UInt
+    correspondingProperty: PROPERTY name:div2 visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-div2> (): kotlin.UInt declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:div2 type:kotlin.UInt visibility:public [final,static]' type=kotlin.UInt origin=null
+  FIELD PROPERTY_BACKING_FIELD name:div2 type:kotlin.UInt visibility:public [final,static]
+    EXPRESSION_BODY
+      CONSTRUCTOR_CALL 'internal constructor <init> (data: kotlin.Int) [primary] declared in kotlin.UInt' type=kotlin.UInt origin=null
+        data: CONST Int type=kotlin.Int value=2
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-div3> visibility:public modality:FINAL <> () returnType:kotlin.UInt
+    correspondingProperty: PROPERTY name:div3 visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-div3> (): kotlin.UInt declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:div3 type:kotlin.UInt visibility:public [final,static]' type=kotlin.UInt origin=null
+  FIELD PROPERTY_BACKING_FIELD name:div3 type:kotlin.UInt visibility:public [final,static]
+    EXPRESSION_BODY
+      CONSTRUCTOR_CALL 'internal constructor <init> (data: kotlin.Int) [primary] declared in kotlin.UInt' type=kotlin.UInt origin=null
+        data: CONST Int type=kotlin.Int value=1
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-div4> visibility:public modality:FINAL <> () returnType:kotlin.ULong
+    correspondingProperty: PROPERTY name:div4 visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-div4> (): kotlin.ULong declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:div4 type:kotlin.ULong visibility:public [final,static]' type=kotlin.ULong origin=null
+  FIELD PROPERTY_BACKING_FIELD name:div4 type:kotlin.ULong visibility:public [final,static]
+    EXPRESSION_BODY
+      CONSTRUCTOR_CALL 'internal constructor <init> (data: kotlin.Long) [primary] declared in kotlin.ULong' type=kotlin.ULong origin=null
+        data: CONSTRUCTOR_CALL 'internal constructor <init> (low: kotlin.Int, high: kotlin.Int) [primary] declared in kotlin.Long' type=kotlin.Long origin=null
+          low: CONST Int type=kotlin.Int value=0
+          high: CONST Int type=kotlin.Int value=0
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-rem1> visibility:public modality:FINAL <> () returnType:kotlin.UInt
+    correspondingProperty: PROPERTY name:rem1 visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-rem1> (): kotlin.UInt declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:rem1 type:kotlin.UInt visibility:public [final,static]' type=kotlin.UInt origin=null
+  FIELD PROPERTY_BACKING_FIELD name:rem1 type:kotlin.UInt visibility:public [final,static]
+    EXPRESSION_BODY
+      CONSTRUCTOR_CALL 'internal constructor <init> (data: kotlin.Int) [primary] declared in kotlin.UInt' type=kotlin.UInt origin=null
+        data: CONST Int type=kotlin.Int value=0
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-rem2> visibility:public modality:FINAL <> () returnType:kotlin.UInt
+    correspondingProperty: PROPERTY name:rem2 visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-rem2> (): kotlin.UInt declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:rem2 type:kotlin.UInt visibility:public [final,static]' type=kotlin.UInt origin=null
+  FIELD PROPERTY_BACKING_FIELD name:rem2 type:kotlin.UInt visibility:public [final,static]
+    EXPRESSION_BODY
+      CONSTRUCTOR_CALL 'internal constructor <init> (data: kotlin.Int) [primary] declared in kotlin.UInt' type=kotlin.UInt origin=null
+        data: CONST Int type=kotlin.Int value=0
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-rem3> visibility:public modality:FINAL <> () returnType:kotlin.UInt
+    correspondingProperty: PROPERTY name:rem3 visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-rem3> (): kotlin.UInt declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:rem3 type:kotlin.UInt visibility:public [final,static]' type=kotlin.UInt origin=null
+  FIELD PROPERTY_BACKING_FIELD name:rem3 type:kotlin.UInt visibility:public [final,static]
+    EXPRESSION_BODY
+      CONSTRUCTOR_CALL 'internal constructor <init> (data: kotlin.Int) [primary] declared in kotlin.UInt' type=kotlin.UInt origin=null
+        data: CONST Int type=kotlin.Int value=0
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-rem4> visibility:public modality:FINAL <> () returnType:kotlin.ULong
+    correspondingProperty: PROPERTY name:rem4 visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-rem4> (): kotlin.ULong declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:rem4 type:kotlin.ULong visibility:public [final,static]' type=kotlin.ULong origin=null
+  FIELD PROPERTY_BACKING_FIELD name:rem4 type:kotlin.ULong visibility:public [final,static]
+    EXPRESSION_BODY
+      CONSTRUCTOR_CALL 'internal constructor <init> (data: kotlin.Long) [primary] declared in kotlin.ULong' type=kotlin.ULong origin=null
+        data: CONSTRUCTOR_CALL 'internal constructor <init> (low: kotlin.Int, high: kotlin.Int) [primary] declared in kotlin.Long' type=kotlin.Long origin=null
+          low: CONST Int type=kotlin.Int value=2
+          high: CONST Int type=kotlin.Int value=0
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-inc> visibility:public modality:FINAL <> () returnType:kotlin.UInt
+    correspondingProperty: PROPERTY name:inc visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-inc> (): kotlin.UInt declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:inc type:kotlin.UInt visibility:public [final,static]' type=kotlin.UInt origin=null
+  FIELD PROPERTY_BACKING_FIELD name:inc type:kotlin.UInt visibility:public [final,static]
+    EXPRESSION_BODY
+      CONSTRUCTOR_CALL 'internal constructor <init> (data: kotlin.Int) [primary] declared in kotlin.UInt' type=kotlin.UInt origin=null
+        data: CONST Int type=kotlin.Int value=4
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-dec> visibility:public modality:FINAL <> () returnType:kotlin.UInt
+    correspondingProperty: PROPERTY name:dec visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-dec> (): kotlin.UInt declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:dec type:kotlin.UInt visibility:public [final,static]' type=kotlin.UInt origin=null
+  FIELD PROPERTY_BACKING_FIELD name:dec type:kotlin.UInt visibility:public [final,static]
+    EXPRESSION_BODY
+      CONSTRUCTOR_CALL 'internal constructor <init> (data: kotlin.Int) [primary] declared in kotlin.UInt' type=kotlin.UInt origin=null
+        data: CONST Int type=kotlin.Int value=2
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-rangeTo> visibility:public modality:FINAL <> () returnType:kotlin.UInt
+    correspondingProperty: PROPERTY name:rangeTo visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-rangeTo> (): kotlin.UInt declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:rangeTo type:kotlin.UInt visibility:public [final,static]' type=kotlin.UInt origin=null
+  FIELD PROPERTY_BACKING_FIELD name:rangeTo type:kotlin.UInt visibility:public [final,static]
+    EXPRESSION_BODY
+      CONSTRUCTOR_CALL 'internal constructor <init> (data: kotlin.Int) [primary] declared in kotlin.UInt' type=kotlin.UInt origin=null
+        data: CONST Int type=kotlin.Int value=10
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-shiftLeft> visibility:public modality:FINAL <> () returnType:kotlin.UInt
+    correspondingProperty: PROPERTY name:shiftLeft visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-shiftLeft> (): kotlin.UInt declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:shiftLeft type:kotlin.UInt visibility:public [final,static]' type=kotlin.UInt origin=null
+  FIELD PROPERTY_BACKING_FIELD name:shiftLeft type:kotlin.UInt visibility:public [final,static]
+    EXPRESSION_BODY
+      CONSTRUCTOR_CALL 'internal constructor <init> (data: kotlin.Int) [primary] declared in kotlin.UInt' type=kotlin.UInt origin=null
+        data: CONST Int type=kotlin.Int value=16
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-shiftRight> visibility:public modality:FINAL <> () returnType:kotlin.UInt
+    correspondingProperty: PROPERTY name:shiftRight visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-shiftRight> (): kotlin.UInt declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:shiftRight type:kotlin.UInt visibility:public [final,static]' type=kotlin.UInt origin=null
+  FIELD PROPERTY_BACKING_FIELD name:shiftRight type:kotlin.UInt visibility:public [final,static]
+    EXPRESSION_BODY
+      CONSTRUCTOR_CALL 'internal constructor <init> (data: kotlin.Int) [primary] declared in kotlin.UInt' type=kotlin.UInt origin=null
+        data: CONST Int type=kotlin.Int value=2
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-and> visibility:public modality:FINAL <> () returnType:kotlin.UInt
+    correspondingProperty: PROPERTY name:and visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-and> (): kotlin.UInt declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:and type:kotlin.UInt visibility:public [final,static]' type=kotlin.UInt origin=null
+  FIELD PROPERTY_BACKING_FIELD name:and type:kotlin.UInt visibility:public [final,static]
+    EXPRESSION_BODY
+      CONSTRUCTOR_CALL 'internal constructor <init> (data: kotlin.Int) [primary] declared in kotlin.UInt' type=kotlin.UInt origin=null
+        data: CONST Int type=kotlin.Int value=0
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-or> visibility:public modality:FINAL <> () returnType:kotlin.UInt
+    correspondingProperty: PROPERTY name:or visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-or> (): kotlin.UInt declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:or type:kotlin.UInt visibility:public [final,static]' type=kotlin.UInt origin=null
+  FIELD PROPERTY_BACKING_FIELD name:or type:kotlin.UInt visibility:public [final,static]
+    EXPRESSION_BODY
+      CONSTRUCTOR_CALL 'internal constructor <init> (data: kotlin.Int) [primary] declared in kotlin.UInt' type=kotlin.UInt origin=null
+        data: CONST Int type=kotlin.Int value=10
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-xor> visibility:public modality:FINAL <> () returnType:kotlin.UInt
+    correspondingProperty: PROPERTY name:xor visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-xor> (): kotlin.UInt declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:xor type:kotlin.UInt visibility:public [final,static]' type=kotlin.UInt origin=null
+  FIELD PROPERTY_BACKING_FIELD name:xor type:kotlin.UInt visibility:public [final,static]
+    EXPRESSION_BODY
+      CONSTRUCTOR_CALL 'internal constructor <init> (data: kotlin.Int) [primary] declared in kotlin.UInt' type=kotlin.UInt origin=null
+        data: CONST Int type=kotlin.Int value=11
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-inv> visibility:public modality:FINAL <> () returnType:kotlin.UInt
+    correspondingProperty: PROPERTY name:inv visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-inv> (): kotlin.UInt declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:inv type:kotlin.UInt visibility:public [final,static]' type=kotlin.UInt origin=null
+  FIELD PROPERTY_BACKING_FIELD name:inv type:kotlin.UInt visibility:public [final,static]
+    EXPRESSION_BODY
+      CONSTRUCTOR_CALL 'internal constructor <init> (data: kotlin.Int) [primary] declared in kotlin.UInt' type=kotlin.UInt origin=null
+        data: CONST Int type=kotlin.Int value=-9
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-a1> visibility:public modality:FINAL <> () returnType:kotlin.Byte
+    correspondingProperty: PROPERTY name:a1 visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-a1> (): kotlin.Byte declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:a1 type:kotlin.Byte visibility:public [final,static]' type=kotlin.Byte origin=null
+  FIELD PROPERTY_BACKING_FIELD name:a1 type:kotlin.Byte visibility:public [final,static]
+    EXPRESSION_BODY
+      CONST Byte type=kotlin.Byte value=1
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-a2> visibility:public modality:FINAL <> () returnType:kotlin.Short
+    correspondingProperty: PROPERTY name:a2 visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-a2> (): kotlin.Short declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:a2 type:kotlin.Short visibility:public [final,static]' type=kotlin.Short origin=null
+  FIELD PROPERTY_BACKING_FIELD name:a2 type:kotlin.Short visibility:public [final,static]
+    EXPRESSION_BODY
+      CONST Short type=kotlin.Short value=2
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-a3> visibility:public modality:FINAL <> () returnType:kotlin.Int
+    correspondingProperty: PROPERTY name:a3 visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-a3> (): kotlin.Int declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:a3 type:kotlin.Int visibility:public [final,static]' type=kotlin.Int origin=null
+  FIELD PROPERTY_BACKING_FIELD name:a3 type:kotlin.Int visibility:public [final,static]
+    EXPRESSION_BODY
+      CONST Int type=kotlin.Int value=3
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-a4> visibility:public modality:FINAL <> () returnType:kotlin.Long
+    correspondingProperty: PROPERTY name:a4 visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-a4> (): kotlin.Long declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:a4 type:kotlin.Long visibility:public [final,static]' type=kotlin.Long origin=null
+  FIELD PROPERTY_BACKING_FIELD name:a4 type:kotlin.Long visibility:public [final,static]
+    EXPRESSION_BODY
+      CONSTRUCTOR_CALL 'internal constructor <init> (low: kotlin.Int, high: kotlin.Int) [primary] declared in kotlin.Long' type=kotlin.Long origin=null
+        low: CONST Int type=kotlin.Int value=4
+        high: CONST Int type=kotlin.Int value=0
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-a5> visibility:public modality:FINAL <> () returnType:kotlin.UByte
+    correspondingProperty: PROPERTY name:a5 visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-a5> (): kotlin.UByte declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:a5 type:kotlin.UByte visibility:public [final,static]' type=kotlin.UByte origin=null
+  FIELD PROPERTY_BACKING_FIELD name:a5 type:kotlin.UByte visibility:public [final,static]
+    EXPRESSION_BODY
+      CONSTRUCTOR_CALL 'internal constructor <init> (data: kotlin.Byte) [primary] declared in kotlin.UByte' type=kotlin.UByte origin=null
+        data: CONST Byte type=kotlin.Byte value=5
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-a6> visibility:public modality:FINAL <> () returnType:kotlin.UShort
+    correspondingProperty: PROPERTY name:a6 visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-a6> (): kotlin.UShort declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:a6 type:kotlin.UShort visibility:public [final,static]' type=kotlin.UShort origin=null
+  FIELD PROPERTY_BACKING_FIELD name:a6 type:kotlin.UShort visibility:public [final,static]
+    EXPRESSION_BODY
+      CONSTRUCTOR_CALL 'internal constructor <init> (data: kotlin.Short) [primary] declared in kotlin.UShort' type=kotlin.UShort origin=null
+        data: CONST Short type=kotlin.Short value=6
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-a7> visibility:public modality:FINAL <> () returnType:kotlin.UInt
+    correspondingProperty: PROPERTY name:a7 visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-a7> (): kotlin.UInt declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:a7 type:kotlin.UInt visibility:public [final,static]' type=kotlin.UInt origin=null
+  FIELD PROPERTY_BACKING_FIELD name:a7 type:kotlin.UInt visibility:public [final,static]
+    EXPRESSION_BODY
+      CONSTRUCTOR_CALL 'internal constructor <init> (data: kotlin.Int) [primary] declared in kotlin.UInt' type=kotlin.UInt origin=null
+        data: CONST Int type=kotlin.Int value=7
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-a8> visibility:public modality:FINAL <> () returnType:kotlin.ULong
+    correspondingProperty: PROPERTY name:a8 visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-a8> (): kotlin.ULong declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:a8 type:kotlin.ULong visibility:public [final,static]' type=kotlin.ULong origin=null
+  FIELD PROPERTY_BACKING_FIELD name:a8 type:kotlin.ULong visibility:public [final,static]
+    EXPRESSION_BODY
+      CONSTRUCTOR_CALL 'internal constructor <init> (data: kotlin.Long) [primary] declared in kotlin.ULong' type=kotlin.ULong origin=null
+        data: CONSTRUCTOR_CALL 'internal constructor <init> (low: kotlin.Int, high: kotlin.Int) [primary] declared in kotlin.Long' type=kotlin.Long origin=null
+          low: CONST Int type=kotlin.Int value=8
+          high: CONST Int type=kotlin.Int value=0
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-a9> visibility:public modality:FINAL <> () returnType:kotlin.Float
+    correspondingProperty: PROPERTY name:a9 visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-a9> (): kotlin.Float declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:a9 type:kotlin.Float visibility:public [final,static]' type=kotlin.Float origin=null
+  FIELD PROPERTY_BACKING_FIELD name:a9 type:kotlin.Float visibility:public [final,static]
+    EXPRESSION_BODY
+      CONST Float type=kotlin.Float value=9.0
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-a10> visibility:public modality:FINAL <> () returnType:kotlin.Double
+    correspondingProperty: PROPERTY name:a10 visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-a10> (): kotlin.Double declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:a10 type:kotlin.Double visibility:public [final,static]' type=kotlin.Double origin=null
+  FIELD PROPERTY_BACKING_FIELD name:a10 type:kotlin.Double visibility:public [final,static]
+    EXPRESSION_BODY
+      CONST Double type=kotlin.Double value=10.0
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-b1> visibility:public modality:FINAL <> () returnType:kotlin.String
+    correspondingProperty: PROPERTY name:b1 visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-b1> (): kotlin.String declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:b1 type:kotlin.String visibility:public [final,static]' type=kotlin.String origin=null
+  FIELD PROPERTY_BACKING_FIELD name:b1 type:kotlin.String visibility:public [final,static]
+    EXPRESSION_BODY
+      CONST String type=kotlin.String value="10"
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-b2> visibility:public modality:FINAL <> () returnType:kotlin.Int
+    correspondingProperty: PROPERTY name:b2 visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-b2> (): kotlin.Int declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:b2 type:kotlin.Int visibility:public [final,static]' type=kotlin.Int origin=null
+  FIELD PROPERTY_BACKING_FIELD name:b2 type:kotlin.Int visibility:public [final,static]
+    EXPRESSION_BODY
+      CONST Int type=kotlin.Int value=10
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-b3> visibility:public modality:FINAL <> () returnType:kotlin.Boolean
+    correspondingProperty: PROPERTY name:b3 visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-b3> (): kotlin.Boolean declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:b3 type:kotlin.Boolean visibility:public [final,static]' type=kotlin.Boolean origin=null
+  FIELD PROPERTY_BACKING_FIELD name:b3 type:kotlin.Boolean visibility:public [final,static]
+    EXPRESSION_BODY
+      CONST Boolean type=kotlin.Boolean value=false
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-b4> visibility:public modality:FINAL <> () returnType:kotlin.Boolean
+    correspondingProperty: PROPERTY name:b4 visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-b4> (): kotlin.Boolean declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:b4 type:kotlin.Boolean visibility:public [final,static]' type=kotlin.Boolean origin=null
+  FIELD PROPERTY_BACKING_FIELD name:b4 type:kotlin.Boolean visibility:public [final,static]
+    EXPRESSION_BODY
+      CONST Boolean type=kotlin.Boolean value=false
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-b5> visibility:public modality:FINAL <> () returnType:kotlin.Boolean
+    correspondingProperty: PROPERTY name:b5 visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-b5> (): kotlin.Boolean declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:b5 type:kotlin.Boolean visibility:public [final,static]' type=kotlin.Boolean origin=null
+  FIELD PROPERTY_BACKING_FIELD name:b5 type:kotlin.Boolean visibility:public [final,static]
+    EXPRESSION_BODY
+      CONST Boolean type=kotlin.Boolean value=false

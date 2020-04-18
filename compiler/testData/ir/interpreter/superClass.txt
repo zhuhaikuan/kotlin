@@ -1,0 +1,586 @@
+FILE fqName:<root> fileName:/superClass.kt
+  CLASS CLASS name:A modality:OPEN visibility:public superTypes:[kotlin.Any]
+    $this: VALUE_PARAMETER INSTANCE_RECEIVER name:<this> type:<root>.A
+    CONSTRUCTOR visibility:public <> (a:kotlin.Int) returnType:<root>.A [primary]
+      annotations:
+        CompileTimeCalculation
+      VALUE_PARAMETER name:a index:0 type:kotlin.Int
+      BLOCK_BODY
+        DELEGATING_CONSTRUCTOR_CALL 'public constructor <init> () [primary] declared in kotlin.Any'
+        SET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:a type:kotlin.Int visibility:private' type=kotlin.Unit origin=INITIALIZE_FIELD
+          receiver: GET_VAR '<this>: <root>.A declared in <root>.A' type=<root>.A origin=null
+          value: GET_VAR 'a: kotlin.Int declared in <root>.A.<init>' type=kotlin.Int origin=INITIALIZE_PROPERTY_FROM_PARAMETER
+    FUN DEFAULT_PROPERTY_ACCESSOR name:<set-a> visibility:public modality:FINAL <> ($this:<root>.A, <set-?>:kotlin.Int) returnType:kotlin.Unit
+      correspondingProperty: PROPERTY name:a visibility:public modality:FINAL [var]
+      $this: VALUE_PARAMETER name:<this> type:<root>.A
+      VALUE_PARAMETER name:<set-?> index:0 type:kotlin.Int
+      BLOCK_BODY
+        SET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:a type:kotlin.Int visibility:private' type=kotlin.Unit origin=null
+          receiver: GET_VAR '<this>: <root>.A declared in <root>.A.<set-a>' type=<root>.A origin=null
+          value: GET_VAR '<set-?>: kotlin.Int declared in <root>.A.<set-a>' type=kotlin.Int origin=null
+    FUN DEFAULT_PROPERTY_ACCESSOR name:<get-a> visibility:public modality:FINAL <> ($this:<root>.A) returnType:kotlin.Int
+      correspondingProperty: PROPERTY name:a visibility:public modality:FINAL [var]
+      $this: VALUE_PARAMETER name:<this> type:<root>.A
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='public final fun <get-a> (): kotlin.Int declared in <root>.A'
+          GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:a type:kotlin.Int visibility:private' type=kotlin.Int origin=null
+            receiver: GET_VAR '<this>: <root>.A declared in <root>.A.<get-a>' type=<root>.A origin=null
+    FIELD PROPERTY_BACKING_FIELD name:a type:kotlin.Int visibility:private
+    FUN name:get visibility:public modality:FINAL <> ($this:<root>.A) returnType:kotlin.Int
+      annotations:
+        CompileTimeCalculation
+      $this: VALUE_PARAMETER name:<this> type:<root>.A
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='public final fun get (): kotlin.Int declared in <root>.A'
+          GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:a type:kotlin.Int visibility:private' type=kotlin.Int origin=GET_PROPERTY
+            receiver: GET_VAR '<this>: <root>.A declared in <root>.A.get' type=<root>.A origin=null
+    FUN name:openGet visibility:public modality:OPEN <> ($this:<root>.A) returnType:kotlin.Int
+      annotations:
+        CompileTimeCalculation
+      $this: VALUE_PARAMETER name:<this> type:<root>.A
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='public open fun openGet (): kotlin.Int declared in <root>.A'
+          GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:a type:kotlin.Int visibility:private' type=kotlin.Int origin=GET_PROPERTY
+            receiver: GET_VAR '<this>: <root>.A declared in <root>.A.openGet' type=<root>.A origin=null
+    FUN name:setA visibility:public modality:FINAL <> ($this:<root>.A, a:kotlin.Int) returnType:<root>.A
+      annotations:
+        CompileTimeCalculation
+      $this: VALUE_PARAMETER name:<this> type:<root>.A
+      VALUE_PARAMETER name:a index:0 type:kotlin.Int
+      BLOCK_BODY
+        SET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:a type:kotlin.Int visibility:private' type=kotlin.Unit origin=EQ
+          receiver: GET_VAR '<this>: <root>.A declared in <root>.A.setA' type=<root>.A origin=null
+          value: GET_VAR 'a: kotlin.Int declared in <root>.A.setA' type=kotlin.Int origin=null
+        RETURN type=kotlin.Nothing from='public final fun setA (a: kotlin.Int): <root>.A declared in <root>.A'
+          GET_VAR '<this>: <root>.A declared in <root>.A.setA' type=<root>.A origin=null
+    FUN FAKE_OVERRIDE name:equals visibility:public modality:OPEN <> ($this:kotlin.Any, other:kotlin.Any?) returnType:kotlin.Boolean [fake_override,operator]
+      overridden:
+        public open fun equals (other: kotlin.Any?): kotlin.Boolean [operator] declared in kotlin.Any
+      $this: VALUE_PARAMETER name:<this> type:kotlin.Any
+      VALUE_PARAMETER name:other index:0 type:kotlin.Any?
+    FUN FAKE_OVERRIDE name:hashCode visibility:public modality:OPEN <> ($this:kotlin.Any) returnType:kotlin.Int [fake_override]
+      overridden:
+        public open fun hashCode (): kotlin.Int declared in kotlin.Any
+      $this: VALUE_PARAMETER name:<this> type:kotlin.Any
+    FUN FAKE_OVERRIDE name:toString visibility:public modality:OPEN <> ($this:kotlin.Any) returnType:kotlin.String [fake_override]
+      overridden:
+        public open fun toString (): kotlin.String declared in kotlin.Any
+      $this: VALUE_PARAMETER name:<this> type:kotlin.Any
+  CLASS CLASS name:B modality:OPEN visibility:public superTypes:[<root>.A]
+    $this: VALUE_PARAMETER INSTANCE_RECEIVER name:<this> type:<root>.B
+    CONSTRUCTOR visibility:public <> (b:kotlin.Int) returnType:<root>.B [primary]
+      annotations:
+        CompileTimeCalculation
+      VALUE_PARAMETER name:b index:0 type:kotlin.Int
+      BLOCK_BODY
+        DELEGATING_CONSTRUCTOR_CALL 'public constructor <init> (a: kotlin.Int) [primary] declared in <root>.A'
+          a: CALL 'public final fun jsBitOr (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Int declared in kotlin.internal.ir' type=kotlin.Int origin=SYNTHESIZED_STATEMENT
+            arg0: CALL 'public final fun jsPlus (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Any? declared in kotlin.internal.ir' type=kotlin.Int origin=PLUS
+              arg0: GET_VAR 'b: kotlin.Int declared in <root>.B.<init>' type=kotlin.Int origin=null
+              arg1: CONST Int type=kotlin.Int value=1
+            arg1: CONST Int type=kotlin.Int value=0
+        SET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:b type:kotlin.Int visibility:private [final]' type=kotlin.Unit origin=INITIALIZE_FIELD
+          receiver: GET_VAR '<this>: <root>.B declared in <root>.B' type=<root>.B origin=null
+          value: GET_VAR 'b: kotlin.Int declared in <root>.B.<init>' type=kotlin.Int origin=INITIALIZE_PROPERTY_FROM_PARAMETER
+    FUN DEFAULT_PROPERTY_ACCESSOR name:<get-b> visibility:public modality:FINAL <> ($this:<root>.B) returnType:kotlin.Int
+      correspondingProperty: PROPERTY name:b visibility:public modality:FINAL [val]
+      $this: VALUE_PARAMETER name:<this> type:<root>.B
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='public final fun <get-b> (): kotlin.Int declared in <root>.B'
+          GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:b type:kotlin.Int visibility:private [final]' type=kotlin.Int origin=null
+            receiver: GET_VAR '<this>: <root>.B declared in <root>.B.<get-b>' type=<root>.B origin=null
+    FIELD PROPERTY_BACKING_FIELD name:b type:kotlin.Int visibility:private [final]
+    FUN name:getAFromB visibility:public modality:FINAL <> ($this:<root>.B) returnType:kotlin.Int
+      annotations:
+        CompileTimeCalculation
+      $this: VALUE_PARAMETER name:<this> type:<root>.B
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='public final fun getAFromB (): kotlin.Int declared in <root>.B'
+          CALL 'public final fun <get-a> (): kotlin.Int [fake_override] declared in <root>.B' type=kotlin.Int origin=GET_PROPERTY
+            $this: GET_VAR '<this>: <root>.B declared in <root>.B.getAFromB' type=<root>.B origin=null
+    FUN name:getFromValueParameter visibility:public modality:FINAL <> ($this:<root>.B, a:<root>.A) returnType:kotlin.Int
+      annotations:
+        CompileTimeCalculation
+      $this: VALUE_PARAMETER name:<this> type:<root>.B
+      VALUE_PARAMETER name:a index:0 type:<root>.A
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='public final fun getFromValueParameter (a: <root>.A): kotlin.Int declared in <root>.B'
+          CALL 'public final fun get (): kotlin.Int declared in <root>.A' type=kotlin.Int origin=null
+            $this: GET_VAR 'a: <root>.A declared in <root>.B.getFromValueParameter' type=<root>.A origin=null
+    FUN FAKE_OVERRIDE name:get visibility:public modality:FINAL <> ($this:<root>.A) returnType:kotlin.Int [fake_override]
+      annotations:
+        CompileTimeCalculation
+      overridden:
+        public final fun get (): kotlin.Int declared in <root>.A
+      $this: VALUE_PARAMETER name:<this> type:<root>.A
+    FUN FAKE_OVERRIDE name:setA visibility:public modality:FINAL <> ($this:<root>.A, a:kotlin.Int) returnType:<root>.A [fake_override]
+      annotations:
+        CompileTimeCalculation
+      overridden:
+        public final fun setA (a: kotlin.Int): <root>.A declared in <root>.A
+      $this: VALUE_PARAMETER name:<this> type:<root>.A
+      VALUE_PARAMETER name:a index:0 type:kotlin.Int
+    FUN FAKE_OVERRIDE name:openGet visibility:public modality:OPEN <> ($this:<root>.A) returnType:kotlin.Int [fake_override]
+      annotations:
+        CompileTimeCalculation
+      overridden:
+        public open fun openGet (): kotlin.Int declared in <root>.A
+      $this: VALUE_PARAMETER name:<this> type:<root>.A
+    FUN FAKE_OVERRIDE name:<set-a> visibility:public modality:FINAL <> ($this:<root>.A, <set-?>:kotlin.Int) returnType:kotlin.Unit [fake_override]
+      correspondingProperty: PROPERTY FAKE_OVERRIDE name:a visibility:public modality:FINAL [fake_override,var]
+      overridden:
+        public final fun <set-a> (<set-?>: kotlin.Int): kotlin.Unit declared in <root>.A
+      $this: VALUE_PARAMETER name:<this> type:<root>.A
+      VALUE_PARAMETER name:<set-?> index:0 type:kotlin.Int
+    FUN FAKE_OVERRIDE name:<get-a> visibility:public modality:FINAL <> ($this:<root>.A) returnType:kotlin.Int [fake_override]
+      correspondingProperty: PROPERTY FAKE_OVERRIDE name:a visibility:public modality:FINAL [fake_override,var]
+      overridden:
+        public final fun <get-a> (): kotlin.Int declared in <root>.A
+      $this: VALUE_PARAMETER name:<this> type:<root>.A
+    FUN FAKE_OVERRIDE name:equals visibility:public modality:OPEN <> ($this:kotlin.Any, other:kotlin.Any?) returnType:kotlin.Boolean [fake_override,operator]
+      overridden:
+        public open fun equals (other: kotlin.Any?): kotlin.Boolean [fake_override,operator] declared in <root>.A
+      $this: VALUE_PARAMETER name:<this> type:kotlin.Any
+      VALUE_PARAMETER name:other index:0 type:kotlin.Any?
+    FUN FAKE_OVERRIDE name:hashCode visibility:public modality:OPEN <> ($this:kotlin.Any) returnType:kotlin.Int [fake_override]
+      overridden:
+        public open fun hashCode (): kotlin.Int [fake_override] declared in <root>.A
+      $this: VALUE_PARAMETER name:<this> type:kotlin.Any
+    FUN FAKE_OVERRIDE name:toString visibility:public modality:OPEN <> ($this:kotlin.Any) returnType:kotlin.String [fake_override]
+      overridden:
+        public open fun toString (): kotlin.String [fake_override] declared in <root>.A
+      $this: VALUE_PARAMETER name:<this> type:kotlin.Any
+  CLASS CLASS name:C modality:OPEN visibility:public superTypes:[<root>.B]
+    $this: VALUE_PARAMETER INSTANCE_RECEIVER name:<this> type:<root>.C
+    CONSTRUCTOR visibility:public <> (c:kotlin.Int) returnType:<root>.C [primary]
+      annotations:
+        CompileTimeCalculation
+      VALUE_PARAMETER name:c index:0 type:kotlin.Int
+      BLOCK_BODY
+        DELEGATING_CONSTRUCTOR_CALL 'public constructor <init> (b: kotlin.Int) [primary] declared in <root>.B'
+          b: CALL 'public final fun jsBitOr (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Int declared in kotlin.internal.ir' type=kotlin.Int origin=SYNTHESIZED_STATEMENT
+            arg0: CALL 'public final fun jsPlus (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Any? declared in kotlin.internal.ir' type=kotlin.Int origin=PLUS
+              arg0: GET_VAR 'c: kotlin.Int declared in <root>.C.<init>' type=kotlin.Int origin=null
+              arg1: CONST Int type=kotlin.Int value=1
+            arg1: CONST Int type=kotlin.Int value=0
+        SET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:c type:kotlin.Int visibility:private [final]' type=kotlin.Unit origin=INITIALIZE_FIELD
+          receiver: GET_VAR '<this>: <root>.C declared in <root>.C' type=<root>.C origin=null
+          value: GET_VAR 'c: kotlin.Int declared in <root>.C.<init>' type=kotlin.Int origin=INITIALIZE_PROPERTY_FROM_PARAMETER
+    FUN DEFAULT_PROPERTY_ACCESSOR name:<get-c> visibility:public modality:FINAL <> ($this:<root>.C) returnType:kotlin.Int
+      correspondingProperty: PROPERTY name:c visibility:public modality:FINAL [val]
+      $this: VALUE_PARAMETER name:<this> type:<root>.C
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='public final fun <get-c> (): kotlin.Int declared in <root>.C'
+          GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:c type:kotlin.Int visibility:private [final]' type=kotlin.Int origin=null
+            receiver: GET_VAR '<this>: <root>.C declared in <root>.C.<get-c>' type=<root>.C origin=null
+    FIELD PROPERTY_BACKING_FIELD name:c type:kotlin.Int visibility:private [final]
+    FUN name:getAFromC visibility:public modality:FINAL <> ($this:<root>.C) returnType:kotlin.Int
+      annotations:
+        CompileTimeCalculation
+      $this: VALUE_PARAMETER name:<this> type:<root>.C
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='public final fun getAFromC (): kotlin.Int declared in <root>.C'
+          CALL 'public final fun <get-a> (): kotlin.Int [fake_override] declared in <root>.C' type=kotlin.Int origin=GET_PROPERTY
+            $this: GET_VAR '<this>: <root>.C declared in <root>.C.getAFromC' type=<root>.C origin=null
+    FUN name:openGet visibility:public modality:OPEN <> ($this:<root>.C) returnType:kotlin.Int
+      annotations:
+        CompileTimeCalculation
+      overridden:
+        public open fun openGet (): kotlin.Int [fake_override] declared in <root>.B
+      $this: VALUE_PARAMETER name:<this> type:<root>.C
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='public open fun openGet (): kotlin.Int declared in <root>.C'
+          CALL 'public open fun openGet (): kotlin.Int [fake_override] declared in <root>.B' superQualifier='CLASS CLASS name:B modality:OPEN visibility:public superTypes:[<root>.A]' type=kotlin.Int origin=null
+            $this: GET_VAR '<this>: <root>.C declared in <root>.C.openGet' type=<root>.C origin=null
+    FUN FAKE_OVERRIDE name:get visibility:public modality:FINAL <> ($this:<root>.A) returnType:kotlin.Int [fake_override]
+      annotations:
+        CompileTimeCalculation
+      overridden:
+        public final fun get (): kotlin.Int [fake_override] declared in <root>.B
+      $this: VALUE_PARAMETER name:<this> type:<root>.A
+    FUN FAKE_OVERRIDE name:getAFromB visibility:public modality:FINAL <> ($this:<root>.B) returnType:kotlin.Int [fake_override]
+      annotations:
+        CompileTimeCalculation
+      overridden:
+        public final fun getAFromB (): kotlin.Int declared in <root>.B
+      $this: VALUE_PARAMETER name:<this> type:<root>.B
+    FUN FAKE_OVERRIDE name:getFromValueParameter visibility:public modality:FINAL <> ($this:<root>.B, a:<root>.A) returnType:kotlin.Int [fake_override]
+      annotations:
+        CompileTimeCalculation
+      overridden:
+        public final fun getFromValueParameter (a: <root>.A): kotlin.Int declared in <root>.B
+      $this: VALUE_PARAMETER name:<this> type:<root>.B
+      VALUE_PARAMETER name:a index:0 type:<root>.A
+    FUN FAKE_OVERRIDE name:setA visibility:public modality:FINAL <> ($this:<root>.A, a:kotlin.Int) returnType:<root>.A [fake_override]
+      annotations:
+        CompileTimeCalculation
+      overridden:
+        public final fun setA (a: kotlin.Int): <root>.A [fake_override] declared in <root>.B
+      $this: VALUE_PARAMETER name:<this> type:<root>.A
+      VALUE_PARAMETER name:a index:0 type:kotlin.Int
+    FUN FAKE_OVERRIDE name:<get-b> visibility:public modality:FINAL <> ($this:<root>.B) returnType:kotlin.Int [fake_override]
+      correspondingProperty: PROPERTY FAKE_OVERRIDE name:b visibility:public modality:FINAL [fake_override,val]
+      overridden:
+        public final fun <get-b> (): kotlin.Int declared in <root>.B
+      $this: VALUE_PARAMETER name:<this> type:<root>.B
+    FUN FAKE_OVERRIDE name:<set-a> visibility:public modality:FINAL <> ($this:<root>.A, <set-?>:kotlin.Int) returnType:kotlin.Unit [fake_override]
+      correspondingProperty: PROPERTY FAKE_OVERRIDE name:a visibility:public modality:FINAL [fake_override,var]
+      overridden:
+        public final fun <set-a> (<set-?>: kotlin.Int): kotlin.Unit [fake_override] declared in <root>.B
+      $this: VALUE_PARAMETER name:<this> type:<root>.A
+      VALUE_PARAMETER name:<set-?> index:0 type:kotlin.Int
+    FUN FAKE_OVERRIDE name:<get-a> visibility:public modality:FINAL <> ($this:<root>.A) returnType:kotlin.Int [fake_override]
+      correspondingProperty: PROPERTY FAKE_OVERRIDE name:a visibility:public modality:FINAL [fake_override,var]
+      overridden:
+        public final fun <get-a> (): kotlin.Int [fake_override] declared in <root>.B
+      $this: VALUE_PARAMETER name:<this> type:<root>.A
+    FUN FAKE_OVERRIDE name:equals visibility:public modality:OPEN <> ($this:kotlin.Any, other:kotlin.Any?) returnType:kotlin.Boolean [fake_override,operator]
+      overridden:
+        public open fun equals (other: kotlin.Any?): kotlin.Boolean [fake_override,operator] declared in <root>.B
+      $this: VALUE_PARAMETER name:<this> type:kotlin.Any
+      VALUE_PARAMETER name:other index:0 type:kotlin.Any?
+    FUN FAKE_OVERRIDE name:hashCode visibility:public modality:OPEN <> ($this:kotlin.Any) returnType:kotlin.Int [fake_override]
+      overridden:
+        public open fun hashCode (): kotlin.Int [fake_override] declared in <root>.B
+      $this: VALUE_PARAMETER name:<this> type:kotlin.Any
+    FUN FAKE_OVERRIDE name:toString visibility:public modality:OPEN <> ($this:kotlin.Any) returnType:kotlin.String [fake_override]
+      overridden:
+        public open fun toString (): kotlin.String [fake_override] declared in <root>.B
+      $this: VALUE_PARAMETER name:<this> type:kotlin.Any
+  CLASS CLASS name:D modality:OPEN visibility:public superTypes:[<root>.C]
+    $this: VALUE_PARAMETER INSTANCE_RECEIVER name:<this> type:<root>.D
+    CONSTRUCTOR visibility:public <> (d:kotlin.Int) returnType:<root>.D [primary]
+      annotations:
+        CompileTimeCalculation
+      VALUE_PARAMETER name:d index:0 type:kotlin.Int
+      BLOCK_BODY
+        DELEGATING_CONSTRUCTOR_CALL 'public constructor <init> (c: kotlin.Int) [primary] declared in <root>.C'
+          c: CALL 'public final fun jsBitOr (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Int declared in kotlin.internal.ir' type=kotlin.Int origin=SYNTHESIZED_STATEMENT
+            arg0: CALL 'public final fun jsPlus (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Any? declared in kotlin.internal.ir' type=kotlin.Int origin=PLUS
+              arg0: GET_VAR 'd: kotlin.Int declared in <root>.D.<init>' type=kotlin.Int origin=null
+              arg1: CONST Int type=kotlin.Int value=1
+            arg1: CONST Int type=kotlin.Int value=0
+        SET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:d type:kotlin.Int visibility:private [final]' type=kotlin.Unit origin=INITIALIZE_FIELD
+          receiver: GET_VAR '<this>: <root>.D declared in <root>.D' type=<root>.D origin=null
+          value: GET_VAR 'd: kotlin.Int declared in <root>.D.<init>' type=kotlin.Int origin=INITIALIZE_PROPERTY_FROM_PARAMETER
+    FUN DEFAULT_PROPERTY_ACCESSOR name:<get-d> visibility:public modality:FINAL <> ($this:<root>.D) returnType:kotlin.Int
+      correspondingProperty: PROPERTY name:d visibility:public modality:FINAL [val]
+      $this: VALUE_PARAMETER name:<this> type:<root>.D
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='public final fun <get-d> (): kotlin.Int declared in <root>.D'
+          GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:d type:kotlin.Int visibility:private [final]' type=kotlin.Int origin=null
+            receiver: GET_VAR '<this>: <root>.D declared in <root>.D.<get-d>' type=<root>.D origin=null
+    FIELD PROPERTY_BACKING_FIELD name:d type:kotlin.Int visibility:private [final]
+    FUN FAKE_OVERRIDE name:get visibility:public modality:FINAL <> ($this:<root>.A) returnType:kotlin.Int [fake_override]
+      annotations:
+        CompileTimeCalculation
+      overridden:
+        public final fun get (): kotlin.Int [fake_override] declared in <root>.C
+      $this: VALUE_PARAMETER name:<this> type:<root>.A
+    FUN FAKE_OVERRIDE name:getAFromB visibility:public modality:FINAL <> ($this:<root>.B) returnType:kotlin.Int [fake_override]
+      annotations:
+        CompileTimeCalculation
+      overridden:
+        public final fun getAFromB (): kotlin.Int [fake_override] declared in <root>.C
+      $this: VALUE_PARAMETER name:<this> type:<root>.B
+    FUN FAKE_OVERRIDE name:getAFromC visibility:public modality:FINAL <> ($this:<root>.C) returnType:kotlin.Int [fake_override]
+      annotations:
+        CompileTimeCalculation
+      overridden:
+        public final fun getAFromC (): kotlin.Int declared in <root>.C
+      $this: VALUE_PARAMETER name:<this> type:<root>.C
+    FUN FAKE_OVERRIDE name:getFromValueParameter visibility:public modality:FINAL <> ($this:<root>.B, a:<root>.A) returnType:kotlin.Int [fake_override]
+      annotations:
+        CompileTimeCalculation
+      overridden:
+        public final fun getFromValueParameter (a: <root>.A): kotlin.Int [fake_override] declared in <root>.C
+      $this: VALUE_PARAMETER name:<this> type:<root>.B
+      VALUE_PARAMETER name:a index:0 type:<root>.A
+    FUN FAKE_OVERRIDE name:setA visibility:public modality:FINAL <> ($this:<root>.A, a:kotlin.Int) returnType:<root>.A [fake_override]
+      annotations:
+        CompileTimeCalculation
+      overridden:
+        public final fun setA (a: kotlin.Int): <root>.A [fake_override] declared in <root>.C
+      $this: VALUE_PARAMETER name:<this> type:<root>.A
+      VALUE_PARAMETER name:a index:0 type:kotlin.Int
+    FUN FAKE_OVERRIDE name:openGet visibility:public modality:OPEN <> ($this:<root>.C) returnType:kotlin.Int [fake_override]
+      annotations:
+        CompileTimeCalculation
+      overridden:
+        public open fun openGet (): kotlin.Int declared in <root>.C
+      $this: VALUE_PARAMETER name:<this> type:<root>.C
+    FUN FAKE_OVERRIDE name:<get-b> visibility:public modality:FINAL <> ($this:<root>.B) returnType:kotlin.Int [fake_override]
+      correspondingProperty: PROPERTY FAKE_OVERRIDE name:b visibility:public modality:FINAL [fake_override,val]
+      overridden:
+        public final fun <get-b> (): kotlin.Int [fake_override] declared in <root>.C
+      $this: VALUE_PARAMETER name:<this> type:<root>.B
+    FUN FAKE_OVERRIDE name:<get-c> visibility:public modality:FINAL <> ($this:<root>.C) returnType:kotlin.Int [fake_override]
+      correspondingProperty: PROPERTY FAKE_OVERRIDE name:c visibility:public modality:FINAL [fake_override,val]
+      overridden:
+        public final fun <get-c> (): kotlin.Int declared in <root>.C
+      $this: VALUE_PARAMETER name:<this> type:<root>.C
+    FUN FAKE_OVERRIDE name:<set-a> visibility:public modality:FINAL <> ($this:<root>.A, <set-?>:kotlin.Int) returnType:kotlin.Unit [fake_override]
+      correspondingProperty: PROPERTY FAKE_OVERRIDE name:a visibility:public modality:FINAL [fake_override,var]
+      overridden:
+        public final fun <set-a> (<set-?>: kotlin.Int): kotlin.Unit [fake_override] declared in <root>.C
+      $this: VALUE_PARAMETER name:<this> type:<root>.A
+      VALUE_PARAMETER name:<set-?> index:0 type:kotlin.Int
+    FUN FAKE_OVERRIDE name:<get-a> visibility:public modality:FINAL <> ($this:<root>.A) returnType:kotlin.Int [fake_override]
+      correspondingProperty: PROPERTY FAKE_OVERRIDE name:a visibility:public modality:FINAL [fake_override,var]
+      overridden:
+        public final fun <get-a> (): kotlin.Int [fake_override] declared in <root>.C
+      $this: VALUE_PARAMETER name:<this> type:<root>.A
+    FUN FAKE_OVERRIDE name:equals visibility:public modality:OPEN <> ($this:kotlin.Any, other:kotlin.Any?) returnType:kotlin.Boolean [fake_override,operator]
+      overridden:
+        public open fun equals (other: kotlin.Any?): kotlin.Boolean [fake_override,operator] declared in <root>.C
+      $this: VALUE_PARAMETER name:<this> type:kotlin.Any
+      VALUE_PARAMETER name:other index:0 type:kotlin.Any?
+    FUN FAKE_OVERRIDE name:hashCode visibility:public modality:OPEN <> ($this:kotlin.Any) returnType:kotlin.Int [fake_override]
+      overridden:
+        public open fun hashCode (): kotlin.Int [fake_override] declared in <root>.C
+      $this: VALUE_PARAMETER name:<this> type:kotlin.Any
+    FUN FAKE_OVERRIDE name:toString visibility:public modality:OPEN <> ($this:kotlin.Any) returnType:kotlin.String [fake_override]
+      overridden:
+        public open fun toString (): kotlin.String [fake_override] declared in <root>.C
+      $this: VALUE_PARAMETER name:<this> type:kotlin.Any
+  CLASS CLASS name:E modality:OPEN visibility:public superTypes:[<root>.D]
+    $this: VALUE_PARAMETER INSTANCE_RECEIVER name:<this> type:<root>.E
+    CONSTRUCTOR visibility:public <> (e:kotlin.Int) returnType:<root>.E [primary]
+      annotations:
+        CompileTimeCalculation
+      VALUE_PARAMETER name:e index:0 type:kotlin.Int
+      BLOCK_BODY
+        DELEGATING_CONSTRUCTOR_CALL 'public constructor <init> (d: kotlin.Int) [primary] declared in <root>.D'
+          d: CALL 'public final fun jsBitOr (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Int declared in kotlin.internal.ir' type=kotlin.Int origin=SYNTHESIZED_STATEMENT
+            arg0: CALL 'public final fun jsPlus (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Any? declared in kotlin.internal.ir' type=kotlin.Int origin=PLUS
+              arg0: GET_VAR 'e: kotlin.Int declared in <root>.E.<init>' type=kotlin.Int origin=null
+              arg1: CONST Int type=kotlin.Int value=1
+            arg1: CONST Int type=kotlin.Int value=0
+        SET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:e type:kotlin.Int visibility:private [final]' type=kotlin.Unit origin=INITIALIZE_FIELD
+          receiver: GET_VAR '<this>: <root>.E declared in <root>.E' type=<root>.E origin=null
+          value: GET_VAR 'e: kotlin.Int declared in <root>.E.<init>' type=kotlin.Int origin=INITIALIZE_PROPERTY_FROM_PARAMETER
+    FUN DEFAULT_PROPERTY_ACCESSOR name:<get-e> visibility:public modality:FINAL <> ($this:<root>.E) returnType:kotlin.Int
+      correspondingProperty: PROPERTY name:e visibility:public modality:FINAL [val]
+      $this: VALUE_PARAMETER name:<this> type:<root>.E
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='public final fun <get-e> (): kotlin.Int declared in <root>.E'
+          GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:e type:kotlin.Int visibility:private [final]' type=kotlin.Int origin=null
+            receiver: GET_VAR '<this>: <root>.E declared in <root>.E.<get-e>' type=<root>.E origin=null
+    FIELD PROPERTY_BACKING_FIELD name:e type:kotlin.Int visibility:private [final]
+    FUN FAKE_OVERRIDE name:get visibility:public modality:FINAL <> ($this:<root>.A) returnType:kotlin.Int [fake_override]
+      annotations:
+        CompileTimeCalculation
+      overridden:
+        public final fun get (): kotlin.Int [fake_override] declared in <root>.D
+      $this: VALUE_PARAMETER name:<this> type:<root>.A
+    FUN FAKE_OVERRIDE name:getAFromB visibility:public modality:FINAL <> ($this:<root>.B) returnType:kotlin.Int [fake_override]
+      annotations:
+        CompileTimeCalculation
+      overridden:
+        public final fun getAFromB (): kotlin.Int [fake_override] declared in <root>.D
+      $this: VALUE_PARAMETER name:<this> type:<root>.B
+    FUN FAKE_OVERRIDE name:getAFromC visibility:public modality:FINAL <> ($this:<root>.C) returnType:kotlin.Int [fake_override]
+      annotations:
+        CompileTimeCalculation
+      overridden:
+        public final fun getAFromC (): kotlin.Int [fake_override] declared in <root>.D
+      $this: VALUE_PARAMETER name:<this> type:<root>.C
+    FUN FAKE_OVERRIDE name:getFromValueParameter visibility:public modality:FINAL <> ($this:<root>.B, a:<root>.A) returnType:kotlin.Int [fake_override]
+      annotations:
+        CompileTimeCalculation
+      overridden:
+        public final fun getFromValueParameter (a: <root>.A): kotlin.Int [fake_override] declared in <root>.D
+      $this: VALUE_PARAMETER name:<this> type:<root>.B
+      VALUE_PARAMETER name:a index:0 type:<root>.A
+    FUN FAKE_OVERRIDE name:setA visibility:public modality:FINAL <> ($this:<root>.A, a:kotlin.Int) returnType:<root>.A [fake_override]
+      annotations:
+        CompileTimeCalculation
+      overridden:
+        public final fun setA (a: kotlin.Int): <root>.A [fake_override] declared in <root>.D
+      $this: VALUE_PARAMETER name:<this> type:<root>.A
+      VALUE_PARAMETER name:a index:0 type:kotlin.Int
+    FUN FAKE_OVERRIDE name:openGet visibility:public modality:OPEN <> ($this:<root>.C) returnType:kotlin.Int [fake_override]
+      annotations:
+        CompileTimeCalculation
+      overridden:
+        public open fun openGet (): kotlin.Int [fake_override] declared in <root>.D
+      $this: VALUE_PARAMETER name:<this> type:<root>.C
+    FUN FAKE_OVERRIDE name:<get-b> visibility:public modality:FINAL <> ($this:<root>.B) returnType:kotlin.Int [fake_override]
+      correspondingProperty: PROPERTY FAKE_OVERRIDE name:b visibility:public modality:FINAL [fake_override,val]
+      overridden:
+        public final fun <get-b> (): kotlin.Int [fake_override] declared in <root>.D
+      $this: VALUE_PARAMETER name:<this> type:<root>.B
+    FUN FAKE_OVERRIDE name:<get-c> visibility:public modality:FINAL <> ($this:<root>.C) returnType:kotlin.Int [fake_override]
+      correspondingProperty: PROPERTY FAKE_OVERRIDE name:c visibility:public modality:FINAL [fake_override,val]
+      overridden:
+        public final fun <get-c> (): kotlin.Int [fake_override] declared in <root>.D
+      $this: VALUE_PARAMETER name:<this> type:<root>.C
+    FUN FAKE_OVERRIDE name:<get-d> visibility:public modality:FINAL <> ($this:<root>.D) returnType:kotlin.Int [fake_override]
+      correspondingProperty: PROPERTY FAKE_OVERRIDE name:d visibility:public modality:FINAL [fake_override,val]
+      overridden:
+        public final fun <get-d> (): kotlin.Int declared in <root>.D
+      $this: VALUE_PARAMETER name:<this> type:<root>.D
+    FUN FAKE_OVERRIDE name:<set-a> visibility:public modality:FINAL <> ($this:<root>.A, <set-?>:kotlin.Int) returnType:kotlin.Unit [fake_override]
+      correspondingProperty: PROPERTY FAKE_OVERRIDE name:a visibility:public modality:FINAL [fake_override,var]
+      overridden:
+        public final fun <set-a> (<set-?>: kotlin.Int): kotlin.Unit [fake_override] declared in <root>.D
+      $this: VALUE_PARAMETER name:<this> type:<root>.A
+      VALUE_PARAMETER name:<set-?> index:0 type:kotlin.Int
+    FUN FAKE_OVERRIDE name:<get-a> visibility:public modality:FINAL <> ($this:<root>.A) returnType:kotlin.Int [fake_override]
+      correspondingProperty: PROPERTY FAKE_OVERRIDE name:a visibility:public modality:FINAL [fake_override,var]
+      overridden:
+        public final fun <get-a> (): kotlin.Int [fake_override] declared in <root>.D
+      $this: VALUE_PARAMETER name:<this> type:<root>.A
+    FUN FAKE_OVERRIDE name:equals visibility:public modality:OPEN <> ($this:kotlin.Any, other:kotlin.Any?) returnType:kotlin.Boolean [fake_override,operator]
+      overridden:
+        public open fun equals (other: kotlin.Any?): kotlin.Boolean [fake_override,operator] declared in <root>.D
+      $this: VALUE_PARAMETER name:<this> type:kotlin.Any
+      VALUE_PARAMETER name:other index:0 type:kotlin.Any?
+    FUN FAKE_OVERRIDE name:hashCode visibility:public modality:OPEN <> ($this:kotlin.Any) returnType:kotlin.Int [fake_override]
+      overridden:
+        public open fun hashCode (): kotlin.Int [fake_override] declared in <root>.D
+      $this: VALUE_PARAMETER name:<this> type:kotlin.Any
+    FUN FAKE_OVERRIDE name:toString visibility:public modality:OPEN <> ($this:kotlin.Any) returnType:kotlin.String [fake_override]
+      overridden:
+        public open fun toString (): kotlin.String [fake_override] declared in <root>.D
+      $this: VALUE_PARAMETER name:<this> type:kotlin.Any
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-a1> visibility:public modality:FINAL <> () returnType:kotlin.Int
+    correspondingProperty: PROPERTY name:a1 visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-a1> (): kotlin.Int declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:a1 type:kotlin.Int visibility:public [final,static]' type=kotlin.Int origin=null
+  FIELD PROPERTY_BACKING_FIELD name:a1 type:kotlin.Int visibility:public [final,static]
+    EXPRESSION_BODY
+      CONST Int type=kotlin.Int value=1
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-a2> visibility:public modality:FINAL <> () returnType:kotlin.Int
+    correspondingProperty: PROPERTY name:a2 visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-a2> (): kotlin.Int declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:a2 type:kotlin.Int visibility:public [final,static]' type=kotlin.Int origin=null
+  FIELD PROPERTY_BACKING_FIELD name:a2 type:kotlin.Int visibility:public [final,static]
+    EXPRESSION_BODY
+      CONST Int type=kotlin.Int value=2
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-a3> visibility:public modality:FINAL <> () returnType:kotlin.Int
+    correspondingProperty: PROPERTY name:a3 visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-a3> (): kotlin.Int declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:a3 type:kotlin.Int visibility:public [final,static]' type=kotlin.Int origin=null
+  FIELD PROPERTY_BACKING_FIELD name:a3 type:kotlin.Int visibility:public [final,static]
+    EXPRESSION_BODY
+      CONST Int type=kotlin.Int value=1
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-b1> visibility:public modality:FINAL <> () returnType:kotlin.Int
+    correspondingProperty: PROPERTY name:b1 visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-b1> (): kotlin.Int declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:b1 type:kotlin.Int visibility:public [final,static]' type=kotlin.Int origin=null
+  FIELD PROPERTY_BACKING_FIELD name:b1 type:kotlin.Int visibility:public [final,static]
+    EXPRESSION_BODY
+      CONST Int type=kotlin.Int value=2
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-b2> visibility:public modality:FINAL <> () returnType:kotlin.Int
+    correspondingProperty: PROPERTY name:b2 visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-b2> (): kotlin.Int declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:b2 type:kotlin.Int visibility:public [final,static]' type=kotlin.Int origin=null
+  FIELD PROPERTY_BACKING_FIELD name:b2 type:kotlin.Int visibility:public [final,static]
+    EXPRESSION_BODY
+      CONST Int type=kotlin.Int value=10
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-b3> visibility:public modality:FINAL <> () returnType:kotlin.Int
+    correspondingProperty: PROPERTY name:b3 visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-b3> (): kotlin.Int declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:b3 type:kotlin.Int visibility:public [final,static]' type=kotlin.Int origin=null
+  FIELD PROPERTY_BACKING_FIELD name:b3 type:kotlin.Int visibility:public [final,static]
+    EXPRESSION_BODY
+      CONST Int type=kotlin.Int value=2
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-b4> visibility:public modality:FINAL <> () returnType:kotlin.Int
+    correspondingProperty: PROPERTY name:b4 visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-b4> (): kotlin.Int declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:b4 type:kotlin.Int visibility:public [final,static]' type=kotlin.Int origin=null
+  FIELD PROPERTY_BACKING_FIELD name:b4 type:kotlin.Int visibility:public [final,static]
+    EXPRESSION_BODY
+      CONST Int type=kotlin.Int value=-1
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-c1> visibility:public modality:FINAL <> () returnType:kotlin.Int
+    correspondingProperty: PROPERTY name:c1 visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-c1> (): kotlin.Int declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:c1 type:kotlin.Int visibility:public [final,static]' type=kotlin.Int origin=null
+  FIELD PROPERTY_BACKING_FIELD name:c1 type:kotlin.Int visibility:public [final,static]
+    EXPRESSION_BODY
+      CONST Int type=kotlin.Int value=3
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-c2> visibility:public modality:FINAL <> () returnType:kotlin.Int
+    correspondingProperty: PROPERTY name:c2 visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-c2> (): kotlin.Int declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:c2 type:kotlin.Int visibility:public [final,static]' type=kotlin.Int origin=null
+  FIELD PROPERTY_BACKING_FIELD name:c2 type:kotlin.Int visibility:public [final,static]
+    EXPRESSION_BODY
+      CONST Int type=kotlin.Int value=3
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-c3> visibility:public modality:FINAL <> () returnType:kotlin.Int
+    correspondingProperty: PROPERTY name:c3 visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-c3> (): kotlin.Int declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:c3 type:kotlin.Int visibility:public [final,static]' type=kotlin.Int origin=null
+  FIELD PROPERTY_BACKING_FIELD name:c3 type:kotlin.Int visibility:public [final,static]
+    EXPRESSION_BODY
+      CONST Int type=kotlin.Int value=3
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-c4> visibility:public modality:FINAL <> () returnType:kotlin.Int
+    correspondingProperty: PROPERTY name:c4 visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-c4> (): kotlin.Int declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:c4 type:kotlin.Int visibility:public [final,static]' type=kotlin.Int origin=null
+  FIELD PROPERTY_BACKING_FIELD name:c4 type:kotlin.Int visibility:public [final,static]
+    EXPRESSION_BODY
+      CONST Int type=kotlin.Int value=3
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-c5> visibility:public modality:FINAL <> () returnType:kotlin.Int
+    correspondingProperty: PROPERTY name:c5 visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-c5> (): kotlin.Int declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:c5 type:kotlin.Int visibility:public [final,static]' type=kotlin.Int origin=null
+  FIELD PROPERTY_BACKING_FIELD name:c5 type:kotlin.Int visibility:public [final,static]
+    EXPRESSION_BODY
+      CONST Int type=kotlin.Int value=10
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-c6> visibility:public modality:FINAL <> () returnType:kotlin.Int
+    correspondingProperty: PROPERTY name:c6 visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-c6> (): kotlin.Int declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:c6 type:kotlin.Int visibility:public [final,static]' type=kotlin.Int origin=null
+  FIELD PROPERTY_BACKING_FIELD name:c6 type:kotlin.Int visibility:public [final,static]
+    EXPRESSION_BODY
+      CONST Int type=kotlin.Int value=-2
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-d1> visibility:public modality:FINAL <> () returnType:kotlin.Int
+    correspondingProperty: PROPERTY name:d1 visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-d1> (): kotlin.Int declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:d1 type:kotlin.Int visibility:public [final,static]' type=kotlin.Int origin=null
+  FIELD PROPERTY_BACKING_FIELD name:d1 type:kotlin.Int visibility:public [final,static]
+    EXPRESSION_BODY
+      CONST Int type=kotlin.Int value=4
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-e1> visibility:public modality:FINAL <> () returnType:kotlin.Int
+    correspondingProperty: PROPERTY name:e1 visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-e1> (): kotlin.Int declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:e1 type:kotlin.Int visibility:public [final,static]' type=kotlin.Int origin=null
+  FIELD PROPERTY_BACKING_FIELD name:e1 type:kotlin.Int visibility:public [final,static]
+    EXPRESSION_BODY
+      CONST Int type=kotlin.Int value=5
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-nonConstButComputable> visibility:public modality:FINAL <> () returnType:kotlin.Int
+    correspondingProperty: PROPERTY name:nonConstButComputable visibility:public modality:FINAL [val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-nonConstButComputable> (): kotlin.Int declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:nonConstButComputable type:kotlin.Int visibility:private [final,static]' type=kotlin.Int origin=null
+  FIELD PROPERTY_BACKING_FIELD name:nonConstButComputable type:kotlin.Int visibility:private [final,static]
+    EXPRESSION_BODY
+      CONST Int type=kotlin.Int value=1
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-mustNotCompute> visibility:public modality:FINAL <> () returnType:kotlin.Int
+    correspondingProperty: PROPERTY name:mustNotCompute visibility:public modality:FINAL [val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-mustNotCompute> (): kotlin.Int declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:mustNotCompute type:kotlin.Int visibility:private [final,static]' type=kotlin.Int origin=null
+  FIELD PROPERTY_BACKING_FIELD name:mustNotCompute type:kotlin.Int visibility:private [final,static]
+    EXPRESSION_BODY
+      CALL 'public final fun jsBitOr (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Int declared in kotlin.internal.ir' type=kotlin.Int origin=SYNTHESIZED_STATEMENT
+        arg0: CALL 'public final fun jsPlus (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Any? declared in kotlin.internal.ir' type=kotlin.Int origin=PLUS
+          arg0: GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:nonConstButComputable type:kotlin.Int visibility:private [final,static]' type=kotlin.Int origin=GET_PROPERTY
+          arg1: CONST Int type=kotlin.Int value=1
+        arg1: CONST Int type=kotlin.Int value=0

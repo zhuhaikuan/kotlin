@@ -1,0 +1,514 @@
+FILE fqName:<root> fileName:/enums2.kt
+  CLASS ENUM_CLASS name:Empty modality:FINAL visibility:public superTypes:[kotlin.Enum<<root>.Empty>]
+    annotations:
+      CompileTimeCalculation
+    $this: VALUE_PARAMETER INSTANCE_RECEIVER name:<this> type:<root>.Empty
+    CONSTRUCTOR visibility:private <> (name:kotlin.String, ordinal:kotlin.Int) returnType:<root>.Empty [primary]
+      VALUE_PARAMETER SYNTHESIZED_DECLARATION name:name index:0 type:kotlin.String
+      VALUE_PARAMETER SYNTHESIZED_DECLARATION name:ordinal index:1 type:kotlin.Int
+      BLOCK_BODY
+        DELEGATING_CONSTRUCTOR_CALL 'public constructor <init> (name: kotlin.String, ordinal: kotlin.Int) [primary] declared in kotlin.Enum'
+          <E>: <none>
+          name: GET_VAR 'name: kotlin.String declared in <root>.Empty.<init>' type=kotlin.String origin=null
+          ordinal: GET_VAR 'ordinal: kotlin.Int declared in <root>.Empty.<init>' type=kotlin.Int origin=null
+    FUN FAKE_OVERRIDE name:hashCode visibility:public modality:OPEN <> ($this:kotlin.Enum<<root>.Empty>) returnType:kotlin.Int [fake_override]
+      annotations:
+        EvaluateIntrinsic(file = '')
+      overridden:
+        public open fun hashCode (): kotlin.Int declared in kotlin.Enum
+      $this: VALUE_PARAMETER name:<this> type:kotlin.Enum<<root>.Empty>
+    FUN FAKE_OVERRIDE name:<get-name> visibility:public modality:FINAL <> ($this:kotlin.Enum<<root>.Empty>) returnType:kotlin.String [fake_override]
+      correspondingProperty: PROPERTY FAKE_OVERRIDE name:name visibility:public modality:FINAL [fake_override,val]
+      overridden:
+        public final fun <get-name> (): kotlin.String declared in kotlin.Enum
+      $this: VALUE_PARAMETER name:<this> type:kotlin.Enum<<root>.Empty>
+    FUN FAKE_OVERRIDE name:<get-ordinal> visibility:public modality:FINAL <> ($this:kotlin.Enum<<root>.Empty>) returnType:kotlin.Int [fake_override]
+      correspondingProperty: PROPERTY FAKE_OVERRIDE name:ordinal visibility:public modality:FINAL [fake_override,val]
+      overridden:
+        public final fun <get-ordinal> (): kotlin.Int declared in kotlin.Enum
+      $this: VALUE_PARAMETER name:<this> type:kotlin.Enum<<root>.Empty>
+    FUN FAKE_OVERRIDE name:compareTo visibility:public modality:OPEN <> ($this:kotlin.Enum<<root>.Empty>, other:<root>.Empty) returnType:kotlin.Int [fake_override,operator]
+      overridden:
+        public open fun compareTo (other: E of kotlin.Enum): kotlin.Int [operator] declared in kotlin.Enum
+      $this: VALUE_PARAMETER name:<this> type:kotlin.Enum<<root>.Empty>
+      VALUE_PARAMETER name:other index:0 type:<root>.Empty
+    FUN FAKE_OVERRIDE name:equals visibility:public modality:OPEN <> ($this:kotlin.Enum<<root>.Empty>, other:kotlin.Any?) returnType:kotlin.Boolean [fake_override,operator]
+      overridden:
+        public open fun equals (other: kotlin.Any?): kotlin.Boolean [operator] declared in kotlin.Enum
+      $this: VALUE_PARAMETER name:<this> type:kotlin.Enum<<root>.Empty>
+      VALUE_PARAMETER name:other index:0 type:kotlin.Any?
+    FUN FAKE_OVERRIDE name:toString visibility:public modality:OPEN <> ($this:kotlin.Enum<<root>.Empty>) returnType:kotlin.String [fake_override]
+      overridden:
+        public open fun toString (): kotlin.String declared in kotlin.Enum
+      $this: VALUE_PARAMETER name:<this> type:kotlin.Enum<<root>.Empty>
+    FUN ENUM_CLASS_SPECIAL_MEMBER name:values visibility:public modality:FINAL <> () returnType:kotlin.Array<<root>.Empty>
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='public final fun values (): kotlin.Array<<root>.Empty> declared in <root>.Empty'
+          CALL 'public final fun arrayLiteral (arg0: kotlin.Any?): kotlin.Any? declared in kotlin.internal.ir' type=kotlin.Array<<root>.Empty> origin=null
+            arg0: CALL 'public final fun arrayLiteral (arg0: kotlin.Any?): kotlin.Any? declared in kotlin.internal.ir' type=kotlin.Array<<root>.Empty> origin=null
+              arg0: VARARG type=kotlin.Array<<root>.Empty> varargElementType=<root>.Empty
+    FUN ENUM_CLASS_SPECIAL_MEMBER name:valueOf visibility:public modality:FINAL <> (value:kotlin.String) returnType:<root>.Empty
+      VALUE_PARAMETER name:value index:0 type:kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='public final fun valueOf (value: kotlin.String): <root>.Empty declared in <root>.Empty'
+          WHEN type=<root>.Empty origin=null
+            BRANCH
+              if: CONST Boolean type=kotlin.Boolean value=true
+              then: CALL 'public final fun THROW_ISE (): kotlin.Nothing declared in kotlin' type=kotlin.Nothing origin=null
+    FIELD name:Empty_entriesInitialized type:kotlin.Boolean visibility:public [static]
+    FUN SYNTHESIZED_DECLARATION name:Empty_initEntries visibility:public modality:FINAL <> () returnType:kotlin.Unit
+      BLOCK_BODY
+        WHEN type=kotlin.Unit origin=null
+          BRANCH
+            if: GET_FIELD 'FIELD name:Empty_entriesInitialized type:kotlin.Boolean visibility:public [static]' type=kotlin.Boolean origin=null
+            then: RETURN type=kotlin.Nothing from='public final fun Empty_initEntries (): kotlin.Unit declared in <root>.Empty'
+              CALL 'public final fun Unit_getInstance (): kotlin.Unit declared in kotlin' type=kotlin.Unit origin=SYNTHESIZED_STATEMENT
+        SET_FIELD 'FIELD name:Empty_entriesInitialized type:kotlin.Boolean visibility:public [static]' type=kotlin.Unit origin=null
+          value: CONST Boolean type=kotlin.Boolean value=true
+  CLASS ENUM_CLASS name:Color modality:ABSTRACT visibility:public superTypes:[kotlin.Enum<<root>.Color>]
+    annotations:
+      CompileTimeCalculation
+    $this: VALUE_PARAMETER INSTANCE_RECEIVER name:<this> type:<root>.Color
+    CONSTRUCTOR visibility:private <> (name:kotlin.String, ordinal:kotlin.Int, rgb:kotlin.Int) returnType:<root>.Color [primary]
+      VALUE_PARAMETER SYNTHESIZED_DECLARATION name:name index:0 type:kotlin.String
+      VALUE_PARAMETER SYNTHESIZED_DECLARATION name:ordinal index:1 type:kotlin.Int
+      VALUE_PARAMETER name:rgb index:2 type:kotlin.Int
+      BLOCK_BODY
+        DELEGATING_CONSTRUCTOR_CALL 'public constructor <init> (name: kotlin.String, ordinal: kotlin.Int) [primary] declared in kotlin.Enum'
+          <E>: <none>
+          name: GET_VAR 'name: kotlin.String declared in <root>.Color.<init>' type=kotlin.String origin=null
+          ordinal: GET_VAR 'ordinal: kotlin.Int declared in <root>.Color.<init>' type=kotlin.Int origin=null
+        SET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:rgb type:kotlin.Int visibility:private [final]' type=kotlin.Unit origin=INITIALIZE_FIELD
+          receiver: GET_VAR '<this>: <root>.Color declared in <root>.Color' type=<root>.Color origin=null
+          value: GET_VAR 'rgb: kotlin.Int declared in <root>.Color.<init>' type=kotlin.Int origin=null
+    FUN DEFAULT_PROPERTY_ACCESSOR name:<get-rgb> visibility:public modality:FINAL <> ($this:<root>.Color) returnType:kotlin.Int
+      correspondingProperty: PROPERTY name:rgb visibility:public modality:FINAL [val]
+      $this: VALUE_PARAMETER name:<this> type:<root>.Color
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='public final fun <get-rgb> (): kotlin.Int declared in <root>.Color'
+          GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:rgb type:kotlin.Int visibility:private [final]' type=kotlin.Int origin=null
+            receiver: GET_VAR '<this>: <root>.Color declared in <root>.Color.<get-rgb>' type=<root>.Color origin=null
+    FIELD PROPERTY_BACKING_FIELD name:rgb type:kotlin.Int visibility:private [final]
+    CLASS ENUM_ENTRY name:BLACK modality:FINAL visibility:private superTypes:[<root>.Color]
+      $this: VALUE_PARAMETER INSTANCE_RECEIVER name:<this> type:<root>.Color.BLACK
+      CONSTRUCTOR visibility:private <> () returnType:<root>.Color.BLACK [primary]
+        BLOCK_BODY
+          SET_FIELD 'FIELD name:Color_BLACK_instance type:<root>.Color.BLACK? visibility:public [static]' type=kotlin.Unit origin=null
+            value: GET_VAR '<this>: <root>.Color.BLACK declared in <root>.Color.BLACK' type=<root>.Color.BLACK origin=null
+          CALL 'internal final fun Color_init_$Init$ (name: kotlin.String, ordinal: kotlin.Int, $this: <root>.Color): <root>.Color declared in <root>.Color' type=kotlin.Unit origin=null
+            name: CONST String type=kotlin.String value="BLACK"
+            ordinal: CONST Int type=kotlin.Int value=-1
+            $this: GET_VAR '<this>: <root>.Color declared in <root>.Color' type=<root>.Color origin=null
+          CALL 'public final fun Unit_getInstance (): kotlin.Unit declared in kotlin' type=kotlin.Unit origin=SYNTHESIZED_STATEMENT
+      FUN name:getColorAsString visibility:public modality:OPEN <> ($this:<root>.Color.BLACK) returnType:kotlin.String
+        overridden:
+          public abstract fun getColorAsString (): kotlin.String declared in <root>.Color
+        $this: VALUE_PARAMETER name:<this> type:<root>.Color.BLACK
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='public open fun getColorAsString (): kotlin.String declared in <root>.Color.BLACK'
+            CONST String type=kotlin.String value="0x000000"
+      FUN FAKE_OVERRIDE name:hashCode visibility:public modality:OPEN <> ($this:kotlin.Enum<<root>.Color>) returnType:kotlin.Int [fake_override]
+        annotations:
+          EvaluateIntrinsic(file = '')
+        overridden:
+          public open fun hashCode (): kotlin.Int [fake_override] declared in <root>.Color
+        $this: VALUE_PARAMETER name:<this> type:kotlin.Enum<<root>.Color>
+      FUN FAKE_OVERRIDE name:getColorAsInt visibility:public modality:FINAL <> ($this:<root>.Color) returnType:kotlin.Int [fake_override]
+        overridden:
+          public final fun getColorAsInt (): kotlin.Int declared in <root>.Color
+        $this: VALUE_PARAMETER name:<this> type:<root>.Color
+      FUN FAKE_OVERRIDE name:<get-name> visibility:public modality:FINAL <> ($this:kotlin.Enum<<root>.Color>) returnType:kotlin.String [fake_override]
+        correspondingProperty: PROPERTY FAKE_OVERRIDE name:name visibility:public modality:FINAL [fake_override,val]
+        overridden:
+          public final fun <get-name> (): kotlin.String [fake_override] declared in <root>.Color
+        $this: VALUE_PARAMETER name:<this> type:kotlin.Enum<<root>.Color>
+      FUN FAKE_OVERRIDE name:<get-ordinal> visibility:public modality:FINAL <> ($this:kotlin.Enum<<root>.Color>) returnType:kotlin.Int [fake_override]
+        correspondingProperty: PROPERTY FAKE_OVERRIDE name:ordinal visibility:public modality:FINAL [fake_override,val]
+        overridden:
+          public final fun <get-ordinal> (): kotlin.Int [fake_override] declared in <root>.Color
+        $this: VALUE_PARAMETER name:<this> type:kotlin.Enum<<root>.Color>
+      FUN FAKE_OVERRIDE name:<get-rgb> visibility:public modality:FINAL <> ($this:<root>.Color) returnType:kotlin.Int [fake_override]
+        correspondingProperty: PROPERTY FAKE_OVERRIDE name:rgb visibility:public modality:FINAL [fake_override,val]
+        overridden:
+          public final fun <get-rgb> (): kotlin.Int declared in <root>.Color
+        $this: VALUE_PARAMETER name:<this> type:<root>.Color
+      FUN FAKE_OVERRIDE name:compareTo visibility:public modality:OPEN <> ($this:kotlin.Enum<<root>.Color>, other:<root>.Color) returnType:kotlin.Int [fake_override,operator]
+        overridden:
+          public open fun compareTo (other: <root>.Color): kotlin.Int [fake_override,operator] declared in <root>.Color
+        $this: VALUE_PARAMETER name:<this> type:kotlin.Enum<<root>.Color>
+        VALUE_PARAMETER name:other index:0 type:<root>.Color
+      FUN FAKE_OVERRIDE name:equals visibility:public modality:OPEN <> ($this:kotlin.Enum<<root>.Color>, other:kotlin.Any?) returnType:kotlin.Boolean [fake_override,operator]
+        overridden:
+          public open fun equals (other: kotlin.Any?): kotlin.Boolean [fake_override,operator] declared in <root>.Color
+        $this: VALUE_PARAMETER name:<this> type:kotlin.Enum<<root>.Color>
+        VALUE_PARAMETER name:other index:0 type:kotlin.Any?
+      FUN FAKE_OVERRIDE name:toString visibility:public modality:OPEN <> ($this:kotlin.Enum<<root>.Color>) returnType:kotlin.String [fake_override]
+        overridden:
+          public open fun toString (): kotlin.String [fake_override] declared in <root>.Color
+        $this: VALUE_PARAMETER name:<this> type:kotlin.Enum<<root>.Color>
+    FIELD name:Color_BLACK_instance type:<root>.Color.BLACK? visibility:public [static]
+    CLASS ENUM_ENTRY name:RED modality:FINAL visibility:private superTypes:[<root>.Color]
+      $this: VALUE_PARAMETER INSTANCE_RECEIVER name:<this> type:<root>.Color.RED
+      CONSTRUCTOR visibility:private <> () returnType:<root>.Color.RED [primary]
+        BLOCK_BODY
+          SET_FIELD 'FIELD name:Color_RED_instance type:<root>.Color.RED? visibility:public [static]' type=kotlin.Unit origin=null
+            value: GET_VAR '<this>: <root>.Color.RED declared in <root>.Color.RED' type=<root>.Color.RED origin=null
+          DELEGATING_CONSTRUCTOR_CALL 'private constructor <init> (name: kotlin.String, ordinal: kotlin.Int, rgb: kotlin.Int) [primary] declared in <root>.Color'
+            name: CONST String type=kotlin.String value="RED"
+            ordinal: CONST Int type=kotlin.Int value=-1
+            rgb: CONST Int type=kotlin.Int value=16711680
+          CALL 'public final fun Unit_getInstance (): kotlin.Unit declared in kotlin' type=kotlin.Unit origin=SYNTHESIZED_STATEMENT
+      FUN name:getColorAsString visibility:public modality:OPEN <> ($this:<root>.Color.RED) returnType:kotlin.String
+        overridden:
+          public abstract fun getColorAsString (): kotlin.String declared in <root>.Color
+        $this: VALUE_PARAMETER name:<this> type:<root>.Color.RED
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='public open fun getColorAsString (): kotlin.String declared in <root>.Color.RED'
+            CONST String type=kotlin.String value="0xFF0000"
+      FUN FAKE_OVERRIDE name:hashCode visibility:public modality:OPEN <> ($this:kotlin.Enum<<root>.Color>) returnType:kotlin.Int [fake_override]
+        annotations:
+          EvaluateIntrinsic(file = '')
+        overridden:
+          public open fun hashCode (): kotlin.Int [fake_override] declared in <root>.Color
+        $this: VALUE_PARAMETER name:<this> type:kotlin.Enum<<root>.Color>
+      FUN FAKE_OVERRIDE name:getColorAsInt visibility:public modality:FINAL <> ($this:<root>.Color) returnType:kotlin.Int [fake_override]
+        overridden:
+          public final fun getColorAsInt (): kotlin.Int declared in <root>.Color
+        $this: VALUE_PARAMETER name:<this> type:<root>.Color
+      FUN FAKE_OVERRIDE name:<get-name> visibility:public modality:FINAL <> ($this:kotlin.Enum<<root>.Color>) returnType:kotlin.String [fake_override]
+        correspondingProperty: PROPERTY FAKE_OVERRIDE name:name visibility:public modality:FINAL [fake_override,val]
+        overridden:
+          public final fun <get-name> (): kotlin.String [fake_override] declared in <root>.Color
+        $this: VALUE_PARAMETER name:<this> type:kotlin.Enum<<root>.Color>
+      FUN FAKE_OVERRIDE name:<get-ordinal> visibility:public modality:FINAL <> ($this:kotlin.Enum<<root>.Color>) returnType:kotlin.Int [fake_override]
+        correspondingProperty: PROPERTY FAKE_OVERRIDE name:ordinal visibility:public modality:FINAL [fake_override,val]
+        overridden:
+          public final fun <get-ordinal> (): kotlin.Int [fake_override] declared in <root>.Color
+        $this: VALUE_PARAMETER name:<this> type:kotlin.Enum<<root>.Color>
+      FUN FAKE_OVERRIDE name:<get-rgb> visibility:public modality:FINAL <> ($this:<root>.Color) returnType:kotlin.Int [fake_override]
+        correspondingProperty: PROPERTY FAKE_OVERRIDE name:rgb visibility:public modality:FINAL [fake_override,val]
+        overridden:
+          public final fun <get-rgb> (): kotlin.Int declared in <root>.Color
+        $this: VALUE_PARAMETER name:<this> type:<root>.Color
+      FUN FAKE_OVERRIDE name:compareTo visibility:public modality:OPEN <> ($this:kotlin.Enum<<root>.Color>, other:<root>.Color) returnType:kotlin.Int [fake_override,operator]
+        overridden:
+          public open fun compareTo (other: <root>.Color): kotlin.Int [fake_override,operator] declared in <root>.Color
+        $this: VALUE_PARAMETER name:<this> type:kotlin.Enum<<root>.Color>
+        VALUE_PARAMETER name:other index:0 type:<root>.Color
+      FUN FAKE_OVERRIDE name:equals visibility:public modality:OPEN <> ($this:kotlin.Enum<<root>.Color>, other:kotlin.Any?) returnType:kotlin.Boolean [fake_override,operator]
+        overridden:
+          public open fun equals (other: kotlin.Any?): kotlin.Boolean [fake_override,operator] declared in <root>.Color
+        $this: VALUE_PARAMETER name:<this> type:kotlin.Enum<<root>.Color>
+        VALUE_PARAMETER name:other index:0 type:kotlin.Any?
+      FUN FAKE_OVERRIDE name:toString visibility:public modality:OPEN <> ($this:kotlin.Enum<<root>.Color>) returnType:kotlin.String [fake_override]
+        overridden:
+          public open fun toString (): kotlin.String [fake_override] declared in <root>.Color
+        $this: VALUE_PARAMETER name:<this> type:kotlin.Enum<<root>.Color>
+    FIELD name:Color_RED_instance type:<root>.Color.RED? visibility:public [static]
+    CLASS ENUM_ENTRY name:GREEN modality:FINAL visibility:private superTypes:[<root>.Color]
+      $this: VALUE_PARAMETER INSTANCE_RECEIVER name:<this> type:<root>.Color.GREEN
+      CONSTRUCTOR visibility:private <> () returnType:<root>.Color.GREEN [primary]
+        BLOCK_BODY
+          SET_FIELD 'FIELD name:Color_GREEN_instance type:<root>.Color.GREEN? visibility:public [static]' type=kotlin.Unit origin=null
+            value: GET_VAR '<this>: <root>.Color.GREEN declared in <root>.Color.GREEN' type=<root>.Color.GREEN origin=null
+          DELEGATING_CONSTRUCTOR_CALL 'private constructor <init> (name: kotlin.String, ordinal: kotlin.Int, rgb: kotlin.Int) [primary] declared in <root>.Color'
+            name: CONST String type=kotlin.String value="GREEN"
+            ordinal: CONST Int type=kotlin.Int value=-1
+            rgb: CONST Int type=kotlin.Int value=65280
+          CALL 'public final fun Unit_getInstance (): kotlin.Unit declared in kotlin' type=kotlin.Unit origin=SYNTHESIZED_STATEMENT
+      FUN name:getColorAsString visibility:public modality:OPEN <> ($this:<root>.Color.GREEN) returnType:kotlin.String
+        overridden:
+          public abstract fun getColorAsString (): kotlin.String declared in <root>.Color
+        $this: VALUE_PARAMETER name:<this> type:<root>.Color.GREEN
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='public open fun getColorAsString (): kotlin.String declared in <root>.Color.GREEN'
+            CONST String type=kotlin.String value="0x00FF00"
+      FUN FAKE_OVERRIDE name:hashCode visibility:public modality:OPEN <> ($this:kotlin.Enum<<root>.Color>) returnType:kotlin.Int [fake_override]
+        annotations:
+          EvaluateIntrinsic(file = '')
+        overridden:
+          public open fun hashCode (): kotlin.Int [fake_override] declared in <root>.Color
+        $this: VALUE_PARAMETER name:<this> type:kotlin.Enum<<root>.Color>
+      FUN FAKE_OVERRIDE name:getColorAsInt visibility:public modality:FINAL <> ($this:<root>.Color) returnType:kotlin.Int [fake_override]
+        overridden:
+          public final fun getColorAsInt (): kotlin.Int declared in <root>.Color
+        $this: VALUE_PARAMETER name:<this> type:<root>.Color
+      FUN FAKE_OVERRIDE name:<get-name> visibility:public modality:FINAL <> ($this:kotlin.Enum<<root>.Color>) returnType:kotlin.String [fake_override]
+        correspondingProperty: PROPERTY FAKE_OVERRIDE name:name visibility:public modality:FINAL [fake_override,val]
+        overridden:
+          public final fun <get-name> (): kotlin.String [fake_override] declared in <root>.Color
+        $this: VALUE_PARAMETER name:<this> type:kotlin.Enum<<root>.Color>
+      FUN FAKE_OVERRIDE name:<get-ordinal> visibility:public modality:FINAL <> ($this:kotlin.Enum<<root>.Color>) returnType:kotlin.Int [fake_override]
+        correspondingProperty: PROPERTY FAKE_OVERRIDE name:ordinal visibility:public modality:FINAL [fake_override,val]
+        overridden:
+          public final fun <get-ordinal> (): kotlin.Int [fake_override] declared in <root>.Color
+        $this: VALUE_PARAMETER name:<this> type:kotlin.Enum<<root>.Color>
+      FUN FAKE_OVERRIDE name:<get-rgb> visibility:public modality:FINAL <> ($this:<root>.Color) returnType:kotlin.Int [fake_override]
+        correspondingProperty: PROPERTY FAKE_OVERRIDE name:rgb visibility:public modality:FINAL [fake_override,val]
+        overridden:
+          public final fun <get-rgb> (): kotlin.Int declared in <root>.Color
+        $this: VALUE_PARAMETER name:<this> type:<root>.Color
+      FUN FAKE_OVERRIDE name:compareTo visibility:public modality:OPEN <> ($this:kotlin.Enum<<root>.Color>, other:<root>.Color) returnType:kotlin.Int [fake_override,operator]
+        overridden:
+          public open fun compareTo (other: <root>.Color): kotlin.Int [fake_override,operator] declared in <root>.Color
+        $this: VALUE_PARAMETER name:<this> type:kotlin.Enum<<root>.Color>
+        VALUE_PARAMETER name:other index:0 type:<root>.Color
+      FUN FAKE_OVERRIDE name:equals visibility:public modality:OPEN <> ($this:kotlin.Enum<<root>.Color>, other:kotlin.Any?) returnType:kotlin.Boolean [fake_override,operator]
+        overridden:
+          public open fun equals (other: kotlin.Any?): kotlin.Boolean [fake_override,operator] declared in <root>.Color
+        $this: VALUE_PARAMETER name:<this> type:kotlin.Enum<<root>.Color>
+        VALUE_PARAMETER name:other index:0 type:kotlin.Any?
+      FUN FAKE_OVERRIDE name:toString visibility:public modality:OPEN <> ($this:kotlin.Enum<<root>.Color>) returnType:kotlin.String [fake_override]
+        overridden:
+          public open fun toString (): kotlin.String [fake_override] declared in <root>.Color
+        $this: VALUE_PARAMETER name:<this> type:kotlin.Enum<<root>.Color>
+    FIELD name:Color_GREEN_instance type:<root>.Color.GREEN? visibility:public [static]
+    CLASS ENUM_ENTRY name:BLUE modality:FINAL visibility:private superTypes:[<root>.Color]
+      $this: VALUE_PARAMETER INSTANCE_RECEIVER name:<this> type:<root>.Color.BLUE
+      CONSTRUCTOR visibility:private <> () returnType:<root>.Color.BLUE [primary]
+        BLOCK_BODY
+          SET_FIELD 'FIELD name:Color_BLUE_instance type:<root>.Color.BLUE? visibility:public [static]' type=kotlin.Unit origin=null
+            value: GET_VAR '<this>: <root>.Color.BLUE declared in <root>.Color.BLUE' type=<root>.Color.BLUE origin=null
+          DELEGATING_CONSTRUCTOR_CALL 'private constructor <init> (name: kotlin.String, ordinal: kotlin.Int, rgb: kotlin.Int) [primary] declared in <root>.Color'
+            name: CONST String type=kotlin.String value="BLUE"
+            ordinal: CONST Int type=kotlin.Int value=-1
+            rgb: CONST Int type=kotlin.Int value=255
+          CALL 'public final fun Unit_getInstance (): kotlin.Unit declared in kotlin' type=kotlin.Unit origin=SYNTHESIZED_STATEMENT
+      FUN name:getColorAsString visibility:public modality:OPEN <> ($this:<root>.Color.BLUE) returnType:kotlin.String
+        overridden:
+          public abstract fun getColorAsString (): kotlin.String declared in <root>.Color
+        $this: VALUE_PARAMETER name:<this> type:<root>.Color.BLUE
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='public open fun getColorAsString (): kotlin.String declared in <root>.Color.BLUE'
+            CONST String type=kotlin.String value="0x0000FF"
+      FUN FAKE_OVERRIDE name:hashCode visibility:public modality:OPEN <> ($this:kotlin.Enum<<root>.Color>) returnType:kotlin.Int [fake_override]
+        annotations:
+          EvaluateIntrinsic(file = '')
+        overridden:
+          public open fun hashCode (): kotlin.Int [fake_override] declared in <root>.Color
+        $this: VALUE_PARAMETER name:<this> type:kotlin.Enum<<root>.Color>
+      FUN FAKE_OVERRIDE name:getColorAsInt visibility:public modality:FINAL <> ($this:<root>.Color) returnType:kotlin.Int [fake_override]
+        overridden:
+          public final fun getColorAsInt (): kotlin.Int declared in <root>.Color
+        $this: VALUE_PARAMETER name:<this> type:<root>.Color
+      FUN FAKE_OVERRIDE name:<get-name> visibility:public modality:FINAL <> ($this:kotlin.Enum<<root>.Color>) returnType:kotlin.String [fake_override]
+        correspondingProperty: PROPERTY FAKE_OVERRIDE name:name visibility:public modality:FINAL [fake_override,val]
+        overridden:
+          public final fun <get-name> (): kotlin.String [fake_override] declared in <root>.Color
+        $this: VALUE_PARAMETER name:<this> type:kotlin.Enum<<root>.Color>
+      FUN FAKE_OVERRIDE name:<get-ordinal> visibility:public modality:FINAL <> ($this:kotlin.Enum<<root>.Color>) returnType:kotlin.Int [fake_override]
+        correspondingProperty: PROPERTY FAKE_OVERRIDE name:ordinal visibility:public modality:FINAL [fake_override,val]
+        overridden:
+          public final fun <get-ordinal> (): kotlin.Int [fake_override] declared in <root>.Color
+        $this: VALUE_PARAMETER name:<this> type:kotlin.Enum<<root>.Color>
+      FUN FAKE_OVERRIDE name:<get-rgb> visibility:public modality:FINAL <> ($this:<root>.Color) returnType:kotlin.Int [fake_override]
+        correspondingProperty: PROPERTY FAKE_OVERRIDE name:rgb visibility:public modality:FINAL [fake_override,val]
+        overridden:
+          public final fun <get-rgb> (): kotlin.Int declared in <root>.Color
+        $this: VALUE_PARAMETER name:<this> type:<root>.Color
+      FUN FAKE_OVERRIDE name:compareTo visibility:public modality:OPEN <> ($this:kotlin.Enum<<root>.Color>, other:<root>.Color) returnType:kotlin.Int [fake_override,operator]
+        overridden:
+          public open fun compareTo (other: <root>.Color): kotlin.Int [fake_override,operator] declared in <root>.Color
+        $this: VALUE_PARAMETER name:<this> type:kotlin.Enum<<root>.Color>
+        VALUE_PARAMETER name:other index:0 type:<root>.Color
+      FUN FAKE_OVERRIDE name:equals visibility:public modality:OPEN <> ($this:kotlin.Enum<<root>.Color>, other:kotlin.Any?) returnType:kotlin.Boolean [fake_override,operator]
+        overridden:
+          public open fun equals (other: kotlin.Any?): kotlin.Boolean [fake_override,operator] declared in <root>.Color
+        $this: VALUE_PARAMETER name:<this> type:kotlin.Enum<<root>.Color>
+        VALUE_PARAMETER name:other index:0 type:kotlin.Any?
+      FUN FAKE_OVERRIDE name:toString visibility:public modality:OPEN <> ($this:kotlin.Enum<<root>.Color>) returnType:kotlin.String [fake_override]
+        overridden:
+          public open fun toString (): kotlin.String [fake_override] declared in <root>.Color
+        $this: VALUE_PARAMETER name:<this> type:kotlin.Enum<<root>.Color>
+    FIELD name:Color_BLUE_instance type:<root>.Color.BLUE? visibility:public [static]
+    FUN SYNTHESIZED_DECLARATION name:Color_init_$Init$ visibility:internal modality:FINAL <> (name:kotlin.String, ordinal:kotlin.Int, $this:<root>.Color) returnType:<root>.Color
+      VALUE_PARAMETER SYNTHESIZED_DECLARATION name:name index:0 type:kotlin.String
+      VALUE_PARAMETER SYNTHESIZED_DECLARATION name:ordinal index:1 type:kotlin.Int
+      VALUE_PARAMETER SYNTHESIZED_DECLARATION name:$this index:2 type:<root>.Color
+      BLOCK_BODY
+        DELEGATING_CONSTRUCTOR_CALL 'private constructor <init> (name: kotlin.String, ordinal: kotlin.Int, rgb: kotlin.Int) [primary] declared in <root>.Color'
+          name: GET_VAR 'name: kotlin.String declared in <root>.Color.Color_init_$Init$' type=kotlin.String origin=null
+          ordinal: GET_VAR 'ordinal: kotlin.Int declared in <root>.Color.Color_init_$Init$' type=kotlin.Int origin=null
+          rgb: CONST Int type=kotlin.Int value=0
+        RETURN type=kotlin.Nothing from='internal final fun Color_init_$Init$ (name: kotlin.String, ordinal: kotlin.Int, $this: <root>.Color): <root>.Color declared in <root>.Color'
+          GET_VAR '$this: <root>.Color declared in <root>.Color.Color_init_$Init$' type=<root>.Color origin=null
+    FUN SYNTHESIZED_DECLARATION name:Color_init_$Create$ visibility:private modality:FINAL <> (name:kotlin.String, ordinal:kotlin.Int) returnType:<root>.Color
+      VALUE_PARAMETER SYNTHESIZED_DECLARATION name:name index:0 type:kotlin.String
+      VALUE_PARAMETER SYNTHESIZED_DECLARATION name:ordinal index:1 type:kotlin.Int
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='private final fun Color_init_$Create$ (name: kotlin.String, ordinal: kotlin.Int): <root>.Color declared in <root>.Color'
+          CALL 'internal final fun Color_init_$Init$ (name: kotlin.String, ordinal: kotlin.Int, $this: <root>.Color): <root>.Color declared in <root>.Color' type=<root>.Color origin=SYNTHESIZED_STATEMENT
+            name: GET_VAR 'name: kotlin.String declared in <root>.Color.Color_init_$Create$' type=kotlin.String origin=SYNTHESIZED_STATEMENT
+            ordinal: GET_VAR 'ordinal: kotlin.Int declared in <root>.Color.Color_init_$Create$' type=kotlin.Int origin=SYNTHESIZED_STATEMENT
+            $this: CALL 'public final fun Object$create <T> (): T of kotlin.js.internal.Object$create declared in kotlin.js.internal' type=<root>.Color origin=SYNTHESIZED_STATEMENT
+              <T>: <root>.Color
+    FUN name:getColorAsString visibility:public modality:ABSTRACT <> ($this:<root>.Color) returnType:kotlin.String
+      $this: VALUE_PARAMETER name:<this> type:<root>.Color
+    FUN name:getColorAsInt visibility:public modality:FINAL <> ($this:<root>.Color) returnType:kotlin.Int
+      $this: VALUE_PARAMETER name:<this> type:<root>.Color
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='public final fun getColorAsInt (): kotlin.Int declared in <root>.Color'
+          GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:rgb type:kotlin.Int visibility:private [final]' type=kotlin.Int origin=GET_PROPERTY
+            receiver: GET_VAR '<this>: <root>.Color declared in <root>.Color.getColorAsInt' type=<root>.Color origin=null
+    FUN FAKE_OVERRIDE name:hashCode visibility:public modality:OPEN <> ($this:kotlin.Enum<<root>.Color>) returnType:kotlin.Int [fake_override]
+      annotations:
+        EvaluateIntrinsic(file = '')
+      overridden:
+        public open fun hashCode (): kotlin.Int declared in kotlin.Enum
+      $this: VALUE_PARAMETER name:<this> type:kotlin.Enum<<root>.Color>
+    FUN FAKE_OVERRIDE name:<get-name> visibility:public modality:FINAL <> ($this:kotlin.Enum<<root>.Color>) returnType:kotlin.String [fake_override]
+      correspondingProperty: PROPERTY FAKE_OVERRIDE name:name visibility:public modality:FINAL [fake_override,val]
+      overridden:
+        public final fun <get-name> (): kotlin.String declared in kotlin.Enum
+      $this: VALUE_PARAMETER name:<this> type:kotlin.Enum<<root>.Color>
+    FUN FAKE_OVERRIDE name:<get-ordinal> visibility:public modality:FINAL <> ($this:kotlin.Enum<<root>.Color>) returnType:kotlin.Int [fake_override]
+      correspondingProperty: PROPERTY FAKE_OVERRIDE name:ordinal visibility:public modality:FINAL [fake_override,val]
+      overridden:
+        public final fun <get-ordinal> (): kotlin.Int declared in kotlin.Enum
+      $this: VALUE_PARAMETER name:<this> type:kotlin.Enum<<root>.Color>
+    FUN FAKE_OVERRIDE name:compareTo visibility:public modality:OPEN <> ($this:kotlin.Enum<<root>.Color>, other:<root>.Color) returnType:kotlin.Int [fake_override,operator]
+      overridden:
+        public open fun compareTo (other: E of kotlin.Enum): kotlin.Int [operator] declared in kotlin.Enum
+      $this: VALUE_PARAMETER name:<this> type:kotlin.Enum<<root>.Color>
+      VALUE_PARAMETER name:other index:0 type:<root>.Color
+    FUN FAKE_OVERRIDE name:equals visibility:public modality:OPEN <> ($this:kotlin.Enum<<root>.Color>, other:kotlin.Any?) returnType:kotlin.Boolean [fake_override,operator]
+      overridden:
+        public open fun equals (other: kotlin.Any?): kotlin.Boolean [operator] declared in kotlin.Enum
+      $this: VALUE_PARAMETER name:<this> type:kotlin.Enum<<root>.Color>
+      VALUE_PARAMETER name:other index:0 type:kotlin.Any?
+    FUN FAKE_OVERRIDE name:toString visibility:public modality:OPEN <> ($this:kotlin.Enum<<root>.Color>) returnType:kotlin.String [fake_override]
+      overridden:
+        public open fun toString (): kotlin.String declared in kotlin.Enum
+      $this: VALUE_PARAMETER name:<this> type:kotlin.Enum<<root>.Color>
+    FUN ENUM_CLASS_SPECIAL_MEMBER name:values visibility:public modality:FINAL <> () returnType:kotlin.Array<<root>.Color>
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='public final fun values (): kotlin.Array<<root>.Color> declared in <root>.Color'
+          CALL 'public final fun arrayLiteral (arg0: kotlin.Any?): kotlin.Any? declared in kotlin.internal.ir' type=kotlin.Array<<root>.Color> origin=null
+            arg0: CALL 'public final fun arrayLiteral (arg0: kotlin.Any?): kotlin.Any? declared in kotlin.internal.ir' type=kotlin.Array<<root>.Color> origin=null
+              arg0: VARARG type=kotlin.Array<<root>.Color> varargElementType=<root>.Color
+                CALL 'public final fun Color_BLACK_getInstance (): <root>.Color.BLACK declared in <root>' type=<root>.Color.BLACK origin=null
+                CALL 'public final fun Color_RED_getInstance (): <root>.Color.RED declared in <root>' type=<root>.Color.RED origin=null
+                CALL 'public final fun Color_GREEN_getInstance (): <root>.Color.GREEN declared in <root>' type=<root>.Color.GREEN origin=null
+                CALL 'public final fun Color_BLUE_getInstance (): <root>.Color.BLUE declared in <root>' type=<root>.Color.BLUE origin=null
+    FUN ENUM_CLASS_SPECIAL_MEMBER name:valueOf visibility:public modality:FINAL <> (value:kotlin.String) returnType:<root>.Color
+      VALUE_PARAMETER name:value index:0 type:kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='public final fun valueOf (value: kotlin.String): <root>.Color declared in <root>.Color'
+          WHEN type=<root>.Color origin=null
+            BRANCH
+              if: CALL 'public final fun jsEqeqeq (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=EQEQ
+                arg0: CONST String type=kotlin.String value="BLACK"
+                arg1: GET_VAR 'value: kotlin.String declared in <root>.Color.valueOf' type=kotlin.String origin=null
+              then: CALL 'public final fun Color_BLACK_getInstance (): <root>.Color.BLACK declared in <root>' type=<root>.Color.BLACK origin=null
+            BRANCH
+              if: CALL 'public final fun jsEqeqeq (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=EQEQ
+                arg0: CONST String type=kotlin.String value="RED"
+                arg1: GET_VAR 'value: kotlin.String declared in <root>.Color.valueOf' type=kotlin.String origin=null
+              then: CALL 'public final fun Color_RED_getInstance (): <root>.Color.RED declared in <root>' type=<root>.Color.RED origin=null
+            BRANCH
+              if: CALL 'public final fun jsEqeqeq (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=EQEQ
+                arg0: CONST String type=kotlin.String value="GREEN"
+                arg1: GET_VAR 'value: kotlin.String declared in <root>.Color.valueOf' type=kotlin.String origin=null
+              then: CALL 'public final fun Color_GREEN_getInstance (): <root>.Color.GREEN declared in <root>' type=<root>.Color.GREEN origin=null
+            BRANCH
+              if: CALL 'public final fun jsEqeqeq (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=EQEQ
+                arg0: CONST String type=kotlin.String value="BLUE"
+                arg1: GET_VAR 'value: kotlin.String declared in <root>.Color.valueOf' type=kotlin.String origin=null
+              then: CALL 'public final fun Color_BLUE_getInstance (): <root>.Color.BLUE declared in <root>' type=<root>.Color.BLUE origin=null
+            BRANCH
+              if: CONST Boolean type=kotlin.Boolean value=true
+              then: CALL 'public final fun THROW_ISE (): kotlin.Nothing declared in kotlin' type=kotlin.Nothing origin=null
+    FIELD name:Color_entriesInitialized type:kotlin.Boolean visibility:public [static]
+    FUN SYNTHESIZED_DECLARATION name:Color_initEntries visibility:public modality:FINAL <> () returnType:kotlin.Unit
+      BLOCK_BODY
+        WHEN type=kotlin.Unit origin=null
+          BRANCH
+            if: GET_FIELD 'FIELD name:Color_entriesInitialized type:kotlin.Boolean visibility:public [static]' type=kotlin.Boolean origin=null
+            then: RETURN type=kotlin.Nothing from='public final fun Color_initEntries (): kotlin.Unit declared in <root>.Color'
+              CALL 'public final fun Unit_getInstance (): kotlin.Unit declared in kotlin' type=kotlin.Unit origin=SYNTHESIZED_STATEMENT
+        SET_FIELD 'FIELD name:Color_entriesInitialized type:kotlin.Boolean visibility:public [static]' type=kotlin.Unit origin=null
+          value: CONST Boolean type=kotlin.Boolean value=true
+        SET_FIELD 'FIELD name:Color_BLACK_instance type:<root>.Color.BLACK? visibility:public [static]' type=kotlin.Unit origin=null
+          value: CONSTRUCTOR_CALL 'private constructor <init> () [primary] declared in <root>.Color.BLACK' type=<root>.Color.BLACK origin=null
+        SET_FIELD 'FIELD name:Color_RED_instance type:<root>.Color.RED? visibility:public [static]' type=kotlin.Unit origin=null
+          value: CONSTRUCTOR_CALL 'private constructor <init> () [primary] declared in <root>.Color.RED' type=<root>.Color.RED origin=null
+        SET_FIELD 'FIELD name:Color_GREEN_instance type:<root>.Color.GREEN? visibility:public [static]' type=kotlin.Unit origin=null
+          value: CONSTRUCTOR_CALL 'private constructor <init> () [primary] declared in <root>.Color.GREEN' type=<root>.Color.GREEN origin=null
+        SET_FIELD 'FIELD name:Color_BLUE_instance type:<root>.Color.BLUE? visibility:public [static]' type=kotlin.Unit origin=null
+          value: CONSTRUCTOR_CALL 'private constructor <init> () [primary] declared in <root>.Color.BLUE' type=<root>.Color.BLUE origin=null
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-a1> visibility:public modality:FINAL <> () returnType:kotlin.Int
+    correspondingProperty: PROPERTY name:a1 visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-a1> (): kotlin.Int declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:a1 type:kotlin.Int visibility:public [final,static]' type=kotlin.Int origin=null
+  FIELD PROPERTY_BACKING_FIELD name:a1 type:kotlin.Int visibility:public [final,static]
+    EXPRESSION_BODY
+      CONST Int type=kotlin.Int value=0
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-a2> visibility:public modality:FINAL <> () returnType:kotlin.Int
+    correspondingProperty: PROPERTY name:a2 visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-a2> (): kotlin.Int declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:a2 type:kotlin.Int visibility:public [final,static]' type=kotlin.Int origin=null
+  FIELD PROPERTY_BACKING_FIELD name:a2 type:kotlin.Int visibility:public [final,static]
+    EXPRESSION_BODY
+      CONST Int type=kotlin.Int value=0
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-b1> visibility:public modality:FINAL <> () returnType:kotlin.String
+    correspondingProperty: PROPERTY name:b1 visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-b1> (): kotlin.String declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:b1 type:kotlin.String visibility:public [final,static]' type=kotlin.String origin=null
+  FIELD PROPERTY_BACKING_FIELD name:b1 type:kotlin.String visibility:public [final,static]
+    EXPRESSION_BODY
+      CONST String type=kotlin.String value="BLACK"
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-b2> visibility:public modality:FINAL <> () returnType:kotlin.String
+    correspondingProperty: PROPERTY name:b2 visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-b2> (): kotlin.String declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:b2 type:kotlin.String visibility:public [final,static]' type=kotlin.String origin=null
+  FIELD PROPERTY_BACKING_FIELD name:b2 type:kotlin.String visibility:public [final,static]
+    EXPRESSION_BODY
+      CONST String type=kotlin.String value="0x000000"
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-b3> visibility:public modality:FINAL <> () returnType:kotlin.String
+    correspondingProperty: PROPERTY name:b3 visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-b3> (): kotlin.String declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:b3 type:kotlin.String visibility:public [final,static]' type=kotlin.String origin=null
+  FIELD PROPERTY_BACKING_FIELD name:b3 type:kotlin.String visibility:public [final,static]
+    EXPRESSION_BODY
+      CONST String type=kotlin.String value="0xFF0000"
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-c1> visibility:public modality:FINAL <> () returnType:kotlin.Int
+    correspondingProperty: PROPERTY name:c1 visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-c1> (): kotlin.Int declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:c1 type:kotlin.Int visibility:public [final,static]' type=kotlin.Int origin=null
+  FIELD PROPERTY_BACKING_FIELD name:c1 type:kotlin.Int visibility:public [final,static]
+    EXPRESSION_BODY
+      CONST Int type=kotlin.Int value=0
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-c2> visibility:public modality:FINAL <> () returnType:kotlin.Int
+    correspondingProperty: PROPERTY name:c2 visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-c2> (): kotlin.Int declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:c2 type:kotlin.Int visibility:public [final,static]' type=kotlin.Int origin=null
+  FIELD PROPERTY_BACKING_FIELD name:c2 type:kotlin.Int visibility:public [final,static]
+    EXPRESSION_BODY
+      CONST Int type=kotlin.Int value=16711680
+  FUN SYNTHESIZED_DECLARATION name:Color_BLACK_getInstance visibility:public modality:FINAL <> () returnType:<root>.Color.BLACK
+    BLOCK_BODY
+      CALL 'public final fun Color_initEntries (): kotlin.Unit declared in <root>.Color' type=kotlin.Unit origin=null
+      RETURN type=kotlin.Nothing from='public final fun Color_BLACK_getInstance (): <root>.Color.BLACK declared in <root>'
+        GET_FIELD 'FIELD name:Color_BLACK_instance type:<root>.Color.BLACK? visibility:public [static]' type=<root>.Color.BLACK? origin=null
+  FUN SYNTHESIZED_DECLARATION name:Color_RED_getInstance visibility:public modality:FINAL <> () returnType:<root>.Color.RED
+    BLOCK_BODY
+      CALL 'public final fun Color_initEntries (): kotlin.Unit declared in <root>.Color' type=kotlin.Unit origin=null
+      RETURN type=kotlin.Nothing from='public final fun Color_RED_getInstance (): <root>.Color.RED declared in <root>'
+        GET_FIELD 'FIELD name:Color_RED_instance type:<root>.Color.RED? visibility:public [static]' type=<root>.Color.RED? origin=null
+  FUN SYNTHESIZED_DECLARATION name:Color_GREEN_getInstance visibility:public modality:FINAL <> () returnType:<root>.Color.GREEN
+    BLOCK_BODY
+      CALL 'public final fun Color_initEntries (): kotlin.Unit declared in <root>.Color' type=kotlin.Unit origin=null
+      RETURN type=kotlin.Nothing from='public final fun Color_GREEN_getInstance (): <root>.Color.GREEN declared in <root>'
+        GET_FIELD 'FIELD name:Color_GREEN_instance type:<root>.Color.GREEN? visibility:public [static]' type=<root>.Color.GREEN? origin=null
+  FUN SYNTHESIZED_DECLARATION name:Color_BLUE_getInstance visibility:public modality:FINAL <> () returnType:<root>.Color.BLUE
+    BLOCK_BODY
+      CALL 'public final fun Color_initEntries (): kotlin.Unit declared in <root>.Color' type=kotlin.Unit origin=null
+      RETURN type=kotlin.Nothing from='public final fun Color_BLUE_getInstance (): <root>.Color.BLUE declared in <root>'
+        GET_FIELD 'FIELD name:Color_BLUE_instance type:<root>.Color.BLUE? visibility:public [static]' type=<root>.Color.BLUE? origin=null

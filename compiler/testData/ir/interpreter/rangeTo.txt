@@ -1,0 +1,40 @@
+FILE fqName:<root> fileName:/rangeTo.kt
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-range> visibility:public modality:FINAL <> () returnType:kotlin.Int
+    correspondingProperty: PROPERTY name:range visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-range> (): kotlin.Int declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:range type:kotlin.Int visibility:public [final,static]' type=kotlin.Int origin=null
+  FIELD PROPERTY_BACKING_FIELD name:range type:kotlin.Int visibility:public [final,static]
+    EXPRESSION_BODY
+      CONST Int type=kotlin.Int value=1
+  FUN name:getIterator visibility:public modality:FINAL <> (first:kotlin.Int, last:kotlin.Int) returnType:kotlin.Int
+    annotations:
+      CompileTimeCalculation
+    VALUE_PARAMETER name:first index:0 type:kotlin.Int
+    VALUE_PARAMETER name:last index:1 type:kotlin.Int
+    BLOCK_BODY
+      VAR name:iterator type:kotlin.collections.IntIterator [val]
+        CALL 'public open fun iterator (): kotlin.collections.IntIterator [fake_override,operator] declared in kotlin.ranges.IntRange' type=kotlin.collections.IntIterator origin=null
+          $this: CALL 'public final fun numberRangeToNumber (start: dynamic, endInclusive: dynamic): kotlin.ranges.IntRange declared in kotlin.js' type=kotlin.ranges.IntRange origin=RANGE
+            start: GET_VAR 'first: kotlin.Int declared in <root>.getIterator' type=kotlin.Int origin=null
+            endInclusive: GET_VAR 'last: kotlin.Int declared in <root>.getIterator' type=kotlin.Int origin=null
+      CALL 'public abstract fun nextInt (): kotlin.Int declared in kotlin.collections.IntIterator' type=kotlin.Int origin=null
+        $this: GET_VAR 'val iterator: kotlin.collections.IntIterator [val] declared in <root>.getIterator' type=kotlin.collections.IntIterator origin=null
+      CALL 'public final fun Unit_getInstance (): kotlin.Unit declared in kotlin' type=kotlin.Unit origin=SYNTHESIZED_STATEMENT
+      CALL 'public abstract fun nextInt (): kotlin.Int declared in kotlin.collections.IntIterator' type=kotlin.Int origin=null
+        $this: GET_VAR 'val iterator: kotlin.collections.IntIterator [val] declared in <root>.getIterator' type=kotlin.collections.IntIterator origin=null
+      CALL 'public final fun Unit_getInstance (): kotlin.Unit declared in kotlin' type=kotlin.Unit origin=SYNTHESIZED_STATEMENT
+      CALL 'public abstract fun nextInt (): kotlin.Int declared in kotlin.collections.IntIterator' type=kotlin.Int origin=null
+        $this: GET_VAR 'val iterator: kotlin.collections.IntIterator [val] declared in <root>.getIterator' type=kotlin.collections.IntIterator origin=null
+      CALL 'public final fun Unit_getInstance (): kotlin.Unit declared in kotlin' type=kotlin.Unit origin=SYNTHESIZED_STATEMENT
+      RETURN type=kotlin.Nothing from='public final fun getIterator (first: kotlin.Int, last: kotlin.Int): kotlin.Int declared in <root>'
+        CALL 'public abstract fun nextInt (): kotlin.Int declared in kotlin.collections.IntIterator' type=kotlin.Int origin=null
+          $this: GET_VAR 'val iterator: kotlin.collections.IntIterator [val] declared in <root>.getIterator' type=kotlin.collections.IntIterator origin=null
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-testIterator> visibility:public modality:FINAL <> () returnType:kotlin.Int
+    correspondingProperty: PROPERTY name:testIterator visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-testIterator> (): kotlin.Int declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:testIterator type:kotlin.Int visibility:public [final,static]' type=kotlin.Int origin=null
+  FIELD PROPERTY_BACKING_FIELD name:testIterator type:kotlin.Int visibility:public [final,static]
+    EXPRESSION_BODY
+      CONST Int type=kotlin.Int value=4

@@ -1,0 +1,154 @@
+FILE fqName:<root> fileName:/instanceOf.kt
+  CLASS INTERFACE name:Base modality:ABSTRACT visibility:public superTypes:[kotlin.Any]
+    $this: VALUE_PARAMETER INSTANCE_RECEIVER name:<this> type:<root>.Base
+    FUN FAKE_OVERRIDE name:equals visibility:public modality:OPEN <> ($this:kotlin.Any, other:kotlin.Any?) returnType:kotlin.Boolean [fake_override,operator]
+      overridden:
+        public open fun equals (other: kotlin.Any?): kotlin.Boolean [operator] declared in kotlin.Any
+      $this: VALUE_PARAMETER name:<this> type:kotlin.Any
+      VALUE_PARAMETER name:other index:0 type:kotlin.Any?
+    FUN FAKE_OVERRIDE name:hashCode visibility:public modality:OPEN <> ($this:kotlin.Any) returnType:kotlin.Int [fake_override]
+      overridden:
+        public open fun hashCode (): kotlin.Int declared in kotlin.Any
+      $this: VALUE_PARAMETER name:<this> type:kotlin.Any
+    FUN FAKE_OVERRIDE name:toString visibility:public modality:OPEN <> ($this:kotlin.Any) returnType:kotlin.String [fake_override]
+      overridden:
+        public open fun toString (): kotlin.String declared in kotlin.Any
+      $this: VALUE_PARAMETER name:<this> type:kotlin.Any
+    CONSTRUCTOR SYNTHETIC_PRIMARY_CONSTRUCTOR visibility:private <> () returnType:<root>.Base [primary]
+      BLOCK_BODY
+  CLASS CLASS name:A modality:OPEN visibility:public superTypes:[<root>.Base]
+    annotations:
+      CompileTimeCalculation
+    $this: VALUE_PARAMETER INSTANCE_RECEIVER name:<this> type:<root>.A
+    CONSTRUCTOR visibility:public <> () returnType:<root>.A [primary]
+      BLOCK_BODY
+        DELEGATING_CONSTRUCTOR_CALL 'public constructor <init> () [primary] declared in kotlin.Any'
+    FUN FAKE_OVERRIDE name:equals visibility:public modality:OPEN <> ($this:kotlin.Any, other:kotlin.Any?) returnType:kotlin.Boolean [fake_override,operator]
+      overridden:
+        public open fun equals (other: kotlin.Any?): kotlin.Boolean [fake_override,operator] declared in <root>.Base
+      $this: VALUE_PARAMETER name:<this> type:kotlin.Any
+      VALUE_PARAMETER name:other index:0 type:kotlin.Any?
+    FUN FAKE_OVERRIDE name:hashCode visibility:public modality:OPEN <> ($this:kotlin.Any) returnType:kotlin.Int [fake_override]
+      overridden:
+        public open fun hashCode (): kotlin.Int [fake_override] declared in <root>.Base
+      $this: VALUE_PARAMETER name:<this> type:kotlin.Any
+    FUN FAKE_OVERRIDE name:toString visibility:public modality:OPEN <> ($this:kotlin.Any) returnType:kotlin.String [fake_override]
+      overridden:
+        public open fun toString (): kotlin.String [fake_override] declared in <root>.Base
+      $this: VALUE_PARAMETER name:<this> type:kotlin.Any
+  CLASS CLASS name:B modality:FINAL visibility:public superTypes:[<root>.A]
+    annotations:
+      CompileTimeCalculation
+    $this: VALUE_PARAMETER INSTANCE_RECEIVER name:<this> type:<root>.B
+    CONSTRUCTOR visibility:public <> () returnType:<root>.B [primary]
+      BLOCK_BODY
+        DELEGATING_CONSTRUCTOR_CALL 'public constructor <init> () [primary] declared in <root>.A'
+    FUN FAKE_OVERRIDE name:equals visibility:public modality:OPEN <> ($this:kotlin.Any, other:kotlin.Any?) returnType:kotlin.Boolean [fake_override,operator]
+      overridden:
+        public open fun equals (other: kotlin.Any?): kotlin.Boolean [fake_override,operator] declared in <root>.A
+      $this: VALUE_PARAMETER name:<this> type:kotlin.Any
+      VALUE_PARAMETER name:other index:0 type:kotlin.Any?
+    FUN FAKE_OVERRIDE name:hashCode visibility:public modality:OPEN <> ($this:kotlin.Any) returnType:kotlin.Int [fake_override]
+      overridden:
+        public open fun hashCode (): kotlin.Int [fake_override] declared in <root>.A
+      $this: VALUE_PARAMETER name:<this> type:kotlin.Any
+    FUN FAKE_OVERRIDE name:toString visibility:public modality:OPEN <> ($this:kotlin.Any) returnType:kotlin.String [fake_override]
+      overridden:
+        public open fun toString (): kotlin.String [fake_override] declared in <root>.A
+      $this: VALUE_PARAMETER name:<this> type:kotlin.Any
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-a1> visibility:public modality:FINAL <> () returnType:kotlin.Boolean
+    correspondingProperty: PROPERTY name:a1 visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-a1> (): kotlin.Boolean declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:a1 type:kotlin.Boolean visibility:public [final,static]' type=kotlin.Boolean origin=null
+  FIELD PROPERTY_BACKING_FIELD name:a1 type:kotlin.Boolean visibility:public [final,static]
+    EXPRESSION_BODY
+      CONST Boolean type=kotlin.Nothing value=true
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-a2> visibility:public modality:FINAL <> () returnType:kotlin.Boolean
+    correspondingProperty: PROPERTY name:a2 visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-a2> (): kotlin.Boolean declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:a2 type:kotlin.Boolean visibility:public [final,static]' type=kotlin.Boolean origin=null
+  FIELD PROPERTY_BACKING_FIELD name:a2 type:kotlin.Boolean visibility:public [final,static]
+    EXPRESSION_BODY
+      CONST Boolean type=kotlin.Nothing value=false
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-b1> visibility:public modality:FINAL <> () returnType:kotlin.Boolean
+    correspondingProperty: PROPERTY name:b1 visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-b1> (): kotlin.Boolean declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:b1 type:kotlin.Boolean visibility:public [final,static]' type=kotlin.Boolean origin=null
+  FIELD PROPERTY_BACKING_FIELD name:b1 type:kotlin.Boolean visibility:public [final,static]
+    EXPRESSION_BODY
+      CONST Boolean type=kotlin.Nothing value=true
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-b2> visibility:public modality:FINAL <> () returnType:kotlin.Boolean
+    correspondingProperty: PROPERTY name:b2 visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-b2> (): kotlin.Boolean declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:b2 type:kotlin.Boolean visibility:public [final,static]' type=kotlin.Boolean origin=null
+  FIELD PROPERTY_BACKING_FIELD name:b2 type:kotlin.Boolean visibility:public [final,static]
+    EXPRESSION_BODY
+      CONST Boolean type=kotlin.Nothing value=false
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-b3> visibility:public modality:FINAL <> () returnType:kotlin.Boolean
+    correspondingProperty: PROPERTY name:b3 visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-b3> (): kotlin.Boolean declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:b3 type:kotlin.Boolean visibility:public [final,static]' type=kotlin.Boolean origin=null
+  FIELD PROPERTY_BACKING_FIELD name:b3 type:kotlin.Boolean visibility:public [final,static]
+    EXPRESSION_BODY
+      CONST Boolean type=kotlin.Nothing value=true
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-b4> visibility:public modality:FINAL <> () returnType:kotlin.Boolean
+    correspondingProperty: PROPERTY name:b4 visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-b4> (): kotlin.Boolean declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:b4 type:kotlin.Boolean visibility:public [final,static]' type=kotlin.Boolean origin=null
+  FIELD PROPERTY_BACKING_FIELD name:b4 type:kotlin.Boolean visibility:public [final,static]
+    EXPRESSION_BODY
+      CONST Boolean type=kotlin.Nothing value=false
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-c1> visibility:public modality:FINAL <> () returnType:kotlin.Boolean
+    correspondingProperty: PROPERTY name:c1 visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-c1> (): kotlin.Boolean declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:c1 type:kotlin.Boolean visibility:public [final,static]' type=kotlin.Boolean origin=null
+  FIELD PROPERTY_BACKING_FIELD name:c1 type:kotlin.Boolean visibility:public [final,static]
+    EXPRESSION_BODY
+      CONST Boolean type=kotlin.Nothing value=true
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-c2> visibility:public modality:FINAL <> () returnType:kotlin.Boolean
+    correspondingProperty: PROPERTY name:c2 visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-c2> (): kotlin.Boolean declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:c2 type:kotlin.Boolean visibility:public [final,static]' type=kotlin.Boolean origin=null
+  FIELD PROPERTY_BACKING_FIELD name:c2 type:kotlin.Boolean visibility:public [final,static]
+    EXPRESSION_BODY
+      CONST Boolean type=kotlin.Nothing value=false
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-c3> visibility:public modality:FINAL <> () returnType:kotlin.Boolean
+    correspondingProperty: PROPERTY name:c3 visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-c3> (): kotlin.Boolean declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:c3 type:kotlin.Boolean visibility:public [final,static]' type=kotlin.Boolean origin=null
+  FIELD PROPERTY_BACKING_FIELD name:c3 type:kotlin.Boolean visibility:public [final,static]
+    EXPRESSION_BODY
+      CONST Boolean type=kotlin.Nothing value=true
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-c4> visibility:public modality:FINAL <> () returnType:kotlin.Boolean
+    correspondingProperty: PROPERTY name:c4 visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-c4> (): kotlin.Boolean declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:c4 type:kotlin.Boolean visibility:public [final,static]' type=kotlin.Boolean origin=null
+  FIELD PROPERTY_BACKING_FIELD name:c4 type:kotlin.Boolean visibility:public [final,static]
+    EXPRESSION_BODY
+      CONST Boolean type=kotlin.Nothing value=false
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-c5> visibility:public modality:FINAL <> () returnType:kotlin.Boolean
+    correspondingProperty: PROPERTY name:c5 visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-c5> (): kotlin.Boolean declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:c5 type:kotlin.Boolean visibility:public [final,static]' type=kotlin.Boolean origin=null
+  FIELD PROPERTY_BACKING_FIELD name:c5 type:kotlin.Boolean visibility:public [final,static]
+    EXPRESSION_BODY
+      CONST Boolean type=kotlin.Nothing value=true
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-c6> visibility:public modality:FINAL <> () returnType:kotlin.Boolean
+    correspondingProperty: PROPERTY name:c6 visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-c6> (): kotlin.Boolean declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:c6 type:kotlin.Boolean visibility:public [final,static]' type=kotlin.Boolean origin=null
+  FIELD PROPERTY_BACKING_FIELD name:c6 type:kotlin.Boolean visibility:public [final,static]
+    EXPRESSION_BODY
+      CONST Boolean type=kotlin.Nothing value=false

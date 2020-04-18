@@ -1,0 +1,185 @@
+FILE fqName:<root> fileName:/defaultArgs.kt
+  FUN name:sum visibility:public modality:FINAL <> (a:kotlin.Int, b:kotlin.Int, c:kotlin.Int) returnType:kotlin.Int
+    annotations:
+      CompileTimeCalculation
+    VALUE_PARAMETER name:a index:0 type:kotlin.Int
+    VALUE_PARAMETER name:b index:1 type:kotlin.Int
+    VALUE_PARAMETER name:c index:2 type:kotlin.Int
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun sum (a: kotlin.Int, b: kotlin.Int, c: kotlin.Int): kotlin.Int declared in <root>'
+        CALL 'public final fun jsBitOr (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Int declared in kotlin.internal.ir' type=kotlin.Int origin=SYNTHESIZED_STATEMENT
+          arg0: CALL 'public final fun jsPlus (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Any? declared in kotlin.internal.ir' type=kotlin.Int origin=PLUS
+            arg0: CALL 'public final fun jsBitOr (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Int declared in kotlin.internal.ir' type=kotlin.Int origin=SYNTHESIZED_STATEMENT
+              arg0: CALL 'public final fun jsPlus (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Any? declared in kotlin.internal.ir' type=kotlin.Int origin=PLUS
+                arg0: GET_VAR 'a: kotlin.Int declared in <root>.sum' type=kotlin.Int origin=null
+                arg1: GET_VAR 'b: kotlin.Int declared in <root>.sum' type=kotlin.Int origin=null
+              arg1: CONST Int type=kotlin.Int value=0
+            arg1: GET_VAR 'c: kotlin.Int declared in <root>.sum' type=kotlin.Int origin=null
+          arg1: CONST Int type=kotlin.Int value=0
+  FUN FUNCTION_FOR_DEFAULT_PARAMETER name:sum$default visibility:public modality:FINAL <> (a:kotlin.Int, b:kotlin.Int, c:kotlin.Int, $mask0:kotlin.Int, $handler:kotlin.Any?) returnType:kotlin.Int
+    annotations:
+      CompileTimeCalculation
+    VALUE_PARAMETER name:a index:0 type:kotlin.Int
+    VALUE_PARAMETER name:b index:1 type:kotlin.Int
+    VALUE_PARAMETER name:c index:2 type:kotlin.Int
+    VALUE_PARAMETER MASK_FOR_DEFAULT_FUNCTION name:$mask0 index:3 type:kotlin.Int
+    VALUE_PARAMETER METHOD_HANDLER_IN_DEFAULT_FUNCTION name:$handler index:4 type:kotlin.Any?
+    BLOCK_BODY
+      VAR IR_TEMPORARY_VARIABLE name:a type:kotlin.Int [val]
+        WHEN type=kotlin.Int origin=null
+          BRANCH
+            if: CALL 'public final fun jsNot (arg0: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=EXCLEQ
+              arg0: CALL 'public final fun jsEqeqeq (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=EXCLEQ
+                arg0: CALL 'public final fun jsBitAnd (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Int declared in kotlin.internal.ir' type=kotlin.Int origin=null
+                  arg0: GET_VAR '$mask0: kotlin.Int declared in <root>.sum$default' type=kotlin.Int origin=null
+                  arg1: CONST Int type=kotlin.Int value=1
+                arg1: CONST Int type=kotlin.Int value=0
+            then: CONST Int type=kotlin.Int value=1
+          BRANCH
+            if: CONST Boolean type=kotlin.Boolean value=true
+            then: GET_VAR 'a: kotlin.Int declared in <root>.sum$default' type=kotlin.Int origin=null
+      VAR IR_TEMPORARY_VARIABLE name:b type:kotlin.Int [val]
+        WHEN type=kotlin.Int origin=null
+          BRANCH
+            if: CALL 'public final fun jsNot (arg0: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=EXCLEQ
+              arg0: CALL 'public final fun jsEqeqeq (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=EXCLEQ
+                arg0: CALL 'public final fun jsBitAnd (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Int declared in kotlin.internal.ir' type=kotlin.Int origin=null
+                  arg0: GET_VAR '$mask0: kotlin.Int declared in <root>.sum$default' type=kotlin.Int origin=null
+                  arg1: CONST Int type=kotlin.Int value=2
+                arg1: CONST Int type=kotlin.Int value=0
+            then: CONST Int type=kotlin.Int value=2
+          BRANCH
+            if: CONST Boolean type=kotlin.Boolean value=true
+            then: GET_VAR 'b: kotlin.Int declared in <root>.sum$default' type=kotlin.Int origin=null
+      VAR IR_TEMPORARY_VARIABLE name:c type:kotlin.Int [val]
+        WHEN type=kotlin.Int origin=null
+          BRANCH
+            if: CALL 'public final fun jsNot (arg0: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=EXCLEQ
+              arg0: CALL 'public final fun jsEqeqeq (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=EXCLEQ
+                arg0: CALL 'public final fun jsBitAnd (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Int declared in kotlin.internal.ir' type=kotlin.Int origin=null
+                  arg0: GET_VAR '$mask0: kotlin.Int declared in <root>.sum$default' type=kotlin.Int origin=null
+                  arg1: CONST Int type=kotlin.Int value=4
+                arg1: CONST Int type=kotlin.Int value=0
+            then: CONST Int type=kotlin.Int value=3
+          BRANCH
+            if: CONST Boolean type=kotlin.Boolean value=true
+            then: GET_VAR 'c: kotlin.Int declared in <root>.sum$default' type=kotlin.Int origin=null
+      RETURN type=kotlin.Nothing from='public final fun sum$default (a: kotlin.Int, b: kotlin.Int, c: kotlin.Int, $mask0: kotlin.Int, $handler: kotlin.Any?): kotlin.Int declared in <root>'
+        CALL 'public final fun sum (a: kotlin.Int, b: kotlin.Int, c: kotlin.Int): kotlin.Int declared in <root>' type=kotlin.Int origin=null
+          a: GET_VAR 'val a: kotlin.Int [val] declared in <root>.sum$default' type=kotlin.Int origin=null
+          b: GET_VAR 'val b: kotlin.Int [val] declared in <root>.sum$default' type=kotlin.Int origin=null
+          c: GET_VAR 'val c: kotlin.Int [val] declared in <root>.sum$default' type=kotlin.Int origin=null
+  FUN name:sumBasedOnPrevious visibility:public modality:FINAL <> (a:kotlin.Int, b:kotlin.Int, c:kotlin.Int) returnType:kotlin.Int
+    annotations:
+      CompileTimeCalculation
+    VALUE_PARAMETER name:a index:0 type:kotlin.Int
+    VALUE_PARAMETER name:b index:1 type:kotlin.Int
+    VALUE_PARAMETER name:c index:2 type:kotlin.Int
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun sumBasedOnPrevious (a: kotlin.Int, b: kotlin.Int, c: kotlin.Int): kotlin.Int declared in <root>'
+        CALL 'public final fun jsBitOr (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Int declared in kotlin.internal.ir' type=kotlin.Int origin=SYNTHESIZED_STATEMENT
+          arg0: CALL 'public final fun jsPlus (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Any? declared in kotlin.internal.ir' type=kotlin.Int origin=PLUS
+            arg0: CALL 'public final fun jsBitOr (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Int declared in kotlin.internal.ir' type=kotlin.Int origin=SYNTHESIZED_STATEMENT
+              arg0: CALL 'public final fun jsPlus (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Any? declared in kotlin.internal.ir' type=kotlin.Int origin=PLUS
+                arg0: GET_VAR 'a: kotlin.Int declared in <root>.sumBasedOnPrevious' type=kotlin.Int origin=null
+                arg1: GET_VAR 'b: kotlin.Int declared in <root>.sumBasedOnPrevious' type=kotlin.Int origin=null
+              arg1: CONST Int type=kotlin.Int value=0
+            arg1: GET_VAR 'c: kotlin.Int declared in <root>.sumBasedOnPrevious' type=kotlin.Int origin=null
+          arg1: CONST Int type=kotlin.Int value=0
+  FUN FUNCTION_FOR_DEFAULT_PARAMETER name:sumBasedOnPrevious$default visibility:public modality:FINAL <> (a:kotlin.Int, b:kotlin.Int, c:kotlin.Int, $mask0:kotlin.Int, $handler:kotlin.Any?) returnType:kotlin.Int
+    annotations:
+      CompileTimeCalculation
+    VALUE_PARAMETER name:a index:0 type:kotlin.Int
+    VALUE_PARAMETER name:b index:1 type:kotlin.Int
+    VALUE_PARAMETER name:c index:2 type:kotlin.Int
+    VALUE_PARAMETER MASK_FOR_DEFAULT_FUNCTION name:$mask0 index:3 type:kotlin.Int
+    VALUE_PARAMETER METHOD_HANDLER_IN_DEFAULT_FUNCTION name:$handler index:4 type:kotlin.Any?
+    BLOCK_BODY
+      VAR IR_TEMPORARY_VARIABLE name:a type:kotlin.Int [val]
+        WHEN type=kotlin.Int origin=null
+          BRANCH
+            if: CALL 'public final fun jsNot (arg0: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=EXCLEQ
+              arg0: CALL 'public final fun jsEqeqeq (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=EXCLEQ
+                arg0: CALL 'public final fun jsBitAnd (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Int declared in kotlin.internal.ir' type=kotlin.Int origin=null
+                  arg0: GET_VAR '$mask0: kotlin.Int declared in <root>.sumBasedOnPrevious$default' type=kotlin.Int origin=null
+                  arg1: CONST Int type=kotlin.Int value=1
+                arg1: CONST Int type=kotlin.Int value=0
+            then: CONST Int type=kotlin.Int value=1
+          BRANCH
+            if: CONST Boolean type=kotlin.Boolean value=true
+            then: GET_VAR 'a: kotlin.Int declared in <root>.sumBasedOnPrevious$default' type=kotlin.Int origin=null
+      VAR IR_TEMPORARY_VARIABLE name:b type:kotlin.Int [val]
+        WHEN type=kotlin.Int origin=null
+          BRANCH
+            if: CALL 'public final fun jsNot (arg0: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=EXCLEQ
+              arg0: CALL 'public final fun jsEqeqeq (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=EXCLEQ
+                arg0: CALL 'public final fun jsBitAnd (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Int declared in kotlin.internal.ir' type=kotlin.Int origin=null
+                  arg0: GET_VAR '$mask0: kotlin.Int declared in <root>.sumBasedOnPrevious$default' type=kotlin.Int origin=null
+                  arg1: CONST Int type=kotlin.Int value=2
+                arg1: CONST Int type=kotlin.Int value=0
+            then: CALL 'internal final fun imul (a_local: kotlin.Int, b_local: kotlin.Int): kotlin.Int declared in kotlin.js' type=kotlin.Int origin=MUL
+              a_local: GET_VAR 'val a: kotlin.Int [val] declared in <root>.sumBasedOnPrevious$default' type=kotlin.Int origin=null
+              b_local: CONST Int type=kotlin.Int value=2
+          BRANCH
+            if: CONST Boolean type=kotlin.Boolean value=true
+            then: GET_VAR 'b: kotlin.Int declared in <root>.sumBasedOnPrevious$default' type=kotlin.Int origin=null
+      VAR IR_TEMPORARY_VARIABLE name:c type:kotlin.Int [val]
+        WHEN type=kotlin.Int origin=null
+          BRANCH
+            if: CALL 'public final fun jsNot (arg0: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=EXCLEQ
+              arg0: CALL 'public final fun jsEqeqeq (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=EXCLEQ
+                arg0: CALL 'public final fun jsBitAnd (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Int declared in kotlin.internal.ir' type=kotlin.Int origin=null
+                  arg0: GET_VAR '$mask0: kotlin.Int declared in <root>.sumBasedOnPrevious$default' type=kotlin.Int origin=null
+                  arg1: CONST Int type=kotlin.Int value=4
+                arg1: CONST Int type=kotlin.Int value=0
+            then: CALL 'internal final fun imul (a_local: kotlin.Int, b_local: kotlin.Int): kotlin.Int declared in kotlin.js' type=kotlin.Int origin=MUL
+              a_local: GET_VAR 'val b: kotlin.Int [val] declared in <root>.sumBasedOnPrevious$default' type=kotlin.Int origin=null
+              b_local: CONST Int type=kotlin.Int value=2
+          BRANCH
+            if: CONST Boolean type=kotlin.Boolean value=true
+            then: GET_VAR 'c: kotlin.Int declared in <root>.sumBasedOnPrevious$default' type=kotlin.Int origin=null
+      RETURN type=kotlin.Nothing from='public final fun sumBasedOnPrevious$default (a: kotlin.Int, b: kotlin.Int, c: kotlin.Int, $mask0: kotlin.Int, $handler: kotlin.Any?): kotlin.Int declared in <root>'
+        CALL 'public final fun sumBasedOnPrevious (a: kotlin.Int, b: kotlin.Int, c: kotlin.Int): kotlin.Int declared in <root>' type=kotlin.Int origin=null
+          a: GET_VAR 'val a: kotlin.Int [val] declared in <root>.sumBasedOnPrevious$default' type=kotlin.Int origin=null
+          b: GET_VAR 'val b: kotlin.Int [val] declared in <root>.sumBasedOnPrevious$default' type=kotlin.Int origin=null
+          c: GET_VAR 'val c: kotlin.Int [val] declared in <root>.sumBasedOnPrevious$default' type=kotlin.Int origin=null
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-sum1> visibility:public modality:FINAL <> () returnType:kotlin.Int
+    correspondingProperty: PROPERTY name:sum1 visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-sum1> (): kotlin.Int declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:sum1 type:kotlin.Int visibility:public [final,static]' type=kotlin.Int origin=null
+  FIELD PROPERTY_BACKING_FIELD name:sum1 type:kotlin.Int visibility:public [final,static]
+    EXPRESSION_BODY
+      CONST Int type=kotlin.Int value=6
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-sum2> visibility:public modality:FINAL <> () returnType:kotlin.Int
+    correspondingProperty: PROPERTY name:sum2 visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-sum2> (): kotlin.Int declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:sum2 type:kotlin.Int visibility:public [final,static]' type=kotlin.Int origin=null
+  FIELD PROPERTY_BACKING_FIELD name:sum2 type:kotlin.Int visibility:public [final,static]
+    EXPRESSION_BODY
+      CONST Int type=kotlin.Int value=1
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-sum3> visibility:public modality:FINAL <> () returnType:kotlin.Int
+    correspondingProperty: PROPERTY name:sum3 visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-sum3> (): kotlin.Int declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:sum3 type:kotlin.Int visibility:public [final,static]' type=kotlin.Int origin=null
+  FIELD PROPERTY_BACKING_FIELD name:sum3 type:kotlin.Int visibility:public [final,static]
+    EXPRESSION_BODY
+      CONST Int type=kotlin.Int value=3
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-sumBasedOnPrevious1> visibility:public modality:FINAL <> () returnType:kotlin.Int
+    correspondingProperty: PROPERTY name:sumBasedOnPrevious1 visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-sumBasedOnPrevious1> (): kotlin.Int declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:sumBasedOnPrevious1 type:kotlin.Int visibility:public [final,static]' type=kotlin.Int origin=null
+  FIELD PROPERTY_BACKING_FIELD name:sumBasedOnPrevious1 type:kotlin.Int visibility:public [final,static]
+    EXPRESSION_BODY
+      CONST Int type=kotlin.Int value=7
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-sumBasedOnPrevious2> visibility:public modality:FINAL <> () returnType:kotlin.Int
+    correspondingProperty: PROPERTY name:sumBasedOnPrevious2 visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-sumBasedOnPrevious2> (): kotlin.Int declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:sumBasedOnPrevious2 type:kotlin.Int visibility:public [final,static]' type=kotlin.Int origin=null
+  FIELD PROPERTY_BACKING_FIELD name:sumBasedOnPrevious2 type:kotlin.Int visibility:public [final,static]
+    EXPRESSION_BODY
+      CONST Int type=kotlin.Int value=3

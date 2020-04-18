@@ -1,0 +1,241 @@
+FILE fqName:<root> fileName:/abstract4.kt
+  CLASS CLASS name:BaseIterator modality:ABSTRACT visibility:public superTypes:[kotlin.Any]
+    annotations:
+      CompileTimeCalculation
+    $this: VALUE_PARAMETER INSTANCE_RECEIVER name:<this> type:<root>.BaseIterator
+    CONSTRUCTOR visibility:public <> (baseStart:kotlin.Int) returnType:<root>.BaseIterator [primary]
+      VALUE_PARAMETER name:baseStart index:0 type:kotlin.Int
+      BLOCK_BODY
+        DELEGATING_CONSTRUCTOR_CALL 'public constructor <init> () [primary] declared in kotlin.Any'
+        SET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:baseStart type:kotlin.Int visibility:private' type=kotlin.Unit origin=INITIALIZE_FIELD
+          receiver: GET_VAR '<this>: <root>.BaseIterator declared in <root>.BaseIterator' type=<root>.BaseIterator origin=null
+          value: GET_VAR 'baseStart: kotlin.Int declared in <root>.BaseIterator.<init>' type=kotlin.Int origin=INITIALIZE_PROPERTY_FROM_PARAMETER
+    FUN DEFAULT_PROPERTY_ACCESSOR name:<set-baseStart> visibility:public modality:FINAL <> ($this:<root>.BaseIterator, <set-?>:kotlin.Int) returnType:kotlin.Unit
+      correspondingProperty: PROPERTY name:baseStart visibility:public modality:FINAL [var]
+      $this: VALUE_PARAMETER name:<this> type:<root>.BaseIterator
+      VALUE_PARAMETER name:<set-?> index:0 type:kotlin.Int
+      BLOCK_BODY
+        SET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:baseStart type:kotlin.Int visibility:private' type=kotlin.Unit origin=null
+          receiver: GET_VAR '<this>: <root>.BaseIterator declared in <root>.BaseIterator.<set-baseStart>' type=<root>.BaseIterator origin=null
+          value: GET_VAR '<set-?>: kotlin.Int declared in <root>.BaseIterator.<set-baseStart>' type=kotlin.Int origin=null
+    FUN DEFAULT_PROPERTY_ACCESSOR name:<get-baseStart> visibility:public modality:FINAL <> ($this:<root>.BaseIterator) returnType:kotlin.Int
+      correspondingProperty: PROPERTY name:baseStart visibility:public modality:FINAL [var]
+      $this: VALUE_PARAMETER name:<this> type:<root>.BaseIterator
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='public final fun <get-baseStart> (): kotlin.Int declared in <root>.BaseIterator'
+          GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:baseStart type:kotlin.Int visibility:private' type=kotlin.Int origin=null
+            receiver: GET_VAR '<this>: <root>.BaseIterator declared in <root>.BaseIterator.<get-baseStart>' type=<root>.BaseIterator origin=null
+    FIELD PROPERTY_BACKING_FIELD name:baseStart type:kotlin.Int visibility:private
+    FUN name:baseNext visibility:public modality:FINAL <> ($this:<root>.BaseIterator) returnType:kotlin.Int
+      $this: VALUE_PARAMETER name:<this> type:<root>.BaseIterator
+      BLOCK_BODY
+        VAR IR_TEMPORARY_VARIABLE name:tmp0_this type:<root>.BaseIterator [val]
+          GET_VAR '<this>: <root>.BaseIterator declared in <root>.BaseIterator.baseNext' type=<root>.BaseIterator origin=null
+        SET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:baseStart type:kotlin.Int visibility:private' type=kotlin.Unit origin=PLUSEQ
+          receiver: GET_VAR 'val tmp0_this: <root>.BaseIterator [val] declared in <root>.BaseIterator.baseNext' type=<root>.BaseIterator origin=null
+          value: CALL 'public final fun jsBitOr (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Int declared in kotlin.internal.ir' type=kotlin.Int origin=SYNTHESIZED_STATEMENT
+            arg0: CALL 'public final fun jsPlus (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Any? declared in kotlin.internal.ir' type=kotlin.Int origin=PLUSEQ
+              arg0: GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:baseStart type:kotlin.Int visibility:private' type=kotlin.Int origin=PLUSEQ
+                receiver: GET_VAR 'val tmp0_this: <root>.BaseIterator [val] declared in <root>.BaseIterator.baseNext' type=<root>.BaseIterator origin=null
+              arg1: CONST Int type=kotlin.Int value=1
+            arg1: CONST Int type=kotlin.Int value=0
+        RETURN type=kotlin.Nothing from='public final fun baseNext (): kotlin.Int declared in <root>.BaseIterator'
+          CALL 'public abstract fun base (): kotlin.Int declared in <root>.BaseIterator' type=kotlin.Int origin=null
+            $this: GET_VAR '<this>: <root>.BaseIterator declared in <root>.BaseIterator.baseNext' type=<root>.BaseIterator origin=null
+    FUN name:base visibility:public modality:ABSTRACT <> ($this:<root>.BaseIterator) returnType:kotlin.Int
+      $this: VALUE_PARAMETER name:<this> type:<root>.BaseIterator
+    FUN FAKE_OVERRIDE name:equals visibility:public modality:OPEN <> ($this:kotlin.Any, other:kotlin.Any?) returnType:kotlin.Boolean [fake_override,operator]
+      overridden:
+        public open fun equals (other: kotlin.Any?): kotlin.Boolean [operator] declared in kotlin.Any
+      $this: VALUE_PARAMETER name:<this> type:kotlin.Any
+      VALUE_PARAMETER name:other index:0 type:kotlin.Any?
+    FUN FAKE_OVERRIDE name:hashCode visibility:public modality:OPEN <> ($this:kotlin.Any) returnType:kotlin.Int [fake_override]
+      overridden:
+        public open fun hashCode (): kotlin.Int declared in kotlin.Any
+      $this: VALUE_PARAMETER name:<this> type:kotlin.Any
+    FUN FAKE_OVERRIDE name:toString visibility:public modality:OPEN <> ($this:kotlin.Any) returnType:kotlin.String [fake_override]
+      overridden:
+        public open fun toString (): kotlin.String declared in kotlin.Any
+      $this: VALUE_PARAMETER name:<this> type:kotlin.Any
+  CLASS CLASS name:ComplexIterator modality:ABSTRACT visibility:public superTypes:[<root>.BaseIterator]
+    annotations:
+      CompileTimeCalculation
+    $this: VALUE_PARAMETER INSTANCE_RECEIVER name:<this> type:<root>.ComplexIterator
+    CONSTRUCTOR visibility:public <> (complexStart:kotlin.Int) returnType:<root>.ComplexIterator [primary]
+      VALUE_PARAMETER name:complexStart index:0 type:kotlin.Int
+      BLOCK_BODY
+        DELEGATING_CONSTRUCTOR_CALL 'public constructor <init> (baseStart: kotlin.Int) [primary] declared in <root>.BaseIterator'
+          baseStart: GET_VAR 'complexStart: kotlin.Int declared in <root>.ComplexIterator.<init>' type=kotlin.Int origin=null
+        SET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:complexStart type:kotlin.Int visibility:private' type=kotlin.Unit origin=INITIALIZE_FIELD
+          receiver: GET_VAR '<this>: <root>.ComplexIterator declared in <root>.ComplexIterator' type=<root>.ComplexIterator origin=null
+          value: GET_VAR 'complexStart: kotlin.Int declared in <root>.ComplexIterator.<init>' type=kotlin.Int origin=INITIALIZE_PROPERTY_FROM_PARAMETER
+    FUN DEFAULT_PROPERTY_ACCESSOR name:<set-complexStart> visibility:public modality:FINAL <> ($this:<root>.ComplexIterator, <set-?>:kotlin.Int) returnType:kotlin.Unit
+      correspondingProperty: PROPERTY name:complexStart visibility:public modality:FINAL [var]
+      $this: VALUE_PARAMETER name:<this> type:<root>.ComplexIterator
+      VALUE_PARAMETER name:<set-?> index:0 type:kotlin.Int
+      BLOCK_BODY
+        SET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:complexStart type:kotlin.Int visibility:private' type=kotlin.Unit origin=null
+          receiver: GET_VAR '<this>: <root>.ComplexIterator declared in <root>.ComplexIterator.<set-complexStart>' type=<root>.ComplexIterator origin=null
+          value: GET_VAR '<set-?>: kotlin.Int declared in <root>.ComplexIterator.<set-complexStart>' type=kotlin.Int origin=null
+    FUN DEFAULT_PROPERTY_ACCESSOR name:<get-complexStart> visibility:public modality:FINAL <> ($this:<root>.ComplexIterator) returnType:kotlin.Int
+      correspondingProperty: PROPERTY name:complexStart visibility:public modality:FINAL [var]
+      $this: VALUE_PARAMETER name:<this> type:<root>.ComplexIterator
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='public final fun <get-complexStart> (): kotlin.Int declared in <root>.ComplexIterator'
+          GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:complexStart type:kotlin.Int visibility:private' type=kotlin.Int origin=null
+            receiver: GET_VAR '<this>: <root>.ComplexIterator declared in <root>.ComplexIterator.<get-complexStart>' type=<root>.ComplexIterator origin=null
+    FIELD PROPERTY_BACKING_FIELD name:complexStart type:kotlin.Int visibility:private
+    FUN name:complexNext visibility:public modality:FINAL <> ($this:<root>.ComplexIterator) returnType:kotlin.Int
+      $this: VALUE_PARAMETER name:<this> type:<root>.ComplexIterator
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='public final fun complexNext (): kotlin.Int declared in <root>.ComplexIterator'
+          CALL 'private final fun abstractCall ($this: <root>.ComplexIterator): kotlin.Int declared in <root>.ComplexIterator' type=kotlin.Int origin=null
+            $this: GET_VAR '<this>: <root>.ComplexIterator declared in <root>.ComplexIterator.complexNext' type=<root>.ComplexIterator origin=null
+    FUN name:abstractCall visibility:private modality:FINAL <> ($this:<root>.ComplexIterator) returnType:kotlin.Int
+      VALUE_PARAMETER STATIC_THIS_PARAMETER name:$this index:0 type:<root>.ComplexIterator
+      BLOCK_BODY
+        VAR IR_TEMPORARY_VARIABLE name:tmp0_this type:<root>.ComplexIterator [val]
+          GET_VAR '$this: <root>.ComplexIterator declared in <root>.ComplexIterator.abstractCall' type=<root>.ComplexIterator origin=null
+        SET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:complexStart type:kotlin.Int visibility:private' type=kotlin.Unit origin=MULTEQ
+          receiver: GET_VAR 'val tmp0_this: <root>.ComplexIterator [val] declared in <root>.ComplexIterator.abstractCall' type=<root>.ComplexIterator origin=null
+          value: CALL 'internal final fun imul (a_local: kotlin.Int, b_local: kotlin.Int): kotlin.Int declared in kotlin.js' type=kotlin.Int origin=MULTEQ
+            a_local: GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:complexStart type:kotlin.Int visibility:private' type=kotlin.Int origin=MULTEQ
+              receiver: GET_VAR 'val tmp0_this: <root>.ComplexIterator [val] declared in <root>.ComplexIterator.abstractCall' type=<root>.ComplexIterator origin=null
+            b_local: CONST Int type=kotlin.Int value=2
+        RETURN type=kotlin.Nothing from='private final fun abstractCall (): kotlin.Int declared in <root>.ComplexIterator'
+          CALL 'public final fun jsBitOr (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Int declared in kotlin.internal.ir' type=kotlin.Int origin=SYNTHESIZED_STATEMENT
+            arg0: CALL 'public final fun jsPlus (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Any? declared in kotlin.internal.ir' type=kotlin.Int origin=PLUS
+              arg0: CALL 'public abstract fun complex (): kotlin.Int declared in <root>.ComplexIterator' type=kotlin.Int origin=null
+                $this: GET_VAR '$this: <root>.ComplexIterator declared in <root>.ComplexIterator.abstractCall' type=<root>.ComplexIterator origin=null
+              arg1: CALL 'public final fun baseNext (): kotlin.Int [fake_override] declared in <root>.ComplexIterator' type=kotlin.Int origin=null
+                $this: GET_VAR '$this: <root>.ComplexIterator declared in <root>.ComplexIterator.abstractCall' type=<root>.ComplexIterator origin=null
+            arg1: CONST Int type=kotlin.Int value=0
+    FUN name:complex visibility:public modality:ABSTRACT <> ($this:<root>.ComplexIterator) returnType:kotlin.Int
+      $this: VALUE_PARAMETER name:<this> type:<root>.ComplexIterator
+    FUN FAKE_OVERRIDE name:base visibility:public modality:ABSTRACT <> ($this:<root>.BaseIterator) returnType:kotlin.Int [fake_override]
+      overridden:
+        public abstract fun base (): kotlin.Int declared in <root>.BaseIterator
+      $this: VALUE_PARAMETER name:<this> type:<root>.BaseIterator
+    FUN FAKE_OVERRIDE name:baseNext visibility:public modality:FINAL <> ($this:<root>.BaseIterator) returnType:kotlin.Int [fake_override]
+      overridden:
+        public final fun baseNext (): kotlin.Int declared in <root>.BaseIterator
+      $this: VALUE_PARAMETER name:<this> type:<root>.BaseIterator
+    FUN FAKE_OVERRIDE name:<set-baseStart> visibility:public modality:FINAL <> ($this:<root>.BaseIterator, <set-?>:kotlin.Int) returnType:kotlin.Unit [fake_override]
+      correspondingProperty: PROPERTY FAKE_OVERRIDE name:baseStart visibility:public modality:FINAL [fake_override,var]
+      overridden:
+        public final fun <set-baseStart> (<set-?>: kotlin.Int): kotlin.Unit declared in <root>.BaseIterator
+      $this: VALUE_PARAMETER name:<this> type:<root>.BaseIterator
+      VALUE_PARAMETER name:<set-?> index:0 type:kotlin.Int
+    FUN FAKE_OVERRIDE name:<get-baseStart> visibility:public modality:FINAL <> ($this:<root>.BaseIterator) returnType:kotlin.Int [fake_override]
+      correspondingProperty: PROPERTY FAKE_OVERRIDE name:baseStart visibility:public modality:FINAL [fake_override,var]
+      overridden:
+        public final fun <get-baseStart> (): kotlin.Int declared in <root>.BaseIterator
+      $this: VALUE_PARAMETER name:<this> type:<root>.BaseIterator
+    FUN FAKE_OVERRIDE name:equals visibility:public modality:OPEN <> ($this:kotlin.Any, other:kotlin.Any?) returnType:kotlin.Boolean [fake_override,operator]
+      overridden:
+        public open fun equals (other: kotlin.Any?): kotlin.Boolean [fake_override,operator] declared in <root>.BaseIterator
+      $this: VALUE_PARAMETER name:<this> type:kotlin.Any
+      VALUE_PARAMETER name:other index:0 type:kotlin.Any?
+    FUN FAKE_OVERRIDE name:hashCode visibility:public modality:OPEN <> ($this:kotlin.Any) returnType:kotlin.Int [fake_override]
+      overridden:
+        public open fun hashCode (): kotlin.Int [fake_override] declared in <root>.BaseIterator
+      $this: VALUE_PARAMETER name:<this> type:kotlin.Any
+    FUN FAKE_OVERRIDE name:toString visibility:public modality:OPEN <> ($this:kotlin.Any) returnType:kotlin.String [fake_override]
+      overridden:
+        public open fun toString (): kotlin.String [fake_override] declared in <root>.BaseIterator
+      $this: VALUE_PARAMETER name:<this> type:kotlin.Any
+  CLASS CLASS name:ImplementIterator modality:FINAL visibility:public superTypes:[<root>.ComplexIterator]
+    annotations:
+      CompileTimeCalculation
+    $this: VALUE_PARAMETER INSTANCE_RECEIVER name:<this> type:<root>.ImplementIterator
+    CONSTRUCTOR visibility:public <> (i:kotlin.Int) returnType:<root>.ImplementIterator [primary]
+      VALUE_PARAMETER name:i index:0 type:kotlin.Int
+      BLOCK_BODY
+        DELEGATING_CONSTRUCTOR_CALL 'public constructor <init> (complexStart: kotlin.Int) [primary] declared in <root>.ComplexIterator'
+          complexStart: GET_VAR 'i: kotlin.Int declared in <root>.ImplementIterator.<init>' type=kotlin.Int origin=null
+        SET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:i type:kotlin.Int visibility:private [final]' type=kotlin.Unit origin=INITIALIZE_FIELD
+          receiver: GET_VAR '<this>: <root>.ImplementIterator declared in <root>.ImplementIterator' type=<root>.ImplementIterator origin=null
+          value: GET_VAR 'i: kotlin.Int declared in <root>.ImplementIterator.<init>' type=kotlin.Int origin=INITIALIZE_PROPERTY_FROM_PARAMETER
+    FUN DEFAULT_PROPERTY_ACCESSOR name:<get-i> visibility:public modality:FINAL <> ($this:<root>.ImplementIterator) returnType:kotlin.Int
+      correspondingProperty: PROPERTY name:i visibility:public modality:FINAL [val]
+      $this: VALUE_PARAMETER name:<this> type:<root>.ImplementIterator
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='public final fun <get-i> (): kotlin.Int declared in <root>.ImplementIterator'
+          GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:i type:kotlin.Int visibility:private [final]' type=kotlin.Int origin=null
+            receiver: GET_VAR '<this>: <root>.ImplementIterator declared in <root>.ImplementIterator.<get-i>' type=<root>.ImplementIterator origin=null
+    FIELD PROPERTY_BACKING_FIELD name:i type:kotlin.Int visibility:private [final]
+    FUN name:complex visibility:public modality:OPEN <> ($this:<root>.ImplementIterator) returnType:kotlin.Int
+      overridden:
+        public abstract fun complex (): kotlin.Int declared in <root>.ComplexIterator
+      $this: VALUE_PARAMETER name:<this> type:<root>.ImplementIterator
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='public open fun complex (): kotlin.Int declared in <root>.ImplementIterator'
+          CALL 'public final fun <get-complexStart> (): kotlin.Int [fake_override] declared in <root>.ImplementIterator' type=kotlin.Int origin=GET_PROPERTY
+            $this: GET_VAR '<this>: <root>.ImplementIterator declared in <root>.ImplementIterator.complex' type=<root>.ImplementIterator origin=null
+    FUN name:base visibility:public modality:OPEN <> ($this:<root>.ImplementIterator) returnType:kotlin.Int
+      overridden:
+        public abstract fun base (): kotlin.Int [fake_override] declared in <root>.ComplexIterator
+      $this: VALUE_PARAMETER name:<this> type:<root>.ImplementIterator
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='public open fun base (): kotlin.Int declared in <root>.ImplementIterator'
+          CALL 'public final fun <get-baseStart> (): kotlin.Int [fake_override] declared in <root>.ImplementIterator' type=kotlin.Int origin=GET_PROPERTY
+            $this: GET_VAR '<this>: <root>.ImplementIterator declared in <root>.ImplementIterator.base' type=<root>.ImplementIterator origin=null
+    FUN FAKE_OVERRIDE name:baseNext visibility:public modality:FINAL <> ($this:<root>.BaseIterator) returnType:kotlin.Int [fake_override]
+      overridden:
+        public final fun baseNext (): kotlin.Int [fake_override] declared in <root>.ComplexIterator
+      $this: VALUE_PARAMETER name:<this> type:<root>.BaseIterator
+    FUN FAKE_OVERRIDE name:complexNext visibility:public modality:FINAL <> ($this:<root>.ComplexIterator) returnType:kotlin.Int [fake_override]
+      overridden:
+        public final fun complexNext (): kotlin.Int declared in <root>.ComplexIterator
+      $this: VALUE_PARAMETER name:<this> type:<root>.ComplexIterator
+    FUN FAKE_OVERRIDE name:<set-baseStart> visibility:public modality:FINAL <> ($this:<root>.BaseIterator, <set-?>:kotlin.Int) returnType:kotlin.Unit [fake_override]
+      correspondingProperty: PROPERTY FAKE_OVERRIDE name:baseStart visibility:public modality:FINAL [fake_override,var]
+      overridden:
+        public final fun <set-baseStart> (<set-?>: kotlin.Int): kotlin.Unit [fake_override] declared in <root>.ComplexIterator
+      $this: VALUE_PARAMETER name:<this> type:<root>.BaseIterator
+      VALUE_PARAMETER name:<set-?> index:0 type:kotlin.Int
+    FUN FAKE_OVERRIDE name:<get-baseStart> visibility:public modality:FINAL <> ($this:<root>.BaseIterator) returnType:kotlin.Int [fake_override]
+      correspondingProperty: PROPERTY FAKE_OVERRIDE name:baseStart visibility:public modality:FINAL [fake_override,var]
+      overridden:
+        public final fun <get-baseStart> (): kotlin.Int [fake_override] declared in <root>.ComplexIterator
+      $this: VALUE_PARAMETER name:<this> type:<root>.BaseIterator
+    FUN FAKE_OVERRIDE name:<set-complexStart> visibility:public modality:FINAL <> ($this:<root>.ComplexIterator, <set-?>:kotlin.Int) returnType:kotlin.Unit [fake_override]
+      correspondingProperty: PROPERTY FAKE_OVERRIDE name:complexStart visibility:public modality:FINAL [fake_override,var]
+      overridden:
+        public final fun <set-complexStart> (<set-?>: kotlin.Int): kotlin.Unit declared in <root>.ComplexIterator
+      $this: VALUE_PARAMETER name:<this> type:<root>.ComplexIterator
+      VALUE_PARAMETER name:<set-?> index:0 type:kotlin.Int
+    FUN FAKE_OVERRIDE name:<get-complexStart> visibility:public modality:FINAL <> ($this:<root>.ComplexIterator) returnType:kotlin.Int [fake_override]
+      correspondingProperty: PROPERTY FAKE_OVERRIDE name:complexStart visibility:public modality:FINAL [fake_override,var]
+      overridden:
+        public final fun <get-complexStart> (): kotlin.Int declared in <root>.ComplexIterator
+      $this: VALUE_PARAMETER name:<this> type:<root>.ComplexIterator
+    FUN FAKE_OVERRIDE name:equals visibility:public modality:OPEN <> ($this:kotlin.Any, other:kotlin.Any?) returnType:kotlin.Boolean [fake_override,operator]
+      overridden:
+        public open fun equals (other: kotlin.Any?): kotlin.Boolean [fake_override,operator] declared in <root>.ComplexIterator
+      $this: VALUE_PARAMETER name:<this> type:kotlin.Any
+      VALUE_PARAMETER name:other index:0 type:kotlin.Any?
+    FUN FAKE_OVERRIDE name:hashCode visibility:public modality:OPEN <> ($this:kotlin.Any) returnType:kotlin.Int [fake_override]
+      overridden:
+        public open fun hashCode (): kotlin.Int [fake_override] declared in <root>.ComplexIterator
+      $this: VALUE_PARAMETER name:<this> type:kotlin.Any
+    FUN FAKE_OVERRIDE name:toString visibility:public modality:OPEN <> ($this:kotlin.Any) returnType:kotlin.String [fake_override]
+      overridden:
+        public open fun toString (): kotlin.String [fake_override] declared in <root>.ComplexIterator
+      $this: VALUE_PARAMETER name:<this> type:kotlin.Any
+  FUN name:getIterator visibility:public modality:FINAL <> (i:kotlin.Int) returnType:<root>.ComplexIterator
+    annotations:
+      CompileTimeCalculation
+    VALUE_PARAMETER name:i index:0 type:kotlin.Int
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun getIterator (i: kotlin.Int): <root>.ComplexIterator declared in <root>'
+        CONSTRUCTOR_CALL 'public constructor <init> (i: kotlin.Int) [primary] declared in <root>.ImplementIterator' type=<root>.ImplementIterator origin=null
+          i: GET_VAR 'i: kotlin.Int declared in <root>.getIterator' type=kotlin.Int origin=null
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-next> visibility:public modality:FINAL <> () returnType:kotlin.Int
+    correspondingProperty: PROPERTY name:next visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-next> (): kotlin.Int declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:next type:kotlin.Int visibility:public [final,static]' type=kotlin.Int origin=null
+  FIELD PROPERTY_BACKING_FIELD name:next type:kotlin.Int visibility:public [final,static]
+    EXPRESSION_BODY
+      CONST Int type=kotlin.Int value=31

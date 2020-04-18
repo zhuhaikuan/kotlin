@@ -1,0 +1,172 @@
+FILE fqName:<root> fileName:/loop.kt
+  FUN name:loop visibility:public modality:FINAL <> (toInc:kotlin.Int, start:kotlin.Int, end:kotlin.Int) returnType:kotlin.Int
+    annotations:
+      CompileTimeCalculation
+    VALUE_PARAMETER name:toInc index:0 type:kotlin.Int
+    VALUE_PARAMETER name:start index:1 type:kotlin.Int
+    VALUE_PARAMETER name:end index:2 type:kotlin.Int
+    BLOCK_BODY
+      VAR name:result type:kotlin.Int [var]
+        GET_VAR 'toInc: kotlin.Int declared in <root>.loop' type=kotlin.Int origin=null
+      VAR IR_TEMPORARY_VARIABLE name:tmp0_inductionVariable type:kotlin.Int [var]
+        GET_VAR 'start: kotlin.Int declared in <root>.loop' type=kotlin.Int origin=null
+      VAR IR_TEMPORARY_VARIABLE name:tmp1_last type:kotlin.Int [val]
+        GET_VAR 'end: kotlin.Int declared in <root>.loop' type=kotlin.Int origin=null
+      VAR IR_TEMPORARY_VARIABLE name:tmp2_step type:kotlin.Int [val]
+        CONST Int type=kotlin.Int value=1
+      WHEN type=kotlin.Unit origin=null
+        BRANCH
+          if: CALL 'public final fun jsLtEq (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=null
+            arg0: GET_VAR 'var tmp0_inductionVariable: kotlin.Int [var] declared in <root>.loop' type=kotlin.Int origin=null
+            arg1: GET_VAR 'val tmp1_last: kotlin.Int [val] declared in <root>.loop' type=kotlin.Int origin=null
+          then: DO_WHILE label=null origin=FOR_LOOP_INNER_WHILE
+            body: COMPOSITE type=kotlin.Unit origin=FOR_LOOP_INNER_WHILE
+              VAR FOR_LOOP_VARIABLE name:i type:kotlin.Int [val]
+                GET_VAR 'var tmp0_inductionVariable: kotlin.Int [var] declared in <root>.loop' type=kotlin.Int origin=null
+              SET_VAR 'var tmp0_inductionVariable: kotlin.Int [var] declared in <root>.loop' type=kotlin.Unit origin=EQ
+                CALL 'public final fun jsBitOr (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Int declared in kotlin.internal.ir' type=kotlin.Int origin=SYNTHESIZED_STATEMENT
+                  arg0: CALL 'public final fun jsPlus (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Any? declared in kotlin.internal.ir' type=kotlin.Int origin=null
+                    arg0: GET_VAR 'var tmp0_inductionVariable: kotlin.Int [var] declared in <root>.loop' type=kotlin.Int origin=null
+                    arg1: GET_VAR 'val tmp2_step: kotlin.Int [val] declared in <root>.loop' type=kotlin.Int origin=null
+                  arg1: CONST Int type=kotlin.Int value=0
+              SET_VAR 'var result: kotlin.Int [var] declared in <root>.loop' type=kotlin.Unit origin=PLUSEQ
+                CALL 'public final fun jsBitOr (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Int declared in kotlin.internal.ir' type=kotlin.Int origin=SYNTHESIZED_STATEMENT
+                  arg0: CALL 'public final fun jsPlus (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Any? declared in kotlin.internal.ir' type=kotlin.Int origin=PLUSEQ
+                    arg0: GET_VAR 'var result: kotlin.Int [var] declared in <root>.loop' type=kotlin.Int origin=PLUSEQ
+                    arg1: CONST Int type=kotlin.Int value=1
+                  arg1: CONST Int type=kotlin.Int value=0
+            condition: CALL 'public final fun jsNot (arg0: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=EXCLEQ
+              arg0: CALL 'public final fun jsEqeqeq (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=EXCLEQ
+                arg0: GET_VAR 'val i: kotlin.Int [val] declared in <root>.loop' type=kotlin.Int origin=null
+                arg1: GET_VAR 'val tmp1_last: kotlin.Int [val] declared in <root>.loop' type=kotlin.Int origin=null
+      RETURN type=kotlin.Nothing from='public final fun loop (toInc: kotlin.Int, start: kotlin.Int, end: kotlin.Int): kotlin.Int declared in <root>'
+        GET_VAR 'var result: kotlin.Int [var] declared in <root>.loop' type=kotlin.Int origin=null
+  FUN name:withInnerContinue visibility:public modality:FINAL <> () returnType:kotlin.Int
+    annotations:
+      CompileTimeCalculation
+    BLOCK_BODY
+      VAR name:cycles type:kotlin.Int [var]
+        CONST Int type=kotlin.Int value=0
+      VAR name:i type:kotlin.Int [var]
+        CONST Int type=kotlin.Int value=1
+      VAR name:j type:kotlin.Int [var]
+        CONST Int type=kotlin.Int value=1
+      WHILE label=L origin=WHILE_LOOP
+        condition: CALL 'public final fun jsLtEq (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=LTEQ
+          arg0: GET_VAR 'var i: kotlin.Int [var] declared in <root>.withInnerContinue' type=kotlin.Int origin=null
+          arg1: CONST Int type=kotlin.Int value=5
+        body: BLOCK type=kotlin.Unit origin=null
+          SET_VAR 'var j: kotlin.Int [var] declared in <root>.withInnerContinue' type=kotlin.Unit origin=EQ
+            CONST Int type=kotlin.Int value=1
+          WHILE label=null origin=WHILE_LOOP
+            condition: CALL 'public final fun jsLtEq (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=LTEQ
+              arg0: GET_VAR 'var j: kotlin.Int [var] declared in <root>.withInnerContinue' type=kotlin.Int origin=null
+              arg1: CONST Int type=kotlin.Int value=5
+            body: BLOCK type=kotlin.Unit origin=null
+              WHEN type=kotlin.Unit origin=IF
+                BRANCH
+                  if: CALL 'public final fun jsEqeqeq (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=EQEQ
+                    arg0: CALL 'public final fun jsMod (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Any? declared in kotlin.internal.ir' type=kotlin.Int origin=PERC
+                      arg0: GET_VAR 'var i: kotlin.Int [var] declared in <root>.withInnerContinue' type=kotlin.Int origin=null
+                      arg1: CONST Int type=kotlin.Int value=2
+                    arg1: CONST Int type=kotlin.Int value=0
+                  then: BLOCK type=kotlin.Unit origin=null
+                    SET_VAR 'var i: kotlin.Int [var] declared in <root>.withInnerContinue' type=kotlin.Unit origin=PLUSEQ
+                      CALL 'public final fun jsBitOr (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Int declared in kotlin.internal.ir' type=kotlin.Int origin=SYNTHESIZED_STATEMENT
+                        arg0: CALL 'public final fun jsPlus (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Any? declared in kotlin.internal.ir' type=kotlin.Int origin=PLUSEQ
+                          arg0: GET_VAR 'var i: kotlin.Int [var] declared in <root>.withInnerContinue' type=kotlin.Int origin=PLUSEQ
+                          arg1: CONST Int type=kotlin.Int value=1
+                        arg1: CONST Int type=kotlin.Int value=0
+                    CONTINUE label=L loop.label=L
+              SET_VAR 'var cycles: kotlin.Int [var] declared in <root>.withInnerContinue' type=kotlin.Unit origin=PLUSEQ
+                CALL 'public final fun jsBitOr (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Int declared in kotlin.internal.ir' type=kotlin.Int origin=SYNTHESIZED_STATEMENT
+                  arg0: CALL 'public final fun jsPlus (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Any? declared in kotlin.internal.ir' type=kotlin.Int origin=PLUSEQ
+                    arg0: GET_VAR 'var cycles: kotlin.Int [var] declared in <root>.withInnerContinue' type=kotlin.Int origin=PLUSEQ
+                    arg1: CONST Int type=kotlin.Int value=1
+                  arg1: CONST Int type=kotlin.Int value=0
+              SET_VAR 'var j: kotlin.Int [var] declared in <root>.withInnerContinue' type=kotlin.Unit origin=PLUSEQ
+                CALL 'public final fun jsBitOr (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Int declared in kotlin.internal.ir' type=kotlin.Int origin=SYNTHESIZED_STATEMENT
+                  arg0: CALL 'public final fun jsPlus (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Any? declared in kotlin.internal.ir' type=kotlin.Int origin=PLUSEQ
+                    arg0: GET_VAR 'var j: kotlin.Int [var] declared in <root>.withInnerContinue' type=kotlin.Int origin=PLUSEQ
+                    arg1: CONST Int type=kotlin.Int value=1
+                  arg1: CONST Int type=kotlin.Int value=0
+          SET_VAR 'var i: kotlin.Int [var] declared in <root>.withInnerContinue' type=kotlin.Unit origin=PLUSEQ
+            CALL 'public final fun jsBitOr (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Int declared in kotlin.internal.ir' type=kotlin.Int origin=SYNTHESIZED_STATEMENT
+              arg0: CALL 'public final fun jsPlus (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Any? declared in kotlin.internal.ir' type=kotlin.Int origin=PLUSEQ
+                arg0: GET_VAR 'var i: kotlin.Int [var] declared in <root>.withInnerContinue' type=kotlin.Int origin=PLUSEQ
+                arg1: CONST Int type=kotlin.Int value=1
+              arg1: CONST Int type=kotlin.Int value=0
+      RETURN type=kotlin.Nothing from='public final fun withInnerContinue (): kotlin.Int declared in <root>'
+        GET_VAR 'var cycles: kotlin.Int [var] declared in <root>.withInnerContinue' type=kotlin.Int origin=null
+  FUN name:earlyExit visibility:public modality:FINAL <> (end:kotlin.Int, stop:kotlin.Int) returnType:kotlin.Int
+    annotations:
+      CompileTimeCalculation
+    VALUE_PARAMETER name:end index:0 type:kotlin.Int
+    VALUE_PARAMETER name:stop index:1 type:kotlin.Int
+    BLOCK_BODY
+      VAR IR_TEMPORARY_VARIABLE name:tmp0_inductionVariable type:kotlin.Int [var]
+        CONST Int type=kotlin.Int value=1
+      VAR IR_TEMPORARY_VARIABLE name:tmp1_last type:kotlin.Int [val]
+        GET_VAR 'end: kotlin.Int declared in <root>.earlyExit' type=kotlin.Int origin=null
+      VAR IR_TEMPORARY_VARIABLE name:tmp2_step type:kotlin.Int [val]
+        CONST Int type=kotlin.Int value=1
+      WHEN type=kotlin.Unit origin=null
+        BRANCH
+          if: CALL 'public final fun jsLtEq (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=null
+            arg0: GET_VAR 'var tmp0_inductionVariable: kotlin.Int [var] declared in <root>.earlyExit' type=kotlin.Int origin=null
+            arg1: GET_VAR 'val tmp1_last: kotlin.Int [val] declared in <root>.earlyExit' type=kotlin.Int origin=null
+          then: DO_WHILE label=null origin=FOR_LOOP_INNER_WHILE
+            body: COMPOSITE type=kotlin.Unit origin=FOR_LOOP_INNER_WHILE
+              VAR FOR_LOOP_VARIABLE name:i type:kotlin.Int [val]
+                GET_VAR 'var tmp0_inductionVariable: kotlin.Int [var] declared in <root>.earlyExit' type=kotlin.Int origin=null
+              SET_VAR 'var tmp0_inductionVariable: kotlin.Int [var] declared in <root>.earlyExit' type=kotlin.Unit origin=EQ
+                CALL 'public final fun jsBitOr (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Int declared in kotlin.internal.ir' type=kotlin.Int origin=SYNTHESIZED_STATEMENT
+                  arg0: CALL 'public final fun jsPlus (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Any? declared in kotlin.internal.ir' type=kotlin.Int origin=null
+                    arg0: GET_VAR 'var tmp0_inductionVariable: kotlin.Int [var] declared in <root>.earlyExit' type=kotlin.Int origin=null
+                    arg1: GET_VAR 'val tmp2_step: kotlin.Int [val] declared in <root>.earlyExit' type=kotlin.Int origin=null
+                  arg1: CONST Int type=kotlin.Int value=0
+              WHEN type=kotlin.Unit origin=IF
+                BRANCH
+                  if: CALL 'public final fun jsEqeqeq (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=EQEQ
+                    arg0: GET_VAR 'val i: kotlin.Int [val] declared in <root>.earlyExit' type=kotlin.Int origin=null
+                    arg1: GET_VAR 'stop: kotlin.Int declared in <root>.earlyExit' type=kotlin.Int origin=null
+                  then: RETURN type=kotlin.Nothing from='public final fun earlyExit (end: kotlin.Int, stop: kotlin.Int): kotlin.Int declared in <root>'
+                    GET_VAR 'val i: kotlin.Int [val] declared in <root>.earlyExit' type=kotlin.Int origin=null
+            condition: CALL 'public final fun jsNot (arg0: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=EXCLEQ
+              arg0: CALL 'public final fun jsEqeqeq (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=EXCLEQ
+                arg0: GET_VAR 'val i: kotlin.Int [val] declared in <root>.earlyExit' type=kotlin.Int origin=null
+                arg1: GET_VAR 'val tmp1_last: kotlin.Int [val] declared in <root>.earlyExit' type=kotlin.Int origin=null
+      RETURN type=kotlin.Nothing from='public final fun earlyExit (end: kotlin.Int, stop: kotlin.Int): kotlin.Int declared in <root>'
+        GET_VAR 'end: kotlin.Int declared in <root>.earlyExit' type=kotlin.Int origin=null
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-a> visibility:public modality:FINAL <> () returnType:kotlin.Int
+    correspondingProperty: PROPERTY name:a visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-a> (): kotlin.Int declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:a type:kotlin.Int visibility:public [final,static]' type=kotlin.Int origin=null
+  FIELD PROPERTY_BACKING_FIELD name:a type:kotlin.Int visibility:public [final,static]
+    EXPRESSION_BODY
+      CONST Int type=kotlin.Int value=10
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-b> visibility:public modality:FINAL <> () returnType:kotlin.Int
+    correspondingProperty: PROPERTY name:b visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-b> (): kotlin.Int declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:b type:kotlin.Int visibility:public [final,static]' type=kotlin.Int origin=null
+  FIELD PROPERTY_BACKING_FIELD name:b type:kotlin.Int visibility:public [final,static]
+    EXPRESSION_BODY
+      CONST Int type=kotlin.Int value=15
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-c1> visibility:public modality:FINAL <> () returnType:kotlin.Int
+    correspondingProperty: PROPERTY name:c1 visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-c1> (): kotlin.Int declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:c1 type:kotlin.Int visibility:public [final,static]' type=kotlin.Int origin=null
+  FIELD PROPERTY_BACKING_FIELD name:c1 type:kotlin.Int visibility:public [final,static]
+    EXPRESSION_BODY
+      CONST Int type=kotlin.Int value=5
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-c2> visibility:public modality:FINAL <> () returnType:kotlin.Int
+    correspondingProperty: PROPERTY name:c2 visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-c2> (): kotlin.Int declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:c2 type:kotlin.Int visibility:public [final,static]' type=kotlin.Int origin=null
+  FIELD PROPERTY_BACKING_FIELD name:c2 type:kotlin.Int visibility:public [final,static]
+    EXPRESSION_BODY
+      CONST Int type=kotlin.Int value=10

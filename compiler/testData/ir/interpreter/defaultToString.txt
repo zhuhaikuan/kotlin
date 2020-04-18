@@ -1,0 +1,219 @@
+FILE fqName:<root> fileName:/defaultToString.kt
+  CLASS CLASS name:A modality:OPEN visibility:public superTypes:[kotlin.Any]
+    annotations:
+      CompileTimeCalculation
+    $this: VALUE_PARAMETER INSTANCE_RECEIVER name:<this> type:<root>.A
+    CONSTRUCTOR visibility:public <> () returnType:<root>.A [primary]
+      BLOCK_BODY
+        DELEGATING_CONSTRUCTOR_CALL 'public constructor <init> () [primary] declared in kotlin.Any'
+    FUN FAKE_OVERRIDE name:equals visibility:public modality:OPEN <> ($this:kotlin.Any, other:kotlin.Any?) returnType:kotlin.Boolean [fake_override,operator]
+      overridden:
+        public open fun equals (other: kotlin.Any?): kotlin.Boolean [operator] declared in kotlin.Any
+      $this: VALUE_PARAMETER name:<this> type:kotlin.Any
+      VALUE_PARAMETER name:other index:0 type:kotlin.Any?
+    FUN FAKE_OVERRIDE name:hashCode visibility:public modality:OPEN <> ($this:kotlin.Any) returnType:kotlin.Int [fake_override]
+      overridden:
+        public open fun hashCode (): kotlin.Int declared in kotlin.Any
+      $this: VALUE_PARAMETER name:<this> type:kotlin.Any
+    FUN FAKE_OVERRIDE name:toString visibility:public modality:OPEN <> ($this:kotlin.Any) returnType:kotlin.String [fake_override]
+      overridden:
+        public open fun toString (): kotlin.String declared in kotlin.Any
+      $this: VALUE_PARAMETER name:<this> type:kotlin.Any
+  CLASS CLASS name:B modality:FINAL visibility:public superTypes:[kotlin.Any]
+    $this: VALUE_PARAMETER INSTANCE_RECEIVER name:<this> type:<root>.B
+    CONSTRUCTOR visibility:public <> () returnType:<root>.B [primary]
+      annotations:
+        CompileTimeCalculation
+      BLOCK_BODY
+        DELEGATING_CONSTRUCTOR_CALL 'public constructor <init> () [primary] declared in kotlin.Any'
+    FUN name:toString visibility:public modality:OPEN <> ($this:<root>.B) returnType:kotlin.String
+      annotations:
+        CompileTimeCalculation
+      overridden:
+        public open fun toString (): kotlin.String declared in kotlin.Any
+      $this: VALUE_PARAMETER name:<this> type:<root>.B
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='public open fun toString (): kotlin.String declared in <root>.B'
+          CALL 'public final fun anyToString (o: dynamic): kotlin.String declared in kotlin.js' type=kotlin.String origin=null
+            o: GET_VAR '<this>: <root>.B declared in <root>.B.toString' type=<root>.B origin=null
+    FUN FAKE_OVERRIDE name:equals visibility:public modality:OPEN <> ($this:kotlin.Any, other:kotlin.Any?) returnType:kotlin.Boolean [fake_override,operator]
+      overridden:
+        public open fun equals (other: kotlin.Any?): kotlin.Boolean [operator] declared in kotlin.Any
+      $this: VALUE_PARAMETER name:<this> type:kotlin.Any
+      VALUE_PARAMETER name:other index:0 type:kotlin.Any?
+    FUN FAKE_OVERRIDE name:hashCode visibility:public modality:OPEN <> ($this:kotlin.Any) returnType:kotlin.Int [fake_override]
+      overridden:
+        public open fun hashCode (): kotlin.Int declared in kotlin.Any
+      $this: VALUE_PARAMETER name:<this> type:kotlin.Any
+  CLASS CLASS name:C modality:FINAL visibility:public superTypes:[kotlin.Any]
+    $this: VALUE_PARAMETER INSTANCE_RECEIVER name:<this> type:<root>.C
+    CONSTRUCTOR visibility:public <> () returnType:<root>.C [primary]
+      BLOCK_BODY
+        DELEGATING_CONSTRUCTOR_CALL 'public constructor <init> () [primary] declared in kotlin.Any'
+    FUN FAKE_OVERRIDE name:equals visibility:public modality:OPEN <> ($this:kotlin.Any, other:kotlin.Any?) returnType:kotlin.Boolean [fake_override,operator]
+      overridden:
+        public open fun equals (other: kotlin.Any?): kotlin.Boolean [operator] declared in kotlin.Any
+      $this: VALUE_PARAMETER name:<this> type:kotlin.Any
+      VALUE_PARAMETER name:other index:0 type:kotlin.Any?
+    FUN FAKE_OVERRIDE name:hashCode visibility:public modality:OPEN <> ($this:kotlin.Any) returnType:kotlin.Int [fake_override]
+      overridden:
+        public open fun hashCode (): kotlin.Int declared in kotlin.Any
+      $this: VALUE_PARAMETER name:<this> type:kotlin.Any
+    FUN FAKE_OVERRIDE name:toString visibility:public modality:OPEN <> ($this:kotlin.Any) returnType:kotlin.String [fake_override]
+      overridden:
+        public open fun toString (): kotlin.String declared in kotlin.Any
+      $this: VALUE_PARAMETER name:<this> type:kotlin.Any
+  CLASS CLASS name:D modality:FINAL visibility:public superTypes:[<root>.A]
+    $this: VALUE_PARAMETER INSTANCE_RECEIVER name:<this> type:<root>.D
+    CONSTRUCTOR visibility:public <> () returnType:<root>.D [primary]
+      BLOCK_BODY
+        DELEGATING_CONSTRUCTOR_CALL 'public constructor <init> () [primary] declared in <root>.A'
+    FUN FAKE_OVERRIDE name:equals visibility:public modality:OPEN <> ($this:kotlin.Any, other:kotlin.Any?) returnType:kotlin.Boolean [fake_override,operator]
+      overridden:
+        public open fun equals (other: kotlin.Any?): kotlin.Boolean [fake_override,operator] declared in <root>.A
+      $this: VALUE_PARAMETER name:<this> type:kotlin.Any
+      VALUE_PARAMETER name:other index:0 type:kotlin.Any?
+    FUN FAKE_OVERRIDE name:hashCode visibility:public modality:OPEN <> ($this:kotlin.Any) returnType:kotlin.Int [fake_override]
+      overridden:
+        public open fun hashCode (): kotlin.Int [fake_override] declared in <root>.A
+      $this: VALUE_PARAMETER name:<this> type:kotlin.Any
+    FUN FAKE_OVERRIDE name:toString visibility:public modality:OPEN <> ($this:kotlin.Any) returnType:kotlin.String [fake_override]
+      overridden:
+        public open fun toString (): kotlin.String [fake_override] declared in <root>.A
+      $this: VALUE_PARAMETER name:<this> type:kotlin.Any
+  FUN name:checkToStringCorrectness visibility:public modality:FINAL <> (value:kotlin.Any, startStr:kotlin.String) returnType:kotlin.Boolean
+    annotations:
+      CompileTimeCalculation
+    VALUE_PARAMETER name:value index:0 type:kotlin.Any
+    VALUE_PARAMETER name:startStr index:1 type:kotlin.String
+    BLOCK_BODY
+      VAR name:string type:kotlin.String [val]
+        CALL 'public final fun toString (o: dynamic): kotlin.String declared in kotlin.js' type=kotlin.String origin=null
+          o: GET_VAR 'value: kotlin.Any declared in <root>.checkToStringCorrectness' type=kotlin.Any origin=null
+      RETURN type=kotlin.Nothing from='public final fun checkToStringCorrectness (value: kotlin.Any, startStr: kotlin.String): kotlin.Boolean declared in <root>'
+        WHEN type=kotlin.Boolean origin=ANDAND
+          BRANCH
+            if: WHEN type=kotlin.Boolean origin=ANDAND
+              BRANCH
+                if: CALL 'public final fun equals (obj1: dynamic, obj2: dynamic): kotlin.Boolean declared in kotlin.js' type=kotlin.Boolean origin=EQEQ
+                  obj1: CALL 'internal final fun charSequenceSubSequence (a: kotlin.CharSequence, startIndex: kotlin.Int, endIndex: kotlin.Int): kotlin.CharSequence declared in kotlin.js' type=kotlin.CharSequence origin=null
+                    a: GET_VAR 'val string: kotlin.String [val] declared in <root>.checkToStringCorrectness' type=kotlin.String origin=null
+                    startIndex: CONST Int type=kotlin.Int value=0
+                    endIndex: CALL 'public final fun jsArrayLength (arg0: kotlin.Any?): kotlin.Any? declared in kotlin.internal.ir' type=kotlin.Int origin=GET_PROPERTY
+                      arg0: GET_VAR 'startStr: kotlin.String declared in <root>.checkToStringCorrectness' type=kotlin.String origin=null
+                  obj2: GET_VAR 'startStr: kotlin.String declared in <root>.checkToStringCorrectness' type=kotlin.String origin=null
+                then: CALL 'public open fun equals (other: kotlin.Any?): kotlin.Boolean [operator] declared in kotlin.Char' type=kotlin.Boolean origin=EQEQ
+                  $this: CALL 'internal final fun charSequenceGet (a: kotlin.CharSequence, index: kotlin.Int): kotlin.Char declared in kotlin.js' type=kotlin.Char origin=null
+                    a: GET_VAR 'val string: kotlin.String [val] declared in <root>.checkToStringCorrectness' type=kotlin.String origin=null
+                    index: CALL 'public final fun jsArrayLength (arg0: kotlin.Any?): kotlin.Any? declared in kotlin.internal.ir' type=kotlin.Int origin=GET_PROPERTY
+                      arg0: GET_VAR 'startStr: kotlin.String declared in <root>.checkToStringCorrectness' type=kotlin.String origin=null
+                  other: CONSTRUCTOR_CALL 'internal constructor <init> (value: kotlin.Int) [primary] declared in kotlin.Char' type=kotlin.Char origin=null
+                    value: CONST Int type=kotlin.Int value=64
+              BRANCH
+                if: CONST Boolean type=kotlin.Boolean value=true
+                then: CONST Boolean type=kotlin.Boolean value=false
+            then: CALL 'public final fun jsEqeqeq (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=EQEQ
+              arg0: CALL 'public final fun jsArrayLength (arg0: kotlin.Any?): kotlin.Any? declared in kotlin.internal.ir' type=kotlin.Int origin=GET_PROPERTY
+                arg0: GET_VAR 'val string: kotlin.String [val] declared in <root>.checkToStringCorrectness' type=kotlin.String origin=null
+              arg1: CALL 'public final fun jsBitOr (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Int declared in kotlin.internal.ir' type=kotlin.Int origin=SYNTHESIZED_STATEMENT
+                arg0: CALL 'public final fun jsPlus (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Any? declared in kotlin.internal.ir' type=kotlin.Int origin=PLUS
+                  arg0: CALL 'public final fun jsArrayLength (arg0: kotlin.Any?): kotlin.Any? declared in kotlin.internal.ir' type=kotlin.Int origin=GET_PROPERTY
+                    arg0: GET_VAR 'startStr: kotlin.String declared in <root>.checkToStringCorrectness' type=kotlin.String origin=null
+                  arg1: CONST Int type=kotlin.Int value=9
+                arg1: CONST Int type=kotlin.Int value=0
+          BRANCH
+            if: CONST Boolean type=kotlin.Boolean value=true
+            then: CONST Boolean type=kotlin.Boolean value=false
+  FUN name:getTheSameValue visibility:public modality:FINAL <> (a:kotlin.Any) returnType:kotlin.Any
+    annotations:
+      CompileTimeCalculation
+    VALUE_PARAMETER name:a index:0 type:kotlin.Any
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun getTheSameValue (a: kotlin.Any): kotlin.Any declared in <root>'
+        GET_VAR 'a: kotlin.Any declared in <root>.getTheSameValue' type=kotlin.Any origin=null
+  FUN name:theSameObjectToString visibility:public modality:FINAL <> (value:kotlin.Any) returnType:kotlin.Boolean
+    annotations:
+      CompileTimeCalculation
+    VALUE_PARAMETER name:value index:0 type:kotlin.Any
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun theSameObjectToString (value: kotlin.Any): kotlin.Boolean declared in <root>'
+        CALL 'public final fun jsEqeqeq (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=EQEQ
+          arg0: CALL 'public final fun toString (o: dynamic): kotlin.String declared in kotlin.js' type=kotlin.String origin=null
+            o: GET_VAR 'value: kotlin.Any declared in <root>.theSameObjectToString' type=kotlin.Any origin=null
+          arg1: CALL 'public final fun toString (o: dynamic): kotlin.String declared in kotlin.js' type=kotlin.String origin=null
+            o: CALL 'public final fun getTheSameValue (a: kotlin.Any): kotlin.Any declared in <root>' type=kotlin.Any origin=null
+              a: GET_VAR 'value: kotlin.Any declared in <root>.theSameObjectToString' type=kotlin.Any origin=null
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-aString> visibility:public modality:FINAL <> () returnType:kotlin.Boolean
+    correspondingProperty: PROPERTY name:aString visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-aString> (): kotlin.Boolean declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:aString type:kotlin.Boolean visibility:public [final,static]' type=kotlin.Boolean origin=null
+  FIELD PROPERTY_BACKING_FIELD name:aString type:kotlin.Boolean visibility:public [final,static]
+    EXPRESSION_BODY
+      CONST Boolean type=kotlin.Boolean value=true
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-bString> visibility:public modality:FINAL <> () returnType:kotlin.Boolean
+    correspondingProperty: PROPERTY name:bString visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-bString> (): kotlin.Boolean declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:bString type:kotlin.Boolean visibility:public [final,static]' type=kotlin.Boolean origin=null
+  FIELD PROPERTY_BACKING_FIELD name:bString type:kotlin.Boolean visibility:public [final,static]
+    EXPRESSION_BODY
+      CONST Boolean type=kotlin.Boolean value=true
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-cString> visibility:public modality:FINAL <> () returnType:kotlin.String
+    correspondingProperty: PROPERTY name:cString visibility:public modality:FINAL [val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-cString> (): kotlin.String declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:cString type:kotlin.String visibility:private [final,static]' type=kotlin.String origin=null
+  FIELD PROPERTY_BACKING_FIELD name:cString type:kotlin.String visibility:private [final,static]
+    EXPRESSION_BODY
+      CALL 'public final fun toString (o: dynamic): kotlin.String declared in kotlin.js' type=kotlin.String origin=null
+        o: CONSTRUCTOR_CALL 'public constructor <init> () [primary] declared in <root>.C' type=<root>.C origin=null
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-dString> visibility:public modality:FINAL <> () returnType:kotlin.String
+    correspondingProperty: PROPERTY name:dString visibility:public modality:FINAL [val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-dString> (): kotlin.String declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:dString type:kotlin.String visibility:private [final,static]' type=kotlin.String origin=null
+  FIELD PROPERTY_BACKING_FIELD name:dString type:kotlin.String visibility:private [final,static]
+    EXPRESSION_BODY
+      CALL 'public final fun toString (o: dynamic): kotlin.String declared in kotlin.js' type=kotlin.String origin=null
+        o: CONSTRUCTOR_CALL 'public constructor <init> () [primary] declared in <root>.D' type=<root>.D origin=null
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-arrayString> visibility:public modality:FINAL <> () returnType:kotlin.Boolean
+    correspondingProperty: PROPERTY name:arrayString visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-arrayString> (): kotlin.Boolean declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:arrayString type:kotlin.Boolean visibility:public [final,static]' type=kotlin.Boolean origin=null
+  FIELD PROPERTY_BACKING_FIELD name:arrayString type:kotlin.Boolean visibility:public [final,static]
+    EXPRESSION_BODY
+      CONST Boolean type=kotlin.Boolean value=true
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-intArrayString> visibility:public modality:FINAL <> () returnType:kotlin.Boolean
+    correspondingProperty: PROPERTY name:intArrayString visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-intArrayString> (): kotlin.Boolean declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:intArrayString type:kotlin.Boolean visibility:public [final,static]' type=kotlin.Boolean origin=null
+  FIELD PROPERTY_BACKING_FIELD name:intArrayString type:kotlin.Boolean visibility:public [final,static]
+    EXPRESSION_BODY
+      CONST Boolean type=kotlin.Boolean value=true
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-checkA> visibility:public modality:FINAL <> () returnType:kotlin.Boolean
+    correspondingProperty: PROPERTY name:checkA visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-checkA> (): kotlin.Boolean declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:checkA type:kotlin.Boolean visibility:public [final,static]' type=kotlin.Boolean origin=null
+  FIELD PROPERTY_BACKING_FIELD name:checkA type:kotlin.Boolean visibility:public [final,static]
+    EXPRESSION_BODY
+      CONST Boolean type=kotlin.Boolean value=true
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-checkStringBuilder1> visibility:public modality:FINAL <> () returnType:kotlin.Boolean
+    correspondingProperty: PROPERTY name:checkStringBuilder1 visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-checkStringBuilder1> (): kotlin.Boolean declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:checkStringBuilder1 type:kotlin.Boolean visibility:public [final,static]' type=kotlin.Boolean origin=null
+  FIELD PROPERTY_BACKING_FIELD name:checkStringBuilder1 type:kotlin.Boolean visibility:public [final,static]
+    EXPRESSION_BODY
+      CONST Boolean type=kotlin.Boolean value=true
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-checkStringBuilder2> visibility:public modality:FINAL <> () returnType:kotlin.Boolean
+    correspondingProperty: PROPERTY name:checkStringBuilder2 visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-checkStringBuilder2> (): kotlin.Boolean declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:checkStringBuilder2 type:kotlin.Boolean visibility:public [final,static]' type=kotlin.Boolean origin=null
+  FIELD PROPERTY_BACKING_FIELD name:checkStringBuilder2 type:kotlin.Boolean visibility:public [final,static]
+    EXPRESSION_BODY
+      CONST Boolean type=kotlin.Boolean value=true

@@ -1,0 +1,74 @@
+FILE fqName:<root> fileName:/inlineReturn.kt
+  FUN name:x visibility:public modality:FINAL <> (i:kotlin.Int, w:kotlin.Function0<kotlin.Int>) returnType:kotlin.Int [inline]
+    annotations:
+      CompileTimeCalculation
+    VALUE_PARAMETER name:i index:0 type:kotlin.Int
+    VALUE_PARAMETER name:w index:1 type:kotlin.Function0<kotlin.Int>
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun x (i: kotlin.Int, w: kotlin.Function0<kotlin.Int>): kotlin.Int [inline] declared in <root>'
+        CALL 'public final fun jsBitOr (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Int declared in kotlin.internal.ir' type=kotlin.Int origin=SYNTHESIZED_STATEMENT
+          arg0: CALL 'public final fun jsPlus (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Any? declared in kotlin.internal.ir' type=kotlin.Int origin=PLUS
+            arg0: GET_VAR 'i: kotlin.Int declared in <root>.x' type=kotlin.Int origin=null
+            arg1: CALL 'public abstract fun invoke (): R of kotlin.Function0 [operator] declared in kotlin.Function0' type=kotlin.Int origin=INVOKE
+              $this: GET_VAR 'w: kotlin.Function0<kotlin.Int> declared in <root>.x' type=kotlin.Function0<kotlin.Int> origin=VARIABLE_AS_FUNCTION
+          arg1: CONST Int type=kotlin.Int value=0
+  FUN name:withNonLocalReturn visibility:public modality:FINAL <> () returnType:kotlin.String
+    annotations:
+      CompileTimeCalculation
+    BLOCK_BODY
+      VAR IR_TEMPORARY_VARIABLE name:tmp0_x_0 type:kotlin.Int [val]
+        CONST Int type=kotlin.Int value=10
+      RETURN type=kotlin.Nothing from='public final fun withNonLocalReturn (): kotlin.String declared in <root>'
+        CONST String type=kotlin.String value="Non local"
+  FUN name:withLocalReturn visibility:public modality:FINAL <> () returnType:kotlin.String
+    annotations:
+      CompileTimeCalculation
+    BLOCK_BODY
+      CALL 'public final fun Unit_getInstance (): kotlin.Unit declared in kotlin' type=kotlin.Unit origin=SYNTHESIZED_STATEMENT
+      RETURN type=kotlin.Nothing from='public final fun withLocalReturn (): kotlin.String declared in <root>'
+        CONST String type=kotlin.String value="Local"
+  FUN name:foo visibility:public modality:FINAL <> () returnType:kotlin.Unit
+    BLOCK_BODY
+      VAR name:a type:kotlin.Int [val]
+        CONST Int type=kotlin.Int value=20
+  FUN name:bar visibility:public modality:FINAL <> (p:kotlin.Int) returnType:kotlin.Unit
+    VALUE_PARAMETER name:p index:0 type:kotlin.Int
+    BLOCK_BODY
+      VAR IR_TEMPORARY_VARIABLE name:tmp0_x_0 type:kotlin.Int [val]
+        CONST Int type=kotlin.Int value=10
+      VAR name:i_2 type:kotlin.Int [val]
+        GET_VAR 'p: kotlin.Int declared in <root>.bar' type=kotlin.Int origin=null
+      VAR IR_TEMPORARY_VARIABLE name:tmp0_x_0_3 type:kotlin.Int [val]
+        CONST Int type=kotlin.Int value=11
+      VAR name:j_2_4 type:kotlin.Int [val]
+        CONST Int type=kotlin.Int value=0
+      CALL 'public final fun jsBitOr (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Int declared in kotlin.internal.ir' type=kotlin.Int origin=SYNTHESIZED_STATEMENT
+        arg0: CALL 'public final fun jsPlus (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Any? declared in kotlin.internal.ir' type=kotlin.Int origin=PLUS
+          arg0: GET_VAR 'val tmp0_x_0: kotlin.Int [val] declared in <root>.bar' type=kotlin.Int origin=null
+          arg1: CALL 'public final fun jsBitOr (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Int declared in kotlin.internal.ir' type=kotlin.Int origin=SYNTHESIZED_STATEMENT
+            arg0: CALL 'public final fun jsPlus (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Any? declared in kotlin.internal.ir' type=kotlin.Int origin=PLUS
+              arg0: GET_VAR 'val tmp0_x_0_3: kotlin.Int [val] declared in <root>.bar' type=kotlin.Int origin=null
+              arg1: CALL 'public final fun jsBitOr (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Int declared in kotlin.internal.ir' type=kotlin.Int origin=SYNTHESIZED_STATEMENT
+                arg0: CALL 'public final fun jsPlus (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Any? declared in kotlin.internal.ir' type=kotlin.Int origin=PLUS
+                  arg0: GET_VAR 'val j_2_4: kotlin.Int [val] declared in <root>.bar' type=kotlin.Int origin=null
+                  arg1: CONST Int type=kotlin.Int value=10
+                arg1: CONST Int type=kotlin.Int value=0
+            arg1: CONST Int type=kotlin.Int value=0
+        arg1: CONST Int type=kotlin.Int value=0
+      CALL 'public final fun Unit_getInstance (): kotlin.Unit declared in kotlin' type=kotlin.Unit origin=SYNTHESIZED_STATEMENT
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-a> visibility:public modality:FINAL <> () returnType:kotlin.String
+    correspondingProperty: PROPERTY name:a visibility:public modality:FINAL [val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-a> (): kotlin.String declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:a type:kotlin.String visibility:private [final,static]' type=kotlin.String origin=null
+  FIELD PROPERTY_BACKING_FIELD name:a type:kotlin.String visibility:private [final,static]
+    EXPRESSION_BODY
+      CONST String type=kotlin.String value="Non local"
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-b> visibility:public modality:FINAL <> () returnType:kotlin.String
+    correspondingProperty: PROPERTY name:b visibility:public modality:FINAL [val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-b> (): kotlin.String declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:b type:kotlin.String visibility:private [final,static]' type=kotlin.String origin=null
+  FIELD PROPERTY_BACKING_FIELD name:b type:kotlin.String visibility:private [final,static]
+    EXPRESSION_BODY
+      CONST String type=kotlin.String value="Local"

@@ -1,0 +1,81 @@
+FILE fqName:<root> fileName:/stackTrace.kt
+  FUN name:divide visibility:public modality:FINAL <> (a:kotlin.Int, b:kotlin.Int) returnType:kotlin.Int
+    annotations:
+      CompileTimeCalculation
+    VALUE_PARAMETER name:a index:0 type:kotlin.Int
+    VALUE_PARAMETER name:b index:1 type:kotlin.Int
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun divide (a: kotlin.Int, b: kotlin.Int): kotlin.Int declared in <root>'
+        CALL 'public final fun jsBitOr (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Int declared in kotlin.internal.ir' type=kotlin.Int origin=SYNTHESIZED_STATEMENT
+          arg0: CALL 'public final fun jsDiv (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Any? declared in kotlin.internal.ir' type=kotlin.Int origin=DIV
+            arg0: GET_VAR 'a: kotlin.Int declared in <root>.divide' type=kotlin.Int origin=null
+            arg1: GET_VAR 'b: kotlin.Int declared in <root>.divide' type=kotlin.Int origin=null
+          arg1: CONST Int type=kotlin.Int value=0
+  FUN name:echo visibility:public modality:FINAL <> (a:kotlin.Int, b:kotlin.Int) returnType:kotlin.Int
+    annotations:
+      CompileTimeCalculation
+    VALUE_PARAMETER name:a index:0 type:kotlin.Int
+    VALUE_PARAMETER name:b index:1 type:kotlin.Int
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun echo (a: kotlin.Int, b: kotlin.Int): kotlin.Int declared in <root>'
+        CALL 'public final fun divide (a: kotlin.Int, b: kotlin.Int): kotlin.Int declared in <root>' type=kotlin.Int origin=null
+          a: GET_VAR 'a: kotlin.Int declared in <root>.echo' type=kotlin.Int origin=null
+          b: GET_VAR 'b: kotlin.Int declared in <root>.echo' type=kotlin.Int origin=null
+  FUN name:getLengthOrThrowException visibility:public modality:FINAL <> (str:kotlin.String?) returnType:kotlin.Int
+    annotations:
+      CompileTimeCalculation
+    VALUE_PARAMETER name:str index:0 type:kotlin.String?
+    BLOCK_BODY
+      TRY type=kotlin.Unit
+        try: BLOCK type=kotlin.Unit origin=null
+          RETURN type=kotlin.Nothing from='public final fun getLengthOrThrowException (str: kotlin.String?): kotlin.Int declared in <root>'
+            CALL 'public final fun jsArrayLength (arg0: kotlin.Any?): kotlin.Any? declared in kotlin.internal.ir' type=kotlin.Int origin=GET_PROPERTY
+              arg0: CALL 'public final fun ensureNotNull <T> (v: T of kotlin.ensureNotNull?): T of kotlin.ensureNotNull declared in kotlin' type=kotlin.String origin=EXCLEXCL
+                <T>: kotlin.String
+                v: GET_VAR 'str: kotlin.String? declared in <root>.getLengthOrThrowException' type=kotlin.String? origin=null
+        CATCH parameter=val $p: dynamic [val] declared in <root>.getLengthOrThrowException
+          VAR SYNTHESIZED_DECLARATION name:$p type:dynamic [val]
+          BLOCK type=kotlin.Unit origin=SYNTHESIZED_STATEMENT
+            WHEN type=kotlin.Unit origin=SYNTHESIZED_STATEMENT
+              BRANCH
+                if: CALL 'public final fun jsInstanceOf (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=SYNTHESIZED_STATEMENT
+                  arg0: GET_VAR 'val $p: dynamic [val] declared in <root>.getLengthOrThrowException' type=dynamic origin=SYNTHESIZED_STATEMENT
+                  arg1: CALL 'public final fun jsClass <T> (): kotlin.js.JsClass<T of kotlin.js.jsClass> [external] declared in kotlin.js' type=kotlin.js.JsClass<T of kotlin.js.jsClass> origin=SYNTHESIZED_STATEMENT
+                    <T>: kotlin.NullPointerException
+                then: BLOCK type=kotlin.Unit origin=null
+                  THROW type=kotlin.Nothing
+                    CALL 'public final fun UnsupportedOperationException_init_$Create$ (cause: kotlin.Throwable?): kotlin.UnsupportedOperationException declared in kotlin.UnsupportedOperationException' type=kotlin.UnsupportedOperationException origin=null
+                      cause: TYPE_OP type=kotlin.NullPointerException origin=REINTERPRET_CAST typeOperand=kotlin.NullPointerException
+                        GET_VAR 'val $p: dynamic [val] declared in <root>.getLengthOrThrowException' type=dynamic origin=SYNTHESIZED_STATEMENT
+              BRANCH
+                if: CONST Boolean type=kotlin.Boolean value=true
+                then: BLOCK type=kotlin.Unit origin=SYNTHESIZED_STATEMENT
+                  WHEN type=kotlin.Unit origin=SYNTHESIZED_STATEMENT
+                    BRANCH
+                      if: CONST Boolean type=kotlin.Boolean value=true
+                      then: BLOCK type=kotlin.Nothing origin=SYNTHESIZED_STATEMENT
+                        THROW type=kotlin.Nothing
+                          GET_VAR 'val $p: dynamic [val] declared in <root>.getLengthOrThrowException' type=dynamic origin=SYNTHESIZED_STATEMENT
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-a> visibility:public modality:FINAL <> () returnType:kotlin.Int
+    correspondingProperty: PROPERTY name:a visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-a> (): kotlin.Int declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:a type:kotlin.Int visibility:public [final,static]' type=kotlin.Int origin=null
+  FIELD PROPERTY_BACKING_FIELD name:a type:kotlin.Int visibility:public [final,static]
+    EXPRESSION_BODY
+      ERROR_EXPR '
+Exception java.lang.ArithmeticException: / by zero
+	at StackTraceKt.divide(stackTrace.kt:4)
+	at StackTraceKt.echo(stackTrace.kt:7)' type=kotlin.Int
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-b> visibility:public modality:FINAL <> () returnType:kotlin.Int
+    correspondingProperty: PROPERTY name:b visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-b> (): kotlin.Int declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:b type:kotlin.Int visibility:public [final,static]' type=kotlin.Int origin=null
+  FIELD PROPERTY_BACKING_FIELD name:b type:kotlin.Int visibility:public [final,static]
+    EXPRESSION_BODY
+      ERROR_EXPR '
+Exception kotlin.UnsupportedOperationException: kotlin.NullPointerException
+	at StackTraceKt.getLengthOrThrowException(stackTrace.kt:10)
+Caused by: kotlin.NullPointerException
+	at StackTraceKt.getLengthOrThrowException(stackTrace.kt:10)' type=kotlin.Int

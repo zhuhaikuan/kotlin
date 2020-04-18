@@ -1,0 +1,35 @@
+FILE fqName:<root> fileName:/file1.kt
+  FUN name:throwException visibility:public modality:FINAL <> (message:kotlin.String) returnType:kotlin.Unit
+    annotations:
+      CompileTimeCalculation
+    VALUE_PARAMETER name:message index:0 type:kotlin.String
+    BLOCK_BODY
+      THROW type=kotlin.Nothing
+        CALL 'public final fun Exception_init_$Create$ (message: kotlin.String?): kotlin.Exception declared in kotlin.Exception' type=kotlin.Exception origin=null
+          message: GET_VAR 'message: kotlin.String declared in <root>.throwException' type=kotlin.String origin=null
+
+FILE fqName:<root> fileName:/main.kt
+  FUN name:callToOtherFile visibility:public modality:FINAL <> (mustThrowException:kotlin.Boolean, message:kotlin.String) returnType:kotlin.Int
+    annotations:
+      CompileTimeCalculation
+    VALUE_PARAMETER name:mustThrowException index:0 type:kotlin.Boolean
+    VALUE_PARAMETER name:message index:1 type:kotlin.String
+    BLOCK_BODY
+      WHEN type=kotlin.Unit origin=IF
+        BRANCH
+          if: GET_VAR 'mustThrowException: kotlin.Boolean declared in <root>.callToOtherFile' type=kotlin.Boolean origin=null
+          then: CALL 'public final fun throwException (message: kotlin.String): kotlin.Unit declared in <root>' type=kotlin.Unit origin=null
+            message: GET_VAR 'message: kotlin.String declared in <root>.callToOtherFile' type=kotlin.String origin=null
+      RETURN type=kotlin.Nothing from='public final fun callToOtherFile (mustThrowException: kotlin.Boolean, message: kotlin.String): kotlin.Int declared in <root>'
+        CONST Int type=kotlin.Int value=0
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-a> visibility:public modality:FINAL <> () returnType:kotlin.Int
+    correspondingProperty: PROPERTY name:a visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-a> (): kotlin.Int declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:a type:kotlin.Int visibility:public [final,static]' type=kotlin.Int origin=null
+  FIELD PROPERTY_BACKING_FIELD name:a type:kotlin.Int visibility:public [final,static]
+    EXPRESSION_BODY
+      ERROR_EXPR '
+Exception kotlin.Exception: Exception from file1.kt
+	at File1Kt.throwException(file1.kt:4)
+	at MainKt.callToOtherFile(main.kt:6)' type=kotlin.Int

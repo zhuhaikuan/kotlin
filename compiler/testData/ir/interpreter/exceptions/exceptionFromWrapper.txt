@@ -1,0 +1,36 @@
+FILE fqName:<root> fileName:/exceptionFromWrapper.kt
+  FUN name:append visibility:public modality:FINAL <> (sb:kotlin.text.StringBuilder, value:kotlin.CharSequence, start:kotlin.Int, end:kotlin.Int) returnType:kotlin.String
+    annotations:
+      CompileTimeCalculation
+    VALUE_PARAMETER name:sb index:0 type:kotlin.text.StringBuilder
+    VALUE_PARAMETER name:value index:1 type:kotlin.CharSequence
+    VALUE_PARAMETER name:start index:2 type:kotlin.Int
+    VALUE_PARAMETER name:end index:3 type:kotlin.Int
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun append (sb: kotlin.text.StringBuilder, value: kotlin.CharSequence, start: kotlin.Int, end: kotlin.Int): kotlin.String declared in <root>'
+        CALL 'public open fun toString (): kotlin.String declared in kotlin.text.StringBuilder' type=kotlin.String origin=null
+          $this: CALL 'public open fun append (value: kotlin.CharSequence?, startIndex: kotlin.Int, endIndex: kotlin.Int): kotlin.text.StringBuilder declared in kotlin.text.StringBuilder' type=kotlin.text.StringBuilder origin=null
+            $this: GET_VAR 'sb: kotlin.text.StringBuilder declared in <root>.append' type=kotlin.text.StringBuilder origin=null
+            value: GET_VAR 'value: kotlin.CharSequence declared in <root>.append' type=kotlin.CharSequence origin=null
+            startIndex: GET_VAR 'start: kotlin.Int declared in <root>.append' type=kotlin.Int origin=null
+            endIndex: GET_VAR 'end: kotlin.Int declared in <root>.append' type=kotlin.Int origin=null
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-a> visibility:public modality:FINAL <> () returnType:kotlin.String
+    correspondingProperty: PROPERTY name:a visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-a> (): kotlin.String declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:a type:kotlin.String visibility:public [final,static]' type=kotlin.String origin=null
+  FIELD PROPERTY_BACKING_FIELD name:a type:kotlin.String visibility:public [final,static]
+    EXPRESSION_BODY
+      CONST String type=kotlin.String value="Some string with not zero length!!!"
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-b> visibility:public modality:FINAL <> () returnType:kotlin.String
+    correspondingProperty: PROPERTY name:b visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-b> (): kotlin.String declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:b type:kotlin.String visibility:public [final,static]' type=kotlin.String origin=null
+  FIELD PROPERTY_BACKING_FIELD name:b type:kotlin.String visibility:public [final,static]
+    EXPRESSION_BODY
+      ERROR_EXPR '
+Exception kotlin.IndexOutOfBoundsException: start -1, end 0, s.length() 3
+	at java.lang.AbstractStringBuilder.append(AbstractStringBuilder.java:539)
+	at java.lang.StringBuilder.append(StringBuilder.java:175)
+	at ExceptionFromWrapperKt.append(exceptionFromWrapper.kt:4)' type=kotlin.String

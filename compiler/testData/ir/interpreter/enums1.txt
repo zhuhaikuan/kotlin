@@ -1,0 +1,181 @@
+FILE fqName:<root> fileName:/enums1.kt
+  CLASS ENUM_CLASS name:EnumClass modality:FINAL visibility:public superTypes:[kotlin.Enum<<root>.EnumClass>]
+    annotations:
+      CompileTimeCalculation
+    $this: VALUE_PARAMETER INSTANCE_RECEIVER name:<this> type:<root>.EnumClass
+    CONSTRUCTOR visibility:private <> (name:kotlin.String, ordinal:kotlin.Int) returnType:<root>.EnumClass [primary]
+      VALUE_PARAMETER SYNTHESIZED_DECLARATION name:name index:0 type:kotlin.String
+      VALUE_PARAMETER SYNTHESIZED_DECLARATION name:ordinal index:1 type:kotlin.Int
+      BLOCK_BODY
+        DELEGATING_CONSTRUCTOR_CALL 'public constructor <init> (name: kotlin.String, ordinal: kotlin.Int) [primary] declared in kotlin.Enum'
+          <E>: <none>
+          name: GET_VAR 'name: kotlin.String declared in <root>.EnumClass.<init>' type=kotlin.String origin=null
+          ordinal: GET_VAR 'ordinal: kotlin.Int declared in <root>.EnumClass.<init>' type=kotlin.Int origin=null
+    FIELD name:EnumClass_VALUE1_instance type:<root>.EnumClass? visibility:public [static]
+    FIELD name:EnumClass_VALUE2_instance type:<root>.EnumClass? visibility:public [static]
+    FUN FAKE_OVERRIDE name:hashCode visibility:public modality:OPEN <> ($this:kotlin.Enum<<root>.EnumClass>) returnType:kotlin.Int [fake_override]
+      annotations:
+        EvaluateIntrinsic(file = '')
+      overridden:
+        public open fun hashCode (): kotlin.Int declared in kotlin.Enum
+      $this: VALUE_PARAMETER name:<this> type:kotlin.Enum<<root>.EnumClass>
+    FUN FAKE_OVERRIDE name:<get-name> visibility:public modality:FINAL <> ($this:kotlin.Enum<<root>.EnumClass>) returnType:kotlin.String [fake_override]
+      correspondingProperty: PROPERTY FAKE_OVERRIDE name:name visibility:public modality:FINAL [fake_override,val]
+      overridden:
+        public final fun <get-name> (): kotlin.String declared in kotlin.Enum
+      $this: VALUE_PARAMETER name:<this> type:kotlin.Enum<<root>.EnumClass>
+    FUN FAKE_OVERRIDE name:<get-ordinal> visibility:public modality:FINAL <> ($this:kotlin.Enum<<root>.EnumClass>) returnType:kotlin.Int [fake_override]
+      correspondingProperty: PROPERTY FAKE_OVERRIDE name:ordinal visibility:public modality:FINAL [fake_override,val]
+      overridden:
+        public final fun <get-ordinal> (): kotlin.Int declared in kotlin.Enum
+      $this: VALUE_PARAMETER name:<this> type:kotlin.Enum<<root>.EnumClass>
+    FUN FAKE_OVERRIDE name:compareTo visibility:public modality:OPEN <> ($this:kotlin.Enum<<root>.EnumClass>, other:<root>.EnumClass) returnType:kotlin.Int [fake_override,operator]
+      overridden:
+        public open fun compareTo (other: E of kotlin.Enum): kotlin.Int [operator] declared in kotlin.Enum
+      $this: VALUE_PARAMETER name:<this> type:kotlin.Enum<<root>.EnumClass>
+      VALUE_PARAMETER name:other index:0 type:<root>.EnumClass
+    FUN FAKE_OVERRIDE name:equals visibility:public modality:OPEN <> ($this:kotlin.Enum<<root>.EnumClass>, other:kotlin.Any?) returnType:kotlin.Boolean [fake_override,operator]
+      overridden:
+        public open fun equals (other: kotlin.Any?): kotlin.Boolean [operator] declared in kotlin.Enum
+      $this: VALUE_PARAMETER name:<this> type:kotlin.Enum<<root>.EnumClass>
+      VALUE_PARAMETER name:other index:0 type:kotlin.Any?
+    FUN FAKE_OVERRIDE name:toString visibility:public modality:OPEN <> ($this:kotlin.Enum<<root>.EnumClass>) returnType:kotlin.String [fake_override]
+      overridden:
+        public open fun toString (): kotlin.String declared in kotlin.Enum
+      $this: VALUE_PARAMETER name:<this> type:kotlin.Enum<<root>.EnumClass>
+    FUN ENUM_CLASS_SPECIAL_MEMBER name:values visibility:public modality:FINAL <> () returnType:kotlin.Array<<root>.EnumClass>
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='public final fun values (): kotlin.Array<<root>.EnumClass> declared in <root>.EnumClass'
+          CALL 'public final fun arrayLiteral (arg0: kotlin.Any?): kotlin.Any? declared in kotlin.internal.ir' type=kotlin.Array<<root>.EnumClass> origin=null
+            arg0: CALL 'public final fun arrayLiteral (arg0: kotlin.Any?): kotlin.Any? declared in kotlin.internal.ir' type=kotlin.Array<<root>.EnumClass> origin=null
+              arg0: VARARG type=kotlin.Array<<root>.EnumClass> varargElementType=<root>.EnumClass
+                CALL 'public final fun EnumClass_VALUE1_getInstance (): <root>.EnumClass declared in <root>' type=<root>.EnumClass origin=null
+                CALL 'public final fun EnumClass_VALUE2_getInstance (): <root>.EnumClass declared in <root>' type=<root>.EnumClass origin=null
+    FUN ENUM_CLASS_SPECIAL_MEMBER name:valueOf visibility:public modality:FINAL <> (value:kotlin.String) returnType:<root>.EnumClass
+      VALUE_PARAMETER name:value index:0 type:kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='public final fun valueOf (value: kotlin.String): <root>.EnumClass declared in <root>.EnumClass'
+          WHEN type=<root>.EnumClass origin=null
+            BRANCH
+              if: CALL 'public final fun jsEqeqeq (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=EQEQ
+                arg0: CONST String type=kotlin.String value="VALUE1"
+                arg1: GET_VAR 'value: kotlin.String declared in <root>.EnumClass.valueOf' type=kotlin.String origin=null
+              then: CALL 'public final fun EnumClass_VALUE1_getInstance (): <root>.EnumClass declared in <root>' type=<root>.EnumClass origin=null
+            BRANCH
+              if: CALL 'public final fun jsEqeqeq (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=EQEQ
+                arg0: CONST String type=kotlin.String value="VALUE2"
+                arg1: GET_VAR 'value: kotlin.String declared in <root>.EnumClass.valueOf' type=kotlin.String origin=null
+              then: CALL 'public final fun EnumClass_VALUE2_getInstance (): <root>.EnumClass declared in <root>' type=<root>.EnumClass origin=null
+            BRANCH
+              if: CONST Boolean type=kotlin.Boolean value=true
+              then: CALL 'public final fun THROW_ISE (): kotlin.Nothing declared in kotlin' type=kotlin.Nothing origin=null
+    FIELD name:EnumClass_entriesInitialized type:kotlin.Boolean visibility:public [static]
+    FUN SYNTHESIZED_DECLARATION name:EnumClass_initEntries visibility:public modality:FINAL <> () returnType:kotlin.Unit
+      BLOCK_BODY
+        WHEN type=kotlin.Unit origin=null
+          BRANCH
+            if: GET_FIELD 'FIELD name:EnumClass_entriesInitialized type:kotlin.Boolean visibility:public [static]' type=kotlin.Boolean origin=null
+            then: RETURN type=kotlin.Nothing from='public final fun EnumClass_initEntries (): kotlin.Unit declared in <root>.EnumClass'
+              CALL 'public final fun Unit_getInstance (): kotlin.Unit declared in kotlin' type=kotlin.Unit origin=SYNTHESIZED_STATEMENT
+        SET_FIELD 'FIELD name:EnumClass_entriesInitialized type:kotlin.Boolean visibility:public [static]' type=kotlin.Unit origin=null
+          value: CONST Boolean type=kotlin.Boolean value=true
+        SET_FIELD 'FIELD name:EnumClass_VALUE1_instance type:<root>.EnumClass? visibility:public [static]' type=kotlin.Unit origin=null
+          value: CONSTRUCTOR_CALL 'private constructor <init> (name: kotlin.String, ordinal: kotlin.Int) [primary] declared in <root>.EnumClass' type=<root>.EnumClass origin=null
+            name: CONST String type=kotlin.String value="VALUE1"
+            ordinal: CONST Int type=kotlin.Int value=0
+        SET_FIELD 'FIELD name:EnumClass_VALUE2_instance type:<root>.EnumClass? visibility:public [static]' type=kotlin.Unit origin=null
+          value: CONSTRUCTOR_CALL 'private constructor <init> (name: kotlin.String, ordinal: kotlin.Int) [primary] declared in <root>.EnumClass' type=<root>.EnumClass origin=null
+            name: CONST String type=kotlin.String value="VALUE2"
+            ordinal: CONST Int type=kotlin.Int value=1
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-a> visibility:public modality:FINAL <> () returnType:kotlin.String
+    correspondingProperty: PROPERTY name:a visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-a> (): kotlin.String declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:a type:kotlin.String visibility:public [final,static]' type=kotlin.String origin=null
+  FIELD PROPERTY_BACKING_FIELD name:a type:kotlin.String visibility:public [final,static]
+    EXPRESSION_BODY
+      CONST String type=kotlin.String value="VALUE1"
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-b> visibility:public modality:FINAL <> () returnType:kotlin.Int
+    correspondingProperty: PROPERTY name:b visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-b> (): kotlin.Int declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:b type:kotlin.Int visibility:public [final,static]' type=kotlin.Int origin=null
+  FIELD PROPERTY_BACKING_FIELD name:b type:kotlin.Int visibility:public [final,static]
+    EXPRESSION_BODY
+      CONST Int type=kotlin.Int value=2
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-c> visibility:public modality:FINAL <> () returnType:kotlin.Int
+    correspondingProperty: PROPERTY name:c visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-c> (): kotlin.Int declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:c type:kotlin.Int visibility:public [final,static]' type=kotlin.Int origin=null
+  FIELD PROPERTY_BACKING_FIELD name:c type:kotlin.Int visibility:public [final,static]
+    EXPRESSION_BODY
+      CONST Int type=kotlin.Int value=0
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-d> visibility:public modality:FINAL <> () returnType:kotlin.Int
+    correspondingProperty: PROPERTY name:d visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-d> (): kotlin.Int declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:d type:kotlin.Int visibility:public [final,static]' type=kotlin.Int origin=null
+  FIELD PROPERTY_BACKING_FIELD name:d type:kotlin.Int visibility:public [final,static]
+    EXPRESSION_BODY
+      ERROR_EXPR '
+Exception kotlin.IllegalArgumentException: No enum constant EnumClass.VALUE3
+	at Enums1Kt.EnumClass.valueOf(enums1.kt:3)' type=kotlin.Int
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-e1> visibility:public modality:FINAL <> () returnType:kotlin.Boolean
+    correspondingProperty: PROPERTY name:e1 visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-e1> (): kotlin.Boolean declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:e1 type:kotlin.Boolean visibility:public [final,static]' type=kotlin.Boolean origin=null
+  FIELD PROPERTY_BACKING_FIELD name:e1 type:kotlin.Boolean visibility:public [final,static]
+    EXPRESSION_BODY
+      CONST Boolean type=kotlin.Boolean value=true
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-e2> visibility:public modality:FINAL <> () returnType:kotlin.String
+    correspondingProperty: PROPERTY name:e2 visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-e2> (): kotlin.String declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:e2 type:kotlin.String visibility:public [final,static]' type=kotlin.String origin=null
+  FIELD PROPERTY_BACKING_FIELD name:e2 type:kotlin.String visibility:public [final,static]
+    EXPRESSION_BODY
+      CONST String type=kotlin.String value="VALUE1"
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-e3> visibility:public modality:FINAL <> () returnType:kotlin.Boolean
+    correspondingProperty: PROPERTY name:e3 visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-e3> (): kotlin.Boolean declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:e3 type:kotlin.Boolean visibility:public [final,static]' type=kotlin.Boolean origin=null
+  FIELD PROPERTY_BACKING_FIELD name:e3 type:kotlin.Boolean visibility:public [final,static]
+    EXPRESSION_BODY
+      CONST Boolean type=kotlin.Boolean value=true
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-e4> visibility:public modality:FINAL <> () returnType:kotlin.Boolean
+    correspondingProperty: PROPERTY name:e4 visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-e4> (): kotlin.Boolean declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:e4 type:kotlin.Boolean visibility:public [final,static]' type=kotlin.Boolean origin=null
+  FIELD PROPERTY_BACKING_FIELD name:e4 type:kotlin.Boolean visibility:public [final,static]
+    EXPRESSION_BODY
+      CONST Boolean type=kotlin.Boolean value=false
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-f1> visibility:public modality:FINAL <> () returnType:kotlin.Int
+    correspondingProperty: PROPERTY name:f1 visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-f1> (): kotlin.Int declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:f1 type:kotlin.Int visibility:public [final,static]' type=kotlin.Int origin=null
+  FIELD PROPERTY_BACKING_FIELD name:f1 type:kotlin.Int visibility:public [final,static]
+    EXPRESSION_BODY
+      CONST Int type=kotlin.Int value=2
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-f2> visibility:public modality:FINAL <> () returnType:kotlin.String
+    correspondingProperty: PROPERTY name:f2 visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-f2> (): kotlin.String declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:f2 type:kotlin.String visibility:public [final,static]' type=kotlin.String origin=null
+  FIELD PROPERTY_BACKING_FIELD name:f2 type:kotlin.String visibility:public [final,static]
+    EXPRESSION_BODY
+      CONST String type=kotlin.String value="VALUE1"
+  FUN SYNTHESIZED_DECLARATION name:EnumClass_VALUE1_getInstance visibility:public modality:FINAL <> () returnType:<root>.EnumClass
+    BLOCK_BODY
+      CALL 'public final fun EnumClass_initEntries (): kotlin.Unit declared in <root>.EnumClass' type=kotlin.Unit origin=null
+      RETURN type=kotlin.Nothing from='public final fun EnumClass_VALUE1_getInstance (): <root>.EnumClass declared in <root>'
+        GET_FIELD 'FIELD name:EnumClass_VALUE1_instance type:<root>.EnumClass? visibility:public [static]' type=<root>.EnumClass? origin=null
+  FUN SYNTHESIZED_DECLARATION name:EnumClass_VALUE2_getInstance visibility:public modality:FINAL <> () returnType:<root>.EnumClass
+    BLOCK_BODY
+      CALL 'public final fun EnumClass_initEntries (): kotlin.Unit declared in <root>.EnumClass' type=kotlin.Unit origin=null
+      RETURN type=kotlin.Nothing from='public final fun EnumClass_VALUE2_getInstance (): <root>.EnumClass declared in <root>'
+        GET_FIELD 'FIELD name:EnumClass_VALUE2_instance type:<root>.EnumClass? visibility:public [static]' type=<root>.EnumClass? origin=null

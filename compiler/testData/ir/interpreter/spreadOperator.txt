@@ -1,0 +1,227 @@
+FILE fqName:<root> fileName:/spreadOperator.kt
+  FUN name:varargSum visibility:public modality:FINAL <> (quantityToSum:kotlin.Int, num:kotlin.IntArray) returnType:kotlin.Int
+    annotations:
+      CompileTimeCalculation
+    VALUE_PARAMETER name:quantityToSum index:0 type:kotlin.Int
+    VALUE_PARAMETER name:num index:1 type:kotlin.IntArray varargElementType:kotlin.Int [vararg]
+    BLOCK_BODY
+      VAR name:sum type:kotlin.Int [var]
+        CONST Int type=kotlin.Int value=0
+      VAR IR_TEMPORARY_VARIABLE name:tmp0_inductionVariable type:kotlin.Int [var]
+        CONST Int type=kotlin.Int value=0
+      VAR IR_TEMPORARY_VARIABLE name:tmp1_last type:kotlin.Int [val]
+        CALL 'public final fun jsBitOr (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Int declared in kotlin.internal.ir' type=kotlin.Int origin=SYNTHESIZED_STATEMENT
+          arg0: CALL 'public final fun jsMinus (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Any? declared in kotlin.internal.ir' type=kotlin.Int origin=MINUS
+            arg0: GET_VAR 'quantityToSum: kotlin.Int declared in <root>.varargSum' type=kotlin.Int origin=null
+            arg1: CONST Int type=kotlin.Int value=1
+          arg1: CONST Int type=kotlin.Int value=0
+      VAR IR_TEMPORARY_VARIABLE name:tmp2_step type:kotlin.Int [val]
+        CONST Int type=kotlin.Int value=1
+      WHEN type=kotlin.Unit origin=null
+        BRANCH
+          if: CALL 'public final fun jsLtEq (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=null
+            arg0: GET_VAR 'var tmp0_inductionVariable: kotlin.Int [var] declared in <root>.varargSum' type=kotlin.Int origin=null
+            arg1: GET_VAR 'val tmp1_last: kotlin.Int [val] declared in <root>.varargSum' type=kotlin.Int origin=null
+          then: DO_WHILE label=null origin=FOR_LOOP_INNER_WHILE
+            body: COMPOSITE type=kotlin.Unit origin=FOR_LOOP_INNER_WHILE
+              VAR FOR_LOOP_VARIABLE name:i type:kotlin.Int [val]
+                GET_VAR 'var tmp0_inductionVariable: kotlin.Int [var] declared in <root>.varargSum' type=kotlin.Int origin=null
+              SET_VAR 'var tmp0_inductionVariable: kotlin.Int [var] declared in <root>.varargSum' type=kotlin.Unit origin=EQ
+                CALL 'public final fun jsBitOr (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Int declared in kotlin.internal.ir' type=kotlin.Int origin=SYNTHESIZED_STATEMENT
+                  arg0: CALL 'public final fun jsPlus (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Any? declared in kotlin.internal.ir' type=kotlin.Int origin=null
+                    arg0: GET_VAR 'var tmp0_inductionVariable: kotlin.Int [var] declared in <root>.varargSum' type=kotlin.Int origin=null
+                    arg1: GET_VAR 'val tmp2_step: kotlin.Int [val] declared in <root>.varargSum' type=kotlin.Int origin=null
+                  arg1: CONST Int type=kotlin.Int value=0
+              WHEN type=kotlin.Unit origin=IF
+                BRANCH
+                  if: CALL 'public final fun jsGtEq (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=GTEQ
+                    arg0: GET_VAR 'val i: kotlin.Int [val] declared in <root>.varargSum' type=kotlin.Int origin=null
+                    arg1: CALL 'public final fun jsArrayLength (arg0: kotlin.Any?): kotlin.Any? declared in kotlin.internal.ir' type=kotlin.Int origin=GET_PROPERTY
+                      arg0: GET_VAR 'num: kotlin.IntArray [vararg] declared in <root>.varargSum' type=kotlin.IntArray origin=null
+                  then: RETURN type=kotlin.Nothing from='public final fun varargSum (quantityToSum: kotlin.Int, vararg num: kotlin.Int): kotlin.Int declared in <root>'
+                    GET_VAR 'var sum: kotlin.Int [var] declared in <root>.varargSum' type=kotlin.Int origin=null
+              SET_VAR 'var sum: kotlin.Int [var] declared in <root>.varargSum' type=kotlin.Unit origin=PLUSEQ
+                CALL 'public final fun jsBitOr (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Int declared in kotlin.internal.ir' type=kotlin.Int origin=SYNTHESIZED_STATEMENT
+                  arg0: CALL 'public final fun jsPlus (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Any? declared in kotlin.internal.ir' type=kotlin.Int origin=PLUSEQ
+                    arg0: GET_VAR 'var sum: kotlin.Int [var] declared in <root>.varargSum' type=kotlin.Int origin=PLUSEQ
+                    arg1: CALL 'public final fun jsArrayGet (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Any? declared in kotlin.internal.ir' type=kotlin.Int origin=GET_ARRAY_ELEMENT
+                      arg0: GET_VAR 'num: kotlin.IntArray [vararg] declared in <root>.varargSum' type=kotlin.IntArray origin=null
+                      arg1: GET_VAR 'val i: kotlin.Int [val] declared in <root>.varargSum' type=kotlin.Int origin=null
+                  arg1: CONST Int type=kotlin.Int value=0
+            condition: CALL 'public final fun jsNot (arg0: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=EXCLEQ
+              arg0: CALL 'public final fun jsEqeqeq (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=EXCLEQ
+                arg0: GET_VAR 'val i: kotlin.Int [val] declared in <root>.varargSum' type=kotlin.Int origin=null
+                arg1: GET_VAR 'val tmp1_last: kotlin.Int [val] declared in <root>.varargSum' type=kotlin.Int origin=null
+      RETURN type=kotlin.Nothing from='public final fun varargSum (quantityToSum: kotlin.Int, vararg num: kotlin.Int): kotlin.Int declared in <root>'
+        GET_VAR 'var sum: kotlin.Int [var] declared in <root>.varargSum' type=kotlin.Int origin=null
+  FUN name:sumWithVarargAtFirst visibility:public modality:FINAL <> (num:kotlin.IntArray, quantityToSum:kotlin.Int) returnType:kotlin.Int
+    annotations:
+      CompileTimeCalculation
+    VALUE_PARAMETER name:num index:0 type:kotlin.IntArray varargElementType:kotlin.Int [vararg]
+    VALUE_PARAMETER name:quantityToSum index:1 type:kotlin.Int
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun sumWithVarargAtFirst (vararg num: kotlin.Int, quantityToSum: kotlin.Int): kotlin.Int declared in <root>'
+        CALL 'public final fun varargSum (quantityToSum: kotlin.Int, vararg num: kotlin.Int): kotlin.Int declared in <root>' type=kotlin.Int origin=null
+          quantityToSum: GET_VAR 'quantityToSum: kotlin.Int declared in <root>.sumWithVarargAtFirst' type=kotlin.Int origin=null
+          num: CALL 'public final fun slice <A> (a: A of kotlin.js.internal.slice): A of kotlin.js.internal.slice declared in kotlin.js.internal' type=kotlin.IntArray origin=null
+            <A>: kotlin.IntArray
+            a: GET_VAR 'num: kotlin.IntArray [vararg] declared in <root>.sumWithVarargAtFirst' type=kotlin.IntArray origin=null
+  FUN FUNCTION_FOR_DEFAULT_PARAMETER name:sumWithVarargAtFirst$default visibility:public modality:FINAL <> (num:kotlin.IntArray, quantityToSum:kotlin.Int, $mask0:kotlin.Int, $handler:kotlin.Any?) returnType:kotlin.Int
+    annotations:
+      CompileTimeCalculation
+    VALUE_PARAMETER name:num index:0 type:kotlin.IntArray varargElementType:kotlin.Int [vararg]
+    VALUE_PARAMETER name:quantityToSum index:1 type:kotlin.Int
+    VALUE_PARAMETER MASK_FOR_DEFAULT_FUNCTION name:$mask0 index:2 type:kotlin.Int
+    VALUE_PARAMETER METHOD_HANDLER_IN_DEFAULT_FUNCTION name:$handler index:3 type:kotlin.Any?
+    BLOCK_BODY
+      VAR IR_TEMPORARY_VARIABLE name:quantityToSum type:kotlin.Int [val]
+        WHEN type=kotlin.Int origin=null
+          BRANCH
+            if: CALL 'public final fun jsNot (arg0: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=EXCLEQ
+              arg0: CALL 'public final fun jsEqeqeq (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=EXCLEQ
+                arg0: CALL 'public final fun jsBitAnd (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Int declared in kotlin.internal.ir' type=kotlin.Int origin=null
+                  arg0: GET_VAR '$mask0: kotlin.Int declared in <root>.sumWithVarargAtFirst$default' type=kotlin.Int origin=null
+                  arg1: CONST Int type=kotlin.Int value=2
+                arg1: CONST Int type=kotlin.Int value=0
+            then: CALL 'public final fun jsArrayLength (arg0: kotlin.Any?): kotlin.Any? declared in kotlin.internal.ir' type=kotlin.Int origin=GET_PROPERTY
+              arg0: GET_VAR 'num: kotlin.IntArray [vararg] declared in <root>.sumWithVarargAtFirst$default' type=kotlin.IntArray origin=null
+          BRANCH
+            if: CONST Boolean type=kotlin.Boolean value=true
+            then: GET_VAR 'quantityToSum: kotlin.Int declared in <root>.sumWithVarargAtFirst$default' type=kotlin.Int origin=null
+      RETURN type=kotlin.Nothing from='public final fun sumWithVarargAtFirst$default (vararg num: kotlin.Int, quantityToSum: kotlin.Int, $mask0: kotlin.Int, $handler: kotlin.Any?): kotlin.Int declared in <root>'
+        CALL 'public final fun sumWithVarargAtFirst (vararg num: kotlin.Int, quantityToSum: kotlin.Int): kotlin.Int declared in <root>' type=kotlin.Int origin=null
+          num: GET_VAR 'num: kotlin.IntArray [vararg] declared in <root>.sumWithVarargAtFirst$default' type=kotlin.IntArray origin=null
+          quantityToSum: GET_VAR 'val quantityToSum: kotlin.Int [val] declared in <root>.sumWithVarargAtFirst$default' type=kotlin.Int origin=null
+  FUN name:concatenation visibility:public modality:FINAL <> (str:kotlin.Array<out kotlin.String>) returnType:kotlin.String
+    annotations:
+      CompileTimeCalculation
+    VALUE_PARAMETER name:str index:0 type:kotlin.Array<out kotlin.String> varargElementType:kotlin.String [vararg]
+    BLOCK_BODY
+      VAR name:result type:kotlin.String [var]
+        CONST String type=kotlin.String value=""
+      VAR IR_TEMPORARY_VARIABLE name:indexedObject type:kotlin.Array<out kotlin.String> [val]
+        GET_VAR 'str: kotlin.Array<out kotlin.String> [vararg] declared in <root>.concatenation' type=kotlin.Array<out kotlin.String> origin=null
+      VAR IR_TEMPORARY_VARIABLE name:tmp0_inductionVariable type:kotlin.Int [var]
+        CONST Int type=kotlin.Int value=0
+      VAR IR_TEMPORARY_VARIABLE name:tmp1_last type:kotlin.Int [val]
+        CALL 'public final fun jsArrayLength (arg0: kotlin.Any?): kotlin.Any? declared in kotlin.internal.ir' type=kotlin.Int origin=null
+          arg0: GET_VAR 'val indexedObject: kotlin.Array<out kotlin.String> [val] declared in <root>.concatenation' type=kotlin.Array<out kotlin.String> origin=null
+      VAR IR_TEMPORARY_VARIABLE name:tmp2_step type:kotlin.Int [val]
+        CONST Int type=kotlin.Int value=1
+      WHILE label=null origin=FOR_LOOP_INNER_WHILE
+        condition: CALL 'public final fun jsLt (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=null
+          arg0: GET_VAR 'var tmp0_inductionVariable: kotlin.Int [var] declared in <root>.concatenation' type=kotlin.Int origin=null
+          arg1: GET_VAR 'val tmp1_last: kotlin.Int [val] declared in <root>.concatenation' type=kotlin.Int origin=null
+        body: COMPOSITE type=kotlin.Unit origin=FOR_LOOP_INNER_WHILE
+          VAR FOR_LOOP_VARIABLE name:s type:kotlin.String [val]
+            CALL 'public final fun jsArrayGet (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Any? declared in kotlin.internal.ir' type=T of kotlin.Array origin=null
+              arg0: GET_VAR 'val indexedObject: kotlin.Array<out kotlin.String> [val] declared in <root>.concatenation' type=kotlin.Array<out kotlin.String> origin=null
+              arg1: GET_VAR 'var tmp0_inductionVariable: kotlin.Int [var] declared in <root>.concatenation' type=kotlin.Int origin=null
+          SET_VAR 'var tmp0_inductionVariable: kotlin.Int [var] declared in <root>.concatenation' type=kotlin.Unit origin=EQ
+            CALL 'public final fun jsBitOr (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Int declared in kotlin.internal.ir' type=kotlin.Int origin=SYNTHESIZED_STATEMENT
+              arg0: CALL 'public final fun jsPlus (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Any? declared in kotlin.internal.ir' type=kotlin.Int origin=null
+                arg0: GET_VAR 'var tmp0_inductionVariable: kotlin.Int [var] declared in <root>.concatenation' type=kotlin.Int origin=null
+                arg1: GET_VAR 'val tmp2_step: kotlin.Int [val] declared in <root>.concatenation' type=kotlin.Int origin=null
+              arg1: CONST Int type=kotlin.Int value=0
+          SET_VAR 'var result: kotlin.String [var] declared in <root>.concatenation' type=kotlin.Unit origin=PLUSEQ
+            CALL 'public final fun jsPlus (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Any? declared in kotlin.internal.ir' type=kotlin.String origin=PLUSEQ
+              arg0: GET_VAR 'var result: kotlin.String [var] declared in <root>.concatenation' type=kotlin.String origin=PLUSEQ
+              arg1: GET_VAR 'val s: kotlin.String [val] declared in <root>.concatenation' type=kotlin.String origin=null
+      RETURN type=kotlin.Nothing from='public final fun concatenation (vararg str: kotlin.String): kotlin.String declared in <root>'
+        GET_VAR 'var result: kotlin.String [var] declared in <root>.concatenation' type=kotlin.String origin=null
+  FUN name:customArrayConcatenation visibility:public modality:FINAL <> (array:kotlin.Array<out kotlin.Any?>) returnType:kotlin.String
+    annotations:
+      CompileTimeCalculation
+    VALUE_PARAMETER name:array index:0 type:kotlin.Array<out kotlin.Any?> varargElementType:kotlin.Any? [vararg]
+    BLOCK_BODY
+      VAR name:result type:kotlin.String [var]
+        CONST String type=kotlin.String value=""
+      VAR IR_TEMPORARY_VARIABLE name:indexedObject type:kotlin.Array<out kotlin.Any?> [val]
+        GET_VAR 'array: kotlin.Array<out kotlin.Any?> [vararg] declared in <root>.customArrayConcatenation' type=kotlin.Array<out kotlin.Any?> origin=null
+      VAR IR_TEMPORARY_VARIABLE name:tmp0_inductionVariable type:kotlin.Int [var]
+        CONST Int type=kotlin.Int value=0
+      VAR IR_TEMPORARY_VARIABLE name:tmp1_last type:kotlin.Int [val]
+        CALL 'public final fun jsArrayLength (arg0: kotlin.Any?): kotlin.Any? declared in kotlin.internal.ir' type=kotlin.Int origin=null
+          arg0: GET_VAR 'val indexedObject: kotlin.Array<out kotlin.Any?> [val] declared in <root>.customArrayConcatenation' type=kotlin.Array<out kotlin.Any?> origin=null
+      VAR IR_TEMPORARY_VARIABLE name:tmp2_step type:kotlin.Int [val]
+        CONST Int type=kotlin.Int value=1
+      WHILE label=null origin=FOR_LOOP_INNER_WHILE
+        condition: CALL 'public final fun jsLt (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=null
+          arg0: GET_VAR 'var tmp0_inductionVariable: kotlin.Int [var] declared in <root>.customArrayConcatenation' type=kotlin.Int origin=null
+          arg1: GET_VAR 'val tmp1_last: kotlin.Int [val] declared in <root>.customArrayConcatenation' type=kotlin.Int origin=null
+        body: COMPOSITE type=kotlin.Unit origin=FOR_LOOP_INNER_WHILE
+          VAR FOR_LOOP_VARIABLE name:elem type:kotlin.Any? [val]
+            CALL 'public final fun jsArrayGet (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Any? declared in kotlin.internal.ir' type=T of kotlin.Array origin=null
+              arg0: GET_VAR 'val indexedObject: kotlin.Array<out kotlin.Any?> [val] declared in <root>.customArrayConcatenation' type=kotlin.Array<out kotlin.Any?> origin=null
+              arg1: GET_VAR 'var tmp0_inductionVariable: kotlin.Int [var] declared in <root>.customArrayConcatenation' type=kotlin.Int origin=null
+          SET_VAR 'var tmp0_inductionVariable: kotlin.Int [var] declared in <root>.customArrayConcatenation' type=kotlin.Unit origin=EQ
+            CALL 'public final fun jsBitOr (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Int declared in kotlin.internal.ir' type=kotlin.Int origin=SYNTHESIZED_STATEMENT
+              arg0: CALL 'public final fun jsPlus (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Any? declared in kotlin.internal.ir' type=kotlin.Int origin=null
+                arg0: GET_VAR 'var tmp0_inductionVariable: kotlin.Int [var] declared in <root>.customArrayConcatenation' type=kotlin.Int origin=null
+                arg1: GET_VAR 'val tmp2_step: kotlin.Int [val] declared in <root>.customArrayConcatenation' type=kotlin.Int origin=null
+              arg1: CONST Int type=kotlin.Int value=0
+          SET_VAR 'var result: kotlin.String [var] declared in <root>.customArrayConcatenation' type=kotlin.Unit origin=PLUSEQ
+            CALL 'public final fun jsPlus (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Any? declared in kotlin.internal.ir' type=kotlin.String origin=PLUSEQ
+              arg0: GET_VAR 'var result: kotlin.String [var] declared in <root>.customArrayConcatenation' type=kotlin.String origin=PLUSEQ
+              arg1: CALL 'public final fun jsPlus (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Any? declared in kotlin.internal.ir' type=kotlin.String origin=PLUS
+                arg0: CALL 'public final fun toString (): kotlin.String declared in kotlin' type=kotlin.String origin=null
+                  $receiver: GET_VAR 'val elem: kotlin.Any? [val] declared in <root>.customArrayConcatenation' type=kotlin.Any? origin=null
+                arg1: CONST String type=kotlin.String value=" "
+      RETURN type=kotlin.Nothing from='public final fun customArrayConcatenation (vararg array: kotlin.Any?): kotlin.String declared in <root>'
+        GET_VAR 'var result: kotlin.String [var] declared in <root>.customArrayConcatenation' type=kotlin.String origin=null
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-a1> visibility:public modality:FINAL <> () returnType:kotlin.Int
+    correspondingProperty: PROPERTY name:a1 visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-a1> (): kotlin.Int declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:a1 type:kotlin.Int visibility:public [final,static]' type=kotlin.Int origin=null
+  FIELD PROPERTY_BACKING_FIELD name:a1 type:kotlin.Int visibility:public [final,static]
+    EXPRESSION_BODY
+      CONST Int type=kotlin.Int value=6
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-a2> visibility:public modality:FINAL <> () returnType:kotlin.Int
+    correspondingProperty: PROPERTY name:a2 visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-a2> (): kotlin.Int declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:a2 type:kotlin.Int visibility:public [final,static]' type=kotlin.Int origin=null
+  FIELD PROPERTY_BACKING_FIELD name:a2 type:kotlin.Int visibility:public [final,static]
+    EXPRESSION_BODY
+      CONST Int type=kotlin.Int value=3
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-a3> visibility:public modality:FINAL <> () returnType:kotlin.Int
+    correspondingProperty: PROPERTY name:a3 visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-a3> (): kotlin.Int declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:a3 type:kotlin.Int visibility:public [final,static]' type=kotlin.Int origin=null
+  FIELD PROPERTY_BACKING_FIELD name:a3 type:kotlin.Int visibility:public [final,static]
+    EXPRESSION_BODY
+      CONST Int type=kotlin.Int value=21
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-b1> visibility:public modality:FINAL <> () returnType:kotlin.Int
+    correspondingProperty: PROPERTY name:b1 visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-b1> (): kotlin.Int declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:b1 type:kotlin.Int visibility:public [final,static]' type=kotlin.Int origin=null
+  FIELD PROPERTY_BACKING_FIELD name:b1 type:kotlin.Int visibility:public [final,static]
+    EXPRESSION_BODY
+      CONST Int type=kotlin.Int value=6
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-b2> visibility:public modality:FINAL <> () returnType:kotlin.Int
+    correspondingProperty: PROPERTY name:b2 visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-b2> (): kotlin.Int declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:b2 type:kotlin.Int visibility:public [final,static]' type=kotlin.Int origin=null
+  FIELD PROPERTY_BACKING_FIELD name:b2 type:kotlin.Int visibility:public [final,static]
+    EXPRESSION_BODY
+      CONST Int type=kotlin.Int value=6
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-c1> visibility:public modality:FINAL <> () returnType:kotlin.String
+    correspondingProperty: PROPERTY name:c1 visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-c1> (): kotlin.String declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:c1 type:kotlin.String visibility:public [final,static]' type=kotlin.String origin=null
+  FIELD PROPERTY_BACKING_FIELD name:c1 type:kotlin.String visibility:public [final,static]
+    EXPRESSION_BODY
+      CONST String type=kotlin.String value="1 2 3"
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-c2> visibility:public modality:FINAL <> () returnType:kotlin.String
+    correspondingProperty: PROPERTY name:c2 visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-c2> (): kotlin.String declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:c2 type:kotlin.String visibility:public [final,static]' type=kotlin.String origin=null
+  FIELD PROPERTY_BACKING_FIELD name:c2 type:kotlin.String visibility:public [final,static]
+    EXPRESSION_BODY
+      CONST String type=kotlin.String value="1 2.0 3 -1 -2.0 "

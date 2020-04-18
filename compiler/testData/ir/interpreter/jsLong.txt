@@ -1,0 +1,1225 @@
+FILE fqName:<root> fileName:/jsLong.kt
+  FUN name:compareTo visibility:public modality:FINAL <> (value:kotlin.Long, other:kotlin.Byte) returnType:kotlin.Int
+    annotations:
+      CompileTimeCalculation
+    VALUE_PARAMETER name:value index:0 type:kotlin.Long
+    VALUE_PARAMETER name:other index:1 type:kotlin.Byte
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun compareTo (value: kotlin.Long, other: kotlin.Byte): kotlin.Int declared in <root>'
+        CALL 'public open fun compareTo (other: kotlin.Long): kotlin.Int [operator] declared in kotlin.Long' type=kotlin.Int origin=null
+          $this: GET_VAR 'value: kotlin.Long declared in <root>.compareTo' type=kotlin.Long origin=null
+          other: CALL 'public final fun toLong (a: dynamic): kotlin.Long declared in kotlin.js' type=kotlin.Long origin=null
+            a: GET_VAR 'other: kotlin.Byte declared in <root>.compareTo' type=kotlin.Byte origin=null
+  FUN name:compareTo visibility:public modality:FINAL <> (value:kotlin.Long, other:kotlin.Short) returnType:kotlin.Int
+    annotations:
+      CompileTimeCalculation
+    VALUE_PARAMETER name:value index:0 type:kotlin.Long
+    VALUE_PARAMETER name:other index:1 type:kotlin.Short
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun compareTo (value: kotlin.Long, other: kotlin.Short): kotlin.Int declared in <root>'
+        CALL 'public open fun compareTo (other: kotlin.Long): kotlin.Int [operator] declared in kotlin.Long' type=kotlin.Int origin=null
+          $this: GET_VAR 'value: kotlin.Long declared in <root>.compareTo' type=kotlin.Long origin=null
+          other: CALL 'public final fun toLong (a: dynamic): kotlin.Long declared in kotlin.js' type=kotlin.Long origin=null
+            a: GET_VAR 'other: kotlin.Short declared in <root>.compareTo' type=kotlin.Short origin=null
+  FUN name:compareTo visibility:public modality:FINAL <> (value:kotlin.Long, other:kotlin.Int) returnType:kotlin.Int
+    annotations:
+      CompileTimeCalculation
+    VALUE_PARAMETER name:value index:0 type:kotlin.Long
+    VALUE_PARAMETER name:other index:1 type:kotlin.Int
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun compareTo (value: kotlin.Long, other: kotlin.Int): kotlin.Int declared in <root>'
+        CALL 'public open fun compareTo (other: kotlin.Long): kotlin.Int [operator] declared in kotlin.Long' type=kotlin.Int origin=null
+          $this: GET_VAR 'value: kotlin.Long declared in <root>.compareTo' type=kotlin.Long origin=null
+          other: CALL 'public final fun toLong (a: dynamic): kotlin.Long declared in kotlin.js' type=kotlin.Long origin=null
+            a: GET_VAR 'other: kotlin.Int declared in <root>.compareTo' type=kotlin.Int origin=null
+  FUN name:compareTo visibility:public modality:FINAL <> (value:kotlin.Long, other:kotlin.Long) returnType:kotlin.Int
+    annotations:
+      CompileTimeCalculation
+    VALUE_PARAMETER name:value index:0 type:kotlin.Long
+    VALUE_PARAMETER name:other index:1 type:kotlin.Long
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun compareTo (value: kotlin.Long, other: kotlin.Long): kotlin.Int declared in <root>'
+        CALL 'public open fun compareTo (other: kotlin.Long): kotlin.Int [operator] declared in kotlin.Long' type=kotlin.Int origin=null
+          $this: GET_VAR 'value: kotlin.Long declared in <root>.compareTo' type=kotlin.Long origin=null
+          other: GET_VAR 'other: kotlin.Long declared in <root>.compareTo' type=kotlin.Long origin=null
+  FUN name:compareTo visibility:public modality:FINAL <> (value:kotlin.Long, other:kotlin.Float) returnType:kotlin.Int
+    annotations:
+      CompileTimeCalculation
+    VALUE_PARAMETER name:value index:0 type:kotlin.Long
+    VALUE_PARAMETER name:other index:1 type:kotlin.Float
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun compareTo (value: kotlin.Long, other: kotlin.Float): kotlin.Int declared in <root>'
+        CALL 'public final fun compareTo (a: dynamic, b: dynamic): kotlin.Int declared in kotlin.js' type=kotlin.Int origin=null
+          a: CALL 'public open fun toFloat (): kotlin.Float declared in kotlin.Long' type=kotlin.Float origin=null
+            $this: GET_VAR 'value: kotlin.Long declared in <root>.compareTo' type=kotlin.Long origin=null
+          b: GET_VAR 'other: kotlin.Float declared in <root>.compareTo' type=kotlin.Float origin=null
+  FUN name:compareTo visibility:public modality:FINAL <> (value:kotlin.Long, other:kotlin.Double) returnType:kotlin.Int
+    annotations:
+      CompileTimeCalculation
+    VALUE_PARAMETER name:value index:0 type:kotlin.Long
+    VALUE_PARAMETER name:other index:1 type:kotlin.Double
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun compareTo (value: kotlin.Long, other: kotlin.Double): kotlin.Int declared in <root>'
+        CALL 'public final fun compareTo (a: dynamic, b: dynamic): kotlin.Int declared in kotlin.js' type=kotlin.Int origin=null
+          a: CALL 'public open fun toDouble (): kotlin.Double declared in kotlin.Long' type=kotlin.Double origin=null
+            $this: GET_VAR 'value: kotlin.Long declared in <root>.compareTo' type=kotlin.Long origin=null
+          b: GET_VAR 'other: kotlin.Double declared in <root>.compareTo' type=kotlin.Double origin=null
+  FUN name:plus visibility:public modality:FINAL <> (value:kotlin.Long, other:kotlin.Byte) returnType:kotlin.Long
+    annotations:
+      CompileTimeCalculation
+    VALUE_PARAMETER name:value index:0 type:kotlin.Long
+    VALUE_PARAMETER name:other index:1 type:kotlin.Byte
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun plus (value: kotlin.Long, other: kotlin.Byte): kotlin.Long declared in <root>'
+        CALL 'public final fun plus (other: kotlin.Long): kotlin.Long [operator] declared in kotlin.Long' type=kotlin.Long origin=null
+          $this: GET_VAR 'value: kotlin.Long declared in <root>.plus' type=kotlin.Long origin=null
+          other: CALL 'public final fun toLong (a: dynamic): kotlin.Long declared in kotlin.js' type=kotlin.Long origin=null
+            a: GET_VAR 'other: kotlin.Byte declared in <root>.plus' type=kotlin.Byte origin=null
+  FUN name:plus visibility:public modality:FINAL <> (value:kotlin.Long, other:kotlin.Short) returnType:kotlin.Long
+    annotations:
+      CompileTimeCalculation
+    VALUE_PARAMETER name:value index:0 type:kotlin.Long
+    VALUE_PARAMETER name:other index:1 type:kotlin.Short
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun plus (value: kotlin.Long, other: kotlin.Short): kotlin.Long declared in <root>'
+        CALL 'public final fun plus (other: kotlin.Long): kotlin.Long [operator] declared in kotlin.Long' type=kotlin.Long origin=null
+          $this: GET_VAR 'value: kotlin.Long declared in <root>.plus' type=kotlin.Long origin=null
+          other: CALL 'public final fun toLong (a: dynamic): kotlin.Long declared in kotlin.js' type=kotlin.Long origin=null
+            a: GET_VAR 'other: kotlin.Short declared in <root>.plus' type=kotlin.Short origin=null
+  FUN name:plus visibility:public modality:FINAL <> (value:kotlin.Long, other:kotlin.Int) returnType:kotlin.Long
+    annotations:
+      CompileTimeCalculation
+    VALUE_PARAMETER name:value index:0 type:kotlin.Long
+    VALUE_PARAMETER name:other index:1 type:kotlin.Int
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun plus (value: kotlin.Long, other: kotlin.Int): kotlin.Long declared in <root>'
+        CALL 'public final fun plus (other: kotlin.Long): kotlin.Long [operator] declared in kotlin.Long' type=kotlin.Long origin=null
+          $this: GET_VAR 'value: kotlin.Long declared in <root>.plus' type=kotlin.Long origin=null
+          other: CALL 'public final fun toLong (a: dynamic): kotlin.Long declared in kotlin.js' type=kotlin.Long origin=null
+            a: GET_VAR 'other: kotlin.Int declared in <root>.plus' type=kotlin.Int origin=null
+  FUN name:plus visibility:public modality:FINAL <> (value:kotlin.Long, other:kotlin.Long) returnType:kotlin.Long
+    annotations:
+      CompileTimeCalculation
+    VALUE_PARAMETER name:value index:0 type:kotlin.Long
+    VALUE_PARAMETER name:other index:1 type:kotlin.Long
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun plus (value: kotlin.Long, other: kotlin.Long): kotlin.Long declared in <root>'
+        CALL 'public final fun plus (other: kotlin.Long): kotlin.Long [operator] declared in kotlin.Long' type=kotlin.Long origin=null
+          $this: GET_VAR 'value: kotlin.Long declared in <root>.plus' type=kotlin.Long origin=null
+          other: GET_VAR 'other: kotlin.Long declared in <root>.plus' type=kotlin.Long origin=null
+  FUN name:plus visibility:public modality:FINAL <> (value:kotlin.Long, other:kotlin.Float) returnType:kotlin.Float
+    annotations:
+      CompileTimeCalculation
+    VALUE_PARAMETER name:value index:0 type:kotlin.Long
+    VALUE_PARAMETER name:other index:1 type:kotlin.Float
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun plus (value: kotlin.Long, other: kotlin.Float): kotlin.Float declared in <root>'
+        CALL 'public final fun jsPlus (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Any? declared in kotlin.internal.ir' type=kotlin.Float origin=PLUS
+          arg0: CALL 'public open fun toFloat (): kotlin.Float declared in kotlin.Long' type=kotlin.Float origin=null
+            $this: GET_VAR 'value: kotlin.Long declared in <root>.plus' type=kotlin.Long origin=null
+          arg1: GET_VAR 'other: kotlin.Float declared in <root>.plus' type=kotlin.Float origin=null
+  FUN name:plus visibility:public modality:FINAL <> (value:kotlin.Long, other:kotlin.Double) returnType:kotlin.Double
+    annotations:
+      CompileTimeCalculation
+    VALUE_PARAMETER name:value index:0 type:kotlin.Long
+    VALUE_PARAMETER name:other index:1 type:kotlin.Double
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun plus (value: kotlin.Long, other: kotlin.Double): kotlin.Double declared in <root>'
+        CALL 'public final fun jsPlus (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Any? declared in kotlin.internal.ir' type=kotlin.Double origin=PLUS
+          arg0: CALL 'public open fun toDouble (): kotlin.Double declared in kotlin.Long' type=kotlin.Double origin=null
+            $this: GET_VAR 'value: kotlin.Long declared in <root>.plus' type=kotlin.Long origin=null
+          arg1: GET_VAR 'other: kotlin.Double declared in <root>.plus' type=kotlin.Double origin=null
+  FUN name:minus visibility:public modality:FINAL <> (value:kotlin.Long, other:kotlin.Byte) returnType:kotlin.Long
+    annotations:
+      CompileTimeCalculation
+    VALUE_PARAMETER name:value index:0 type:kotlin.Long
+    VALUE_PARAMETER name:other index:1 type:kotlin.Byte
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun minus (value: kotlin.Long, other: kotlin.Byte): kotlin.Long declared in <root>'
+        CALL 'public final fun minus (other: kotlin.Long): kotlin.Long [operator] declared in kotlin.Long' type=kotlin.Long origin=null
+          $this: GET_VAR 'value: kotlin.Long declared in <root>.minus' type=kotlin.Long origin=null
+          other: CALL 'public final fun toLong (a: dynamic): kotlin.Long declared in kotlin.js' type=kotlin.Long origin=null
+            a: GET_VAR 'other: kotlin.Byte declared in <root>.minus' type=kotlin.Byte origin=null
+  FUN name:minus visibility:public modality:FINAL <> (value:kotlin.Long, other:kotlin.Short) returnType:kotlin.Long
+    annotations:
+      CompileTimeCalculation
+    VALUE_PARAMETER name:value index:0 type:kotlin.Long
+    VALUE_PARAMETER name:other index:1 type:kotlin.Short
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun minus (value: kotlin.Long, other: kotlin.Short): kotlin.Long declared in <root>'
+        CALL 'public final fun minus (other: kotlin.Long): kotlin.Long [operator] declared in kotlin.Long' type=kotlin.Long origin=null
+          $this: GET_VAR 'value: kotlin.Long declared in <root>.minus' type=kotlin.Long origin=null
+          other: CALL 'public final fun toLong (a: dynamic): kotlin.Long declared in kotlin.js' type=kotlin.Long origin=null
+            a: GET_VAR 'other: kotlin.Short declared in <root>.minus' type=kotlin.Short origin=null
+  FUN name:minus visibility:public modality:FINAL <> (value:kotlin.Long, other:kotlin.Int) returnType:kotlin.Long
+    annotations:
+      CompileTimeCalculation
+    VALUE_PARAMETER name:value index:0 type:kotlin.Long
+    VALUE_PARAMETER name:other index:1 type:kotlin.Int
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun minus (value: kotlin.Long, other: kotlin.Int): kotlin.Long declared in <root>'
+        CALL 'public final fun minus (other: kotlin.Long): kotlin.Long [operator] declared in kotlin.Long' type=kotlin.Long origin=null
+          $this: GET_VAR 'value: kotlin.Long declared in <root>.minus' type=kotlin.Long origin=null
+          other: CALL 'public final fun toLong (a: dynamic): kotlin.Long declared in kotlin.js' type=kotlin.Long origin=null
+            a: GET_VAR 'other: kotlin.Int declared in <root>.minus' type=kotlin.Int origin=null
+  FUN name:minus visibility:public modality:FINAL <> (value:kotlin.Long, other:kotlin.Long) returnType:kotlin.Long
+    annotations:
+      CompileTimeCalculation
+    VALUE_PARAMETER name:value index:0 type:kotlin.Long
+    VALUE_PARAMETER name:other index:1 type:kotlin.Long
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun minus (value: kotlin.Long, other: kotlin.Long): kotlin.Long declared in <root>'
+        CALL 'public final fun minus (other: kotlin.Long): kotlin.Long [operator] declared in kotlin.Long' type=kotlin.Long origin=null
+          $this: GET_VAR 'value: kotlin.Long declared in <root>.minus' type=kotlin.Long origin=null
+          other: GET_VAR 'other: kotlin.Long declared in <root>.minus' type=kotlin.Long origin=null
+  FUN name:minus visibility:public modality:FINAL <> (value:kotlin.Long, other:kotlin.Float) returnType:kotlin.Float
+    annotations:
+      CompileTimeCalculation
+    VALUE_PARAMETER name:value index:0 type:kotlin.Long
+    VALUE_PARAMETER name:other index:1 type:kotlin.Float
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun minus (value: kotlin.Long, other: kotlin.Float): kotlin.Float declared in <root>'
+        CALL 'public final fun jsMinus (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Any? declared in kotlin.internal.ir' type=kotlin.Float origin=MINUS
+          arg0: CALL 'public open fun toFloat (): kotlin.Float declared in kotlin.Long' type=kotlin.Float origin=null
+            $this: GET_VAR 'value: kotlin.Long declared in <root>.minus' type=kotlin.Long origin=null
+          arg1: GET_VAR 'other: kotlin.Float declared in <root>.minus' type=kotlin.Float origin=null
+  FUN name:minus visibility:public modality:FINAL <> (value:kotlin.Long, other:kotlin.Double) returnType:kotlin.Double
+    annotations:
+      CompileTimeCalculation
+    VALUE_PARAMETER name:value index:0 type:kotlin.Long
+    VALUE_PARAMETER name:other index:1 type:kotlin.Double
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun minus (value: kotlin.Long, other: kotlin.Double): kotlin.Double declared in <root>'
+        CALL 'public final fun jsMinus (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Any? declared in kotlin.internal.ir' type=kotlin.Double origin=MINUS
+          arg0: CALL 'public open fun toDouble (): kotlin.Double declared in kotlin.Long' type=kotlin.Double origin=null
+            $this: GET_VAR 'value: kotlin.Long declared in <root>.minus' type=kotlin.Long origin=null
+          arg1: GET_VAR 'other: kotlin.Double declared in <root>.minus' type=kotlin.Double origin=null
+  FUN name:times visibility:public modality:FINAL <> (value:kotlin.Long, other:kotlin.Byte) returnType:kotlin.Long
+    annotations:
+      CompileTimeCalculation
+    VALUE_PARAMETER name:value index:0 type:kotlin.Long
+    VALUE_PARAMETER name:other index:1 type:kotlin.Byte
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun times (value: kotlin.Long, other: kotlin.Byte): kotlin.Long declared in <root>'
+        CALL 'public final fun times (other: kotlin.Long): kotlin.Long [operator] declared in kotlin.Long' type=kotlin.Long origin=null
+          $this: GET_VAR 'value: kotlin.Long declared in <root>.times' type=kotlin.Long origin=null
+          other: CALL 'public final fun toLong (a: dynamic): kotlin.Long declared in kotlin.js' type=kotlin.Long origin=null
+            a: GET_VAR 'other: kotlin.Byte declared in <root>.times' type=kotlin.Byte origin=null
+  FUN name:times visibility:public modality:FINAL <> (value:kotlin.Long, other:kotlin.Short) returnType:kotlin.Long
+    annotations:
+      CompileTimeCalculation
+    VALUE_PARAMETER name:value index:0 type:kotlin.Long
+    VALUE_PARAMETER name:other index:1 type:kotlin.Short
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun times (value: kotlin.Long, other: kotlin.Short): kotlin.Long declared in <root>'
+        CALL 'public final fun times (other: kotlin.Long): kotlin.Long [operator] declared in kotlin.Long' type=kotlin.Long origin=null
+          $this: GET_VAR 'value: kotlin.Long declared in <root>.times' type=kotlin.Long origin=null
+          other: CALL 'public final fun toLong (a: dynamic): kotlin.Long declared in kotlin.js' type=kotlin.Long origin=null
+            a: GET_VAR 'other: kotlin.Short declared in <root>.times' type=kotlin.Short origin=null
+  FUN name:times visibility:public modality:FINAL <> (value:kotlin.Long, other:kotlin.Int) returnType:kotlin.Long
+    annotations:
+      CompileTimeCalculation
+    VALUE_PARAMETER name:value index:0 type:kotlin.Long
+    VALUE_PARAMETER name:other index:1 type:kotlin.Int
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun times (value: kotlin.Long, other: kotlin.Int): kotlin.Long declared in <root>'
+        CALL 'public final fun times (other: kotlin.Long): kotlin.Long [operator] declared in kotlin.Long' type=kotlin.Long origin=null
+          $this: GET_VAR 'value: kotlin.Long declared in <root>.times' type=kotlin.Long origin=null
+          other: CALL 'public final fun toLong (a: dynamic): kotlin.Long declared in kotlin.js' type=kotlin.Long origin=null
+            a: GET_VAR 'other: kotlin.Int declared in <root>.times' type=kotlin.Int origin=null
+  FUN name:times visibility:public modality:FINAL <> (value:kotlin.Long, other:kotlin.Long) returnType:kotlin.Long
+    annotations:
+      CompileTimeCalculation
+    VALUE_PARAMETER name:value index:0 type:kotlin.Long
+    VALUE_PARAMETER name:other index:1 type:kotlin.Long
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun times (value: kotlin.Long, other: kotlin.Long): kotlin.Long declared in <root>'
+        CALL 'public final fun times (other: kotlin.Long): kotlin.Long [operator] declared in kotlin.Long' type=kotlin.Long origin=null
+          $this: GET_VAR 'value: kotlin.Long declared in <root>.times' type=kotlin.Long origin=null
+          other: GET_VAR 'other: kotlin.Long declared in <root>.times' type=kotlin.Long origin=null
+  FUN name:times visibility:public modality:FINAL <> (value:kotlin.Long, other:kotlin.Float) returnType:kotlin.Float
+    annotations:
+      CompileTimeCalculation
+    VALUE_PARAMETER name:value index:0 type:kotlin.Long
+    VALUE_PARAMETER name:other index:1 type:kotlin.Float
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun times (value: kotlin.Long, other: kotlin.Float): kotlin.Float declared in <root>'
+        CALL 'public final fun jsMult (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Any? declared in kotlin.internal.ir' type=kotlin.Float origin=MUL
+          arg0: CALL 'public open fun toFloat (): kotlin.Float declared in kotlin.Long' type=kotlin.Float origin=null
+            $this: GET_VAR 'value: kotlin.Long declared in <root>.times' type=kotlin.Long origin=null
+          arg1: GET_VAR 'other: kotlin.Float declared in <root>.times' type=kotlin.Float origin=null
+  FUN name:times visibility:public modality:FINAL <> (value:kotlin.Long, other:kotlin.Double) returnType:kotlin.Double
+    annotations:
+      CompileTimeCalculation
+    VALUE_PARAMETER name:value index:0 type:kotlin.Long
+    VALUE_PARAMETER name:other index:1 type:kotlin.Double
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun times (value: kotlin.Long, other: kotlin.Double): kotlin.Double declared in <root>'
+        CALL 'public final fun jsMult (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Any? declared in kotlin.internal.ir' type=kotlin.Double origin=MUL
+          arg0: CALL 'public open fun toDouble (): kotlin.Double declared in kotlin.Long' type=kotlin.Double origin=null
+            $this: GET_VAR 'value: kotlin.Long declared in <root>.times' type=kotlin.Long origin=null
+          arg1: GET_VAR 'other: kotlin.Double declared in <root>.times' type=kotlin.Double origin=null
+  FUN name:div visibility:public modality:FINAL <> (value:kotlin.Long, other:kotlin.Byte) returnType:kotlin.Long
+    annotations:
+      CompileTimeCalculation
+    VALUE_PARAMETER name:value index:0 type:kotlin.Long
+    VALUE_PARAMETER name:other index:1 type:kotlin.Byte
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun div (value: kotlin.Long, other: kotlin.Byte): kotlin.Long declared in <root>'
+        CALL 'public final fun div (other: kotlin.Long): kotlin.Long [operator] declared in kotlin.Long' type=kotlin.Long origin=null
+          $this: GET_VAR 'value: kotlin.Long declared in <root>.div' type=kotlin.Long origin=null
+          other: CALL 'public final fun toLong (a: dynamic): kotlin.Long declared in kotlin.js' type=kotlin.Long origin=null
+            a: GET_VAR 'other: kotlin.Byte declared in <root>.div' type=kotlin.Byte origin=null
+  FUN name:div visibility:public modality:FINAL <> (value:kotlin.Long, other:kotlin.Short) returnType:kotlin.Long
+    annotations:
+      CompileTimeCalculation
+    VALUE_PARAMETER name:value index:0 type:kotlin.Long
+    VALUE_PARAMETER name:other index:1 type:kotlin.Short
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun div (value: kotlin.Long, other: kotlin.Short): kotlin.Long declared in <root>'
+        CALL 'public final fun div (other: kotlin.Long): kotlin.Long [operator] declared in kotlin.Long' type=kotlin.Long origin=null
+          $this: GET_VAR 'value: kotlin.Long declared in <root>.div' type=kotlin.Long origin=null
+          other: CALL 'public final fun toLong (a: dynamic): kotlin.Long declared in kotlin.js' type=kotlin.Long origin=null
+            a: GET_VAR 'other: kotlin.Short declared in <root>.div' type=kotlin.Short origin=null
+  FUN name:div visibility:public modality:FINAL <> (value:kotlin.Long, other:kotlin.Int) returnType:kotlin.Long
+    annotations:
+      CompileTimeCalculation
+    VALUE_PARAMETER name:value index:0 type:kotlin.Long
+    VALUE_PARAMETER name:other index:1 type:kotlin.Int
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun div (value: kotlin.Long, other: kotlin.Int): kotlin.Long declared in <root>'
+        CALL 'public final fun div (other: kotlin.Long): kotlin.Long [operator] declared in kotlin.Long' type=kotlin.Long origin=null
+          $this: GET_VAR 'value: kotlin.Long declared in <root>.div' type=kotlin.Long origin=null
+          other: CALL 'public final fun toLong (a: dynamic): kotlin.Long declared in kotlin.js' type=kotlin.Long origin=null
+            a: GET_VAR 'other: kotlin.Int declared in <root>.div' type=kotlin.Int origin=null
+  FUN name:div visibility:public modality:FINAL <> (value:kotlin.Long, other:kotlin.Long) returnType:kotlin.Long
+    annotations:
+      CompileTimeCalculation
+    VALUE_PARAMETER name:value index:0 type:kotlin.Long
+    VALUE_PARAMETER name:other index:1 type:kotlin.Long
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun div (value: kotlin.Long, other: kotlin.Long): kotlin.Long declared in <root>'
+        CALL 'public final fun div (other: kotlin.Long): kotlin.Long [operator] declared in kotlin.Long' type=kotlin.Long origin=null
+          $this: GET_VAR 'value: kotlin.Long declared in <root>.div' type=kotlin.Long origin=null
+          other: GET_VAR 'other: kotlin.Long declared in <root>.div' type=kotlin.Long origin=null
+  FUN name:div visibility:public modality:FINAL <> (value:kotlin.Long, other:kotlin.Float) returnType:kotlin.Float
+    annotations:
+      CompileTimeCalculation
+    VALUE_PARAMETER name:value index:0 type:kotlin.Long
+    VALUE_PARAMETER name:other index:1 type:kotlin.Float
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun div (value: kotlin.Long, other: kotlin.Float): kotlin.Float declared in <root>'
+        CALL 'public final fun jsDiv (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Any? declared in kotlin.internal.ir' type=kotlin.Float origin=DIV
+          arg0: CALL 'public open fun toFloat (): kotlin.Float declared in kotlin.Long' type=kotlin.Float origin=null
+            $this: GET_VAR 'value: kotlin.Long declared in <root>.div' type=kotlin.Long origin=null
+          arg1: GET_VAR 'other: kotlin.Float declared in <root>.div' type=kotlin.Float origin=null
+  FUN name:div visibility:public modality:FINAL <> (value:kotlin.Long, other:kotlin.Double) returnType:kotlin.Double
+    annotations:
+      CompileTimeCalculation
+    VALUE_PARAMETER name:value index:0 type:kotlin.Long
+    VALUE_PARAMETER name:other index:1 type:kotlin.Double
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun div (value: kotlin.Long, other: kotlin.Double): kotlin.Double declared in <root>'
+        CALL 'public final fun jsDiv (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Any? declared in kotlin.internal.ir' type=kotlin.Double origin=DIV
+          arg0: CALL 'public open fun toDouble (): kotlin.Double declared in kotlin.Long' type=kotlin.Double origin=null
+            $this: GET_VAR 'value: kotlin.Long declared in <root>.div' type=kotlin.Long origin=null
+          arg1: GET_VAR 'other: kotlin.Double declared in <root>.div' type=kotlin.Double origin=null
+  FUN name:rem visibility:public modality:FINAL <> (value:kotlin.Long, other:kotlin.Byte) returnType:kotlin.Long
+    annotations:
+      CompileTimeCalculation
+    VALUE_PARAMETER name:value index:0 type:kotlin.Long
+    VALUE_PARAMETER name:other index:1 type:kotlin.Byte
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun rem (value: kotlin.Long, other: kotlin.Byte): kotlin.Long declared in <root>'
+        CALL 'public final fun rem (other: kotlin.Long): kotlin.Long [operator] declared in kotlin.Long' type=kotlin.Long origin=null
+          $this: GET_VAR 'value: kotlin.Long declared in <root>.rem' type=kotlin.Long origin=null
+          other: CALL 'public final fun toLong (a: dynamic): kotlin.Long declared in kotlin.js' type=kotlin.Long origin=null
+            a: GET_VAR 'other: kotlin.Byte declared in <root>.rem' type=kotlin.Byte origin=null
+  FUN name:rem visibility:public modality:FINAL <> (value:kotlin.Long, other:kotlin.Short) returnType:kotlin.Long
+    annotations:
+      CompileTimeCalculation
+    VALUE_PARAMETER name:value index:0 type:kotlin.Long
+    VALUE_PARAMETER name:other index:1 type:kotlin.Short
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun rem (value: kotlin.Long, other: kotlin.Short): kotlin.Long declared in <root>'
+        CALL 'public final fun rem (other: kotlin.Long): kotlin.Long [operator] declared in kotlin.Long' type=kotlin.Long origin=null
+          $this: GET_VAR 'value: kotlin.Long declared in <root>.rem' type=kotlin.Long origin=null
+          other: CALL 'public final fun toLong (a: dynamic): kotlin.Long declared in kotlin.js' type=kotlin.Long origin=null
+            a: GET_VAR 'other: kotlin.Short declared in <root>.rem' type=kotlin.Short origin=null
+  FUN name:rem visibility:public modality:FINAL <> (value:kotlin.Long, other:kotlin.Int) returnType:kotlin.Long
+    annotations:
+      CompileTimeCalculation
+    VALUE_PARAMETER name:value index:0 type:kotlin.Long
+    VALUE_PARAMETER name:other index:1 type:kotlin.Int
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun rem (value: kotlin.Long, other: kotlin.Int): kotlin.Long declared in <root>'
+        CALL 'public final fun rem (other: kotlin.Long): kotlin.Long [operator] declared in kotlin.Long' type=kotlin.Long origin=null
+          $this: GET_VAR 'value: kotlin.Long declared in <root>.rem' type=kotlin.Long origin=null
+          other: CALL 'public final fun toLong (a: dynamic): kotlin.Long declared in kotlin.js' type=kotlin.Long origin=null
+            a: GET_VAR 'other: kotlin.Int declared in <root>.rem' type=kotlin.Int origin=null
+  FUN name:rem visibility:public modality:FINAL <> (value:kotlin.Long, other:kotlin.Long) returnType:kotlin.Long
+    annotations:
+      CompileTimeCalculation
+    VALUE_PARAMETER name:value index:0 type:kotlin.Long
+    VALUE_PARAMETER name:other index:1 type:kotlin.Long
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun rem (value: kotlin.Long, other: kotlin.Long): kotlin.Long declared in <root>'
+        CALL 'public final fun rem (other: kotlin.Long): kotlin.Long [operator] declared in kotlin.Long' type=kotlin.Long origin=null
+          $this: GET_VAR 'value: kotlin.Long declared in <root>.rem' type=kotlin.Long origin=null
+          other: GET_VAR 'other: kotlin.Long declared in <root>.rem' type=kotlin.Long origin=null
+  FUN name:rem visibility:public modality:FINAL <> (value:kotlin.Long, other:kotlin.Float) returnType:kotlin.Float
+    annotations:
+      CompileTimeCalculation
+    VALUE_PARAMETER name:value index:0 type:kotlin.Long
+    VALUE_PARAMETER name:other index:1 type:kotlin.Float
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun rem (value: kotlin.Long, other: kotlin.Float): kotlin.Float declared in <root>'
+        CALL 'public final fun jsMod (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Any? declared in kotlin.internal.ir' type=kotlin.Float origin=PERC
+          arg0: CALL 'public open fun toFloat (): kotlin.Float declared in kotlin.Long' type=kotlin.Float origin=null
+            $this: GET_VAR 'value: kotlin.Long declared in <root>.rem' type=kotlin.Long origin=null
+          arg1: GET_VAR 'other: kotlin.Float declared in <root>.rem' type=kotlin.Float origin=null
+  FUN name:rem visibility:public modality:FINAL <> (value:kotlin.Long, other:kotlin.Double) returnType:kotlin.Double
+    annotations:
+      CompileTimeCalculation
+    VALUE_PARAMETER name:value index:0 type:kotlin.Long
+    VALUE_PARAMETER name:other index:1 type:kotlin.Double
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun rem (value: kotlin.Long, other: kotlin.Double): kotlin.Double declared in <root>'
+        CALL 'public final fun jsMod (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Any? declared in kotlin.internal.ir' type=kotlin.Double origin=PERC
+          arg0: CALL 'public open fun toDouble (): kotlin.Double declared in kotlin.Long' type=kotlin.Double origin=null
+            $this: GET_VAR 'value: kotlin.Long declared in <root>.rem' type=kotlin.Long origin=null
+          arg1: GET_VAR 'other: kotlin.Double declared in <root>.rem' type=kotlin.Double origin=null
+  FUN name:inc visibility:public modality:FINAL <> (value:kotlin.Long) returnType:kotlin.Long
+    annotations:
+      CompileTimeCalculation
+    VALUE_PARAMETER name:value index:0 type:kotlin.Long
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun inc (value: kotlin.Long): kotlin.Long declared in <root>'
+        CALL 'public final fun inc (): kotlin.Long [operator] declared in kotlin.Long' type=kotlin.Long origin=null
+          $this: GET_VAR 'value: kotlin.Long declared in <root>.inc' type=kotlin.Long origin=null
+  FUN name:dec visibility:public modality:FINAL <> (value:kotlin.Long) returnType:kotlin.Long
+    annotations:
+      CompileTimeCalculation
+    VALUE_PARAMETER name:value index:0 type:kotlin.Long
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun dec (value: kotlin.Long): kotlin.Long declared in <root>'
+        CALL 'public final fun dec (): kotlin.Long [operator] declared in kotlin.Long' type=kotlin.Long origin=null
+          $this: GET_VAR 'value: kotlin.Long declared in <root>.dec' type=kotlin.Long origin=null
+  FUN name:unaryPlus visibility:public modality:FINAL <> (value:kotlin.Long) returnType:kotlin.Long
+    annotations:
+      CompileTimeCalculation
+    VALUE_PARAMETER name:value index:0 type:kotlin.Long
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun unaryPlus (value: kotlin.Long): kotlin.Long declared in <root>'
+        GET_VAR 'value: kotlin.Long declared in <root>.unaryPlus' type=kotlin.Long origin=null
+  FUN name:unaryMinus visibility:public modality:FINAL <> (value:kotlin.Long) returnType:kotlin.Long
+    annotations:
+      CompileTimeCalculation
+    VALUE_PARAMETER name:value index:0 type:kotlin.Long
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun unaryMinus (value: kotlin.Long): kotlin.Long declared in <root>'
+        CALL 'public final fun unaryMinus (): kotlin.Long [operator] declared in kotlin.Long' type=kotlin.Long origin=null
+          $this: GET_VAR 'value: kotlin.Long declared in <root>.unaryMinus' type=kotlin.Long origin=null
+  FUN name:rangeTo visibility:public modality:FINAL <> (value:kotlin.Long, other:kotlin.Byte) returnType:kotlin.ranges.LongRange
+    annotations:
+      CompileTimeCalculation
+    VALUE_PARAMETER name:value index:0 type:kotlin.Long
+    VALUE_PARAMETER name:other index:1 type:kotlin.Byte
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun rangeTo (value: kotlin.Long, other: kotlin.Byte): kotlin.ranges.LongRange declared in <root>'
+        CALL 'public final fun rangeTo (other: kotlin.Byte): kotlin.ranges.LongRange [operator] declared in kotlin.Long' type=kotlin.ranges.LongRange origin=null
+          $this: GET_VAR 'value: kotlin.Long declared in <root>.rangeTo' type=kotlin.Long origin=null
+          other: GET_VAR 'other: kotlin.Byte declared in <root>.rangeTo' type=kotlin.Byte origin=null
+  FUN name:rangeTo visibility:public modality:FINAL <> (value:kotlin.Long, other:kotlin.Short) returnType:kotlin.ranges.LongRange
+    annotations:
+      CompileTimeCalculation
+    VALUE_PARAMETER name:value index:0 type:kotlin.Long
+    VALUE_PARAMETER name:other index:1 type:kotlin.Short
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun rangeTo (value: kotlin.Long, other: kotlin.Short): kotlin.ranges.LongRange declared in <root>'
+        CALL 'public final fun rangeTo (other: kotlin.Short): kotlin.ranges.LongRange [operator] declared in kotlin.Long' type=kotlin.ranges.LongRange origin=null
+          $this: GET_VAR 'value: kotlin.Long declared in <root>.rangeTo' type=kotlin.Long origin=null
+          other: GET_VAR 'other: kotlin.Short declared in <root>.rangeTo' type=kotlin.Short origin=null
+  FUN name:rangeTo visibility:public modality:FINAL <> (value:kotlin.Long, other:kotlin.Int) returnType:kotlin.ranges.LongRange
+    annotations:
+      CompileTimeCalculation
+    VALUE_PARAMETER name:value index:0 type:kotlin.Long
+    VALUE_PARAMETER name:other index:1 type:kotlin.Int
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun rangeTo (value: kotlin.Long, other: kotlin.Int): kotlin.ranges.LongRange declared in <root>'
+        CALL 'public final fun rangeTo (other: kotlin.Int): kotlin.ranges.LongRange [operator] declared in kotlin.Long' type=kotlin.ranges.LongRange origin=null
+          $this: GET_VAR 'value: kotlin.Long declared in <root>.rangeTo' type=kotlin.Long origin=null
+          other: GET_VAR 'other: kotlin.Int declared in <root>.rangeTo' type=kotlin.Int origin=null
+  FUN name:rangeTo visibility:public modality:FINAL <> (value:kotlin.Long, other:kotlin.Long) returnType:kotlin.ranges.LongRange
+    annotations:
+      CompileTimeCalculation
+    VALUE_PARAMETER name:value index:0 type:kotlin.Long
+    VALUE_PARAMETER name:other index:1 type:kotlin.Long
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun rangeTo (value: kotlin.Long, other: kotlin.Long): kotlin.ranges.LongRange declared in <root>'
+        CALL 'public final fun rangeTo (other: kotlin.Long): kotlin.ranges.LongRange [operator] declared in kotlin.Long' type=kotlin.ranges.LongRange origin=null
+          $this: GET_VAR 'value: kotlin.Long declared in <root>.rangeTo' type=kotlin.Long origin=null
+          other: GET_VAR 'other: kotlin.Long declared in <root>.rangeTo' type=kotlin.Long origin=null
+  FUN name:shl visibility:public modality:FINAL <> (value:kotlin.Long, bitCount:kotlin.Int) returnType:kotlin.Long
+    annotations:
+      CompileTimeCalculation
+    VALUE_PARAMETER name:value index:0 type:kotlin.Long
+    VALUE_PARAMETER name:bitCount index:1 type:kotlin.Int
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun shl (value: kotlin.Long, bitCount: kotlin.Int): kotlin.Long declared in <root>'
+        CALL 'public final fun shl (bitCount: kotlin.Int): kotlin.Long declared in kotlin.Long' type=kotlin.Long origin=null
+          $this: GET_VAR 'value: kotlin.Long declared in <root>.shl' type=kotlin.Long origin=null
+          bitCount: GET_VAR 'bitCount: kotlin.Int declared in <root>.shl' type=kotlin.Int origin=null
+  FUN name:shr visibility:public modality:FINAL <> (value:kotlin.Long, bitCount:kotlin.Int) returnType:kotlin.Long
+    annotations:
+      CompileTimeCalculation
+    VALUE_PARAMETER name:value index:0 type:kotlin.Long
+    VALUE_PARAMETER name:bitCount index:1 type:kotlin.Int
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun shr (value: kotlin.Long, bitCount: kotlin.Int): kotlin.Long declared in <root>'
+        CALL 'public final fun shr (bitCount: kotlin.Int): kotlin.Long declared in kotlin.Long' type=kotlin.Long origin=null
+          $this: GET_VAR 'value: kotlin.Long declared in <root>.shr' type=kotlin.Long origin=null
+          bitCount: GET_VAR 'bitCount: kotlin.Int declared in <root>.shr' type=kotlin.Int origin=null
+  FUN name:ushr visibility:public modality:FINAL <> (value:kotlin.Long, bitCount:kotlin.Int) returnType:kotlin.Long
+    annotations:
+      CompileTimeCalculation
+    VALUE_PARAMETER name:value index:0 type:kotlin.Long
+    VALUE_PARAMETER name:bitCount index:1 type:kotlin.Int
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun ushr (value: kotlin.Long, bitCount: kotlin.Int): kotlin.Long declared in <root>'
+        CALL 'public final fun ushr (bitCount: kotlin.Int): kotlin.Long declared in kotlin.Long' type=kotlin.Long origin=null
+          $this: GET_VAR 'value: kotlin.Long declared in <root>.ushr' type=kotlin.Long origin=null
+          bitCount: GET_VAR 'bitCount: kotlin.Int declared in <root>.ushr' type=kotlin.Int origin=null
+  FUN name:and visibility:public modality:FINAL <> (value:kotlin.Long, other:kotlin.Long) returnType:kotlin.Long
+    annotations:
+      CompileTimeCalculation
+    VALUE_PARAMETER name:value index:0 type:kotlin.Long
+    VALUE_PARAMETER name:other index:1 type:kotlin.Long
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun and (value: kotlin.Long, other: kotlin.Long): kotlin.Long declared in <root>'
+        CALL 'public final fun and (other: kotlin.Long): kotlin.Long declared in kotlin.Long' type=kotlin.Long origin=null
+          $this: GET_VAR 'value: kotlin.Long declared in <root>.and' type=kotlin.Long origin=null
+          other: GET_VAR 'other: kotlin.Long declared in <root>.and' type=kotlin.Long origin=null
+  FUN name:or visibility:public modality:FINAL <> (value:kotlin.Long, other:kotlin.Long) returnType:kotlin.Long
+    annotations:
+      CompileTimeCalculation
+    VALUE_PARAMETER name:value index:0 type:kotlin.Long
+    VALUE_PARAMETER name:other index:1 type:kotlin.Long
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun or (value: kotlin.Long, other: kotlin.Long): kotlin.Long declared in <root>'
+        CALL 'public final fun or (other: kotlin.Long): kotlin.Long declared in kotlin.Long' type=kotlin.Long origin=null
+          $this: GET_VAR 'value: kotlin.Long declared in <root>.or' type=kotlin.Long origin=null
+          other: GET_VAR 'other: kotlin.Long declared in <root>.or' type=kotlin.Long origin=null
+  FUN name:xor visibility:public modality:FINAL <> (value:kotlin.Long, other:kotlin.Long) returnType:kotlin.Long
+    annotations:
+      CompileTimeCalculation
+    VALUE_PARAMETER name:value index:0 type:kotlin.Long
+    VALUE_PARAMETER name:other index:1 type:kotlin.Long
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun xor (value: kotlin.Long, other: kotlin.Long): kotlin.Long declared in <root>'
+        CALL 'public final fun xor (other: kotlin.Long): kotlin.Long declared in kotlin.Long' type=kotlin.Long origin=null
+          $this: GET_VAR 'value: kotlin.Long declared in <root>.xor' type=kotlin.Long origin=null
+          other: GET_VAR 'other: kotlin.Long declared in <root>.xor' type=kotlin.Long origin=null
+  FUN name:inv visibility:public modality:FINAL <> (value:kotlin.Long) returnType:kotlin.Long
+    annotations:
+      CompileTimeCalculation
+    VALUE_PARAMETER name:value index:0 type:kotlin.Long
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun inv (value: kotlin.Long): kotlin.Long declared in <root>'
+        CALL 'public final fun inv (): kotlin.Long declared in kotlin.Long' type=kotlin.Long origin=null
+          $this: GET_VAR 'value: kotlin.Long declared in <root>.inv' type=kotlin.Long origin=null
+  FUN name:toByte visibility:public modality:FINAL <> (value:kotlin.Long) returnType:kotlin.Byte
+    annotations:
+      CompileTimeCalculation
+    VALUE_PARAMETER name:value index:0 type:kotlin.Long
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun toByte (value: kotlin.Long): kotlin.Byte declared in <root>'
+        CALL 'public open fun toByte (): kotlin.Byte declared in kotlin.Long' type=kotlin.Byte origin=null
+          $this: GET_VAR 'value: kotlin.Long declared in <root>.toByte' type=kotlin.Long origin=null
+  FUN name:toChar visibility:public modality:FINAL <> (value:kotlin.Long) returnType:kotlin.Char
+    annotations:
+      CompileTimeCalculation
+    VALUE_PARAMETER name:value index:0 type:kotlin.Long
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun toChar (value: kotlin.Long): kotlin.Char declared in <root>'
+        CALL 'public open fun toChar (): kotlin.Char declared in kotlin.Long' type=kotlin.Char origin=null
+          $this: GET_VAR 'value: kotlin.Long declared in <root>.toChar' type=kotlin.Long origin=null
+  FUN name:toShort visibility:public modality:FINAL <> (value:kotlin.Long) returnType:kotlin.Short
+    annotations:
+      CompileTimeCalculation
+    VALUE_PARAMETER name:value index:0 type:kotlin.Long
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun toShort (value: kotlin.Long): kotlin.Short declared in <root>'
+        CALL 'public open fun toShort (): kotlin.Short declared in kotlin.Long' type=kotlin.Short origin=null
+          $this: GET_VAR 'value: kotlin.Long declared in <root>.toShort' type=kotlin.Long origin=null
+  FUN name:toInt visibility:public modality:FINAL <> (value:kotlin.Long) returnType:kotlin.Int
+    annotations:
+      CompileTimeCalculation
+    VALUE_PARAMETER name:value index:0 type:kotlin.Long
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun toInt (value: kotlin.Long): kotlin.Int declared in <root>'
+        CALL 'public open fun toInt (): kotlin.Int declared in kotlin.Long' type=kotlin.Int origin=null
+          $this: GET_VAR 'value: kotlin.Long declared in <root>.toInt' type=kotlin.Long origin=null
+  FUN name:toLong visibility:public modality:FINAL <> (value:kotlin.Long) returnType:kotlin.Long
+    annotations:
+      CompileTimeCalculation
+    VALUE_PARAMETER name:value index:0 type:kotlin.Long
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun toLong (value: kotlin.Long): kotlin.Long declared in <root>'
+        CALL 'public open fun toLong (): kotlin.Long declared in kotlin.Long' type=kotlin.Long origin=null
+          $this: GET_VAR 'value: kotlin.Long declared in <root>.toLong' type=kotlin.Long origin=null
+  FUN name:toFloat visibility:public modality:FINAL <> (value:kotlin.Long) returnType:kotlin.Float
+    annotations:
+      CompileTimeCalculation
+    VALUE_PARAMETER name:value index:0 type:kotlin.Long
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun toFloat (value: kotlin.Long): kotlin.Float declared in <root>'
+        CALL 'public open fun toFloat (): kotlin.Float declared in kotlin.Long' type=kotlin.Float origin=null
+          $this: GET_VAR 'value: kotlin.Long declared in <root>.toFloat' type=kotlin.Long origin=null
+  FUN name:toDouble visibility:public modality:FINAL <> (value:kotlin.Long) returnType:kotlin.Double
+    annotations:
+      CompileTimeCalculation
+    VALUE_PARAMETER name:value index:0 type:kotlin.Long
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun toDouble (value: kotlin.Long): kotlin.Double declared in <root>'
+        CALL 'public open fun toDouble (): kotlin.Double declared in kotlin.Long' type=kotlin.Double origin=null
+          $this: GET_VAR 'value: kotlin.Long declared in <root>.toDouble' type=kotlin.Long origin=null
+  FUN name:toString visibility:public modality:FINAL <> (value:kotlin.Long) returnType:kotlin.String
+    annotations:
+      CompileTimeCalculation
+    VALUE_PARAMETER name:value index:0 type:kotlin.Long
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun toString (value: kotlin.Long): kotlin.String declared in <root>'
+        CALL 'public open fun toString (): kotlin.String declared in kotlin.Long' type=kotlin.String origin=null
+          $this: GET_VAR 'value: kotlin.Long declared in <root>.toString' type=kotlin.Long origin=null
+  FUN name:hashCode visibility:public modality:FINAL <> (value:kotlin.Long) returnType:kotlin.Int
+    annotations:
+      CompileTimeCalculation
+    VALUE_PARAMETER name:value index:0 type:kotlin.Long
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun hashCode (value: kotlin.Long): kotlin.Int declared in <root>'
+        CALL 'public open fun hashCode (): kotlin.Int declared in kotlin.Long' type=kotlin.Int origin=null
+          $this: GET_VAR 'value: kotlin.Long declared in <root>.hashCode' type=kotlin.Long origin=null
+  FUN name:equals visibility:public modality:FINAL <> (value:kotlin.Long, other:kotlin.Long) returnType:kotlin.Boolean
+    annotations:
+      CompileTimeCalculation
+    VALUE_PARAMETER name:value index:0 type:kotlin.Long
+    VALUE_PARAMETER name:other index:1 type:kotlin.Long
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun equals (value: kotlin.Long, other: kotlin.Long): kotlin.Boolean declared in <root>'
+        CALL 'public open fun equals (other: kotlin.Any?): kotlin.Boolean [operator] declared in kotlin.Long' type=kotlin.Boolean origin=null
+          $this: GET_VAR 'value: kotlin.Long declared in <root>.equals' type=kotlin.Long origin=null
+          other: GET_VAR 'other: kotlin.Long declared in <root>.equals' type=kotlin.Long origin=null
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-min> visibility:public modality:FINAL <> () returnType:kotlin.Long
+    correspondingProperty: PROPERTY name:min visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-min> (): kotlin.Long declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:min type:kotlin.Long visibility:public [final,static]' type=kotlin.Long origin=null
+  FIELD PROPERTY_BACKING_FIELD name:min type:kotlin.Long visibility:public [final,static]
+    EXPRESSION_BODY
+      CONSTRUCTOR_CALL 'internal constructor <init> (low: kotlin.Int, high: kotlin.Int) [primary] declared in kotlin.Long' type=kotlin.Long origin=null
+        low: CONST Int type=kotlin.Int value=0
+        high: CONST Int type=kotlin.Int value=-2147483648
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-max> visibility:public modality:FINAL <> () returnType:kotlin.Long
+    correspondingProperty: PROPERTY name:max visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-max> (): kotlin.Long declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:max type:kotlin.Long visibility:public [final,static]' type=kotlin.Long origin=null
+  FIELD PROPERTY_BACKING_FIELD name:max type:kotlin.Long visibility:public [final,static]
+    EXPRESSION_BODY
+      CONSTRUCTOR_CALL 'internal constructor <init> (low: kotlin.Int, high: kotlin.Int) [primary] declared in kotlin.Long' type=kotlin.Long origin=null
+        low: CONST Int type=kotlin.Int value=-1
+        high: CONST Int type=kotlin.Int value=2147483647
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-bytes> visibility:public modality:FINAL <> () returnType:kotlin.Int
+    correspondingProperty: PROPERTY name:bytes visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-bytes> (): kotlin.Int declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:bytes type:kotlin.Int visibility:public [final,static]' type=kotlin.Int origin=null
+  FIELD PROPERTY_BACKING_FIELD name:bytes type:kotlin.Int visibility:public [final,static]
+    EXPRESSION_BODY
+      CONST Int type=kotlin.Int value=8
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-bits> visibility:public modality:FINAL <> () returnType:kotlin.Int
+    correspondingProperty: PROPERTY name:bits visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-bits> (): kotlin.Int declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:bits type:kotlin.Int visibility:public [final,static]' type=kotlin.Int origin=null
+  FIELD PROPERTY_BACKING_FIELD name:bits type:kotlin.Int visibility:public [final,static]
+    EXPRESSION_BODY
+      CONST Int type=kotlin.Int value=64
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-compare1> visibility:public modality:FINAL <> () returnType:kotlin.Int
+    correspondingProperty: PROPERTY name:compare1 visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-compare1> (): kotlin.Int declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:compare1 type:kotlin.Int visibility:public [final,static]' type=kotlin.Int origin=null
+  FIELD PROPERTY_BACKING_FIELD name:compare1 type:kotlin.Int visibility:public [final,static]
+    EXPRESSION_BODY
+      CONST Int type=kotlin.Int value=1
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-compare2> visibility:public modality:FINAL <> () returnType:kotlin.Int
+    correspondingProperty: PROPERTY name:compare2 visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-compare2> (): kotlin.Int declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:compare2 type:kotlin.Int visibility:public [final,static]' type=kotlin.Int origin=null
+  FIELD PROPERTY_BACKING_FIELD name:compare2 type:kotlin.Int visibility:public [final,static]
+    EXPRESSION_BODY
+      CONST Int type=kotlin.Int value=1
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-compare3> visibility:public modality:FINAL <> () returnType:kotlin.Int
+    correspondingProperty: PROPERTY name:compare3 visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-compare3> (): kotlin.Int declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:compare3 type:kotlin.Int visibility:public [final,static]' type=kotlin.Int origin=null
+  FIELD PROPERTY_BACKING_FIELD name:compare3 type:kotlin.Int visibility:public [final,static]
+    EXPRESSION_BODY
+      CONST Int type=kotlin.Int value=1
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-compare4> visibility:public modality:FINAL <> () returnType:kotlin.Int
+    correspondingProperty: PROPERTY name:compare4 visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-compare4> (): kotlin.Int declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:compare4 type:kotlin.Int visibility:public [final,static]' type=kotlin.Int origin=null
+  FIELD PROPERTY_BACKING_FIELD name:compare4 type:kotlin.Int visibility:public [final,static]
+    EXPRESSION_BODY
+      CONST Int type=kotlin.Int value=1
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-compare5> visibility:public modality:FINAL <> () returnType:kotlin.Int
+    correspondingProperty: PROPERTY name:compare5 visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-compare5> (): kotlin.Int declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:compare5 type:kotlin.Int visibility:public [final,static]' type=kotlin.Int origin=null
+  FIELD PROPERTY_BACKING_FIELD name:compare5 type:kotlin.Int visibility:public [final,static]
+    EXPRESSION_BODY
+      CONST Int type=kotlin.Int value=0
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-compare6> visibility:public modality:FINAL <> () returnType:kotlin.Int
+    correspondingProperty: PROPERTY name:compare6 visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-compare6> (): kotlin.Int declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:compare6 type:kotlin.Int visibility:public [final,static]' type=kotlin.Int origin=null
+  FIELD PROPERTY_BACKING_FIELD name:compare6 type:kotlin.Int visibility:public [final,static]
+    EXPRESSION_BODY
+      CONST Int type=kotlin.Int value=-1
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-plus1> visibility:public modality:FINAL <> () returnType:kotlin.Long
+    correspondingProperty: PROPERTY name:plus1 visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-plus1> (): kotlin.Long declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:plus1 type:kotlin.Long visibility:public [final,static]' type=kotlin.Long origin=null
+  FIELD PROPERTY_BACKING_FIELD name:plus1 type:kotlin.Long visibility:public [final,static]
+    EXPRESSION_BODY
+      CONSTRUCTOR_CALL 'internal constructor <init> (low: kotlin.Int, high: kotlin.Int) [primary] declared in kotlin.Long' type=kotlin.Long origin=null
+        low: CONST Int type=kotlin.Int value=6
+        high: CONST Int type=kotlin.Int value=0
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-plus2> visibility:public modality:FINAL <> () returnType:kotlin.Long
+    correspondingProperty: PROPERTY name:plus2 visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-plus2> (): kotlin.Long declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:plus2 type:kotlin.Long visibility:public [final,static]' type=kotlin.Long origin=null
+  FIELD PROPERTY_BACKING_FIELD name:plus2 type:kotlin.Long visibility:public [final,static]
+    EXPRESSION_BODY
+      CONSTRUCTOR_CALL 'internal constructor <init> (low: kotlin.Int, high: kotlin.Int) [primary] declared in kotlin.Long' type=kotlin.Long origin=null
+        low: CONST Int type=kotlin.Int value=7
+        high: CONST Int type=kotlin.Int value=0
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-plus3> visibility:public modality:FINAL <> () returnType:kotlin.Long
+    correspondingProperty: PROPERTY name:plus3 visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-plus3> (): kotlin.Long declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:plus3 type:kotlin.Long visibility:public [final,static]' type=kotlin.Long origin=null
+  FIELD PROPERTY_BACKING_FIELD name:plus3 type:kotlin.Long visibility:public [final,static]
+    EXPRESSION_BODY
+      CONSTRUCTOR_CALL 'internal constructor <init> (low: kotlin.Int, high: kotlin.Int) [primary] declared in kotlin.Long' type=kotlin.Long origin=null
+        low: CONST Int type=kotlin.Int value=8
+        high: CONST Int type=kotlin.Int value=0
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-plus4> visibility:public modality:FINAL <> () returnType:kotlin.Long
+    correspondingProperty: PROPERTY name:plus4 visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-plus4> (): kotlin.Long declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:plus4 type:kotlin.Long visibility:public [final,static]' type=kotlin.Long origin=null
+  FIELD PROPERTY_BACKING_FIELD name:plus4 type:kotlin.Long visibility:public [final,static]
+    EXPRESSION_BODY
+      CONSTRUCTOR_CALL 'internal constructor <init> (low: kotlin.Int, high: kotlin.Int) [primary] declared in kotlin.Long' type=kotlin.Long origin=null
+        low: CONST Int type=kotlin.Int value=9
+        high: CONST Int type=kotlin.Int value=0
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-plus5> visibility:public modality:FINAL <> () returnType:kotlin.Float
+    correspondingProperty: PROPERTY name:plus5 visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-plus5> (): kotlin.Float declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:plus5 type:kotlin.Float visibility:public [final,static]' type=kotlin.Float origin=null
+  FIELD PROPERTY_BACKING_FIELD name:plus5 type:kotlin.Float visibility:public [final,static]
+    EXPRESSION_BODY
+      CONST Float type=kotlin.Float value=10.0
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-plus6> visibility:public modality:FINAL <> () returnType:kotlin.Double
+    correspondingProperty: PROPERTY name:plus6 visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-plus6> (): kotlin.Double declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:plus6 type:kotlin.Double visibility:public [final,static]' type=kotlin.Double origin=null
+  FIELD PROPERTY_BACKING_FIELD name:plus6 type:kotlin.Double visibility:public [final,static]
+    EXPRESSION_BODY
+      CONST Double type=kotlin.Double value=11.0
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-minus1> visibility:public modality:FINAL <> () returnType:kotlin.Long
+    correspondingProperty: PROPERTY name:minus1 visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-minus1> (): kotlin.Long declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:minus1 type:kotlin.Long visibility:public [final,static]' type=kotlin.Long origin=null
+  FIELD PROPERTY_BACKING_FIELD name:minus1 type:kotlin.Long visibility:public [final,static]
+    EXPRESSION_BODY
+      CONSTRUCTOR_CALL 'internal constructor <init> (low: kotlin.Int, high: kotlin.Int) [primary] declared in kotlin.Long' type=kotlin.Long origin=null
+        low: CONST Int type=kotlin.Int value=4
+        high: CONST Int type=kotlin.Int value=0
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-minus2> visibility:public modality:FINAL <> () returnType:kotlin.Long
+    correspondingProperty: PROPERTY name:minus2 visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-minus2> (): kotlin.Long declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:minus2 type:kotlin.Long visibility:public [final,static]' type=kotlin.Long origin=null
+  FIELD PROPERTY_BACKING_FIELD name:minus2 type:kotlin.Long visibility:public [final,static]
+    EXPRESSION_BODY
+      CONSTRUCTOR_CALL 'internal constructor <init> (low: kotlin.Int, high: kotlin.Int) [primary] declared in kotlin.Long' type=kotlin.Long origin=null
+        low: CONST Int type=kotlin.Int value=3
+        high: CONST Int type=kotlin.Int value=0
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-minus3> visibility:public modality:FINAL <> () returnType:kotlin.Long
+    correspondingProperty: PROPERTY name:minus3 visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-minus3> (): kotlin.Long declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:minus3 type:kotlin.Long visibility:public [final,static]' type=kotlin.Long origin=null
+  FIELD PROPERTY_BACKING_FIELD name:minus3 type:kotlin.Long visibility:public [final,static]
+    EXPRESSION_BODY
+      CONSTRUCTOR_CALL 'internal constructor <init> (low: kotlin.Int, high: kotlin.Int) [primary] declared in kotlin.Long' type=kotlin.Long origin=null
+        low: CONST Int type=kotlin.Int value=2
+        high: CONST Int type=kotlin.Int value=0
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-minus4> visibility:public modality:FINAL <> () returnType:kotlin.Long
+    correspondingProperty: PROPERTY name:minus4 visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-minus4> (): kotlin.Long declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:minus4 type:kotlin.Long visibility:public [final,static]' type=kotlin.Long origin=null
+  FIELD PROPERTY_BACKING_FIELD name:minus4 type:kotlin.Long visibility:public [final,static]
+    EXPRESSION_BODY
+      CONSTRUCTOR_CALL 'internal constructor <init> (low: kotlin.Int, high: kotlin.Int) [primary] declared in kotlin.Long' type=kotlin.Long origin=null
+        low: CONST Int type=kotlin.Int value=1
+        high: CONST Int type=kotlin.Int value=0
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-minus5> visibility:public modality:FINAL <> () returnType:kotlin.Float
+    correspondingProperty: PROPERTY name:minus5 visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-minus5> (): kotlin.Float declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:minus5 type:kotlin.Float visibility:public [final,static]' type=kotlin.Float origin=null
+  FIELD PROPERTY_BACKING_FIELD name:minus5 type:kotlin.Float visibility:public [final,static]
+    EXPRESSION_BODY
+      CONST Float type=kotlin.Float value=0.0
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-minus6> visibility:public modality:FINAL <> () returnType:kotlin.Double
+    correspondingProperty: PROPERTY name:minus6 visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-minus6> (): kotlin.Double declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:minus6 type:kotlin.Double visibility:public [final,static]' type=kotlin.Double origin=null
+  FIELD PROPERTY_BACKING_FIELD name:minus6 type:kotlin.Double visibility:public [final,static]
+    EXPRESSION_BODY
+      CONST Double type=kotlin.Double value=-1.0
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-times1> visibility:public modality:FINAL <> () returnType:kotlin.Long
+    correspondingProperty: PROPERTY name:times1 visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-times1> (): kotlin.Long declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:times1 type:kotlin.Long visibility:public [final,static]' type=kotlin.Long origin=null
+  FIELD PROPERTY_BACKING_FIELD name:times1 type:kotlin.Long visibility:public [final,static]
+    EXPRESSION_BODY
+      CONSTRUCTOR_CALL 'internal constructor <init> (low: kotlin.Int, high: kotlin.Int) [primary] declared in kotlin.Long' type=kotlin.Long origin=null
+        low: CONST Int type=kotlin.Int value=5
+        high: CONST Int type=kotlin.Int value=0
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-times2> visibility:public modality:FINAL <> () returnType:kotlin.Long
+    correspondingProperty: PROPERTY name:times2 visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-times2> (): kotlin.Long declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:times2 type:kotlin.Long visibility:public [final,static]' type=kotlin.Long origin=null
+  FIELD PROPERTY_BACKING_FIELD name:times2 type:kotlin.Long visibility:public [final,static]
+    EXPRESSION_BODY
+      CONSTRUCTOR_CALL 'internal constructor <init> (low: kotlin.Int, high: kotlin.Int) [primary] declared in kotlin.Long' type=kotlin.Long origin=null
+        low: CONST Int type=kotlin.Int value=10
+        high: CONST Int type=kotlin.Int value=0
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-times3> visibility:public modality:FINAL <> () returnType:kotlin.Long
+    correspondingProperty: PROPERTY name:times3 visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-times3> (): kotlin.Long declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:times3 type:kotlin.Long visibility:public [final,static]' type=kotlin.Long origin=null
+  FIELD PROPERTY_BACKING_FIELD name:times3 type:kotlin.Long visibility:public [final,static]
+    EXPRESSION_BODY
+      CONSTRUCTOR_CALL 'internal constructor <init> (low: kotlin.Int, high: kotlin.Int) [primary] declared in kotlin.Long' type=kotlin.Long origin=null
+        low: CONST Int type=kotlin.Int value=15
+        high: CONST Int type=kotlin.Int value=0
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-times4> visibility:public modality:FINAL <> () returnType:kotlin.Long
+    correspondingProperty: PROPERTY name:times4 visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-times4> (): kotlin.Long declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:times4 type:kotlin.Long visibility:public [final,static]' type=kotlin.Long origin=null
+  FIELD PROPERTY_BACKING_FIELD name:times4 type:kotlin.Long visibility:public [final,static]
+    EXPRESSION_BODY
+      CONSTRUCTOR_CALL 'internal constructor <init> (low: kotlin.Int, high: kotlin.Int) [primary] declared in kotlin.Long' type=kotlin.Long origin=null
+        low: CONST Int type=kotlin.Int value=20
+        high: CONST Int type=kotlin.Int value=0
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-times5> visibility:public modality:FINAL <> () returnType:kotlin.Float
+    correspondingProperty: PROPERTY name:times5 visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-times5> (): kotlin.Float declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:times5 type:kotlin.Float visibility:public [final,static]' type=kotlin.Float origin=null
+  FIELD PROPERTY_BACKING_FIELD name:times5 type:kotlin.Float visibility:public [final,static]
+    EXPRESSION_BODY
+      CONST Float type=kotlin.Float value=25.0
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-times6> visibility:public modality:FINAL <> () returnType:kotlin.Double
+    correspondingProperty: PROPERTY name:times6 visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-times6> (): kotlin.Double declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:times6 type:kotlin.Double visibility:public [final,static]' type=kotlin.Double origin=null
+  FIELD PROPERTY_BACKING_FIELD name:times6 type:kotlin.Double visibility:public [final,static]
+    EXPRESSION_BODY
+      CONST Double type=kotlin.Double value=30.0
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-div1> visibility:public modality:FINAL <> () returnType:kotlin.Long
+    correspondingProperty: PROPERTY name:div1 visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-div1> (): kotlin.Long declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:div1 type:kotlin.Long visibility:public [final,static]' type=kotlin.Long origin=null
+  FIELD PROPERTY_BACKING_FIELD name:div1 type:kotlin.Long visibility:public [final,static]
+    EXPRESSION_BODY
+      CONSTRUCTOR_CALL 'internal constructor <init> (low: kotlin.Int, high: kotlin.Int) [primary] declared in kotlin.Long' type=kotlin.Long origin=null
+        low: CONST Int type=kotlin.Int value=100
+        high: CONST Int type=kotlin.Int value=0
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-div2> visibility:public modality:FINAL <> () returnType:kotlin.Long
+    correspondingProperty: PROPERTY name:div2 visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-div2> (): kotlin.Long declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:div2 type:kotlin.Long visibility:public [final,static]' type=kotlin.Long origin=null
+  FIELD PROPERTY_BACKING_FIELD name:div2 type:kotlin.Long visibility:public [final,static]
+    EXPRESSION_BODY
+      CONSTRUCTOR_CALL 'internal constructor <init> (low: kotlin.Int, high: kotlin.Int) [primary] declared in kotlin.Long' type=kotlin.Long origin=null
+        low: CONST Int type=kotlin.Int value=50
+        high: CONST Int type=kotlin.Int value=0
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-div3> visibility:public modality:FINAL <> () returnType:kotlin.Long
+    correspondingProperty: PROPERTY name:div3 visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-div3> (): kotlin.Long declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:div3 type:kotlin.Long visibility:public [final,static]' type=kotlin.Long origin=null
+  FIELD PROPERTY_BACKING_FIELD name:div3 type:kotlin.Long visibility:public [final,static]
+    EXPRESSION_BODY
+      CONSTRUCTOR_CALL 'internal constructor <init> (low: kotlin.Int, high: kotlin.Int) [primary] declared in kotlin.Long' type=kotlin.Long origin=null
+        low: CONST Int type=kotlin.Int value=25
+        high: CONST Int type=kotlin.Int value=0
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-div4> visibility:public modality:FINAL <> () returnType:kotlin.Long
+    correspondingProperty: PROPERTY name:div4 visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-div4> (): kotlin.Long declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:div4 type:kotlin.Long visibility:public [final,static]' type=kotlin.Long origin=null
+  FIELD PROPERTY_BACKING_FIELD name:div4 type:kotlin.Long visibility:public [final,static]
+    EXPRESSION_BODY
+      CONSTRUCTOR_CALL 'internal constructor <init> (low: kotlin.Int, high: kotlin.Int) [primary] declared in kotlin.Long' type=kotlin.Long origin=null
+        low: CONST Int type=kotlin.Int value=10
+        high: CONST Int type=kotlin.Int value=0
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-div5> visibility:public modality:FINAL <> () returnType:kotlin.Float
+    correspondingProperty: PROPERTY name:div5 visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-div5> (): kotlin.Float declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:div5 type:kotlin.Float visibility:public [final,static]' type=kotlin.Float origin=null
+  FIELD PROPERTY_BACKING_FIELD name:div5 type:kotlin.Float visibility:public [final,static]
+    EXPRESSION_BODY
+      CONST Float type=kotlin.Float value=4.0
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-div6> visibility:public modality:FINAL <> () returnType:kotlin.Double
+    correspondingProperty: PROPERTY name:div6 visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-div6> (): kotlin.Double declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:div6 type:kotlin.Double visibility:public [final,static]' type=kotlin.Double origin=null
+  FIELD PROPERTY_BACKING_FIELD name:div6 type:kotlin.Double visibility:public [final,static]
+    EXPRESSION_BODY
+      CONST Double type=kotlin.Double value=2.0
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-rem1> visibility:public modality:FINAL <> () returnType:kotlin.Long
+    correspondingProperty: PROPERTY name:rem1 visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-rem1> (): kotlin.Long declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:rem1 type:kotlin.Long visibility:public [final,static]' type=kotlin.Long origin=null
+  FIELD PROPERTY_BACKING_FIELD name:rem1 type:kotlin.Long visibility:public [final,static]
+    EXPRESSION_BODY
+      CONSTRUCTOR_CALL 'internal constructor <init> (low: kotlin.Int, high: kotlin.Int) [primary] declared in kotlin.Long' type=kotlin.Long origin=null
+        low: CONST Int type=kotlin.Int value=0
+        high: CONST Int type=kotlin.Int value=0
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-rem2> visibility:public modality:FINAL <> () returnType:kotlin.Long
+    correspondingProperty: PROPERTY name:rem2 visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-rem2> (): kotlin.Long declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:rem2 type:kotlin.Long visibility:public [final,static]' type=kotlin.Long origin=null
+  FIELD PROPERTY_BACKING_FIELD name:rem2 type:kotlin.Long visibility:public [final,static]
+    EXPRESSION_BODY
+      CONSTRUCTOR_CALL 'internal constructor <init> (low: kotlin.Int, high: kotlin.Int) [primary] declared in kotlin.Long' type=kotlin.Long origin=null
+        low: CONST Int type=kotlin.Int value=1
+        high: CONST Int type=kotlin.Int value=0
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-rem3> visibility:public modality:FINAL <> () returnType:kotlin.Long
+    correspondingProperty: PROPERTY name:rem3 visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-rem3> (): kotlin.Long declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:rem3 type:kotlin.Long visibility:public [final,static]' type=kotlin.Long origin=null
+  FIELD PROPERTY_BACKING_FIELD name:rem3 type:kotlin.Long visibility:public [final,static]
+    EXPRESSION_BODY
+      CONSTRUCTOR_CALL 'internal constructor <init> (low: kotlin.Int, high: kotlin.Int) [primary] declared in kotlin.Long' type=kotlin.Long origin=null
+        low: CONST Int type=kotlin.Int value=2
+        high: CONST Int type=kotlin.Int value=0
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-rem4> visibility:public modality:FINAL <> () returnType:kotlin.Long
+    correspondingProperty: PROPERTY name:rem4 visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-rem4> (): kotlin.Long declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:rem4 type:kotlin.Long visibility:public [final,static]' type=kotlin.Long origin=null
+  FIELD PROPERTY_BACKING_FIELD name:rem4 type:kotlin.Long visibility:public [final,static]
+    EXPRESSION_BODY
+      CONSTRUCTOR_CALL 'internal constructor <init> (low: kotlin.Int, high: kotlin.Int) [primary] declared in kotlin.Long' type=kotlin.Long origin=null
+        low: CONST Int type=kotlin.Int value=1
+        high: CONST Int type=kotlin.Int value=0
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-rem5> visibility:public modality:FINAL <> () returnType:kotlin.Float
+    correspondingProperty: PROPERTY name:rem5 visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-rem5> (): kotlin.Float declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:rem5 type:kotlin.Float visibility:public [final,static]' type=kotlin.Float origin=null
+  FIELD PROPERTY_BACKING_FIELD name:rem5 type:kotlin.Float visibility:public [final,static]
+    EXPRESSION_BODY
+      CONST Float type=kotlin.Float value=0.0
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-rem6> visibility:public modality:FINAL <> () returnType:kotlin.Double
+    correspondingProperty: PROPERTY name:rem6 visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-rem6> (): kotlin.Double declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:rem6 type:kotlin.Double visibility:public [final,static]' type=kotlin.Double origin=null
+  FIELD PROPERTY_BACKING_FIELD name:rem6 type:kotlin.Double visibility:public [final,static]
+    EXPRESSION_BODY
+      CONST Double type=kotlin.Double value=5.0
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-increment> visibility:public modality:FINAL <> () returnType:kotlin.Long
+    correspondingProperty: PROPERTY name:increment visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-increment> (): kotlin.Long declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:increment type:kotlin.Long visibility:public [final,static]' type=kotlin.Long origin=null
+  FIELD PROPERTY_BACKING_FIELD name:increment type:kotlin.Long visibility:public [final,static]
+    EXPRESSION_BODY
+      CONSTRUCTOR_CALL 'internal constructor <init> (low: kotlin.Int, high: kotlin.Int) [primary] declared in kotlin.Long' type=kotlin.Long origin=null
+        low: CONST Int type=kotlin.Int value=4
+        high: CONST Int type=kotlin.Int value=0
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-decrement> visibility:public modality:FINAL <> () returnType:kotlin.Long
+    correspondingProperty: PROPERTY name:decrement visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-decrement> (): kotlin.Long declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:decrement type:kotlin.Long visibility:public [final,static]' type=kotlin.Long origin=null
+  FIELD PROPERTY_BACKING_FIELD name:decrement type:kotlin.Long visibility:public [final,static]
+    EXPRESSION_BODY
+      CONSTRUCTOR_CALL 'internal constructor <init> (low: kotlin.Int, high: kotlin.Int) [primary] declared in kotlin.Long' type=kotlin.Long origin=null
+        low: CONST Int type=kotlin.Int value=2
+        high: CONST Int type=kotlin.Int value=0
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-unaryPlus> visibility:public modality:FINAL <> () returnType:kotlin.Long
+    correspondingProperty: PROPERTY name:unaryPlus visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-unaryPlus> (): kotlin.Long declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:unaryPlus type:kotlin.Long visibility:public [final,static]' type=kotlin.Long origin=null
+  FIELD PROPERTY_BACKING_FIELD name:unaryPlus type:kotlin.Long visibility:public [final,static]
+    EXPRESSION_BODY
+      CONSTRUCTOR_CALL 'internal constructor <init> (low: kotlin.Int, high: kotlin.Int) [primary] declared in kotlin.Long' type=kotlin.Long origin=null
+        low: CONST Int type=kotlin.Int value=3
+        high: CONST Int type=kotlin.Int value=0
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-unaryMinus> visibility:public modality:FINAL <> () returnType:kotlin.Long
+    correspondingProperty: PROPERTY name:unaryMinus visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-unaryMinus> (): kotlin.Long declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:unaryMinus type:kotlin.Long visibility:public [final,static]' type=kotlin.Long origin=null
+  FIELD PROPERTY_BACKING_FIELD name:unaryMinus type:kotlin.Long visibility:public [final,static]
+    EXPRESSION_BODY
+      CONSTRUCTOR_CALL 'internal constructor <init> (low: kotlin.Int, high: kotlin.Int) [primary] declared in kotlin.Long' type=kotlin.Long origin=null
+        low: CONST Int type=kotlin.Int value=-3
+        high: CONST Int type=kotlin.Int value=-1
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-rangeTo1> visibility:public modality:FINAL <> () returnType:kotlin.Long
+    correspondingProperty: PROPERTY name:rangeTo1 visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-rangeTo1> (): kotlin.Long declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:rangeTo1 type:kotlin.Long visibility:public [final,static]' type=kotlin.Long origin=null
+  FIELD PROPERTY_BACKING_FIELD name:rangeTo1 type:kotlin.Long visibility:public [final,static]
+    EXPRESSION_BODY
+      CONSTRUCTOR_CALL 'internal constructor <init> (low: kotlin.Int, high: kotlin.Int) [primary] declared in kotlin.Long' type=kotlin.Long origin=null
+        low: CONST Int type=kotlin.Int value=1
+        high: CONST Int type=kotlin.Int value=0
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-rangeTo2> visibility:public modality:FINAL <> () returnType:kotlin.Long
+    correspondingProperty: PROPERTY name:rangeTo2 visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-rangeTo2> (): kotlin.Long declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:rangeTo2 type:kotlin.Long visibility:public [final,static]' type=kotlin.Long origin=null
+  FIELD PROPERTY_BACKING_FIELD name:rangeTo2 type:kotlin.Long visibility:public [final,static]
+    EXPRESSION_BODY
+      CONSTRUCTOR_CALL 'internal constructor <init> (low: kotlin.Int, high: kotlin.Int) [primary] declared in kotlin.Long' type=kotlin.Long origin=null
+        low: CONST Int type=kotlin.Int value=2
+        high: CONST Int type=kotlin.Int value=0
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-rangeTo3> visibility:public modality:FINAL <> () returnType:kotlin.Long
+    correspondingProperty: PROPERTY name:rangeTo3 visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-rangeTo3> (): kotlin.Long declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:rangeTo3 type:kotlin.Long visibility:public [final,static]' type=kotlin.Long origin=null
+  FIELD PROPERTY_BACKING_FIELD name:rangeTo3 type:kotlin.Long visibility:public [final,static]
+    EXPRESSION_BODY
+      CONSTRUCTOR_CALL 'internal constructor <init> (low: kotlin.Int, high: kotlin.Int) [primary] declared in kotlin.Long' type=kotlin.Long origin=null
+        low: CONST Int type=kotlin.Int value=3
+        high: CONST Int type=kotlin.Int value=0
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-rangeTo4> visibility:public modality:FINAL <> () returnType:kotlin.Long
+    correspondingProperty: PROPERTY name:rangeTo4 visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-rangeTo4> (): kotlin.Long declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:rangeTo4 type:kotlin.Long visibility:public [final,static]' type=kotlin.Long origin=null
+  FIELD PROPERTY_BACKING_FIELD name:rangeTo4 type:kotlin.Long visibility:public [final,static]
+    EXPRESSION_BODY
+      CONSTRUCTOR_CALL 'internal constructor <init> (low: kotlin.Int, high: kotlin.Int) [primary] declared in kotlin.Long' type=kotlin.Long origin=null
+        low: CONST Int type=kotlin.Int value=4
+        high: CONST Int type=kotlin.Int value=0
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-shiftLeft> visibility:public modality:FINAL <> () returnType:kotlin.Long
+    correspondingProperty: PROPERTY name:shiftLeft visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-shiftLeft> (): kotlin.Long declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:shiftLeft type:kotlin.Long visibility:public [final,static]' type=kotlin.Long origin=null
+  FIELD PROPERTY_BACKING_FIELD name:shiftLeft type:kotlin.Long visibility:public [final,static]
+    EXPRESSION_BODY
+      CONSTRUCTOR_CALL 'internal constructor <init> (low: kotlin.Int, high: kotlin.Int) [primary] declared in kotlin.Long' type=kotlin.Long origin=null
+        low: CONST Int type=kotlin.Int value=16
+        high: CONST Int type=kotlin.Int value=0
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-shiftRight> visibility:public modality:FINAL <> () returnType:kotlin.Long
+    correspondingProperty: PROPERTY name:shiftRight visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-shiftRight> (): kotlin.Long declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:shiftRight type:kotlin.Long visibility:public [final,static]' type=kotlin.Long origin=null
+  FIELD PROPERTY_BACKING_FIELD name:shiftRight type:kotlin.Long visibility:public [final,static]
+    EXPRESSION_BODY
+      CONSTRUCTOR_CALL 'internal constructor <init> (low: kotlin.Int, high: kotlin.Int) [primary] declared in kotlin.Long' type=kotlin.Long origin=null
+        low: CONST Int type=kotlin.Int value=2
+        high: CONST Int type=kotlin.Int value=0
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-unsignedShiftRight> visibility:public modality:FINAL <> () returnType:kotlin.Long
+    correspondingProperty: PROPERTY name:unsignedShiftRight visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-unsignedShiftRight> (): kotlin.Long declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:unsignedShiftRight type:kotlin.Long visibility:public [final,static]' type=kotlin.Long origin=null
+  FIELD PROPERTY_BACKING_FIELD name:unsignedShiftRight type:kotlin.Long visibility:public [final,static]
+    EXPRESSION_BODY
+      CONSTRUCTOR_CALL 'internal constructor <init> (low: kotlin.Int, high: kotlin.Int) [primary] declared in kotlin.Long' type=kotlin.Long origin=null
+        low: CONST Int type=kotlin.Int value=-1
+        high: CONST Int type=kotlin.Int value=536870911
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-and> visibility:public modality:FINAL <> () returnType:kotlin.Long
+    correspondingProperty: PROPERTY name:and visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-and> (): kotlin.Long declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:and type:kotlin.Long visibility:public [final,static]' type=kotlin.Long origin=null
+  FIELD PROPERTY_BACKING_FIELD name:and type:kotlin.Long visibility:public [final,static]
+    EXPRESSION_BODY
+      CONSTRUCTOR_CALL 'internal constructor <init> (low: kotlin.Int, high: kotlin.Int) [primary] declared in kotlin.Long' type=kotlin.Long origin=null
+        low: CONST Int type=kotlin.Int value=0
+        high: CONST Int type=kotlin.Int value=0
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-or> visibility:public modality:FINAL <> () returnType:kotlin.Long
+    correspondingProperty: PROPERTY name:or visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-or> (): kotlin.Long declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:or type:kotlin.Long visibility:public [final,static]' type=kotlin.Long origin=null
+  FIELD PROPERTY_BACKING_FIELD name:or type:kotlin.Long visibility:public [final,static]
+    EXPRESSION_BODY
+      CONSTRUCTOR_CALL 'internal constructor <init> (low: kotlin.Int, high: kotlin.Int) [primary] declared in kotlin.Long' type=kotlin.Long origin=null
+        low: CONST Int type=kotlin.Int value=10
+        high: CONST Int type=kotlin.Int value=0
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-xor> visibility:public modality:FINAL <> () returnType:kotlin.Long
+    correspondingProperty: PROPERTY name:xor visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-xor> (): kotlin.Long declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:xor type:kotlin.Long visibility:public [final,static]' type=kotlin.Long origin=null
+  FIELD PROPERTY_BACKING_FIELD name:xor type:kotlin.Long visibility:public [final,static]
+    EXPRESSION_BODY
+      CONSTRUCTOR_CALL 'internal constructor <init> (low: kotlin.Int, high: kotlin.Int) [primary] declared in kotlin.Long' type=kotlin.Long origin=null
+        low: CONST Int type=kotlin.Int value=-5
+        high: CONST Int type=kotlin.Int value=-1
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-inv> visibility:public modality:FINAL <> () returnType:kotlin.Long
+    correspondingProperty: PROPERTY name:inv visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-inv> (): kotlin.Long declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:inv type:kotlin.Long visibility:public [final,static]' type=kotlin.Long origin=null
+  FIELD PROPERTY_BACKING_FIELD name:inv type:kotlin.Long visibility:public [final,static]
+    EXPRESSION_BODY
+      CONSTRUCTOR_CALL 'internal constructor <init> (low: kotlin.Int, high: kotlin.Int) [primary] declared in kotlin.Long' type=kotlin.Long origin=null
+        low: CONST Int type=kotlin.Int value=-9
+        high: CONST Int type=kotlin.Int value=-1
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-a1> visibility:public modality:FINAL <> () returnType:kotlin.Byte
+    correspondingProperty: PROPERTY name:a1 visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-a1> (): kotlin.Byte declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:a1 type:kotlin.Byte visibility:public [final,static]' type=kotlin.Byte origin=null
+  FIELD PROPERTY_BACKING_FIELD name:a1 type:kotlin.Byte visibility:public [final,static]
+    EXPRESSION_BODY
+      CONST Byte type=kotlin.Byte value=1
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-a2> visibility:public modality:FINAL <> () returnType:kotlin.Char
+    correspondingProperty: PROPERTY name:a2 visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-a2> (): kotlin.Char declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:a2 type:kotlin.Char visibility:public [final,static]' type=kotlin.Char origin=null
+  FIELD PROPERTY_BACKING_FIELD name:a2 type:kotlin.Char visibility:public [final,static]
+    EXPRESSION_BODY
+      CONSTRUCTOR_CALL 'internal constructor <init> (value: kotlin.Int) [primary] declared in kotlin.Char' type=kotlin.Char origin=null
+        value: CONST Int type=kotlin.Int value=2
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-a3> visibility:public modality:FINAL <> () returnType:kotlin.Short
+    correspondingProperty: PROPERTY name:a3 visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-a3> (): kotlin.Short declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:a3 type:kotlin.Short visibility:public [final,static]' type=kotlin.Short origin=null
+  FIELD PROPERTY_BACKING_FIELD name:a3 type:kotlin.Short visibility:public [final,static]
+    EXPRESSION_BODY
+      CONST Short type=kotlin.Short value=3
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-a4> visibility:public modality:FINAL <> () returnType:kotlin.Int
+    correspondingProperty: PROPERTY name:a4 visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-a4> (): kotlin.Int declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:a4 type:kotlin.Int visibility:public [final,static]' type=kotlin.Int origin=null
+  FIELD PROPERTY_BACKING_FIELD name:a4 type:kotlin.Int visibility:public [final,static]
+    EXPRESSION_BODY
+      CONST Int type=kotlin.Int value=4
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-a5> visibility:public modality:FINAL <> () returnType:kotlin.Long
+    correspondingProperty: PROPERTY name:a5 visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-a5> (): kotlin.Long declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:a5 type:kotlin.Long visibility:public [final,static]' type=kotlin.Long origin=null
+  FIELD PROPERTY_BACKING_FIELD name:a5 type:kotlin.Long visibility:public [final,static]
+    EXPRESSION_BODY
+      CONSTRUCTOR_CALL 'internal constructor <init> (low: kotlin.Int, high: kotlin.Int) [primary] declared in kotlin.Long' type=kotlin.Long origin=null
+        low: CONST Int type=kotlin.Int value=5
+        high: CONST Int type=kotlin.Int value=0
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-a6> visibility:public modality:FINAL <> () returnType:kotlin.Float
+    correspondingProperty: PROPERTY name:a6 visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-a6> (): kotlin.Float declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:a6 type:kotlin.Float visibility:public [final,static]' type=kotlin.Float origin=null
+  FIELD PROPERTY_BACKING_FIELD name:a6 type:kotlin.Float visibility:public [final,static]
+    EXPRESSION_BODY
+      CONST Float type=kotlin.Float value=6.0
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-a7> visibility:public modality:FINAL <> () returnType:kotlin.Double
+    correspondingProperty: PROPERTY name:a7 visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-a7> (): kotlin.Double declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:a7 type:kotlin.Double visibility:public [final,static]' type=kotlin.Double origin=null
+  FIELD PROPERTY_BACKING_FIELD name:a7 type:kotlin.Double visibility:public [final,static]
+    EXPRESSION_BODY
+      CONST Double type=kotlin.Double value=7.0
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-b1> visibility:public modality:FINAL <> () returnType:kotlin.String
+    correspondingProperty: PROPERTY name:b1 visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-b1> (): kotlin.String declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:b1 type:kotlin.String visibility:public [final,static]' type=kotlin.String origin=null
+  FIELD PROPERTY_BACKING_FIELD name:b1 type:kotlin.String visibility:public [final,static]
+    EXPRESSION_BODY
+      CONST String type=kotlin.String value="10"
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-b2> visibility:public modality:FINAL <> () returnType:kotlin.Int
+    correspondingProperty: PROPERTY name:b2 visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-b2> (): kotlin.Int declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:b2 type:kotlin.Int visibility:public [final,static]' type=kotlin.Int origin=null
+  FIELD PROPERTY_BACKING_FIELD name:b2 type:kotlin.Int visibility:public [final,static]
+    EXPRESSION_BODY
+      CONST Int type=kotlin.Int value=10
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-b3> visibility:public modality:FINAL <> () returnType:kotlin.Boolean
+    correspondingProperty: PROPERTY name:b3 visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-b3> (): kotlin.Boolean declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:b3 type:kotlin.Boolean visibility:public [final,static]' type=kotlin.Boolean origin=null
+  FIELD PROPERTY_BACKING_FIELD name:b3 type:kotlin.Boolean visibility:public [final,static]
+    EXPRESSION_BODY
+      CONST Boolean type=kotlin.Boolean value=false
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-b4> visibility:public modality:FINAL <> () returnType:kotlin.Boolean
+    correspondingProperty: PROPERTY name:b4 visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-b4> (): kotlin.Boolean declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:b4 type:kotlin.Boolean visibility:public [final,static]' type=kotlin.Boolean origin=null
+  FIELD PROPERTY_BACKING_FIELD name:b4 type:kotlin.Boolean visibility:public [final,static]
+    EXPRESSION_BODY
+      CONST Boolean type=kotlin.Boolean value=true
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-b5> visibility:public modality:FINAL <> () returnType:kotlin.Boolean
+    correspondingProperty: PROPERTY name:b5 visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-b5> (): kotlin.Boolean declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:b5 type:kotlin.Boolean visibility:public [final,static]' type=kotlin.Boolean origin=null
+  FIELD PROPERTY_BACKING_FIELD name:b5 type:kotlin.Boolean visibility:public [final,static]
+    EXPRESSION_BODY
+      CONST Boolean type=kotlin.Boolean value=true

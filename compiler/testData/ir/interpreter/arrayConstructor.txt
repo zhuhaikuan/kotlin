@@ -1,0 +1,73 @@
+FILE fqName:<root> fileName:/arrayConstructor.kt
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-intArray1> visibility:public modality:FINAL <> () returnType:kotlin.Int
+    correspondingProperty: PROPERTY name:intArray1 visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-intArray1> (): kotlin.Int declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:intArray1 type:kotlin.Int visibility:public [final,static]' type=kotlin.Int origin=null
+  FIELD PROPERTY_BACKING_FIELD name:intArray1 type:kotlin.Int visibility:public [final,static]
+    EXPRESSION_BODY
+      CONST Int type=kotlin.Int value=42
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-intArray2> visibility:public modality:FINAL <> () returnType:kotlin.Int
+    correspondingProperty: PROPERTY name:intArray2 visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-intArray2> (): kotlin.Int declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:intArray2 type:kotlin.Int visibility:public [final,static]' type=kotlin.Int origin=null
+  FIELD PROPERTY_BACKING_FIELD name:intArray2 type:kotlin.Int visibility:public [final,static]
+    EXPRESSION_BODY
+      CONST Int type=kotlin.Int value=0
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-intArray3> visibility:public modality:FINAL <> () returnType:kotlin.Int
+    correspondingProperty: PROPERTY name:intArray3 visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-intArray3> (): kotlin.Int declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:intArray3 type:kotlin.Int visibility:public [final,static]' type=kotlin.Int origin=null
+  FIELD PROPERTY_BACKING_FIELD name:intArray3 type:kotlin.Int visibility:public [final,static]
+    EXPRESSION_BODY
+      CONST Int type=kotlin.Int value=42
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-intArray4> visibility:public modality:FINAL <> () returnType:kotlin.Int
+    correspondingProperty: PROPERTY name:intArray4 visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-intArray4> (): kotlin.Int declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:intArray4 type:kotlin.Int visibility:public [final,static]' type=kotlin.Int origin=null
+  FIELD PROPERTY_BACKING_FIELD name:intArray4 type:kotlin.Int visibility:public [final,static]
+    EXPRESSION_BODY
+      CONST Int type=kotlin.Int value=7
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-floatArray1> visibility:public modality:FINAL <> () returnType:kotlin.Int
+    correspondingProperty: PROPERTY name:floatArray1 visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-floatArray1> (): kotlin.Int declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:floatArray1 type:kotlin.Int visibility:public [final,static]' type=kotlin.Int origin=null
+  FIELD PROPERTY_BACKING_FIELD name:floatArray1 type:kotlin.Int visibility:public [final,static]
+    EXPRESSION_BODY
+      CONST Int type=kotlin.Int value=42
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-floatArray2> visibility:public modality:FINAL <> () returnType:kotlin.Float
+    correspondingProperty: PROPERTY name:floatArray2 visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-floatArray2> (): kotlin.Float declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:floatArray2 type:kotlin.Float visibility:public [final,static]' type=kotlin.Float origin=null
+  FIELD PROPERTY_BACKING_FIELD name:floatArray2 type:kotlin.Float visibility:public [final,static]
+    EXPRESSION_BODY
+      CONST Float type=kotlin.Float value=0.0
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-floatArray3> visibility:public modality:FINAL <> () returnType:kotlin.Float
+    correspondingProperty: PROPERTY name:floatArray3 visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-floatArray3> (): kotlin.Float declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:floatArray3 type:kotlin.Float visibility:public [final,static]' type=kotlin.Float origin=null
+  FIELD PROPERTY_BACKING_FIELD name:floatArray3 type:kotlin.Float visibility:public [final,static]
+    EXPRESSION_BODY
+      CONST Float type=kotlin.Float value=42.5
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-floatArray4> visibility:public modality:FINAL <> () returnType:kotlin.Float
+    correspondingProperty: PROPERTY name:floatArray4 visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-floatArray4> (): kotlin.Float declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:floatArray4 type:kotlin.Float visibility:public [final,static]' type=kotlin.Float origin=null
+  FIELD PROPERTY_BACKING_FIELD name:floatArray4 type:kotlin.Float visibility:public [final,static]
+    EXPRESSION_BODY
+      CONST Float type=kotlin.Float value=7.0
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-array> visibility:public modality:FINAL <> () returnType:kotlin.String
+    correspondingProperty: PROPERTY name:array visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-array> (): kotlin.String declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:array type:kotlin.String visibility:public [final,static]' type=kotlin.String origin=null
+  FIELD PROPERTY_BACKING_FIELD name:array type:kotlin.String visibility:public [final,static]
+    EXPRESSION_BODY
+      CONST String type=kotlin.String value="1 2.0 3 null"

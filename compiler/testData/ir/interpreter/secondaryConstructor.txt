@@ -1,0 +1,199 @@
+FILE fqName:<root> fileName:/secondaryConstructor.kt
+  CLASS CLASS name:Person modality:FINAL visibility:public superTypes:[kotlin.Any]
+    annotations:
+      CompileTimeCalculation
+    $this: VALUE_PARAMETER INSTANCE_RECEIVER name:<this> type:<root>.Person
+    CONSTRUCTOR visibility:public <> (name:kotlin.String, surname:kotlin.String) returnType:<root>.Person [primary]
+      VALUE_PARAMETER name:name index:0 type:kotlin.String
+      VALUE_PARAMETER name:surname index:1 type:kotlin.String
+      BLOCK_BODY
+        DELEGATING_CONSTRUCTOR_CALL 'public constructor <init> () [primary] declared in kotlin.Any'
+        SET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:name type:kotlin.String visibility:private [final]' type=kotlin.Unit origin=INITIALIZE_FIELD
+          receiver: GET_VAR '<this>: <root>.Person declared in <root>.Person' type=<root>.Person origin=null
+          value: GET_VAR 'name: kotlin.String declared in <root>.Person.<init>' type=kotlin.String origin=INITIALIZE_PROPERTY_FROM_PARAMETER
+        SET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:surname type:kotlin.String visibility:private [final]' type=kotlin.Unit origin=INITIALIZE_FIELD
+          receiver: GET_VAR '<this>: <root>.Person declared in <root>.Person' type=<root>.Person origin=null
+          value: GET_VAR 'surname: kotlin.String declared in <root>.Person.<init>' type=kotlin.String origin=INITIALIZE_PROPERTY_FROM_PARAMETER
+        SET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:wholeName type:kotlin.String visibility:private [final]' type=kotlin.Unit origin=null
+          receiver: GET_VAR '<this>: <root>.Person declared in <root>.Person' type=<root>.Person origin=null
+          value: CALL 'public final fun jsPlus (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Any? declared in kotlin.internal.ir' type=kotlin.String origin=PLUS
+            arg0: CALL 'public final fun jsPlus (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Any? declared in kotlin.internal.ir' type=kotlin.String origin=PLUS
+              arg0: GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:name type:kotlin.String visibility:private [final]' type=kotlin.String origin=GET_PROPERTY
+                receiver: GET_VAR '<this>: <root>.Person declared in <root>.Person' type=<root>.Person origin=null
+              arg1: CONST String type=kotlin.String value=" "
+            arg1: GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:surname type:kotlin.String visibility:private [final]' type=kotlin.String origin=GET_PROPERTY
+              receiver: GET_VAR '<this>: <root>.Person declared in <root>.Person' type=<root>.Person origin=null
+        SET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:age type:kotlin.Int visibility:private' type=kotlin.Unit origin=EQ
+          receiver: GET_VAR '<this>: <root>.Person declared in <root>.Person' type=<root>.Person origin=null
+          value: CONST Int type=kotlin.Int value=-1
+    FUN DEFAULT_PROPERTY_ACCESSOR name:<get-name> visibility:public modality:FINAL <> ($this:<root>.Person) returnType:kotlin.String
+      correspondingProperty: PROPERTY name:name visibility:public modality:FINAL [val]
+      $this: VALUE_PARAMETER name:<this> type:<root>.Person
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='public final fun <get-name> (): kotlin.String declared in <root>.Person'
+          GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:name type:kotlin.String visibility:private [final]' type=kotlin.String origin=null
+            receiver: GET_VAR '<this>: <root>.Person declared in <root>.Person.<get-name>' type=<root>.Person origin=null
+    FIELD PROPERTY_BACKING_FIELD name:name type:kotlin.String visibility:private [final]
+    FUN DEFAULT_PROPERTY_ACCESSOR name:<get-surname> visibility:public modality:FINAL <> ($this:<root>.Person) returnType:kotlin.String
+      correspondingProperty: PROPERTY name:surname visibility:public modality:FINAL [val]
+      $this: VALUE_PARAMETER name:<this> type:<root>.Person
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='public final fun <get-surname> (): kotlin.String declared in <root>.Person'
+          GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:surname type:kotlin.String visibility:private [final]' type=kotlin.String origin=null
+            receiver: GET_VAR '<this>: <root>.Person declared in <root>.Person.<get-surname>' type=<root>.Person origin=null
+    FIELD PROPERTY_BACKING_FIELD name:surname type:kotlin.String visibility:private [final]
+    FUN DEFAULT_PROPERTY_ACCESSOR name:<set-age> visibility:public modality:FINAL <> ($this:<root>.Person, <set-?>:kotlin.Int) returnType:kotlin.Unit
+      correspondingProperty: PROPERTY name:age visibility:public modality:FINAL [var]
+      $this: VALUE_PARAMETER name:<this> type:<root>.Person
+      VALUE_PARAMETER name:<set-?> index:0 type:kotlin.Int
+      BLOCK_BODY
+        SET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:age type:kotlin.Int visibility:private' type=kotlin.Unit origin=null
+          receiver: GET_VAR '<this>: <root>.Person declared in <root>.Person.<set-age>' type=<root>.Person origin=null
+          value: GET_VAR '<set-?>: kotlin.Int declared in <root>.Person.<set-age>' type=kotlin.Int origin=null
+    FUN DEFAULT_PROPERTY_ACCESSOR name:<get-age> visibility:public modality:FINAL <> ($this:<root>.Person) returnType:kotlin.Int
+      correspondingProperty: PROPERTY name:age visibility:public modality:FINAL [var]
+      $this: VALUE_PARAMETER name:<this> type:<root>.Person
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='public final fun <get-age> (): kotlin.Int declared in <root>.Person'
+          GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:age type:kotlin.Int visibility:private' type=kotlin.Int origin=null
+            receiver: GET_VAR '<this>: <root>.Person declared in <root>.Person.<get-age>' type=<root>.Person origin=null
+    FIELD PROPERTY_BACKING_FIELD name:age type:kotlin.Int visibility:private
+    FUN DEFAULT_PROPERTY_ACCESSOR name:<get-wholeName> visibility:public modality:FINAL <> ($this:<root>.Person) returnType:kotlin.String
+      correspondingProperty: PROPERTY name:wholeName visibility:public modality:FINAL [val]
+      $this: VALUE_PARAMETER name:<this> type:<root>.Person
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='public final fun <get-wholeName> (): kotlin.String declared in <root>.Person'
+          GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:wholeName type:kotlin.String visibility:private [final]' type=kotlin.String origin=null
+            receiver: GET_VAR '<this>: <root>.Person declared in <root>.Person.<get-wholeName>' type=<root>.Person origin=null
+    FIELD PROPERTY_BACKING_FIELD name:wholeName type:kotlin.String visibility:private [final]
+    FUN SYNTHESIZED_DECLARATION name:Person_init_$Init$ visibility:internal modality:FINAL <> (name:kotlin.String, $this:<root>.Person) returnType:<root>.Person
+      VALUE_PARAMETER name:name index:0 type:kotlin.String
+      VALUE_PARAMETER SYNTHESIZED_DECLARATION name:$this index:1 type:<root>.Person
+      BLOCK_BODY
+        DELEGATING_CONSTRUCTOR_CALL 'public constructor <init> (name: kotlin.String, surname: kotlin.String) [primary] declared in <root>.Person'
+          name: GET_VAR 'name: kotlin.String declared in <root>.Person.Person_init_$Init$' type=kotlin.String origin=null
+          surname: CONST String type=kotlin.String value="<NULL>"
+        RETURN type=kotlin.Nothing from='internal final fun Person_init_$Init$ (name: kotlin.String, $this: <root>.Person): <root>.Person declared in <root>.Person'
+          GET_VAR '$this: <root>.Person declared in <root>.Person.Person_init_$Init$' type=<root>.Person origin=null
+    FUN SYNTHESIZED_DECLARATION name:Person_init_$Create$ visibility:public modality:FINAL <> (name:kotlin.String) returnType:<root>.Person
+      VALUE_PARAMETER name:name index:0 type:kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='public final fun Person_init_$Create$ (name: kotlin.String): <root>.Person declared in <root>.Person'
+          CALL 'internal final fun Person_init_$Init$ (name: kotlin.String, $this: <root>.Person): <root>.Person declared in <root>.Person' type=<root>.Person origin=SYNTHESIZED_STATEMENT
+            name: GET_VAR 'name: kotlin.String declared in <root>.Person.Person_init_$Create$' type=kotlin.String origin=SYNTHESIZED_STATEMENT
+            $this: CALL 'public final fun Object$create <T> (): T of kotlin.js.internal.Object$create declared in kotlin.js.internal' type=<root>.Person origin=SYNTHESIZED_STATEMENT
+              <T>: <root>.Person
+    FUN SYNTHESIZED_DECLARATION name:Person_init_$Init$ visibility:internal modality:FINAL <> ($this:<root>.Person) returnType:<root>.Person
+      VALUE_PARAMETER SYNTHESIZED_DECLARATION name:$this index:0 type:<root>.Person
+      BLOCK_BODY
+        CALL 'internal final fun Person_init_$Init$ (name: kotlin.String, $this: <root>.Person): <root>.Person declared in <root>.Person' type=kotlin.Unit origin=null
+          name: CONST String type=kotlin.String value="<NOT_GIVEN>"
+          $this: GET_VAR '$this: <root>.Person declared in <root>.Person.Person_init_$Init$' type=<root>.Person origin=null
+        RETURN type=kotlin.Nothing from='internal final fun Person_init_$Init$ ($this: <root>.Person): <root>.Person declared in <root>.Person'
+          GET_VAR '$this: <root>.Person declared in <root>.Person.Person_init_$Init$' type=<root>.Person origin=null
+    FUN SYNTHESIZED_DECLARATION name:Person_init_$Create$ visibility:public modality:FINAL <> () returnType:<root>.Person
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='public final fun Person_init_$Create$ (): <root>.Person declared in <root>.Person'
+          CALL 'internal final fun Person_init_$Init$ ($this: <root>.Person): <root>.Person declared in <root>.Person' type=<root>.Person origin=SYNTHESIZED_STATEMENT
+            $this: CALL 'public final fun Object$create <T> (): T of kotlin.js.internal.Object$create declared in kotlin.js.internal' type=<root>.Person origin=SYNTHESIZED_STATEMENT
+              <T>: <root>.Person
+    FUN SYNTHESIZED_DECLARATION name:Person_init_$Init$ visibility:internal modality:FINAL <> (name:kotlin.String, age:kotlin.Int, $this:<root>.Person) returnType:<root>.Person
+      VALUE_PARAMETER name:name index:0 type:kotlin.String
+      VALUE_PARAMETER name:age index:1 type:kotlin.Int
+      VALUE_PARAMETER SYNTHESIZED_DECLARATION name:$this index:2 type:<root>.Person
+      BLOCK_BODY
+        CALL 'internal final fun Person_init_$Init$ (name: kotlin.String, $this: <root>.Person): <root>.Person declared in <root>.Person' type=kotlin.Unit origin=null
+          name: GET_VAR 'name: kotlin.String declared in <root>.Person.Person_init_$Init$' type=kotlin.String origin=null
+          $this: GET_VAR '$this: <root>.Person declared in <root>.Person.Person_init_$Init$' type=<root>.Person origin=null
+        SET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:age type:kotlin.Int visibility:private' type=kotlin.Unit origin=EQ
+          receiver: GET_VAR '$this: <root>.Person declared in <root>.Person.Person_init_$Init$' type=<root>.Person origin=null
+          value: GET_VAR 'age: kotlin.Int declared in <root>.Person.Person_init_$Init$' type=kotlin.Int origin=null
+        RETURN type=kotlin.Nothing from='internal final fun Person_init_$Init$ (name: kotlin.String, age: kotlin.Int, $this: <root>.Person): <root>.Person declared in <root>.Person'
+          GET_VAR '$this: <root>.Person declared in <root>.Person.Person_init_$Init$' type=<root>.Person origin=null
+    FUN SYNTHESIZED_DECLARATION name:Person_init_$Create$ visibility:public modality:FINAL <> (name:kotlin.String, age:kotlin.Int) returnType:<root>.Person
+      VALUE_PARAMETER name:name index:0 type:kotlin.String
+      VALUE_PARAMETER name:age index:1 type:kotlin.Int
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='public final fun Person_init_$Create$ (name: kotlin.String, age: kotlin.Int): <root>.Person declared in <root>.Person'
+          CALL 'internal final fun Person_init_$Init$ (name: kotlin.String, age: kotlin.Int, $this: <root>.Person): <root>.Person declared in <root>.Person' type=<root>.Person origin=SYNTHESIZED_STATEMENT
+            name: GET_VAR 'name: kotlin.String declared in <root>.Person.Person_init_$Create$' type=kotlin.String origin=SYNTHESIZED_STATEMENT
+            age: GET_VAR 'age: kotlin.Int declared in <root>.Person.Person_init_$Create$' type=kotlin.Int origin=SYNTHESIZED_STATEMENT
+            $this: CALL 'public final fun Object$create <T> (): T of kotlin.js.internal.Object$create declared in kotlin.js.internal' type=<root>.Person origin=SYNTHESIZED_STATEMENT
+              <T>: <root>.Person
+    FUN FAKE_OVERRIDE name:equals visibility:public modality:OPEN <> ($this:kotlin.Any, other:kotlin.Any?) returnType:kotlin.Boolean [fake_override,operator]
+      overridden:
+        public open fun equals (other: kotlin.Any?): kotlin.Boolean [operator] declared in kotlin.Any
+      $this: VALUE_PARAMETER name:<this> type:kotlin.Any
+      VALUE_PARAMETER name:other index:0 type:kotlin.Any?
+    FUN FAKE_OVERRIDE name:hashCode visibility:public modality:OPEN <> ($this:kotlin.Any) returnType:kotlin.Int [fake_override]
+      overridden:
+        public open fun hashCode (): kotlin.Int declared in kotlin.Any
+      $this: VALUE_PARAMETER name:<this> type:kotlin.Any
+    FUN FAKE_OVERRIDE name:toString visibility:public modality:OPEN <> ($this:kotlin.Any) returnType:kotlin.String [fake_override]
+      overridden:
+        public open fun toString (): kotlin.String declared in kotlin.Any
+      $this: VALUE_PARAMETER name:<this> type:kotlin.Any
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-a1> visibility:public modality:FINAL <> () returnType:kotlin.Int
+    correspondingProperty: PROPERTY name:a1 visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-a1> (): kotlin.Int declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:a1 type:kotlin.Int visibility:public [final,static]' type=kotlin.Int origin=null
+  FIELD PROPERTY_BACKING_FIELD name:a1 type:kotlin.Int visibility:public [final,static]
+    EXPRESSION_BODY
+      CONST Int type=kotlin.Int value=-1
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-a2> visibility:public modality:FINAL <> () returnType:kotlin.String
+    correspondingProperty: PROPERTY name:a2 visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-a2> (): kotlin.String declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:a2 type:kotlin.String visibility:public [final,static]' type=kotlin.String origin=null
+  FIELD PROPERTY_BACKING_FIELD name:a2 type:kotlin.String visibility:public [final,static]
+    EXPRESSION_BODY
+      CONST String type=kotlin.String value="Ivan Ivanov"
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-b1> visibility:public modality:FINAL <> () returnType:kotlin.Int
+    correspondingProperty: PROPERTY name:b1 visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-b1> (): kotlin.Int declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:b1 type:kotlin.Int visibility:public [final,static]' type=kotlin.Int origin=null
+  FIELD PROPERTY_BACKING_FIELD name:b1 type:kotlin.Int visibility:public [final,static]
+    EXPRESSION_BODY
+      CONST Int type=kotlin.Int value=-1
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-b2> visibility:public modality:FINAL <> () returnType:kotlin.String
+    correspondingProperty: PROPERTY name:b2 visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-b2> (): kotlin.String declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:b2 type:kotlin.String visibility:public [final,static]' type=kotlin.String origin=null
+  FIELD PROPERTY_BACKING_FIELD name:b2 type:kotlin.String visibility:public [final,static]
+    EXPRESSION_BODY
+      CONST String type=kotlin.String value="Ivan <NULL>"
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-c1> visibility:public modality:FINAL <> () returnType:kotlin.Int
+    correspondingProperty: PROPERTY name:c1 visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-c1> (): kotlin.Int declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:c1 type:kotlin.Int visibility:public [final,static]' type=kotlin.Int origin=null
+  FIELD PROPERTY_BACKING_FIELD name:c1 type:kotlin.Int visibility:public [final,static]
+    EXPRESSION_BODY
+      CONST Int type=kotlin.Int value=-1
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-c2> visibility:public modality:FINAL <> () returnType:kotlin.String
+    correspondingProperty: PROPERTY name:c2 visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-c2> (): kotlin.String declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:c2 type:kotlin.String visibility:public [final,static]' type=kotlin.String origin=null
+  FIELD PROPERTY_BACKING_FIELD name:c2 type:kotlin.String visibility:public [final,static]
+    EXPRESSION_BODY
+      CONST String type=kotlin.String value="<NOT_GIVEN> <NULL>"
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-d1> visibility:public modality:FINAL <> () returnType:kotlin.Int
+    correspondingProperty: PROPERTY name:d1 visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-d1> (): kotlin.Int declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:d1 type:kotlin.Int visibility:public [final,static]' type=kotlin.Int origin=null
+  FIELD PROPERTY_BACKING_FIELD name:d1 type:kotlin.Int visibility:public [final,static]
+    EXPRESSION_BODY
+      CONST Int type=kotlin.Int value=20
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-d2> visibility:public modality:FINAL <> () returnType:kotlin.String
+    correspondingProperty: PROPERTY name:d2 visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-d2> (): kotlin.String declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:d2 type:kotlin.String visibility:public [final,static]' type=kotlin.String origin=null
+  FIELD PROPERTY_BACKING_FIELD name:d2 type:kotlin.String visibility:public [final,static]
+    EXPRESSION_BODY
+      CONST String type=kotlin.String value="Ivan <NULL>"

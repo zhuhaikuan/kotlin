@@ -1,0 +1,131 @@
+FILE fqName:<root> fileName:/arithmeticExceptionTryBlock.kt
+  FUN name:tryCatch visibility:public modality:FINAL <> (integer:kotlin.Int) returnType:kotlin.Boolean
+    annotations:
+      CompileTimeCalculation
+    VALUE_PARAMETER name:integer index:0 type:kotlin.Int
+    BLOCK_BODY
+      TRY type=kotlin.Unit
+        try: BLOCK type=kotlin.Unit origin=null
+          VAR name:a type:kotlin.Int [val]
+            CALL 'public final fun jsBitOr (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Int declared in kotlin.internal.ir' type=kotlin.Int origin=SYNTHESIZED_STATEMENT
+              arg0: CALL 'public final fun jsDiv (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Any? declared in kotlin.internal.ir' type=kotlin.Int origin=DIV
+                arg0: CONST Int type=kotlin.Int value=10
+                arg1: GET_VAR 'integer: kotlin.Int declared in <root>.tryCatch' type=kotlin.Int origin=null
+              arg1: CONST Int type=kotlin.Int value=0
+          RETURN type=kotlin.Nothing from='public final fun tryCatch (integer: kotlin.Int): kotlin.Boolean declared in <root>'
+            CONST Boolean type=kotlin.Boolean value=true
+        CATCH parameter=val $p: dynamic [val] declared in <root>.tryCatch
+          VAR SYNTHESIZED_DECLARATION name:$p type:dynamic [val]
+          BLOCK type=kotlin.Unit origin=SYNTHESIZED_STATEMENT
+            WHEN type=kotlin.Unit origin=SYNTHESIZED_STATEMENT
+              BRANCH
+                if: CALL 'public final fun jsInstanceOf (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=SYNTHESIZED_STATEMENT
+                  arg0: GET_VAR 'val $p: dynamic [val] declared in <root>.tryCatch' type=dynamic origin=SYNTHESIZED_STATEMENT
+                  arg1: CALL 'public final fun jsClass <T> (): kotlin.js.JsClass<T of kotlin.js.jsClass> [external] declared in kotlin.js' type=kotlin.js.JsClass<T of kotlin.js.jsClass> origin=SYNTHESIZED_STATEMENT
+                    <T>: kotlin.ArithmeticException
+                then: BLOCK type=kotlin.Unit origin=null
+                  RETURN type=kotlin.Nothing from='public final fun tryCatch (integer: kotlin.Int): kotlin.Boolean declared in <root>'
+                    CONST Boolean type=kotlin.Boolean value=false
+              BRANCH
+                if: CONST Boolean type=kotlin.Boolean value=true
+                then: BLOCK type=kotlin.Unit origin=SYNTHESIZED_STATEMENT
+                  WHEN type=kotlin.Unit origin=SYNTHESIZED_STATEMENT
+                    BRANCH
+                      if: CONST Boolean type=kotlin.Boolean value=true
+                      then: BLOCK type=kotlin.Nothing origin=SYNTHESIZED_STATEMENT
+                        THROW type=kotlin.Nothing
+                          GET_VAR 'val $p: dynamic [val] declared in <root>.tryCatch' type=dynamic origin=SYNTHESIZED_STATEMENT
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-a1> visibility:public modality:FINAL <> () returnType:kotlin.Boolean
+    correspondingProperty: PROPERTY name:a1 visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-a1> (): kotlin.Boolean declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:a1 type:kotlin.Boolean visibility:public [final,static]' type=kotlin.Boolean origin=null
+  FIELD PROPERTY_BACKING_FIELD name:a1 type:kotlin.Boolean visibility:public [final,static]
+    EXPRESSION_BODY
+      CONST Boolean type=kotlin.Boolean value=false
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-a2> visibility:public modality:FINAL <> () returnType:kotlin.Boolean
+    correspondingProperty: PROPERTY name:a2 visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-a2> (): kotlin.Boolean declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:a2 type:kotlin.Boolean visibility:public [final,static]' type=kotlin.Boolean origin=null
+  FIELD PROPERTY_BACKING_FIELD name:a2 type:kotlin.Boolean visibility:public [final,static]
+    EXPRESSION_BODY
+      CONST Boolean type=kotlin.Boolean value=true
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-a3> visibility:public modality:FINAL <> () returnType:kotlin.Boolean
+    correspondingProperty: PROPERTY name:a3 visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-a3> (): kotlin.Boolean declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:a3 type:kotlin.Boolean visibility:public [final,static]' type=kotlin.Boolean origin=null
+  FIELD PROPERTY_BACKING_FIELD name:a3 type:kotlin.Boolean visibility:public [final,static]
+    EXPRESSION_BODY
+      CONST Boolean type=kotlin.Boolean value=true
+  FUN name:multiTryCatch visibility:public modality:FINAL <> (integer:kotlin.Int) returnType:kotlin.String
+    annotations:
+      CompileTimeCalculation
+    VALUE_PARAMETER name:integer index:0 type:kotlin.Int
+    BLOCK_BODY
+      VAR SYNTHESIZED_DECLARATION name:tmp type:kotlin.String [var]
+      TRY type=kotlin.Unit
+        try: BLOCK type=kotlin.Unit origin=null
+          VAR name:a type:kotlin.Int [val]
+            CALL 'public final fun jsBitOr (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Int declared in kotlin.internal.ir' type=kotlin.Int origin=SYNTHESIZED_STATEMENT
+              arg0: CALL 'public final fun jsDiv (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Any? declared in kotlin.internal.ir' type=kotlin.Int origin=DIV
+                arg0: CONST Int type=kotlin.Int value=10
+                arg1: GET_VAR 'integer: kotlin.Int declared in <root>.multiTryCatch' type=kotlin.Int origin=null
+              arg1: CONST Int type=kotlin.Int value=0
+          SET_VAR 'var tmp: kotlin.String [var] declared in <root>.multiTryCatch' type=kotlin.Unit origin=SYNTHESIZED_STATEMENT
+            CONST String type=kotlin.String value="Normal"
+        CATCH parameter=val $p: dynamic [val] declared in <root>.multiTryCatch
+          VAR SYNTHESIZED_DECLARATION name:$p type:dynamic [val]
+          BLOCK type=kotlin.Unit origin=null
+            VAR SYNTHESIZED_DECLARATION name:tmp type:kotlin.String [var]
+            WHEN type=kotlin.Unit origin=SYNTHESIZED_STATEMENT
+              BRANCH
+                if: CALL 'public final fun jsInstanceOf (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=SYNTHESIZED_STATEMENT
+                  arg0: GET_VAR 'val $p: dynamic [val] declared in <root>.multiTryCatch' type=dynamic origin=SYNTHESIZED_STATEMENT
+                  arg1: CALL 'public final fun jsClass <T> (): kotlin.js.JsClass<T of kotlin.js.jsClass> [external] declared in kotlin.js' type=kotlin.js.JsClass<T of kotlin.js.jsClass> origin=SYNTHESIZED_STATEMENT
+                    <T>: kotlin.AssertionError
+                then: BLOCK type=kotlin.Unit origin=null
+                  SET_VAR 'var tmp: kotlin.String [var] declared in <root>.multiTryCatch' type=kotlin.Unit origin=SYNTHESIZED_STATEMENT
+                    CONST String type=kotlin.String value="AssertionError"
+              BRANCH
+                if: CONST Boolean type=kotlin.Boolean value=true
+                then: BLOCK type=kotlin.Unit origin=SYNTHESIZED_STATEMENT
+                  WHEN type=kotlin.Unit origin=SYNTHESIZED_STATEMENT
+                    BRANCH
+                      if: CALL 'public final fun jsInstanceOf (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=SYNTHESIZED_STATEMENT
+                        arg0: GET_VAR 'val $p: dynamic [val] declared in <root>.multiTryCatch' type=dynamic origin=SYNTHESIZED_STATEMENT
+                        arg1: CALL 'public final fun jsClass <T> (): kotlin.js.JsClass<T of kotlin.js.jsClass> [external] declared in kotlin.js' type=kotlin.js.JsClass<T of kotlin.js.jsClass> origin=SYNTHESIZED_STATEMENT
+                          <T>: kotlin.ArithmeticException
+                      then: BLOCK type=kotlin.Unit origin=null
+                        SET_VAR 'var tmp: kotlin.String [var] declared in <root>.multiTryCatch' type=kotlin.Unit origin=SYNTHESIZED_STATEMENT
+                          CONST String type=kotlin.String value="ArithmeticException"
+                    BRANCH
+                      if: CONST Boolean type=kotlin.Boolean value=true
+                      then: BLOCK type=kotlin.Unit origin=SYNTHESIZED_STATEMENT
+                        WHEN type=kotlin.Unit origin=SYNTHESIZED_STATEMENT
+                          BRANCH
+                            if: CONST Boolean type=kotlin.Boolean value=true
+                            then: BLOCK type=kotlin.Unit origin=null
+                              THROW type=kotlin.Nothing
+                                GET_VAR 'val $p: dynamic [val] declared in <root>.multiTryCatch' type=dynamic origin=SYNTHESIZED_STATEMENT
+            SET_VAR 'var tmp: kotlin.String [var] declared in <root>.multiTryCatch' type=kotlin.Unit origin=SYNTHESIZED_STATEMENT
+              GET_VAR 'var tmp: kotlin.String [var] declared in <root>.multiTryCatch' type=kotlin.String origin=SYNTHESIZED_STATEMENT
+      RETURN type=kotlin.Nothing from='public final fun multiTryCatch (integer: kotlin.Int): kotlin.String declared in <root>'
+        GET_VAR 'var tmp: kotlin.String [var] declared in <root>.multiTryCatch' type=kotlin.String origin=SYNTHESIZED_STATEMENT
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-b1> visibility:public modality:FINAL <> () returnType:kotlin.String
+    correspondingProperty: PROPERTY name:b1 visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-b1> (): kotlin.String declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:b1 type:kotlin.String visibility:public [final,static]' type=kotlin.String origin=null
+  FIELD PROPERTY_BACKING_FIELD name:b1 type:kotlin.String visibility:public [final,static]
+    EXPRESSION_BODY
+      CONST String type=kotlin.String value="ArithmeticException"
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-b2> visibility:public modality:FINAL <> () returnType:kotlin.String
+    correspondingProperty: PROPERTY name:b2 visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-b2> (): kotlin.String declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:b2 type:kotlin.String visibility:public [final,static]' type=kotlin.String origin=null
+  FIELD PROPERTY_BACKING_FIELD name:b2 type:kotlin.String visibility:public [final,static]
+    EXPRESSION_BODY
+      CONST String type=kotlin.String value="Normal"

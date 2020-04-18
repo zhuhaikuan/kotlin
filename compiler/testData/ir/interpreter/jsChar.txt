@@ -1,0 +1,381 @@
+FILE fqName:<root> fileName:/jsChar.kt
+  FUN name:compareTo visibility:public modality:FINAL <> (first:kotlin.Char, second:kotlin.Char) returnType:kotlin.Int
+    annotations:
+      CompileTimeCalculation
+    VALUE_PARAMETER name:first index:0 type:kotlin.Char
+    VALUE_PARAMETER name:second index:1 type:kotlin.Char
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun compareTo (first: kotlin.Char, second: kotlin.Char): kotlin.Int declared in <root>'
+        CALL 'public open fun compareTo (other: kotlin.Char): kotlin.Int [operator] declared in kotlin.Char' type=kotlin.Int origin=null
+          $this: GET_VAR 'first: kotlin.Char declared in <root>.compareTo' type=kotlin.Char origin=null
+          other: GET_VAR 'second: kotlin.Char declared in <root>.compareTo' type=kotlin.Char origin=null
+  FUN name:plus visibility:public modality:FINAL <> (first:kotlin.Char, second:kotlin.Int) returnType:kotlin.Char
+    annotations:
+      CompileTimeCalculation
+    VALUE_PARAMETER name:first index:0 type:kotlin.Char
+    VALUE_PARAMETER name:second index:1 type:kotlin.Int
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun plus (first: kotlin.Char, second: kotlin.Int): kotlin.Char declared in <root>'
+        CALL 'public final fun plus (other: kotlin.Int): kotlin.Char [operator] declared in kotlin.Char' type=kotlin.Char origin=null
+          $this: GET_VAR 'first: kotlin.Char declared in <root>.plus' type=kotlin.Char origin=null
+          other: GET_VAR 'second: kotlin.Int declared in <root>.plus' type=kotlin.Int origin=null
+  FUN name:minus visibility:public modality:FINAL <> (first:kotlin.Char, second:kotlin.Char) returnType:kotlin.Int
+    annotations:
+      CompileTimeCalculation
+    VALUE_PARAMETER name:first index:0 type:kotlin.Char
+    VALUE_PARAMETER name:second index:1 type:kotlin.Char
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun minus (first: kotlin.Char, second: kotlin.Char): kotlin.Int declared in <root>'
+        CALL 'public final fun minus (other: kotlin.Char): kotlin.Int [operator] declared in kotlin.Char' type=kotlin.Int origin=null
+          $this: GET_VAR 'first: kotlin.Char declared in <root>.minus' type=kotlin.Char origin=null
+          other: GET_VAR 'second: kotlin.Char declared in <root>.minus' type=kotlin.Char origin=null
+  FUN name:minus visibility:public modality:FINAL <> (first:kotlin.Char, second:kotlin.Int) returnType:kotlin.Char
+    annotations:
+      CompileTimeCalculation
+    VALUE_PARAMETER name:first index:0 type:kotlin.Char
+    VALUE_PARAMETER name:second index:1 type:kotlin.Int
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun minus (first: kotlin.Char, second: kotlin.Int): kotlin.Char declared in <root>'
+        CALL 'public final fun minus (other: kotlin.Int): kotlin.Char [operator] declared in kotlin.Char' type=kotlin.Char origin=null
+          $this: GET_VAR 'first: kotlin.Char declared in <root>.minus' type=kotlin.Char origin=null
+          other: GET_VAR 'second: kotlin.Int declared in <root>.minus' type=kotlin.Int origin=null
+  FUN name:inc visibility:public modality:FINAL <> (first:kotlin.Char) returnType:kotlin.Char
+    annotations:
+      CompileTimeCalculation
+    VALUE_PARAMETER name:first index:0 type:kotlin.Char
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun inc (first: kotlin.Char): kotlin.Char declared in <root>'
+        CALL 'public final fun inc (): kotlin.Char [operator] declared in kotlin.Char' type=kotlin.Char origin=null
+          $this: GET_VAR 'first: kotlin.Char declared in <root>.inc' type=kotlin.Char origin=null
+  FUN name:dec visibility:public modality:FINAL <> (first:kotlin.Char) returnType:kotlin.Char
+    annotations:
+      CompileTimeCalculation
+    VALUE_PARAMETER name:first index:0 type:kotlin.Char
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun dec (first: kotlin.Char): kotlin.Char declared in <root>'
+        CALL 'public final fun dec (): kotlin.Char [operator] declared in kotlin.Char' type=kotlin.Char origin=null
+          $this: GET_VAR 'first: kotlin.Char declared in <root>.dec' type=kotlin.Char origin=null
+  FUN name:rangeTo visibility:public modality:FINAL <> (first:kotlin.Char, second:kotlin.Char) returnType:kotlin.ranges.CharRange
+    annotations:
+      CompileTimeCalculation
+    VALUE_PARAMETER name:first index:0 type:kotlin.Char
+    VALUE_PARAMETER name:second index:1 type:kotlin.Char
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun rangeTo (first: kotlin.Char, second: kotlin.Char): kotlin.ranges.CharRange declared in <root>'
+        CALL 'public final fun rangeTo (other: kotlin.Char): kotlin.ranges.CharRange [operator] declared in kotlin.Char' type=kotlin.ranges.CharRange origin=null
+          $this: GET_VAR 'first: kotlin.Char declared in <root>.rangeTo' type=kotlin.Char origin=null
+          other: GET_VAR 'second: kotlin.Char declared in <root>.rangeTo' type=kotlin.Char origin=null
+  FUN name:toByte visibility:public modality:FINAL <> (first:kotlin.Char) returnType:kotlin.Byte
+    annotations:
+      CompileTimeCalculation
+    VALUE_PARAMETER name:first index:0 type:kotlin.Char
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun toByte (first: kotlin.Char): kotlin.Byte declared in <root>'
+        CALL 'public final fun toByte (): kotlin.Byte declared in kotlin.Char' type=kotlin.Byte origin=null
+          $this: GET_VAR 'first: kotlin.Char declared in <root>.toByte' type=kotlin.Char origin=null
+  FUN name:toChar visibility:public modality:FINAL <> (first:kotlin.Char) returnType:kotlin.Char
+    annotations:
+      CompileTimeCalculation
+    VALUE_PARAMETER name:first index:0 type:kotlin.Char
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun toChar (first: kotlin.Char): kotlin.Char declared in <root>'
+        CALL 'public final fun toChar (): kotlin.Char declared in kotlin.Char' type=kotlin.Char origin=null
+          $this: GET_VAR 'first: kotlin.Char declared in <root>.toChar' type=kotlin.Char origin=null
+  FUN name:toShort visibility:public modality:FINAL <> (first:kotlin.Char) returnType:kotlin.Short
+    annotations:
+      CompileTimeCalculation
+    VALUE_PARAMETER name:first index:0 type:kotlin.Char
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun toShort (first: kotlin.Char): kotlin.Short declared in <root>'
+        CALL 'public final fun toShort (): kotlin.Short declared in kotlin.Char' type=kotlin.Short origin=null
+          $this: GET_VAR 'first: kotlin.Char declared in <root>.toShort' type=kotlin.Char origin=null
+  FUN name:toInt visibility:public modality:FINAL <> (first:kotlin.Char) returnType:kotlin.Int
+    annotations:
+      CompileTimeCalculation
+    VALUE_PARAMETER name:first index:0 type:kotlin.Char
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun toInt (first: kotlin.Char): kotlin.Int declared in <root>'
+        CALL 'public final fun toInt (): kotlin.Int declared in kotlin.Char' type=kotlin.Int origin=null
+          $this: GET_VAR 'first: kotlin.Char declared in <root>.toInt' type=kotlin.Char origin=null
+  FUN name:toLong visibility:public modality:FINAL <> (first:kotlin.Char) returnType:kotlin.Long
+    annotations:
+      CompileTimeCalculation
+    VALUE_PARAMETER name:first index:0 type:kotlin.Char
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun toLong (first: kotlin.Char): kotlin.Long declared in <root>'
+        CALL 'public final fun toLong (): kotlin.Long declared in kotlin.Char' type=kotlin.Long origin=null
+          $this: GET_VAR 'first: kotlin.Char declared in <root>.toLong' type=kotlin.Char origin=null
+  FUN name:toFloat visibility:public modality:FINAL <> (first:kotlin.Char) returnType:kotlin.Float
+    annotations:
+      CompileTimeCalculation
+    VALUE_PARAMETER name:first index:0 type:kotlin.Char
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun toFloat (first: kotlin.Char): kotlin.Float declared in <root>'
+        CALL 'public final fun toFloat (): kotlin.Float declared in kotlin.Char' type=kotlin.Float origin=null
+          $this: GET_VAR 'first: kotlin.Char declared in <root>.toFloat' type=kotlin.Char origin=null
+  FUN name:toDouble visibility:public modality:FINAL <> (first:kotlin.Char) returnType:kotlin.Double
+    annotations:
+      CompileTimeCalculation
+    VALUE_PARAMETER name:first index:0 type:kotlin.Char
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun toDouble (first: kotlin.Char): kotlin.Double declared in <root>'
+        CALL 'public final fun toDouble (): kotlin.Double declared in kotlin.Char' type=kotlin.Double origin=null
+          $this: GET_VAR 'first: kotlin.Char declared in <root>.toDouble' type=kotlin.Char origin=null
+  FUN name:toString visibility:public modality:FINAL <> (first:kotlin.Char) returnType:kotlin.String
+    annotations:
+      CompileTimeCalculation
+    VALUE_PARAMETER name:first index:0 type:kotlin.Char
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun toString (first: kotlin.Char): kotlin.String declared in <root>'
+        CALL 'public open fun toString (): kotlin.String declared in kotlin.Char' type=kotlin.String origin=null
+          $this: GET_VAR 'first: kotlin.Char declared in <root>.toString' type=kotlin.Char origin=null
+  FUN name:hashCode visibility:public modality:FINAL <> (first:kotlin.Char) returnType:kotlin.Int
+    annotations:
+      CompileTimeCalculation
+    VALUE_PARAMETER name:first index:0 type:kotlin.Char
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun hashCode (first: kotlin.Char): kotlin.Int declared in <root>'
+        CALL 'public open fun hashCode (): kotlin.Int declared in kotlin.Char' type=kotlin.Int origin=null
+          $this: GET_VAR 'first: kotlin.Char declared in <root>.hashCode' type=kotlin.Char origin=null
+  FUN name:equals visibility:public modality:FINAL <> (first:kotlin.Char, second:kotlin.Char) returnType:kotlin.Boolean
+    annotations:
+      CompileTimeCalculation
+    VALUE_PARAMETER name:first index:0 type:kotlin.Char
+    VALUE_PARAMETER name:second index:1 type:kotlin.Char
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun equals (first: kotlin.Char, second: kotlin.Char): kotlin.Boolean declared in <root>'
+        CALL 'public open fun equals (other: kotlin.Any?): kotlin.Boolean [operator] declared in kotlin.Char' type=kotlin.Boolean origin=null
+          $this: GET_VAR 'first: kotlin.Char declared in <root>.equals' type=kotlin.Char origin=null
+          other: GET_VAR 'second: kotlin.Char declared in <root>.equals' type=kotlin.Char origin=null
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-min> visibility:public modality:FINAL <> () returnType:kotlin.Char
+    correspondingProperty: PROPERTY name:min visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-min> (): kotlin.Char declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:min type:kotlin.Char visibility:public [final,static]' type=kotlin.Char origin=null
+  FIELD PROPERTY_BACKING_FIELD name:min type:kotlin.Char visibility:public [final,static]
+    EXPRESSION_BODY
+      CONSTRUCTOR_CALL 'internal constructor <init> (value: kotlin.Int) [primary] declared in kotlin.Char' type=kotlin.Char origin=null
+        value: CONST Int type=kotlin.Int value=0
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-max> visibility:public modality:FINAL <> () returnType:kotlin.Char
+    correspondingProperty: PROPERTY name:max visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-max> (): kotlin.Char declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:max type:kotlin.Char visibility:public [final,static]' type=kotlin.Char origin=null
+  FIELD PROPERTY_BACKING_FIELD name:max type:kotlin.Char visibility:public [final,static]
+    EXPRESSION_BODY
+      CONSTRUCTOR_CALL 'internal constructor <init> (value: kotlin.Int) [primary] declared in kotlin.Char' type=kotlin.Char origin=null
+        value: CONST Int type=kotlin.Int value=65535
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-min_high> visibility:public modality:FINAL <> () returnType:kotlin.Char
+    correspondingProperty: PROPERTY name:min_high visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-min_high> (): kotlin.Char declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:min_high type:kotlin.Char visibility:public [final,static]' type=kotlin.Char origin=null
+  FIELD PROPERTY_BACKING_FIELD name:min_high type:kotlin.Char visibility:public [final,static]
+    EXPRESSION_BODY
+      CONSTRUCTOR_CALL 'internal constructor <init> (value: kotlin.Int) [primary] declared in kotlin.Char' type=kotlin.Char origin=null
+        value: CONST Int type=kotlin.Int value=55296
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-max_high> visibility:public modality:FINAL <> () returnType:kotlin.Char
+    correspondingProperty: PROPERTY name:max_high visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-max_high> (): kotlin.Char declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:max_high type:kotlin.Char visibility:public [final,static]' type=kotlin.Char origin=null
+  FIELD PROPERTY_BACKING_FIELD name:max_high type:kotlin.Char visibility:public [final,static]
+    EXPRESSION_BODY
+      CONSTRUCTOR_CALL 'internal constructor <init> (value: kotlin.Int) [primary] declared in kotlin.Char' type=kotlin.Char origin=null
+        value: CONST Int type=kotlin.Int value=56319
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-min_low> visibility:public modality:FINAL <> () returnType:kotlin.Char
+    correspondingProperty: PROPERTY name:min_low visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-min_low> (): kotlin.Char declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:min_low type:kotlin.Char visibility:public [final,static]' type=kotlin.Char origin=null
+  FIELD PROPERTY_BACKING_FIELD name:min_low type:kotlin.Char visibility:public [final,static]
+    EXPRESSION_BODY
+      CONSTRUCTOR_CALL 'internal constructor <init> (value: kotlin.Int) [primary] declared in kotlin.Char' type=kotlin.Char origin=null
+        value: CONST Int type=kotlin.Int value=56320
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-max_low> visibility:public modality:FINAL <> () returnType:kotlin.Char
+    correspondingProperty: PROPERTY name:max_low visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-max_low> (): kotlin.Char declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:max_low type:kotlin.Char visibility:public [final,static]' type=kotlin.Char origin=null
+  FIELD PROPERTY_BACKING_FIELD name:max_low type:kotlin.Char visibility:public [final,static]
+    EXPRESSION_BODY
+      CONSTRUCTOR_CALL 'internal constructor <init> (value: kotlin.Int) [primary] declared in kotlin.Char' type=kotlin.Char origin=null
+        value: CONST Int type=kotlin.Int value=57343
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-min_surrogate> visibility:public modality:FINAL <> () returnType:kotlin.Char
+    correspondingProperty: PROPERTY name:min_surrogate visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-min_surrogate> (): kotlin.Char declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:min_surrogate type:kotlin.Char visibility:public [final,static]' type=kotlin.Char origin=null
+  FIELD PROPERTY_BACKING_FIELD name:min_surrogate type:kotlin.Char visibility:public [final,static]
+    EXPRESSION_BODY
+      CONSTRUCTOR_CALL 'internal constructor <init> (value: kotlin.Int) [primary] declared in kotlin.Char' type=kotlin.Char origin=null
+        value: CONST Int type=kotlin.Int value=55296
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-max_surrogate> visibility:public modality:FINAL <> () returnType:kotlin.Char
+    correspondingProperty: PROPERTY name:max_surrogate visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-max_surrogate> (): kotlin.Char declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:max_surrogate type:kotlin.Char visibility:public [final,static]' type=kotlin.Char origin=null
+  FIELD PROPERTY_BACKING_FIELD name:max_surrogate type:kotlin.Char visibility:public [final,static]
+    EXPRESSION_BODY
+      CONSTRUCTOR_CALL 'internal constructor <init> (value: kotlin.Int) [primary] declared in kotlin.Char' type=kotlin.Char origin=null
+        value: CONST Int type=kotlin.Int value=57343
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-bytes> visibility:public modality:FINAL <> () returnType:kotlin.Int
+    correspondingProperty: PROPERTY name:bytes visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-bytes> (): kotlin.Int declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:bytes type:kotlin.Int visibility:public [final,static]' type=kotlin.Int origin=null
+  FIELD PROPERTY_BACKING_FIELD name:bytes type:kotlin.Int visibility:public [final,static]
+    EXPRESSION_BODY
+      CONST Int type=kotlin.Int value=2
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-bits> visibility:public modality:FINAL <> () returnType:kotlin.Int
+    correspondingProperty: PROPERTY name:bits visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-bits> (): kotlin.Int declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:bits type:kotlin.Int visibility:public [final,static]' type=kotlin.Int origin=null
+  FIELD PROPERTY_BACKING_FIELD name:bits type:kotlin.Int visibility:public [final,static]
+    EXPRESSION_BODY
+      CONST Int type=kotlin.Int value=16
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-a1> visibility:public modality:FINAL <> () returnType:kotlin.Int
+    correspondingProperty: PROPERTY name:a1 visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-a1> (): kotlin.Int declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:a1 type:kotlin.Int visibility:public [final,static]' type=kotlin.Int origin=null
+  FIELD PROPERTY_BACKING_FIELD name:a1 type:kotlin.Int visibility:public [final,static]
+    EXPRESSION_BODY
+      CONST Int type=kotlin.Int value=-1
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-a2> visibility:public modality:FINAL <> () returnType:kotlin.Char
+    correspondingProperty: PROPERTY name:a2 visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-a2> (): kotlin.Char declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:a2 type:kotlin.Char visibility:public [final,static]' type=kotlin.Char origin=null
+  FIELD PROPERTY_BACKING_FIELD name:a2 type:kotlin.Char visibility:public [final,static]
+    EXPRESSION_BODY
+      CONSTRUCTOR_CALL 'internal constructor <init> (value: kotlin.Int) [primary] declared in kotlin.Char' type=kotlin.Char origin=null
+        value: CONST Int type=kotlin.Int value=51
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-a3> visibility:public modality:FINAL <> () returnType:kotlin.Int
+    correspondingProperty: PROPERTY name:a3 visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-a3> (): kotlin.Int declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:a3 type:kotlin.Int visibility:public [final,static]' type=kotlin.Int origin=null
+  FIELD PROPERTY_BACKING_FIELD name:a3 type:kotlin.Int visibility:public [final,static]
+    EXPRESSION_BODY
+      CONST Int type=kotlin.Int value=8
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-a4> visibility:public modality:FINAL <> () returnType:kotlin.Char
+    correspondingProperty: PROPERTY name:a4 visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-a4> (): kotlin.Char declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:a4 type:kotlin.Char visibility:public [final,static]' type=kotlin.Char origin=null
+  FIELD PROPERTY_BACKING_FIELD name:a4 type:kotlin.Char visibility:public [final,static]
+    EXPRESSION_BODY
+      CONSTRUCTOR_CALL 'internal constructor <init> (value: kotlin.Int) [primary] declared in kotlin.Char' type=kotlin.Char origin=null
+        value: CONST Int type=kotlin.Int value=56
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-a5> visibility:public modality:FINAL <> () returnType:kotlin.Char
+    correspondingProperty: PROPERTY name:a5 visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-a5> (): kotlin.Char declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:a5 type:kotlin.Char visibility:public [final,static]' type=kotlin.Char origin=null
+  FIELD PROPERTY_BACKING_FIELD name:a5 type:kotlin.Char visibility:public [final,static]
+    EXPRESSION_BODY
+      CONSTRUCTOR_CALL 'internal constructor <init> (value: kotlin.Int) [primary] declared in kotlin.Char' type=kotlin.Char origin=null
+        value: CONST Int type=kotlin.Int value=50
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-a6> visibility:public modality:FINAL <> () returnType:kotlin.Char
+    correspondingProperty: PROPERTY name:a6 visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-a6> (): kotlin.Char declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:a6 type:kotlin.Char visibility:public [final,static]' type=kotlin.Char origin=null
+  FIELD PROPERTY_BACKING_FIELD name:a6 type:kotlin.Char visibility:public [final,static]
+    EXPRESSION_BODY
+      CONSTRUCTOR_CALL 'internal constructor <init> (value: kotlin.Int) [primary] declared in kotlin.Char' type=kotlin.Char origin=null
+        value: CONST Int type=kotlin.Int value=48
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-a7> visibility:public modality:FINAL <> () returnType:kotlin.Char
+    correspondingProperty: PROPERTY name:a7 visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-a7> (): kotlin.Char declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:a7 type:kotlin.Char visibility:public [final,static]' type=kotlin.Char origin=null
+  FIELD PROPERTY_BACKING_FIELD name:a7 type:kotlin.Char visibility:public [final,static]
+    EXPRESSION_BODY
+      CONSTRUCTOR_CALL 'internal constructor <init> (value: kotlin.Int) [primary] declared in kotlin.Char' type=kotlin.Char origin=null
+        value: CONST Int type=kotlin.Int value=49
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-b1> visibility:public modality:FINAL <> () returnType:kotlin.Byte
+    correspondingProperty: PROPERTY name:b1 visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-b1> (): kotlin.Byte declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:b1 type:kotlin.Byte visibility:public [final,static]' type=kotlin.Byte origin=null
+  FIELD PROPERTY_BACKING_FIELD name:b1 type:kotlin.Byte visibility:public [final,static]
+    EXPRESSION_BODY
+      CONST Byte type=kotlin.Byte value=49
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-b2> visibility:public modality:FINAL <> () returnType:kotlin.Char
+    correspondingProperty: PROPERTY name:b2 visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-b2> (): kotlin.Char declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:b2 type:kotlin.Char visibility:public [final,static]' type=kotlin.Char origin=null
+  FIELD PROPERTY_BACKING_FIELD name:b2 type:kotlin.Char visibility:public [final,static]
+    EXPRESSION_BODY
+      CONSTRUCTOR_CALL 'internal constructor <init> (value: kotlin.Int) [primary] declared in kotlin.Char' type=kotlin.Char origin=null
+        value: CONST Int type=kotlin.Int value=50
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-b3> visibility:public modality:FINAL <> () returnType:kotlin.Short
+    correspondingProperty: PROPERTY name:b3 visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-b3> (): kotlin.Short declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:b3 type:kotlin.Short visibility:public [final,static]' type=kotlin.Short origin=null
+  FIELD PROPERTY_BACKING_FIELD name:b3 type:kotlin.Short visibility:public [final,static]
+    EXPRESSION_BODY
+      CONST Short type=kotlin.Short value=51
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-b4> visibility:public modality:FINAL <> () returnType:kotlin.Int
+    correspondingProperty: PROPERTY name:b4 visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-b4> (): kotlin.Int declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:b4 type:kotlin.Int visibility:public [final,static]' type=kotlin.Int origin=null
+  FIELD PROPERTY_BACKING_FIELD name:b4 type:kotlin.Int visibility:public [final,static]
+    EXPRESSION_BODY
+      CONST Int type=kotlin.Int value=52
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-b5> visibility:public modality:FINAL <> () returnType:kotlin.Long
+    correspondingProperty: PROPERTY name:b5 visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-b5> (): kotlin.Long declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:b5 type:kotlin.Long visibility:public [final,static]' type=kotlin.Long origin=null
+  FIELD PROPERTY_BACKING_FIELD name:b5 type:kotlin.Long visibility:public [final,static]
+    EXPRESSION_BODY
+      CONSTRUCTOR_CALL 'internal constructor <init> (low: kotlin.Int, high: kotlin.Int) [primary] declared in kotlin.Long' type=kotlin.Long origin=null
+        low: CONST Int type=kotlin.Int value=53
+        high: CONST Int type=kotlin.Int value=0
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-b6> visibility:public modality:FINAL <> () returnType:kotlin.Float
+    correspondingProperty: PROPERTY name:b6 visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-b6> (): kotlin.Float declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:b6 type:kotlin.Float visibility:public [final,static]' type=kotlin.Float origin=null
+  FIELD PROPERTY_BACKING_FIELD name:b6 type:kotlin.Float visibility:public [final,static]
+    EXPRESSION_BODY
+      CONST Float type=kotlin.Float value=54.0
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-b7> visibility:public modality:FINAL <> () returnType:kotlin.Double
+    correspondingProperty: PROPERTY name:b7 visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-b7> (): kotlin.Double declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:b7 type:kotlin.Double visibility:public [final,static]' type=kotlin.Double origin=null
+  FIELD PROPERTY_BACKING_FIELD name:b7 type:kotlin.Double visibility:public [final,static]
+    EXPRESSION_BODY
+      CONST Double type=kotlin.Double value=55.0
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-c1> visibility:public modality:FINAL <> () returnType:kotlin.String
+    correspondingProperty: PROPERTY name:c1 visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-c1> (): kotlin.String declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:c1 type:kotlin.String visibility:public [final,static]' type=kotlin.String origin=null
+  FIELD PROPERTY_BACKING_FIELD name:c1 type:kotlin.String visibility:public [final,static]
+    EXPRESSION_BODY
+      CONST String type=kotlin.String value="q"
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-c2> visibility:public modality:FINAL <> () returnType:kotlin.Int
+    correspondingProperty: PROPERTY name:c2 visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-c2> (): kotlin.Int declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:c2 type:kotlin.Int visibility:public [final,static]' type=kotlin.Int origin=null
+  FIELD PROPERTY_BACKING_FIELD name:c2 type:kotlin.Int visibility:public [final,static]
+    EXPRESSION_BODY
+      CONST Int type=kotlin.Int value=113
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-c3> visibility:public modality:FINAL <> () returnType:kotlin.Boolean
+    correspondingProperty: PROPERTY name:c3 visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-c3> (): kotlin.Boolean declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:c3 type:kotlin.Boolean visibility:public [final,static]' type=kotlin.Boolean origin=null
+  FIELD PROPERTY_BACKING_FIELD name:c3 type:kotlin.Boolean visibility:public [final,static]
+    EXPRESSION_BODY
+      CONST Boolean type=kotlin.Boolean value=false

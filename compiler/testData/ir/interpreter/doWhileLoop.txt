@@ -1,0 +1,111 @@
+FILE fqName:<root> fileName:/doWhileLoop.kt
+  FUN name:factorialDoWhile visibility:public modality:FINAL <> (num:kotlin.Int) returnType:kotlin.Int
+    annotations:
+      CompileTimeCalculation
+    VALUE_PARAMETER name:num index:0 type:kotlin.Int
+    BLOCK_BODY
+      VAR name:number type:kotlin.Int [var]
+        GET_VAR 'num: kotlin.Int declared in <root>.factorialDoWhile' type=kotlin.Int origin=null
+      VAR name:factorial type:kotlin.Int [var]
+        CONST Int type=kotlin.Int value=1
+      DO_WHILE label=null origin=DO_WHILE_LOOP
+        body: COMPOSITE type=kotlin.Unit origin=null
+          SET_VAR 'var factorial: kotlin.Int [var] declared in <root>.factorialDoWhile' type=kotlin.Unit origin=MULTEQ
+            CALL 'internal final fun imul (a_local: kotlin.Int, b_local: kotlin.Int): kotlin.Int declared in kotlin.js' type=kotlin.Int origin=MULTEQ
+              a_local: GET_VAR 'var factorial: kotlin.Int [var] declared in <root>.factorialDoWhile' type=kotlin.Int origin=MULTEQ
+              b_local: GET_VAR 'var number: kotlin.Int [var] declared in <root>.factorialDoWhile' type=kotlin.Int origin=null
+          VAR IR_TEMPORARY_VARIABLE name:tmp0 type:kotlin.Int [val]
+            GET_VAR 'var number: kotlin.Int [var] declared in <root>.factorialDoWhile' type=kotlin.Int origin=POSTFIX_DECR
+          SET_VAR 'var number: kotlin.Int [var] declared in <root>.factorialDoWhile' type=kotlin.Unit origin=POSTFIX_DECR
+            CALL 'public final fun jsBitOr (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Int declared in kotlin.internal.ir' type=kotlin.Int origin=SYNTHESIZED_STATEMENT
+              arg0: CALL 'public final fun jsMinus (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Any? declared in kotlin.internal.ir' type=kotlin.Int origin=POSTFIX_DECR
+                arg0: GET_VAR 'val tmp0: kotlin.Int [val] declared in <root>.factorialDoWhile' type=kotlin.Int origin=null
+                arg1: CONST Int type=kotlin.Int value=1
+              arg1: CONST Int type=kotlin.Int value=0
+          CALL 'public final fun Unit_getInstance (): kotlin.Unit declared in kotlin' type=kotlin.Unit origin=SYNTHESIZED_STATEMENT
+        condition: CALL 'public final fun jsGt (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=GT
+          arg0: GET_VAR 'var number: kotlin.Int [var] declared in <root>.factorialDoWhile' type=kotlin.Int origin=null
+          arg1: CONST Int type=kotlin.Int value=0
+      RETURN type=kotlin.Nothing from='public final fun factorialDoWhile (num: kotlin.Int): kotlin.Int declared in <root>'
+        GET_VAR 'var factorial: kotlin.Int [var] declared in <root>.factorialDoWhile' type=kotlin.Int origin=null
+  FUN name:firstNotNull visibility:public modality:FINAL <> (array:kotlin.Array<kotlin.Int?>) returnType:kotlin.Int
+    annotations:
+      CompileTimeCalculation
+    VALUE_PARAMETER name:array index:0 type:kotlin.Array<kotlin.Int?>
+    BLOCK_BODY
+      VAR name:i type:kotlin.Int [var]
+        CONST Int type=kotlin.Int value=0
+      DO_WHILE label=null origin=DO_WHILE_LOOP
+        body: COMPOSITE type=kotlin.Unit origin=null
+          VAR IR_TEMPORARY_VARIABLE name:tmp0 type:kotlin.Int [val]
+            GET_VAR 'var i: kotlin.Int [var] declared in <root>.firstNotNull' type=kotlin.Int origin=POSTFIX_INCR
+          SET_VAR 'var i: kotlin.Int [var] declared in <root>.firstNotNull' type=kotlin.Unit origin=POSTFIX_INCR
+            CALL 'public final fun jsBitOr (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Int declared in kotlin.internal.ir' type=kotlin.Int origin=SYNTHESIZED_STATEMENT
+              arg0: CALL 'public final fun jsPlus (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Any? declared in kotlin.internal.ir' type=kotlin.Int origin=POSTFIX_INCR
+                arg0: GET_VAR 'val tmp0: kotlin.Int [val] declared in <root>.firstNotNull' type=kotlin.Int origin=null
+                arg1: CONST Int type=kotlin.Int value=1
+              arg1: CONST Int type=kotlin.Int value=0
+          VAR name:y type:kotlin.Int? [val]
+            CALL 'public final fun jsArrayGet (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Any? declared in kotlin.internal.ir' type=kotlin.Int? origin=GET_ARRAY_ELEMENT
+              arg0: GET_VAR 'array: kotlin.Array<kotlin.Int?> declared in <root>.firstNotNull' type=kotlin.Array<kotlin.Int?> origin=null
+              arg1: GET_VAR 'val tmp0: kotlin.Int [val] declared in <root>.firstNotNull' type=kotlin.Int origin=null
+        condition: CALL 'public final fun jsEqeq (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=EQEQ
+          arg0: GET_VAR 'val y: kotlin.Int? [val] declared in <root>.firstNotNull' type=kotlin.Int? origin=null
+          arg1: CONST Null type=kotlin.Nothing? value=null
+      RETURN type=kotlin.Nothing from='public final fun firstNotNull (array: kotlin.Array<kotlin.Int?>): kotlin.Int declared in <root>'
+        CALL 'public final fun ensureNotNull <T> (v: T of kotlin.ensureNotNull?): T of kotlin.ensureNotNull declared in kotlin' type=kotlin.Int origin=EXCLEXCL
+          <T>: kotlin.Int
+          v: CALL 'public final fun jsArrayGet (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Any? declared in kotlin.internal.ir' type=kotlin.Int? origin=GET_ARRAY_ELEMENT
+            arg0: GET_VAR 'array: kotlin.Array<kotlin.Int?> declared in <root>.firstNotNull' type=kotlin.Array<kotlin.Int?> origin=null
+            arg1: CALL 'public final fun jsBitOr (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Int declared in kotlin.internal.ir' type=kotlin.Int origin=SYNTHESIZED_STATEMENT
+              arg0: CALL 'public final fun jsMinus (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Any? declared in kotlin.internal.ir' type=kotlin.Int origin=MINUS
+                arg0: GET_VAR 'var i: kotlin.Int [var] declared in <root>.firstNotNull' type=kotlin.Int origin=null
+                arg1: CONST Int type=kotlin.Int value=1
+              arg1: CONST Int type=kotlin.Int value=0
+  FUN name:singleExpressionLoop visibility:public modality:FINAL <> (incrementTo:kotlin.Int) returnType:kotlin.Int
+    annotations:
+      CompileTimeCalculation
+    VALUE_PARAMETER name:incrementTo index:0 type:kotlin.Int
+    BLOCK_BODY
+      VAR name:i type:kotlin.Int [var]
+        CONST Int type=kotlin.Int value=0
+      DO_WHILE label=null origin=DO_WHILE_LOOP
+        body: COMPOSITE type=kotlin.Unit origin=null
+          VAR IR_TEMPORARY_VARIABLE name:tmp0 type:kotlin.Int [val]
+            GET_VAR 'var i: kotlin.Int [var] declared in <root>.singleExpressionLoop' type=kotlin.Int origin=POSTFIX_INCR
+          SET_VAR 'var i: kotlin.Int [var] declared in <root>.singleExpressionLoop' type=kotlin.Unit origin=POSTFIX_INCR
+            CALL 'public final fun jsBitOr (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Int declared in kotlin.internal.ir' type=kotlin.Int origin=SYNTHESIZED_STATEMENT
+              arg0: CALL 'public final fun jsPlus (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Any? declared in kotlin.internal.ir' type=kotlin.Int origin=POSTFIX_INCR
+                arg0: GET_VAR 'val tmp0: kotlin.Int [val] declared in <root>.singleExpressionLoop' type=kotlin.Int origin=null
+                arg1: CONST Int type=kotlin.Int value=1
+              arg1: CONST Int type=kotlin.Int value=0
+          CALL 'public final fun Unit_getInstance (): kotlin.Unit declared in kotlin' type=kotlin.Unit origin=SYNTHESIZED_STATEMENT
+        condition: CALL 'public final fun jsLt (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=LT
+          arg0: GET_VAR 'var i: kotlin.Int [var] declared in <root>.singleExpressionLoop' type=kotlin.Int origin=null
+          arg1: GET_VAR 'incrementTo: kotlin.Int declared in <root>.singleExpressionLoop' type=kotlin.Int origin=null
+      RETURN type=kotlin.Nothing from='public final fun singleExpressionLoop (incrementTo: kotlin.Int): kotlin.Int declared in <root>'
+        GET_VAR 'var i: kotlin.Int [var] declared in <root>.singleExpressionLoop' type=kotlin.Int origin=null
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-a> visibility:public modality:FINAL <> () returnType:kotlin.Int
+    correspondingProperty: PROPERTY name:a visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-a> (): kotlin.Int declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:a type:kotlin.Int visibility:public [final,static]' type=kotlin.Int origin=null
+  FIELD PROPERTY_BACKING_FIELD name:a type:kotlin.Int visibility:public [final,static]
+    EXPRESSION_BODY
+      CONST Int type=kotlin.Int value=720
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-b> visibility:public modality:FINAL <> () returnType:kotlin.Int
+    correspondingProperty: PROPERTY name:b visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-b> (): kotlin.Int declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:b type:kotlin.Int visibility:public [final,static]' type=kotlin.Int origin=null
+  FIELD PROPERTY_BACKING_FIELD name:b type:kotlin.Int visibility:public [final,static]
+    EXPRESSION_BODY
+      CONST Int type=kotlin.Int value=1
+  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-c> visibility:public modality:FINAL <> () returnType:kotlin.Int
+    correspondingProperty: PROPERTY name:c visibility:public modality:FINAL [const,val]
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun <get-c> (): kotlin.Int declared in <root>'
+        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:c type:kotlin.Int visibility:public [final,static]' type=kotlin.Int origin=null
+  FIELD PROPERTY_BACKING_FIELD name:c type:kotlin.Int visibility:public [final,static]
+    EXPRESSION_BODY
+      CONST Int type=kotlin.Int value=10
