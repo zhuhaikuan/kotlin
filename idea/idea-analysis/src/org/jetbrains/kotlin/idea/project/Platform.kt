@@ -138,6 +138,7 @@ fun Project.getLanguageVersionSettings(
             languageVersion
         )
         configureNewInferenceSupportInIDE(this@getLanguageVersionSettings)
+        put(LanguageFeature.CompileTimeCalculations, LanguageFeature.State.ENABLED)
         if (isReleaseCoroutines != null) {
             put(
                 LanguageFeature.ReleaseCoroutines,
@@ -228,6 +229,7 @@ private fun Module.computeLanguageVersionSettings(): LanguageVersionSettings {
         configureCoroutinesSupport(facetSettings.coroutineSupport, languageVersion)
         configureMultiplatformSupport(facetSettings.targetPlatform?.idePlatformKind, this@computeLanguageVersionSettings)
         configureNewInferenceSupportInIDE(project)
+        put(LanguageFeature.CompileTimeCalculations, LanguageFeature.State.ENABLED)
     }.orEmpty()
 
     val analysisFlags = facetSettings
