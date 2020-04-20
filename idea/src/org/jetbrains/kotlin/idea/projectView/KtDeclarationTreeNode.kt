@@ -86,20 +86,8 @@ internal class KtDeclarationTreeNode(
                 if (isCompanion()) {
                     append("companion object")
                 } else {
-                    append("object")
                     if (!name.isNullOrEmpty()) {
-                        append(" $name")
-                    }
-                }
-
-                if (superTypeListEntries.any()) {
-                    appendColon()
-                    val lastIndex = superTypeListEntries.size - 1
-                    superTypeListEntries.forEachIndexed { index, entry ->
-                        entry.typeReference?.text?.let {
-                            if (index > 0 && index != lastIndex) append(", ")
-                            append(it)
-                        }
+                        append(name)
                     }
                 }
             }
