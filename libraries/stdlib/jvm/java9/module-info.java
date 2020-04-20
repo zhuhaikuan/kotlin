@@ -20,12 +20,7 @@ module kotlin.stdlib {
     exports kotlin.sequences;
     exports kotlin.system;
     exports kotlin.text;
-
-    // do not export experimental coroutines packages
-    //exports kotlin.coroutines.experimental;
-    //exports kotlin.coroutines.experimental.intrinsics;
-    //exports kotlin.coroutines.experimental.jvm.internal;
-    //exports kotlin.coroutines.experimental.migration;
+    exports kotlin.time;
 
     exports kotlin.experimental;
 
@@ -33,7 +28,7 @@ module kotlin.stdlib {
     exports kotlin.jvm.internal;
     exports kotlin.jvm.internal.markers;
 
-    // Open packages with .kotlin_builtins files to kotlin-reflect, to allow reflection to load built-in declarations there
+    // Open packages with .kotlin_builtins files to kotlin-reflect, to allow reflection to load built-in declarations from there
     opens kotlin to kotlin.reflect;
     opens kotlin.annotation to kotlin.reflect;
     opens kotlin.collections to kotlin.reflect;
