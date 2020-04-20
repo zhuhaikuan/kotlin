@@ -19,15 +19,23 @@ import org.jetbrains.kotlin.asJava.elements.KtLightAbstractAnnotation
 import org.jetbrains.kotlin.asJava.elements.KtLightMethodImpl
 import org.jetbrains.kotlin.codegen.FunctionCodegen
 import org.jetbrains.kotlin.config.LanguageVersionSettingsImpl
+import org.jetbrains.kotlin.descriptors.CallableMemberDescriptor
 import org.jetbrains.kotlin.descriptors.ConstructorDescriptor
 import org.jetbrains.kotlin.descriptors.FunctionDescriptor
+import org.jetbrains.kotlin.descriptors.isOverridableOrOverrides
+import org.jetbrains.kotlin.lexer.KtTokens
 import org.jetbrains.kotlin.load.java.BuiltinMethodsWithSpecialGenericSignature.getSpecialSignatureInfo
+import org.jetbrains.kotlin.load.java.descriptors.JavaMethodDescriptor
 import org.jetbrains.kotlin.load.kotlin.TypeMappingMode
 import org.jetbrains.kotlin.psi.KtDeclaration
 import org.jetbrains.kotlin.psi.KtFunction
 import org.jetbrains.kotlin.psi.KtProperty
 import org.jetbrains.kotlin.psi.KtTypeParameterListOwner
+import org.jetbrains.kotlin.resolve.DescriptorUtils
+import org.jetbrains.kotlin.resolve.descriptorUtil.firstOverridden
 import org.jetbrains.kotlin.resolve.jvm.diagnostics.JvmDeclarationOriginKind
+import org.jetbrains.kotlin.resolve.source.getPsi
+import org.jetbrains.kotlin.types.RawType
 
 internal const val METHOD_INDEX_FOR_GETTER = 1
 internal const val METHOD_INDEX_FOR_SETTER = 2
@@ -69,10 +77,25 @@ internal abstract class KtUltraLightMethod(
     }
 
     protected fun computeCheckNeedToErasureParametersTypes(methodDescriptor: FunctionDescriptor?): Boolean {
-        return methodDescriptor
-            ?.getSpecialSignatureInfo()
-            ?.let { it.valueParametersSignature !== null }
-            ?: false
+
+        if (methodDescriptor == null) return false
+
+        val hasSpecialSignatureInfo = methodDescriptor.getSpecialSignatureInfo()
+            ?.let { it.valueParametersSignature !== null } ?: false
+        if (hasSpecialSignatureInfo) return true
+
+        // Workaround for KT-32245 that checks if this signature could be affected by KT-38406
+        if (!DescriptorUtils.isOverride(methodDescriptor)) return false
+
+        val hasStarProjectionParameterType = methodDescriptor.valueParameters
+            .any { parameter -> parameter.type.arguments.any { it.isStarProjection } }
+        if (!hasStarProjectionParameterType) return false
+
+        return methodDescriptor.overriddenDescriptors
+            .filterIsInstance<JavaMethodDescriptor>()
+            .any { javaDescriptor ->
+                javaDescriptor.valueParameters.any { it.type is RawType }
+            }
     }
 
     abstract override fun buildTypeParameterList(): PsiTypeParameterList
