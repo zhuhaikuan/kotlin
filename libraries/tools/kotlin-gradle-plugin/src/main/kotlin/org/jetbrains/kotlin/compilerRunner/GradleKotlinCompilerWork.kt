@@ -66,7 +66,7 @@ internal class GradleKotlinCompilerWorkArguments(
     }
 }
 
-internal open class GradleKotlinCompilerWork @Inject constructor(
+internal class GradleKotlinCompilerWork @Inject constructor(
     /**
      * Arguments are passed through [GradleKotlinCompilerWorkArguments],
      * because Gradle Workers API does not support nullable arguments (https://github.com/gradle/gradle/issues/2405),
