@@ -49,7 +49,7 @@ class KotlinConstraintSystemCompleter(
 
     data class ParameterTypesInfo(
         val parametersFromDeclaration: List<KotlinType?>?,
-        val parametersFromConstraints: Set<List<KotlinType>>?,
+        val parametersFromConstraints: Set<List<KotlinType?>>?,
         val annotations: Annotations,
         val isSuspend: Boolean,
         val isNullable: Boolean
@@ -273,6 +273,16 @@ class KotlinConstraintSystemCompleter(
         fun isAnonymousFunction(argument: PostponedAtomWithRevisableExpectedType) = argument.atom is FunctionExpression
 
         /*
+         * For lambdas, we should collect parameter types from declaration in partial mode
+         * as in full mode we add constraints, which may not contain types from declaration of other lambdas (it will depend on evaluation order).
+         */
+        if (completionMode == ConstraintSystemCompletionMode.PARTIAL) {
+            for (argument in postponedArguments.filterIsInstance<LambdaWithTypeVariableAsExpectedTypeAtom>()) {
+                argument.parameterTypesFromDeclaration = extractParameterTypesFromDeclaration(argument.atom)
+            }
+        }
+
+        /*
          * We can collect parameter types and build new expected types in partial mode only for anonymous functions,
          * because more exact type can't appear from constraints in full mode.
          *
@@ -282,20 +292,68 @@ class KotlinConstraintSystemCompleter(
             if (completionMode == ConstraintSystemCompletionMode.PARTIAL) {
                 postponedArguments.filter(::isAnonymousFunction)
             } else {
-                postponedArguments.filterNot(::isAnonymousFunction)
+                postponedArguments
             }
 
         do {
             val wasTransformedSomePostponedArgument =
                 suitablePostponedArguments.filter { it.revisedExpectedType == null }.any { argument ->
                     val parameterTypesInfo = collectParameterTypes(argument) ?: return@any false
-                    val newExpectedType = buildNewFunctionalExpectedType(argument, parameterTypesInfo) ?: return@any false
+                    val revisedParameterTypesInfo = getRevisedParameterTypesInfo(argument, postponedArguments, parameterTypesInfo)
+                    val newExpectedType = buildNewFunctionalExpectedType(argument, revisedParameterTypesInfo) ?: return@any false
 
                     argument.revisedExpectedType = newExpectedType
 
                     true
                 }
         } while (wasTransformedSomePostponedArgument)
+    }
+
+    private fun Context.getRevisedParameterTypesInfo(
+        argument: PostponedAtomWithRevisableExpectedType,
+        postponedArguments: List<PostponedAtomWithRevisableExpectedType>,
+        parameterTypesInfo: ParameterTypesInfo
+    ): ParameterTypesInfo {
+        fun getExpectedTypeConstructor(argument: PostponedAtomWithRevisableExpectedType) =
+            argument.expectedType?.typeConstructor() as? TypeVariableTypeConstructor
+
+        val parameterTypesFromDeclarationOfRelatedArguments = postponedArguments
+            .filterIsInstance<LambdaWithTypeVariableAsExpectedTypeAtom>()
+            .filter { it.parameterTypesFromDeclaration != null }
+            .mapNotNull { anotherArgument ->
+                val argumentExpectedTypeConstructor = getExpectedTypeConstructor(argument) ?: return@mapNotNull null
+                val anotherArgumentExpectedTypeConstructor = getExpectedTypeConstructor(anotherArgument) ?: return@mapNotNull null
+
+                if (areTypeVariablesDependent(argumentExpectedTypeConstructor, anotherArgumentExpectedTypeConstructor)) {
+                    anotherArgument.parameterTypesFromDeclaration
+                } else null
+            }
+
+        return if (parameterTypesFromDeclarationOfRelatedArguments.isNotEmpty()) {
+            parameterTypesInfo.copy(
+                parametersFromConstraints = parameterTypesInfo.parametersFromConstraints.orEmpty()
+                        + parameterTypesFromDeclarationOfRelatedArguments.toSet()
+            )
+        } else parameterTypesInfo
+    }
+
+    private fun Context.areTypeVariablesDependent(
+        a: TypeVariableTypeConstructor,
+        b: TypeVariableTypeConstructor,
+        variablesSeen: MutableSet<TypeVariableTypeConstructor> = mutableSetOf()
+    ): Boolean {
+        val variableWithConstraintsForFirst = notFixedTypeVariables.getValue(a)
+
+        if (a in variablesSeen) return false
+        variablesSeen.add(a)
+
+        return variableWithConstraintsForFirst.constraints.any {
+            val typeConstructor = it.type.typeConstructor()
+            val variableTypeConstructor =
+                notFixedTypeVariables[typeConstructor]?.typeVariable?.freshTypeConstructor() as? TypeVariableTypeConstructor
+
+            typeConstructor == b || (variableTypeConstructor != null && areTypeVariablesDependent(variableTypeConstructor, b, variablesSeen))
+        }
     }
 
     private fun NewConstraintSystem.buildNewFunctionalExpectedType(
@@ -396,31 +454,6 @@ class KotlinConstraintSystemCompleter(
         }
     }
 
-    private fun Context.fixVariablesInsideConstraints(
-        variableWithConstraints: VariableWithConstraints,
-        topLevelAtoms: List<ResolvedAtom>,
-        variablesSeen: MutableSet<TypeVariableTypeConstructor>
-    ) {
-        variablesSeen.add(variableWithConstraints.typeVariable.freshTypeConstructor() as? TypeVariableTypeConstructor ?: return)
-
-        while (true) {
-            val constraint = variableWithConstraints.constraints.firstOrNull { constraint ->
-                val constraintType = constraint.type
-                val constraintTypeConstructor = constraintType.typeConstructor()
-
-                constraintTypeConstructor !in variablesSeen && constraintTypeConstructor in notFixedTypeVariables
-                        || constraintType.contains { it.typeConstructor() !in variablesSeen && it.typeConstructor() in notFixedTypeVariables }
-            } ?: break
-            val type = constraint.type as? KotlinType ?: break
-            val typeConstructor = type.constructor
-
-            if (typeConstructor is TypeVariableTypeConstructor) {
-                variablesSeen.add(typeConstructor)
-            }
-            fixVariablesInsideType(type, topLevelAtoms, variablesSeen)
-        }
-    }
-
     private fun Context.fixVariablesInsideType(
         type: KotlinType, topLevelAtoms: List<ResolvedAtom>,
         variablesSeen: MutableSet<TypeVariableTypeConstructor> = mutableSetOf()
@@ -431,7 +464,6 @@ class KotlinConstraintSystemCompleter(
         if (isProperTypeConstructorForVariable && variableFixationFinder.isTypeVariableHasProperConstraint(this, typeConstructor)) {
             val variableWithConstraints = notFixedTypeVariables.getValue(typeConstructor)
             if (variableWithConstraints.typeVariable !in postponedTypeVariables) {
-                fixVariablesInsideConstraints(variableWithConstraints, topLevelAtoms, variablesSeen)
                 if (typeConstructor in notFixedTypeVariables) {
                     fixVariable(this, variableWithConstraints, topLevelAtoms)
                 }
@@ -451,7 +483,7 @@ class KotlinConstraintSystemCompleter(
 
     private fun prependReceiverTypeIfItIsExtensionFunction(
         parametersFromDeclaration: List<KotlinType?>?,
-        parametersFromConstraints: Set<List<KotlinType>>?,
+        parametersFromConstraints: Set<List<KotlinType?>>?,
         annotations: Annotations
     ): List<KotlinType?>? {
         if (parametersFromConstraints.isNullOrEmpty() || parametersFromDeclaration.isNullOrEmpty())

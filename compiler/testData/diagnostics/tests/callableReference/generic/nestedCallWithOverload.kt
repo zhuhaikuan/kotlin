@@ -46,7 +46,7 @@ fun test1() {
 
     select({ <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Int")!>it<!> }, { x: Int -> TODO() })
 
-    // Unsupported
+    // Interdependent postponed arguments are unsupported
     <!NEW_INFERENCE_NO_INFORMATION_FOR_PARAMETER!>takeInterdependentLambdas<!>({}, {})
     <!NEW_INFERENCE_NO_INFORMATION_FOR_PARAMETER!>takeInterdependentLambdas<!>({ <!DEBUG_INFO_ELEMENT_WITH_ERROR_TYPE!>it<!> }, { 10 })
     <!NEW_INFERENCE_NO_INFORMATION_FOR_PARAMETER!>takeInterdependentLambdas<!>({ 10 }, { <!DEBUG_INFO_ELEMENT_WITH_ERROR_TYPE!>it<!> })
@@ -57,4 +57,6 @@ fun test1() {
     takeDependentLambdas({ <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Int")!>it<!> }, { it })
     takeDependentLambdas({ <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.String")!>it<!>.length }, { "it" })
     takeDependentLambdas({ <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Unit"), UNUSED_EXPRESSION!>it<!>; 10 }, { })
+
+    val x = select({ <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Int")!>it<!> }, fun(x: Int) = 1)
 }
