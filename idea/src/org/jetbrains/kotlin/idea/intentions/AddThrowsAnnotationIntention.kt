@@ -14,6 +14,7 @@ import org.jetbrains.kotlin.idea.caches.resolve.resolveToCall
 import org.jetbrains.kotlin.idea.core.ShortenReferences
 import org.jetbrains.kotlin.idea.core.replaced
 import org.jetbrains.kotlin.idea.project.platform
+import org.jetbrains.kotlin.idea.quickfix.ExperimentalFixesFactory.fqNameIsExisting
 import org.jetbrains.kotlin.idea.util.addAnnotation
 import org.jetbrains.kotlin.name.FqName
 import org.jetbrains.kotlin.platform.jvm.isJvm
@@ -24,6 +25,7 @@ import org.jetbrains.kotlin.resolve.annotations.JVM_THROWS_ANNOTATION_FQ_NAME
 import org.jetbrains.kotlin.resolve.annotations.KOTLIN_THROWS_ANNOTATION_FQ_NAME
 import org.jetbrains.kotlin.resolve.calls.callUtil.getType
 import org.jetbrains.kotlin.resolve.descriptorUtil.fqNameSafe
+import org.jetbrains.kotlin.resolve.descriptorUtil.module
 import org.jetbrains.kotlin.resolve.lazy.BodyResolveMode
 import org.jetbrains.kotlin.types.KotlinType
 import org.jetbrains.kotlin.types.getAbbreviatedType
@@ -54,7 +56,8 @@ class AddThrowsAnnotationIntention : SelfTargetingIntention<KtThrowExpression>(
 
     override fun applyTo(element: KtThrowExpression, editor: Editor?) {
         val containingDeclaration = element.getContainingDeclaration() ?: return
-        val type = element.thrownExpression?.resolveToCall()?.resultingDescriptor?.returnType ?: return
+        val callableDescriptor = element.thrownExpression?.resolveToCall()?.resultingDescriptor
+        val type = callableDescriptor?.returnType ?: return
 
         val annotationArgumentText = if (type.getAbbreviatedType() != null)
             "$type::class"
@@ -66,7 +69,11 @@ class AddThrowsAnnotationIntention : SelfTargetingIntention<KtThrowExpression>(
         if (annotationEntry == null || annotationEntry.valueArguments.isEmpty()) {
             annotationEntry?.delete()
             val whiteSpaceText = if (containingDeclaration is KtPropertyAccessor) " " else "\n"
-            containingDeclaration.addAnnotation(KOTLIN_THROWS_ANNOTATION_FQ_NAME, annotationArgumentText, whiteSpaceText)
+            val annotationFqName = KOTLIN_THROWS_ANNOTATION_FQ_NAME.takeIf {
+                callableDescriptor.module.fqNameIsExisting(it)
+            } ?: JVM_THROWS_ANNOTATION_FQ_NAME
+
+            containingDeclaration.addAnnotation(annotationFqName, annotationArgumentText, whiteSpaceText)
         } else {
             val factory = KtPsiFactory(element)
             val argument = annotationEntry.valueArguments.firstOrNull()
@@ -110,7 +117,8 @@ private fun KtDeclaration.findThrowsAnnotation(context: BindingContext): KtAnnot
     val annotationEntries = this.annotationEntries + (parent as? KtProperty)?.annotationEntries.orEmpty()
     return annotationEntries.find {
         val typeReference = it.typeReference ?: return@find false
-        context[BindingContext.TYPE, typeReference]?.constructor?.declarationDescriptor?.fqNameSafe == JVM_THROWS_ANNOTATION_FQ_NAME
+        val fqNameSafe = context[BindingContext.TYPE, typeReference]?.constructor?.declarationDescriptor?.fqNameSafe ?: return@find false
+        fqNameSafe == JVM_THROWS_ANNOTATION_FQ_NAME || fqNameSafe == KOTLIN_THROWS_ANNOTATION_FQ_NAME
     }
 }
 
