@@ -36,11 +36,11 @@ FILE: O.kt
                             super<R|Wrapper|>(this@R|/O.Derived.Some|.R|/O.Derived.Some.z|)
                         }
 
-                        public final fun local(): R|kotlin/Unit| {
+                        public[local] final fun local(): R|kotlin/Unit| {
                             lval y: R|ft<kotlin/String, kotlin/String?>!| = this@R|/O.Derived|.R|/Base.foo|()
                         }
 
-                        public final val oo: R|anonymous| = object : R|kotlin/Any| {
+                        public[local] final val oo: R|anonymous| = object : R|kotlin/Any| {
                             private constructor(): R|anonymous| {
                                 super<R|kotlin/Any|>()
                             }
@@ -65,7 +65,7 @@ FILE: O.kt
                         super<R|kotlin/Any|>()
                     }
 
-                    public final fun local(): R|kotlin/Unit| {
+                    public[local] final fun local(): R|kotlin/Unit| {
                         lval y: R|ft<kotlin/String, kotlin/String?>!| = this@R|/O.Derived|.R|/Base.foo|()
                     }
 

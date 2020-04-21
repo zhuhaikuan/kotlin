@@ -54,7 +54,7 @@ private class FirStatusResolveTransformer(override val session: FirSession) :
     }
 
     private inline fun storeClass(
-        klass: FirRegularClass,
+        klass: FirClass<*>,
         computeResult: () -> CompositeTransformResult<FirDeclaration>
     ): CompositeTransformResult<FirDeclaration> {
         classes += klass
@@ -74,6 +74,15 @@ private class FirStatusResolveTransformer(override val session: FirSession) :
         return storeClass(regularClass) {
             regularClass.typeParameters.forEach { it.transformSingle(this, data) }
             transformDeclaration(regularClass, data)
+        } as CompositeTransformResult<FirStatement>
+    }
+
+    override fun transformAnonymousObject(
+        anonymousObject: FirAnonymousObject,
+        data: FirDeclarationStatus?
+    ): CompositeTransformResult<FirStatement> {
+        return storeClass(anonymousObject) {
+            transformDeclaration(anonymousObject, data)
         } as CompositeTransformResult<FirStatement>
     }
 
