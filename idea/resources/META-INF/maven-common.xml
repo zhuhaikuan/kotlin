@@ -103,12 +103,6 @@
         implementation="org.jetbrains.kotlin.idea.maven.inspections.KotlinMavenUnresolvedReferenceQuickFixProvider" />
   </extensions>
 
-  <module-components>
-    <component>
-      <implementation-class>org.jetbrains.kotlin.idea.maven.KotlinImporterComponent</implementation-class>
-    </component>
-  </module-components>
-
   <actions>
     <group id="KotlinMavenGenerate">
       <separator />
